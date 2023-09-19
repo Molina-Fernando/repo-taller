@@ -6,7 +6,11 @@ package clases;
 */
 public class InfoEspecialidad {
 
+
     private DateTime fecha;
+
+    //private DateTime fecha;
+
     private String universidad;
 
 }
