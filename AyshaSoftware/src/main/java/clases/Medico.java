@@ -1,7 +1,7 @@
-
 package clases;
 
 import java.util.ArrayList;
+
 public class Medico extends Funcionario implements ProfesionalSanitario {
 
     private int numMatricula;

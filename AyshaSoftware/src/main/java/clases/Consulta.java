@@ -1,4 +1,3 @@
-
 package clases;
 
 /**
@@ -16,9 +15,11 @@ public class Consulta {
     private LocalDate fecha;
     private LocalTime hora;
     private String motivo;
+
     private Paciente paciente;
     private Box box;
     private Triage triage;
     private Registro registro;
 
 }
+

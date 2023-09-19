@@ -17,7 +17,10 @@ clases\Conexion.class
 clases\Lugares.class
 ventanas\CrudUsuarios$4.class
 ventanas\Login$2.class
+<<<<<<< HEAD
 clases\en\maven\Datos.class
+=======
+>>>>>>> 9b1068b29fcac22449ce67c52a439169622edef0
 ventanas\Funcionario.class
 clases\Consulta.class
 clases\HistoriaClinica.class
@@ -29,6 +32,10 @@ ventanas\CrudUsuarios$1.class
 clases\Estudio.class
 ventanas\CrudUsuarios.class
 ventanas\Medico.class
+<<<<<<< HEAD
+=======
+clases\Datos.class
+>>>>>>> 9b1068b29fcac22449ce67c52a439169622edef0
 clases\Medico.class
 ventanas\Funcionario$1.class
 ventanas\Login$3.class

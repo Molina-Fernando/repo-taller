@@ -1,7 +1,6 @@
 package clases;
 
 import java.time.LocalDate;
-
 public abstract class Persona {
 
     private String nombre;

@@ -1,12 +1,6 @@
-
 package clases;
-
-/**
- *
- * @author joaquin velazquez
- */
-import clases.Rol;
 import java.util.ArrayList;
+
 
 public class AdminSistemas {
 
