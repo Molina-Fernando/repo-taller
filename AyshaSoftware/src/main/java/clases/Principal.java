@@ -8,6 +8,7 @@ public class Principal {
         Conexion cc = new Conexion();
         Connection conex = cc.conectar();
 
+        int a ;
     }
 
 }
