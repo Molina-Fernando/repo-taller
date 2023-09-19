@@ -33,7 +33,7 @@ public class Login extends javax.swing.JFrame {
         setResizable(false);
         setTitle("Acceso al sistema");
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
-        Image miIcono = miPantalla.getImage("D:\\AyshaSoftwareTaller\\AyshaSoftware\\src\\main\\java\\images\\icon.png");
+        Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
         setIconImage(miIcono);
 
     }
