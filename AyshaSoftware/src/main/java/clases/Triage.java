@@ -1,12 +1,10 @@
+
 package clases;
 
-/**
-* Código generado por la app UXFtoJava by Charly Cimino
-* @see https://github.com/CharlyCimino/uxf-to-java
-*/
+
 public class Triage {
 
-    private int respirancion;
+    private int respiracion;
     private int pulso;
     private int estadoMental;
     private int conciencia;
