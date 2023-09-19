@@ -25,9 +25,9 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         this.setLocationRelativeTo(this);
-        SetImageLabel(labelImagen, "D:\\AyshaSoftwareTaller\\AyshaSoftware\\src\\main\\java\\images\\LogoAysha.png");
-        SetImageLabel(labelUser, "D:\\AyshaSoftwareTaller\\AyshaSoftware\\src\\main\\java\\images\\user.png");
-        SetImageLabel(labelPass, "D:\\AyshaSoftwareTaller\\AyshaSoftware\\src\\main\\java\\images\\pass.png");
+        SetImageLabel(labelImagen, "src\\main\\java\\images\\LogoAysha.png");
+        SetImageLabel(labelUser, "src\\main\\java\\images\\user.png");
+        SetImageLabel(labelPass, "src\\main\\java\\images\\pass.png");
         setVisible(true);
         setLocationRelativeTo(null);
         setResizable(false);
