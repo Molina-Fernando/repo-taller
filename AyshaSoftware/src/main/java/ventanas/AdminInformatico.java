@@ -24,11 +24,11 @@ public class AdminInformatico extends javax.swing.JFrame {
 
         setLocationRelativeTo(null);
         setResizable(false);
-        SetImageLabel(labelUsuarios, "D:\\AyshaSoftwareTaller\\AyshaSoftware\\src\\main\\java\\images\\usersAdmin.png");
+        SetImageLabel(labelUsuarios, "src\\main\\java\\images\\usersAdmin.png");
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
-        Image miIcono = miPantalla.getImage("D:\\AyshaSoftwareTaller\\AyshaSoftware\\src\\main\\java\\images\\icon.png");
+        Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
         setIconImage(miIcono);
-        SetImageLabel(jLabelIconito, "D:\\AyshaSoftwareTaller\\AyshaSoftware\\src\\main\\java\\images\\icon.png");
+        SetImageLabel(jLabelIconito, "src\\main\\java\\images\\icon.png");
         String userAdmin = Login.user;
         setTitle("Administrador - Sesión de: " + userAdmin);
     }
