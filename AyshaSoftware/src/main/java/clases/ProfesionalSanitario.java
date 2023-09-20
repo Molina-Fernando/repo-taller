@@ -9,11 +9,9 @@ import java.util.ArrayList;
 public interface ProfesionalSanitario {
 
 
-    public Triage realizarTriage(Paciente paciente1);
+    public void realizarTriage();
 
-    public void asignarBox(Paciente paciente1);
-
-    public void cambiarTriage(Triage triage1);
+    public void cambiarTriage(String color);
     
     public void verListaEsperaTriage(ArrayList<Paciente> paciente);
 }

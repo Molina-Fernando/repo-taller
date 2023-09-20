@@ -163,9 +163,9 @@ public class Login extends javax.swing.JFrame {
                     if ("AdminInformatico".equals(nivelAcceso)) {
                         dispose();
                         new AdminInformatico().setVisible(true);
-                    } else if ("Medico".equals(nivelAcceso)) {
+                    } else if ("Medico".equals(nivelAcceso)) { //Medico no va, seria MedicoSala, MedicoTriage
                         dispose();
-                        new Medico().setVisible(true);
+                        new MedicoTriage().setVisible(true);
                     } else if ("Funcionario".equals(nivelAcceso)) {
                         dispose();
                         new Funcionario().setVisible(true);
