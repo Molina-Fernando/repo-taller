@@ -4,7 +4,6 @@ package clases;
  *
  * @author joaqu
  */
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -21,5 +20,9 @@ public class Consulta {
     private Triage triage;
     private Registro registro;
 
-}
+    //El atributo box es el último en instanciarse o guardarse dentro de la lógica de la relacion box-datos-consulta
+    public void setBox(Box box) {
+        this.box = box;
+    }
 
+}

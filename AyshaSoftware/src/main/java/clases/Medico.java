@@ -2,10 +2,11 @@ package clases;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import ventanas.MedicoTriage;
-
 import java.util.Iterator;
+
 
 
 public class Medico extends Funcionario implements ProfesionalSanitario {
@@ -14,11 +15,18 @@ public class Medico extends Funcionario implements ProfesionalSanitario {
     private int numMatricula;
     private ArrayList<Especialidad> especialidad;
 
+
     public Medico(){}
     
     public Medico(String nombre, String apellido, LocalDate fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, String user, String password, int matricula) {
         super(nombre, apellido, fecNacimiento, domicilio, dni, telFijo, telCelular, correoElectronico, user, password);
         this.numMatricula=matricula;
+    }
+    
+    public Medico(String nombre, String apellido, LocalDate fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, String user, String password, int matricula,Especialidad especialidad) {
+        super(nombre, apellido, fecNacimiento, domicilio, dni, telFijo, telCelular, correoElectronico, user, password);
+        this.numMatricula=matricula;
+        setEspecialidad(especialidad);
         
     }
     
@@ -59,7 +67,16 @@ public class Medico extends Funcionario implements ProfesionalSanitario {
     public void tomarHistoriaClinica() {
         // Método a resolver...
     }
+    
+    
+    
 
+
+    public void setEspecialidad(Especialidad especialidad) {
+        this.especialidad.add(especialidad);
+    }
+    
+    
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
