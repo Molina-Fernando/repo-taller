@@ -1,15 +1,15 @@
 package clases;
 import java.util.ArrayList;
 
-public class Enfermero implements ProfesionalSanitario {
+public class Enfermero extends Funcionario implements ProfesionalSanitario{
+    
     @Override
-    public Triage realizarTriage(Paciente paciente1) {
-        // Método a resolver...
-        return null;
+    public void realizarTriage() {
+        // Método a resolver... 
     }
-
+   
     @Override
-    public void cambiarTriage(Triage triage1) {
+    public void cambiarTriage(String color) {
         // Método a resolver...
     }
 

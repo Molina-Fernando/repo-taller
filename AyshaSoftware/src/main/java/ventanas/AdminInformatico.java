@@ -30,7 +30,7 @@ public class AdminInformatico extends javax.swing.JFrame {
         setIconImage(miIcono);
         SetImageLabel(jLabelIconito, "src\\main\\java\\images\\icon.png");
         String userAdmin = Login.user;
-        setTitle("Administrador - Sesión de: " + userAdmin);
+        setTitle("Administrador - Sesión de " + userAdmin);
     }
 
     /**

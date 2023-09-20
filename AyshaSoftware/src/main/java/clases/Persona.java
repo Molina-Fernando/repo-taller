@@ -11,6 +11,9 @@ public abstract class Persona {
     private String telFijo;
     private String telCelular;
     private String correoElectronico;
+    
+    public Persona(){
+    }
 
     public Persona(String nombre, String apellido, LocalDate fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico) {
         setNombre(nombre);

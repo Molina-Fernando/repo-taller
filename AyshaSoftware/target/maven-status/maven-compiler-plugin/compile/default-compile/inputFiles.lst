@@ -12,11 +12,19 @@ D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Paciente.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Administrativo.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Estudio.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Rol.java
+<<<<<<< HEAD
+=======
+D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\Admision.java
+>>>>>>> rama2
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\Login.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Conexion.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Enfermero.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\AdminSistemas.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Triage.java
+<<<<<<< HEAD
+=======
+D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\MedicoTriage.java
+>>>>>>> rama2
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Persona.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Principal.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\ProfesionalSanitario.java
@@ -25,4 +33,7 @@ D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Datos.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Box.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\CrudUsuarios.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\Funcionario.java
+<<<<<<< HEAD
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\Medico.java
+=======
+>>>>>>> rama2
