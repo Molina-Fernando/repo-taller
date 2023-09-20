@@ -17,8 +17,8 @@ public class Medico extends Funcionario implements ProfesionalSanitario {
 
    
     public void realizarTriage() {
-        String color = t.getcolor();
-        System.out.println(color + "Hola");
+        //String color = ; //Aca nose como pero debería conectarse al boton de MedicoTriage
+        //System.out.println(color + "Hola");
         // Método a resolver...
        // return null;
     }

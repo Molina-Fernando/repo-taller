@@ -16,8 +16,9 @@ public class MedicoTriage extends javax.swing.JFrame {
     /**
      * Creates new form MedicoTriage
      */
-    private int i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13 = 0;
+    private int i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13;
     private String color;
+
     public MedicoTriage() {
         initComponents();
     }
@@ -60,41 +61,101 @@ public class MedicoTriage extends javax.swing.JFrame {
         });
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Anormal", " " }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Anormal" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Leve ", "Grave" }));
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Consciente", "Inconsciente" }));
+        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox4ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
         jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Duele pecho", "No duele pecho" }));
+        jComboBox5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox5ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
 
         jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lesiones graves", "No lesiones graves" }));
         jComboBox6.setToolTipText("");
+        jComboBox6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox6ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jComboBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
 
         jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Adulto", "Niño o anciano" }));
+        jComboBox7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox7ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jComboBox7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
 
         jComboBox8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin fiebre", "Moderada", "Alta" }));
+        jComboBox8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox8ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jComboBox8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
 
         jComboBox9.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin vomitos", "Moderados", "Intensos" }));
+        jComboBox9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox9ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jComboBox9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
 
-        jComboBox10.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No dolor abdominal", "Moderado", "Severo", " " }));
+        jComboBox10.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No dolor abdominal", "Moderado", "Severo" }));
+        jComboBox10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox10ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jComboBox10, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, -1, -1));
 
         jComboBox11.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Presente", "No presente" }));
+        jComboBox11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox11ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jComboBox11, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, -1, -1));
 
         jComboBox12.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Presentes ", "No presentes" }));
+        jComboBox12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox12ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jComboBox12, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, -1, -1));
 
         jComboBox13.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No presente", "Moderado", "Intenso" }));
+        jComboBox13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox13ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jComboBox13, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, -1, -1));
 
         BotonInstancia.setText("jButton1");
@@ -141,20 +202,16 @@ public class MedicoTriage extends javax.swing.JFrame {
 
     private void BotonInstanciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonInstanciaActionPerformed
         // TODO add your handling code here:
-      Triage t = new Triage(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
-       this.color = t.obtenerColor();
-        System.out.println(this.color);
-       
+        Triage t = new Triage(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+        String colorPrueba = t.obtenerColor();
+        System.out.println(colorPrueba);
+        t.setColorTriage(colorPrueba);
+        //Prueba
+
     }//GEN-LAST:event_BotonInstanciaActionPerformed
 
-    public String getcolor() {
-        return color;
-    }
-
-    
-    
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {
-
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
         String selectedOption = (String) jComboBox2.getSelectedItem();
         switch (selectedOption) {
             case "Normal":
@@ -163,11 +220,10 @@ public class MedicoTriage extends javax.swing.JFrame {
             case "Anormal":
                 this.i2 = 1;
         }
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
-    }
-
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {
-
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        // TODO add your handling code here:
         String selectedOption = (String) jComboBox3.getSelectedItem();
         switch (selectedOption) {
             case "Normal":
@@ -180,10 +236,10 @@ public class MedicoTriage extends javax.swing.JFrame {
                 this.i3 = 2;
         }
 
-    }
+    }//GEN-LAST:event_jComboBox3ActionPerformed
 
-    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {
-
+    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+        // TODO add your handling code here:
         String selectedOption = (String) jComboBox4.getSelectedItem();
         switch (selectedOption) {
             case "Consciente":
@@ -193,10 +249,10 @@ public class MedicoTriage extends javax.swing.JFrame {
                 this.i4 = 3;
         }
 
-    }
+    }//GEN-LAST:event_jComboBox4ActionPerformed
 
-    private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {
-
+    private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
+        // TODO add your handling code here:
         String selectedOption = (String) jComboBox5.getSelectedItem();
         switch (selectedOption) {
             case "No duele pecho":
@@ -205,11 +261,10 @@ public class MedicoTriage extends javax.swing.JFrame {
             case "Duele pecho":
                 this.i5 = 1;
         }
+    }//GEN-LAST:event_jComboBox5ActionPerformed
 
-    }
-
-    private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {
-
+    private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed
+        // TODO add your handling code here:
         String selectedOption = (String) jComboBox6.getSelectedItem();
         switch (selectedOption) {
             case "No lesiones graves":
@@ -218,11 +273,10 @@ public class MedicoTriage extends javax.swing.JFrame {
             case "Lesiones graves":
                 this.i6 = 2;
         }
+    }//GEN-LAST:event_jComboBox6ActionPerformed
 
-    }
-
-    private void jComboBox7ActionPerformed(java.awt.event.ActionEvent evt) {
-
+    private void jComboBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox7ActionPerformed
+        // TODO add your handling code here:
         String selectedOption = (String) jComboBox7.getSelectedItem();
         switch (selectedOption) {
             case "Adulto":
@@ -231,11 +285,10 @@ public class MedicoTriage extends javax.swing.JFrame {
             case "Niño o anciano":
                 this.i7 = 1;
         }
+    }//GEN-LAST:event_jComboBox7ActionPerformed
 
-    }
-
-    private void jComboBox8ActionPerformed(java.awt.event.ActionEvent evt) {
-
+    private void jComboBox8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox8ActionPerformed
+        // TODO add your handling code here:
         String selectedOption = (String) jComboBox8.getSelectedItem();
         switch (selectedOption) {
             case "Sin fiebre":
@@ -247,11 +300,10 @@ public class MedicoTriage extends javax.swing.JFrame {
             case "Alta":
                 this.i8 = 2;
         }
+    }//GEN-LAST:event_jComboBox8ActionPerformed
 
-    }
-
-    private void jComboBox9ActionPerformed(java.awt.event.ActionEvent evt) {
-
+    private void jComboBox9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox9ActionPerformed
+        // TODO add your handling code here:
         String selectedOption = (String) jComboBox9.getSelectedItem();
         switch (selectedOption) {
             case "Sin vomitos":
@@ -263,27 +315,25 @@ public class MedicoTriage extends javax.swing.JFrame {
             case "Intensos":
                 this.i9 = 2;
         }
+    }//GEN-LAST:event_jComboBox9ActionPerformed
 
-    }
-
-    private void jComboBox10ActionPerformed(java.awt.event.ActionEvent evt) {
-
+    private void jComboBox10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox10ActionPerformed
+        // TODO add your handling code here:
         String selectedOption = (String) jComboBox10.getSelectedItem();
         switch (selectedOption) {
             case "No dolor abdominal":
                 this.i10 = 0;
                 break;
             case "Moderado":
-                this.i10= 1;
+                this.i10 = 1;
                 break;
             case "Severo":
                 this.i10 = 2;
         }
+    }//GEN-LAST:event_jComboBox10ActionPerformed
 
-    }
-
-    private void jComboBox11ActionPerformed(java.awt.event.ActionEvent evt) {
-
+    private void jComboBox11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox11ActionPerformed
+        // TODO add your handling code here:
         String selectedOption = (String) jComboBox11.getSelectedItem();
         switch (selectedOption) {
             case "No presente":
@@ -292,11 +342,10 @@ public class MedicoTriage extends javax.swing.JFrame {
             case "Presente":
                 this.i11 = 3;
         }
+    }//GEN-LAST:event_jComboBox11ActionPerformed
 
-    }
-
-    private void jComboBox12ActionPerformed(java.awt.event.ActionEvent evt) {
-
+    private void jComboBox12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox12ActionPerformed
+        // TODO add your handling code here:
         String selectedOption = (String) jComboBox12.getSelectedItem();
         switch (selectedOption) {
             case "Presentes":
@@ -305,11 +354,10 @@ public class MedicoTriage extends javax.swing.JFrame {
             case "No presentes":
                 this.i12 = 1;
         }
+    }//GEN-LAST:event_jComboBox12ActionPerformed
 
-    }
-
-    private void jComboBox13ActionPerformed(java.awt.event.ActionEvent evt) {
-
+    private void jComboBox13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox13ActionPerformed
+        // TODO add your handling code here:
         String selectedOption = (String) jComboBox13.getSelectedItem();
         switch (selectedOption) {
             case "No presente":
@@ -322,7 +370,7 @@ public class MedicoTriage extends javax.swing.JFrame {
                 this.i13 = 2;
         }
 
-    }
+    }//GEN-LAST:event_jComboBox13ActionPerformed
 
 //Una vez tengo los 13 i cargados... 
     public Triage instanciarTriage() {

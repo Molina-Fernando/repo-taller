@@ -46,6 +46,10 @@ public class Triage {
         return colorTriage;
     }
 
+    public void setColorTriage(String colorTriage) {
+        this.colorTriage = colorTriage;
+    }
+
 
     public String getColorFinal() {
         return colorFinal;
@@ -69,7 +73,6 @@ public class Triage {
         //medicoTriage.instanciarTriage();
         
         int resultadoTriage = calcularPuntuacion();
-        System.out.println("Prueba1");
         if (resultadoTriage == 0){
             colorTriage = "Azul";
         } else if(resultadoTriage >=1 && resultadoTriage <= 4){
@@ -88,7 +91,6 @@ public class Triage {
     }
 
     private int calcularPuntuacion() {
-        System.out.println("Prueba");
         return respiracion + pulso + estadoMental + conciencia + dolorPecho + lesionGrave + edad + fiebre + vomitos + dolorAbdominal + signosDeShock + doloresLeves + sangrado;
         // Método a resolver...
     }
