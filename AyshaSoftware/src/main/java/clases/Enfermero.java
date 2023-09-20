@@ -7,10 +7,6 @@ public class Enfermero implements ProfesionalSanitario {
         // Método a resolver...
         return null;
     }
-    @Override
-    public void asignarBox(Paciente paciente1) {
-        // Método a resolver...
-    }
 
     @Override
     public void cambiarTriage(Triage triage1) {
@@ -22,5 +18,9 @@ public class Enfermero implements ProfesionalSanitario {
         // Método a resolver...
     }
 
-
+    @Override
+    public String toString() {
+        return "Enfermero{" + super.toString()+'}';
+    }
+    
 }

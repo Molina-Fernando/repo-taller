@@ -22,6 +22,7 @@ public class Triage {
 
     public String obtenerColor() {
         // Método a resolver...
+        //Este llama a calcularPuntuacion
         return "";
     }
 

@@ -1,30 +1,19 @@
-<<<<<<< HEAD
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package clases;
 
-import clases.Persona;
+import java.time.LocalDate;
 
-/**
- *
- * @author joaqu
- */
-=======
-package clases;
-
-/**
-* Código generado por la app UXFtoJava by Charly Cimino
-* @see https://github.com/CharlyCimino/uxf-to-java
-*/
->>>>>>> 9b1068b29fcac22449ce67c52a439169622edef0
 public class Paciente extends Persona {
 
     private String personaContacto;
 
-<<<<<<< HEAD
+    public Paciente(String nombre, String apellido, LocalDate fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, String personaContacto) {
+        super(nombre, apellido, fecNacimiento, domicilio, dni, telFijo, telCelular, correoElectronico);
+        this.personaContacto=personaContacto;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+"Paciente{" + "personaContacto=" + personaContacto + '}';
+    }
+    
 }
-=======
-}
->>>>>>> 9b1068b29fcac22449ce67c52a439169622edef0
