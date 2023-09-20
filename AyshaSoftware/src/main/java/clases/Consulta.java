@@ -20,6 +20,13 @@ public class Consulta {
     private Box box;
     private Triage triage;
     private Registro registro;
+    
+    //El atributo box es el último en instanciarse o guardarse dentro de la lógica de la relacion box-datos-consulta
+    public void setBox(Box box) {
+        this.box = box;
+    }
+    
+    
 
 }
 
