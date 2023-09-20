@@ -1,11 +1,9 @@
 package clases;
 
-/**
-* Código generado por la app UXFtoJava by Charly Cimino
-* @see https://github.com/CharlyCimino/uxf-to-java
-*/
+
 public class Triage {
-    
+
+
     private int respiracion;
     private int pulso;
     private int estadoMental;
@@ -82,7 +80,10 @@ public class Triage {
         
         return colorTriage;
         // Método a resolver...
-        
+
+        //Este llama a calcularPuntuacion
+ 
+
     }
 
     private int calcularPuntuacion() {

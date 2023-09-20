@@ -1,4 +1,5 @@
 clases\Especialidad.class
+ventanas\Admision$2.class
 clases\Persona.class
 clases\Administrativo.class
 clases\Paciente.class
@@ -20,6 +21,7 @@ ventanas\CrudUsuarios$4.class
 ventanas\Login$2.class
 ventanas\Funcionario.class
 clases\Consulta.class
+ventanas\Admision$1.class
 ventanas\MedicoTriage.class
 ventanas\MedicoTriage$2.class
 clases\HistoriaClinica.class
@@ -37,6 +39,7 @@ ventanas\Login$3.class
 clases\AdminSistemas.class
 ventanas\Login$1.class
 clases\Registro.class
+ventanas\Admision.class
 ventanas\CrudUsuarios$3.class
 ventanas\Login.class
 clases\Funcionario.class

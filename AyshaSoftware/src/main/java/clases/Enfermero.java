@@ -1,18 +1,13 @@
 package clases;
-
 import java.util.ArrayList;
 
-/**
-* Código generado por la app UXFtoJava by Charly Cimino
-* @see https://github.com/CharlyCimino/uxf-to-java
-*/
-public class Enfermero implements ProfesionalSanitario {
+public class Enfermero extends Funcionario implements ProfesionalSanitario{
+    
     @Override
     public void realizarTriage() {
-        // Método a resolver...
-                }
-
-
+        // Método a resolver... 
+    }
+   
     @Override
     public void cambiarTriage(String color) {
         // Método a resolver...
@@ -23,5 +18,9 @@ public class Enfermero implements ProfesionalSanitario {
         // Método a resolver...
     }
 
-
+    @Override
+    public String toString() {
+        return "Enfermero{" + super.toString()+'}';
+    }
+    
 }

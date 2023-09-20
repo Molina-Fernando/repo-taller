@@ -1,9 +1,18 @@
+
 package clases;
-
-/**
-* Código generado por la app UXFtoJava by Charly Cimino
-* @see https://github.com/CharlyCimino/uxf-to-java
-*/
 public class Especialidad {
+    private String especialidad;
+    private InfoEspecialidad info;
 
+    public Especialidad(String especialidad,InfoEspecialidad informacion) {
+        this.especialidad = especialidad;
+        this.info=informacion;
+        
+    }
+
+    @Override
+    public String toString() {
+        return "Especialidad{" + "especialidad=" + especialidad + '}'+info.toString();
+    }
+    
 }
