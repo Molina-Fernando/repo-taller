@@ -1,14 +1,13 @@
 package clases;
 
+/**
+ *
+ * @author joaqu
+ */
+
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 
-
-/**
-* Código generado por la app UXFtoJava by Charly Cimino
-* @see https://github.com/CharlyCimino/uxf-to-java
-*/
 public class Consulta {
 
     private String resultadoTriage;
@@ -16,9 +15,11 @@ public class Consulta {
     private LocalDate fecha;
     private LocalTime hora;
     private String motivo;
-    private ArrayList<Paciente> paciente;
+
+    private Paciente paciente;
     private Box box;
     private Triage triage;
     private Registro registro;
 
 }
+
