@@ -12,7 +12,7 @@ public class AdminSistemas extends Funcionario {
     }
 
     public void asignarRol(Funcionario funcionario1,Rol rol) {
-        funcionario1.setRol(rol);
+        funcionario1.setRoles(rol);
     }
 
     @Override
