@@ -1,5 +1,5 @@
 package clases;
-
+import ventanas.MedicoTriage;
 /**
 * Código generado por la app UXFtoJava by Charly Cimino
 * @see https://github.com/CharlyCimino/uxf-to-java
@@ -22,6 +22,7 @@ public class Triage {
     private String colorTriage;
     private String colorFinal;
     private String motivoCambio;
+    MedicoTriage medicoTriage = new MedicoTriage();
     
     public Triage(){}
 
@@ -65,9 +66,10 @@ public class Triage {
     
     
     public String obtenerColor() {
+        //medicoTriage.instanciarTriage();
         
         int resultadoTriage = calcularPuntuacion();
-     
+        System.out.println("Prueba1");
         if (resultadoTriage == 0){
             colorTriage = "Azul";
         } else if(resultadoTriage >=1 && resultadoTriage <= 4){
@@ -86,6 +88,7 @@ public class Triage {
     }
 
     private int calcularPuntuacion() {
+        System.out.println("Prueba");
         return respiracion + pulso + estadoMental + conciencia + dolorPecho + lesionGrave + edad + fiebre + vomitos + dolorAbdominal + signosDeShock + doloresLeves + sangrado;
         // Método a resolver...
     }

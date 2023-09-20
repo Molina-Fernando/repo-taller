@@ -8,14 +8,16 @@ package ventanas;
  *
  * @author Fernando
  */
-
 import clases.Medico;
+import clases.Triage;
 
 public class MedicoTriage extends javax.swing.JFrame {
 
     /**
      * Creates new form MedicoTriage
      */
+    private int i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13 = 0;
+    private String color;
     public MedicoTriage() {
         initComponents();
     }
@@ -31,6 +33,19 @@ public class MedicoTriage extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jComboBox4 = new javax.swing.JComboBox<>();
+        jComboBox5 = new javax.swing.JComboBox<>();
+        jComboBox6 = new javax.swing.JComboBox<>();
+        jComboBox7 = new javax.swing.JComboBox<>();
+        jComboBox8 = new javax.swing.JComboBox<>();
+        jComboBox9 = new javax.swing.JComboBox<>();
+        jComboBox10 = new javax.swing.JComboBox<>();
+        jComboBox11 = new javax.swing.JComboBox<>();
+        jComboBox12 = new javax.swing.JComboBox<>();
+        jComboBox13 = new javax.swing.JComboBox<>();
+        BotonInstancia = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,7 +58,52 @@ public class MedicoTriage extends javax.swing.JFrame {
                 jComboBox1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, -1, -1));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Anormal", " " }));
+        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Leve ", "Grave" }));
+        jPanel1.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Consciente", "Inconsciente" }));
+        jPanel1.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Duele pecho", "No duele pecho" }));
+        jPanel1.add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+
+        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lesiones graves", "No lesiones graves" }));
+        jComboBox6.setToolTipText("");
+        jPanel1.add(jComboBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+
+        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Adulto", "Niño o anciano" }));
+        jPanel1.add(jComboBox7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
+
+        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin fiebre", "Moderada", "Alta" }));
+        jPanel1.add(jComboBox8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
+
+        jComboBox9.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin vomitos", "Moderados", "Intensos" }));
+        jPanel1.add(jComboBox9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
+
+        jComboBox10.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No dolor abdominal", "Moderado", "Severo", " " }));
+        jPanel1.add(jComboBox10, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, -1, -1));
+
+        jComboBox11.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Presente", "No presente" }));
+        jPanel1.add(jComboBox11, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, -1, -1));
+
+        jComboBox12.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Presentes ", "No presentes" }));
+        jPanel1.add(jComboBox12, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, -1, -1));
+
+        jComboBox13.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No presente", "Moderado", "Intenso" }));
+        jPanel1.add(jComboBox13, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, -1, -1));
+
+        BotonInstancia.setText("jButton1");
+        BotonInstancia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonInstanciaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BotonInstancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -64,31 +124,213 @@ public class MedicoTriage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-        
+
         String selectedOption = (String) jComboBox1.getSelectedItem();
-        int i1 = 0;
-        switch (selectedOption){
-            case "Normal" : i1 = 0;
-            break;
-            case "Moderada" : i1 = 2;
-            break;
-            case "Grave" : i1 = 130;
-            
+        switch (selectedOption) {
+            case "Normal":
+                this.i1 = 0;
+                break;
+            case "Moderada":
+                this.i1 = 1;
+                break;
+            case "Grave":
+                this.i1 = 2;
         }
-        System.out.println(i1);
-        Medico med = new Medico();
-        
-        med.seti1(i1);
-        
-        int pruebita = med.geti1();
-        System.out.println(pruebita);
-        
+
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void BotonInstanciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonInstanciaActionPerformed
+        // TODO add your handling code here:
+      Triage t = new Triage(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+       this.color = t.obtenerColor();
+        System.out.println(this.color);
+       
+    }//GEN-LAST:event_BotonInstanciaActionPerformed
+
+    public String getcolor() {
+        return color;
+    }
+
+    
+    
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {
+
+        String selectedOption = (String) jComboBox2.getSelectedItem();
+        switch (selectedOption) {
+            case "Normal":
+                this.i2 = 0;
+                break;
+            case "Anormal":
+                this.i2 = 1;
+        }
+
+    }
+
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {
+
+        String selectedOption = (String) jComboBox3.getSelectedItem();
+        switch (selectedOption) {
+            case "Normal":
+                this.i3 = 0;
+                break;
+            case "Leve":
+                this.i3 = 1;
+                break;
+            case "Grave":
+                this.i3 = 2;
+        }
+
+    }
+
+    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {
+
+        String selectedOption = (String) jComboBox4.getSelectedItem();
+        switch (selectedOption) {
+            case "Consciente":
+                this.i4 = 0;
+                break;
+            case "Inconsciente":
+                this.i4 = 3;
+        }
+
+    }
+
+    private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {
+
+        String selectedOption = (String) jComboBox5.getSelectedItem();
+        switch (selectedOption) {
+            case "No duele pecho":
+                this.i5 = 0;
+                break;
+            case "Duele pecho":
+                this.i5 = 1;
+        }
+
+    }
+
+    private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {
+
+        String selectedOption = (String) jComboBox6.getSelectedItem();
+        switch (selectedOption) {
+            case "No lesiones graves":
+                this.i6 = 0;
+                break;
+            case "Lesiones graves":
+                this.i6 = 2;
+        }
+
+    }
+
+    private void jComboBox7ActionPerformed(java.awt.event.ActionEvent evt) {
+
+        String selectedOption = (String) jComboBox7.getSelectedItem();
+        switch (selectedOption) {
+            case "Adulto":
+                this.i7 = 0;
+                break;
+            case "Niño o anciano":
+                this.i7 = 1;
+        }
+
+    }
+
+    private void jComboBox8ActionPerformed(java.awt.event.ActionEvent evt) {
+
+        String selectedOption = (String) jComboBox8.getSelectedItem();
+        switch (selectedOption) {
+            case "Sin fiebre":
+                this.i8 = 0;
+                break;
+            case "Moderada":
+                this.i8 = 1;
+                break;
+            case "Alta":
+                this.i8 = 2;
+        }
+
+    }
+
+    private void jComboBox9ActionPerformed(java.awt.event.ActionEvent evt) {
+
+        String selectedOption = (String) jComboBox9.getSelectedItem();
+        switch (selectedOption) {
+            case "Sin vomitos":
+                this.i9 = 0;
+                break;
+            case "Moderados":
+                this.i9 = 1;
+                break;
+            case "Intensos":
+                this.i9 = 2;
+        }
+
+    }
+
+    private void jComboBox10ActionPerformed(java.awt.event.ActionEvent evt) {
+
+        String selectedOption = (String) jComboBox10.getSelectedItem();
+        switch (selectedOption) {
+            case "No dolor abdominal":
+                this.i10 = 0;
+                break;
+            case "Moderado":
+                this.i10= 1;
+                break;
+            case "Severo":
+                this.i10 = 2;
+        }
+
+    }
+
+    private void jComboBox11ActionPerformed(java.awt.event.ActionEvent evt) {
+
+        String selectedOption = (String) jComboBox11.getSelectedItem();
+        switch (selectedOption) {
+            case "No presente":
+                this.i11 = 0;
+                break;
+            case "Presente":
+                this.i11 = 3;
+        }
+
+    }
+
+    private void jComboBox12ActionPerformed(java.awt.event.ActionEvent evt) {
+
+        String selectedOption = (String) jComboBox12.getSelectedItem();
+        switch (selectedOption) {
+            case "Presentes":
+                this.i12 = 0;
+                break;
+            case "No presentes":
+                this.i12 = 1;
+        }
+
+    }
+
+    private void jComboBox13ActionPerformed(java.awt.event.ActionEvent evt) {
+
+        String selectedOption = (String) jComboBox13.getSelectedItem();
+        switch (selectedOption) {
+            case "No presente":
+                this.i13 = 0;
+                break;
+            case "Moderado":
+                this.i13 = 1;
+                break;
+            case "Intenso":
+                this.i13 = 2;
+        }
+
+    }
+
+//Una vez tengo los 13 i cargados... 
+    public Triage instanciarTriage() {
+        System.out.println("Pruebita");
+        Triage t = new Triage(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+        return t;
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -122,7 +364,20 @@ public class MedicoTriage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonInstancia;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox10;
+    private javax.swing.JComboBox<String> jComboBox11;
+    private javax.swing.JComboBox<String> jComboBox12;
+    private javax.swing.JComboBox<String> jComboBox13;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBox4;
+    private javax.swing.JComboBox<String> jComboBox5;
+    private javax.swing.JComboBox<String> jComboBox6;
+    private javax.swing.JComboBox<String> jComboBox7;
+    private javax.swing.JComboBox<String> jComboBox8;
+    private javax.swing.JComboBox<String> jComboBox9;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
