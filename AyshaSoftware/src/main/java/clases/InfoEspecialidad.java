@@ -8,11 +8,7 @@ import java.time.LocalDate;
 */
 public class InfoEspecialidad {
 
-
     private LocalDate fecha;
-
-    //private DateTime fecha;
-
     private String universidad;
 
 }
