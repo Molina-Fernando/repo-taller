@@ -11,7 +11,6 @@ public interface ProfesionalSanitario {
 
     public Triage realizarTriage(Paciente paciente1);
 
-    public void asignarBox(Paciente paciente1);
 
     public void cambiarTriage(Triage triage1);
     

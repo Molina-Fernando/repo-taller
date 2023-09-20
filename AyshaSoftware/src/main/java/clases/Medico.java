@@ -16,7 +16,7 @@ public class Medico extends Funcionario implements ProfesionalSanitario {
         // Método a resolver...
         return null;
     }
-    @Override
+    
     public void asignarBox(Paciente paciente1) {
         // Método a resolver...
     }

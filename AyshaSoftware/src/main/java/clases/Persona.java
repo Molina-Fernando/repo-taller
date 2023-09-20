@@ -16,5 +16,7 @@ public abstract class Persona {
     private String telFijo;
     private String telCelular;
     private String correoElectronico;
+    
+    
 
 }
