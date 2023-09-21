@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ventanas;
 
 import java.awt.Image;
@@ -13,10 +9,6 @@ import java.sql.*;
 import clases.Conexion;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Fernando
- */
 public class Login extends javax.swing.JFrame {
 
     public static String user = "";

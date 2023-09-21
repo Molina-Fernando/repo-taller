@@ -1,4 +1,3 @@
-
 package clases;
 
 public enum Lugares {
@@ -7,4 +6,3 @@ public enum Lugares {
     EMERGENCIA,
     INTERNACION;
 }
-

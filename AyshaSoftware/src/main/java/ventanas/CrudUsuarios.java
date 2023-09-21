@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ventanas;
 
 import clases.Conexion;
@@ -14,19 +10,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Fernando
- */
 public class CrudUsuarios extends javax.swing.JFrame {
 
     /**
      * Creates new form CrudUsuarios
      */
-    
     DefaultTableModel modelo = new DefaultTableModel();
-   // ArrayList<Usuarios> usuario = new ArrayList<>();
-    
+    // ArrayList<Usuarios> usuario = new ArrayList<>();
+
     public CrudUsuarios() {
         initComponents();
         setTitle("Gestión de Usuarios");

@@ -1,7 +1,7 @@
 package clases;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 
 public class AdminSistemas extends Funcionario {
 
@@ -11,14 +11,13 @@ public class AdminSistemas extends Funcionario {
         super(nombre, apellido, fecNacimiento, domicilio, dni, telFijo, telCelular, correoElectronico, user, password);
     }
 
-    public void asignarRol(Funcionario funcionario1,Rol rol) {
+    public void asignarRol(Funcionario funcionario1, Rol rol) {
         funcionario1.setRoles(rol);
     }
 
     @Override
     public String toString() {
-        return super.toString()+"AdminSistemas{" + "roles=" + roles + '}';
+        return super.toString() + "AdminSistemas{" + "roles=" + roles + '}';
     }
-    
-    
+
 }

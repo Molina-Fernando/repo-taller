@@ -1,6 +1,7 @@
 package clases;
 
 import java.time.LocalDate;
+
 public abstract class Persona {
 
     private String nombre;
@@ -11,8 +12,8 @@ public abstract class Persona {
     private String telFijo;
     private String telCelular;
     private String correoElectronico;
-    
-    public Persona(){
+
+    public Persona() {
     }
 
     public Persona(String nombre, String apellido, LocalDate fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico) {
@@ -89,13 +90,10 @@ public abstract class Persona {
     public String getCorreoElectronico() {
         return correoElectronico;
     }
-    
 
     @Override
     public String toString() {
         return "Persona{" + "nombre=" + nombre + ", apellido=" + apellido + ", fecNacimiento=" + fecNacimiento + ", domicilio=" + domicilio + ", dni=" + dni + ", telFijo=" + telFijo + ", telCelular=" + telCelular + ", correoElectronico=" + correoElectronico + '}';
     }
-    
-    
 
 }

@@ -1,8 +1,6 @@
-
 package clases;
 
 import java.time.LocalDate;
-
 
 public class InfoEspecialidad {
 
@@ -22,6 +20,5 @@ public class InfoEspecialidad {
     public String toString() {
         return "InfoEspecialidad{" + "fecha=" + fecha + ", universidad=" + universidad + '}';
     }
-    
-    
+
 }

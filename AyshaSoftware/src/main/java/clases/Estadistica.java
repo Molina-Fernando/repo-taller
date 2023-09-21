@@ -3,7 +3,6 @@ package clases;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-
 public class Estadistica {
 
     private ArrayList<Consulta> consultas;

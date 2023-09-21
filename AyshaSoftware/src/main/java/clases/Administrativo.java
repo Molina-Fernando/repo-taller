@@ -1,4 +1,3 @@
-
 package clases;
 
 import java.time.LocalDate;
@@ -15,6 +14,5 @@ public class Administrativo extends Funcionario {
     public void setSectores(Sector e) {
         this.sectores.add(e);
     }
-    
 
 }

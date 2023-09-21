@@ -4,20 +4,32 @@
  */
 package ventanas;
 
-/**
- *
- * @author Fernando
- */
-
 import clases.Medico;
+import clases.Triage;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 public class MedicoTriage extends javax.swing.JFrame {
 
     /**
      * Creates new form MedicoTriage
      */
+    private int i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13;
+    private String color;
+
     public MedicoTriage() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
+        Toolkit miPantalla = Toolkit.getDefaultToolkit();
+        Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
+        setIconImage(miIcono);
+        SetImageLabel(LabelIconito, "src\\main\\java\\images\\icon.png");
+        String userName = Login.user;
+        setTitle("Triage - Sesión de " + userName);
     }
 
     /**
@@ -31,19 +43,274 @@ public class MedicoTriage extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jComboBox4 = new javax.swing.JComboBox<>();
+        jComboBox5 = new javax.swing.JComboBox<>();
+        jComboBox6 = new javax.swing.JComboBox<>();
+        jComboBox7 = new javax.swing.JComboBox<>();
+        jComboBox8 = new javax.swing.JComboBox<>();
+        jComboBox9 = new javax.swing.JComboBox<>();
+        jComboBox10 = new javax.swing.JComboBox<>();
+        jComboBox11 = new javax.swing.JComboBox<>();
+        jComboBox12 = new javax.swing.JComboBox<>();
+        jComboBox13 = new javax.swing.JComboBox<>();
+        BotonInstancia = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        LabelIconito = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox1.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Moderada", "Grave" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, -1, -1));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 90, -1));
+
+        jComboBox2.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox2.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        jComboBox2.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Anormal" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 90, -1));
+
+        jComboBox3.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox3.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        jComboBox3.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Leve ", "Grave" }));
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 90, -1));
+
+        jComboBox4.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox4.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        jComboBox4.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Consciente", "Inconsciente" }));
+        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 90, -1));
+
+        jComboBox5.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox5.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        jComboBox5.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Presente", "No presente" }));
+        jComboBox5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 90, -1));
+
+        jComboBox6.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox6.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        jComboBox6.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Presentes", "No presentes" }));
+        jComboBox6.setToolTipText("");
+        jComboBox6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox6ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 90, -1));
+
+        jComboBox7.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox7.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        jComboBox7.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Adulto", "Niño o anciano" }));
+        jComboBox7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox7ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBox7, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 90, -1));
+
+        jComboBox8.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox8.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        jComboBox8.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin fiebre", "Moderada", "Alta" }));
+        jComboBox8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox8ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBox8, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 90, -1));
+
+        jComboBox9.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox9.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        jComboBox9.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBox9.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin vomitos", "Moderados", "Intensos" }));
+        jComboBox9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox9ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBox9, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, 90, -1));
+
+        jComboBox10.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox10.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        jComboBox10.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBox10.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No duele", "Moderado", "Severo" }));
+        jComboBox10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox10ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBox10, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 40, 90, -1));
+
+        jComboBox11.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox11.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        jComboBox11.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBox11.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Presente", "No presente" }));
+        jComboBox11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox11ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBox11, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 90, -1));
+
+        jComboBox12.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox12.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        jComboBox12.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBox12.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Presentes ", "No presentes" }));
+        jComboBox12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox12ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBox12, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, 90, -1));
+
+        jComboBox13.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox13.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        jComboBox13.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBox13.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No presente", "Moderado", "Intenso" }));
+        jComboBox13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox13ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBox13, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, 90, -1));
+
+        BotonInstancia.setBackground(new java.awt.Color(0, 0, 153));
+        BotonInstancia.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        BotonInstancia.setForeground(new java.awt.Color(255, 255, 255));
+        BotonInstancia.setText("TRIAGIAR");
+        BotonInstancia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonInstanciaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BotonInstancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, -1, -1));
+
+        jLabel1.setBackground(new java.awt.Color(0, 0, 153));
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel1.setText("Sangrado");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, 60, 20));
+
+        jLabel2.setBackground(new java.awt.Color(0, 0, 153));
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel2.setText("Respiración");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 70, 20));
+
+        jLabel3.setBackground(new java.awt.Color(0, 0, 153));
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel3.setText("Pulso");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 40, 20));
+
+        jLabel4.setBackground(new java.awt.Color(0, 0, 153));
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel4.setText("Estado mental");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 90, 20));
+
+        jLabel5.setBackground(new java.awt.Color(0, 0, 153));
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel5.setText("Conciencia");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 70, 20));
+
+        jLabel6.setBackground(new java.awt.Color(0, 0, 153));
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel6.setText("Dolor de pecho");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, 20));
+
+        jLabel7.setBackground(new java.awt.Color(0, 0, 153));
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel7.setText("Lesiones graves");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 240, -1, 20));
+
+        jLabel8.setBackground(new java.awt.Color(0, 0, 153));
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel8.setText("Edad");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 30, 20));
+
+        jLabel9.setBackground(new java.awt.Color(0, 0, 153));
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel9.setText("Fiebre");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, 40, 20));
+
+        jLabel10.setBackground(new java.awt.Color(0, 0, 153));
+        jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel10.setText("Vómitos");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, 50, 20));
+
+        jLabel11.setBackground(new java.awt.Color(0, 0, 153));
+        jLabel11.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel11.setText("Dolor abdominal");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, 100, 20));
+
+        jLabel12.setBackground(new java.awt.Color(0, 0, 153));
+        jLabel12.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel12.setText("Signos de shock");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(294, 80, -1, 20));
+
+        jLabel13.setBackground(new java.awt.Color(0, 0, 153));
+        jLabel13.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel13.setText("Lesiones leves");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 90, 20));
+
+        LabelIconito.setText("jLabel14");
+        jPanel1.add(LabelIconito, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -64,31 +331,201 @@ public class MedicoTriage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-        
+
         String selectedOption = (String) jComboBox1.getSelectedItem();
-        int i1 = 0;
-        switch (selectedOption){
-            case "Normal" : i1 = 0;
-            break;
-            case "Moderada" : i1 = 2;
-            break;
-            case "Grave" : i1 = 130;
-            
+        switch (selectedOption) {
+            case "Normal":
+                this.i1 = 0;
+                break;
+            case "Moderada":
+                this.i1 = 1;
+                break;
+            case "Grave":
+                this.i1 = 2;
         }
-        System.out.println(i1);
-        Medico med = new Medico();
-        
-        med.seti1(i1);
-        
-        int pruebita = med.geti1();
-        System.out.println(pruebita);
-        
+
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void BotonInstanciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonInstanciaActionPerformed
+        // TODO add your handling code here:
+        Triage t = new Triage(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+        String colorPrueba = t.obtenerColor();
+        System.out.println(colorPrueba);
+        t.setColorTriage(colorPrueba);
+        //Prueba
+
+    }//GEN-LAST:event_BotonInstanciaActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+        String selectedOption = (String) jComboBox2.getSelectedItem();
+        switch (selectedOption) {
+            case "Normal":
+                this.i2 = 0;
+                break;
+            case "Anormal":
+                this.i2 = 1;
+        }
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        // TODO add your handling code here:
+        String selectedOption = (String) jComboBox3.getSelectedItem();
+        switch (selectedOption) {
+            case "Normal":
+                this.i3 = 0;
+                break;
+            case "Leve":
+                this.i3 = 1;
+                break;
+            case "Grave":
+                this.i3 = 2;
+        }
+
+    }//GEN-LAST:event_jComboBox3ActionPerformed
+
+    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+        // TODO add your handling code here:
+        String selectedOption = (String) jComboBox4.getSelectedItem();
+        switch (selectedOption) {
+            case "Consciente":
+                this.i4 = 0;
+                break;
+            case "Inconsciente":
+                this.i4 = 3;
+        }
+
+    }//GEN-LAST:event_jComboBox4ActionPerformed
+
+    private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
+        // TODO add your handling code here:
+        String selectedOption = (String) jComboBox5.getSelectedItem();
+        switch (selectedOption) {
+            case "No presente":
+                this.i5 = 0;
+                break;
+            case "Presente":
+                this.i5 = 1;
+        }
+    }//GEN-LAST:event_jComboBox5ActionPerformed
+
+    private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed
+        // TODO add your handling code here:
+        String selectedOption = (String) jComboBox6.getSelectedItem();
+        switch (selectedOption) {
+            case "No presentes":
+                this.i6 = 0;
+                break;
+            case "Presentes":
+                this.i6 = 2;
+        }
+    }//GEN-LAST:event_jComboBox6ActionPerformed
+
+    private void jComboBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox7ActionPerformed
+        // TODO add your handling code here:
+        String selectedOption = (String) jComboBox7.getSelectedItem();
+        switch (selectedOption) {
+            case "Adulto":
+                this.i7 = 0;
+                break;
+            case "Niño o anciano":
+                this.i7 = 1;
+        }
+    }//GEN-LAST:event_jComboBox7ActionPerformed
+
+    private void jComboBox8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox8ActionPerformed
+        // TODO add your handling code here:
+        String selectedOption = (String) jComboBox8.getSelectedItem();
+        switch (selectedOption) {
+            case "Sin fiebre":
+                this.i8 = 0;
+                break;
+            case "Moderada":
+                this.i8 = 1;
+                break;
+            case "Alta":
+                this.i8 = 2;
+        }
+    }//GEN-LAST:event_jComboBox8ActionPerformed
+
+    private void jComboBox9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox9ActionPerformed
+        // TODO add your handling code here:
+        String selectedOption = (String) jComboBox9.getSelectedItem();
+        switch (selectedOption) {
+            case "Sin vomitos":
+                this.i9 = 0;
+                break;
+            case "Moderados":
+                this.i9 = 1;
+                break;
+            case "Intensos":
+                this.i9 = 2;
+        }
+    }//GEN-LAST:event_jComboBox9ActionPerformed
+
+    private void jComboBox10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox10ActionPerformed
+        // TODO add your handling code here:
+        String selectedOption = (String) jComboBox10.getSelectedItem();
+        switch (selectedOption) {
+            case "No duele":
+                this.i10 = 0;
+                break;
+            case "Moderado":
+                this.i10 = 1;
+                break;
+            case "Severo":
+                this.i10 = 2;
+        }
+    }//GEN-LAST:event_jComboBox10ActionPerformed
+
+    private void jComboBox11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox11ActionPerformed
+        // TODO add your handling code here:
+        String selectedOption = (String) jComboBox11.getSelectedItem();
+        switch (selectedOption) {
+            case "No presente":
+                this.i11 = 0;
+                break;
+            case "Presente":
+                this.i11 = 3;
+        }
+    }//GEN-LAST:event_jComboBox11ActionPerformed
+
+    private void jComboBox12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox12ActionPerformed
+        // TODO add your handling code here:
+        String selectedOption = (String) jComboBox12.getSelectedItem();
+        switch (selectedOption) {
+            case "Presentes":
+                this.i12 = 0;
+                break;
+            case "No presentes":
+                this.i12 = 1;
+        }
+    }//GEN-LAST:event_jComboBox12ActionPerformed
+
+    private void jComboBox13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox13ActionPerformed
+        // TODO add your handling code here:
+        String selectedOption = (String) jComboBox13.getSelectedItem();
+        switch (selectedOption) {
+            case "No presente":
+                this.i13 = 0;
+                break;
+            case "Moderado":
+                this.i13 = 1;
+                break;
+            case "Intenso":
+                this.i13 = 2;
+        }
+
+    }//GEN-LAST:event_jComboBox13ActionPerformed
+
+//Una vez tengo los 13 i cargados... 
+    //esto no va aca
+    public Triage instanciarTriage() {
+        System.out.println("Pruebita");
+        Triage t = new Triage(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+        return t;
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -122,7 +559,42 @@ public class MedicoTriage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonInstancia;
+    private javax.swing.JLabel LabelIconito;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox10;
+    private javax.swing.JComboBox<String> jComboBox11;
+    private javax.swing.JComboBox<String> jComboBox12;
+    private javax.swing.JComboBox<String> jComboBox13;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBox4;
+    private javax.swing.JComboBox<String> jComboBox5;
+    private javax.swing.JComboBox<String> jComboBox6;
+    private javax.swing.JComboBox<String> jComboBox7;
+    private javax.swing.JComboBox<String> jComboBox8;
+    private javax.swing.JComboBox<String> jComboBox9;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    private void SetImageLabel(JLabel jLabel1, String root) {
+        ImageIcon image = new ImageIcon(root);
+        Icon icon = new ImageIcon(
+                image.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
+        jLabel1.setIcon(icon);
+        this.repaint();
+    }
 }

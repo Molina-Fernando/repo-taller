@@ -9,8 +9,8 @@ public abstract class Funcionario extends Persona {
     private String usuario;
     private String contrasenia;
     private ArrayList<Rol> roles;
-    
-    public Funcionario(){
+
+    public Funcionario() {
     }
 
     public Funcionario(String nombre, String apellido, LocalDate fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, String user, String password) {
@@ -18,17 +18,20 @@ public abstract class Funcionario extends Persona {
         setUsuario(usuario);
         setContrasenia(contrasenia);
     }
-    public void setRoles(Rol e){
+
+    public void setRoles(Rol e) {
         this.roles.add(e);
     }
-    public ArrayList<Rol> getRol(){
+
+    public ArrayList<Rol> getRol() {
         return this.roles;
     }
-    public void borrarRol(Rol e){
-        Iterator<Rol>it= this.roles.iterator();
-        while(it.hasNext()){
-            Rol r=it.next();
-            if(r.equals(e)){
+
+    public void borrarRol(Rol e) {
+        Iterator<Rol> it = this.roles.iterator();
+        while (it.hasNext()) {
+            Rol r = it.next();
+            if (r.equals(e)) {
                 this.roles.remove(r);
             }
         }
@@ -41,7 +44,6 @@ public abstract class Funcionario extends Persona {
     public final void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
-    
 
     @Override
     public String toString() {
@@ -60,7 +62,7 @@ public abstract class Funcionario extends Persona {
         }
 
         sb.append("]}");
-        return super.toString()+sb.toString();
+        return super.toString() + sb.toString();
     }
-        
+
 }

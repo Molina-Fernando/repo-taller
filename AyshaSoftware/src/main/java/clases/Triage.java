@@ -1,8 +1,8 @@
 package clases;
 
+import ventanas.MedicoTriage;
 
 public class Triage {
-
 
     private int respiracion;
     private int pulso;
@@ -20,8 +20,10 @@ public class Triage {
     private String colorTriage;
     private String colorFinal;
     private String motivoCambio;
-    
-    public Triage(){}
+    MedicoTriage medicoTriage = new MedicoTriage();
+
+    public Triage() {
+    }
 
     public Triage(int respiracion, int pulso, int estadoMental, int conciencia, int dolorPecho, int lesionGrave, int edad, int fiebre, int vomitos, int dolorAbdominal, int signosDeShock, int doloresLeves, int sangrado) {
         this.respiracion = respiracion;
@@ -43,6 +45,9 @@ public class Triage {
         return colorTriage;
     }
 
+    public void setColorTriage(String colorTriage) {
+        this.colorTriage = colorTriage;
+    }
 
     public String getColorFinal() {
         return colorFinal;
@@ -60,30 +65,26 @@ public class Triage {
         this.motivoCambio = motivoCambio;
     }
 
-    
-    
     public String obtenerColor() {
-        
+        //medicoTriage.instanciarTriage();
+
         int resultadoTriage = calcularPuntuacion();
-     
-        if (resultadoTriage == 0){
+        if (resultadoTriage == 0) {
             colorTriage = "Azul";
-        } else if(resultadoTriage >=1 && resultadoTriage <= 4){
+        } else if (resultadoTriage >= 1 && resultadoTriage <= 4) {
             colorTriage = "Verde";
-        } else if(resultadoTriage >= 5 && resultadoTriage <= 9){
+        } else if (resultadoTriage >= 5 && resultadoTriage <= 9) {
             colorTriage = "Amarillo";
-        } else if(resultadoTriage >= 10 && resultadoTriage <=14){
+        } else if (resultadoTriage >= 10 && resultadoTriage <= 14) {
             colorTriage = "Naranja";
-        } else{
+        } else {
             colorTriage = "Rojo";
         }
-        
+
         return colorTriage;
         // Método a resolver...
 
         //Este llama a calcularPuntuacion
- 
-
     }
 
     private int calcularPuntuacion() {

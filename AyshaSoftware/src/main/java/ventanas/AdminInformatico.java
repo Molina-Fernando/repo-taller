@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ventanas;
 
 import java.awt.Image;
@@ -10,15 +6,8 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-/**
- *
- * @author Fernando
- */
 public class AdminInformatico extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AdminInformatico
-     */
     public AdminInformatico() {
         initComponents();
 
