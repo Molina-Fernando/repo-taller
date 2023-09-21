@@ -18,7 +18,6 @@ public class MedicoTriage extends javax.swing.JFrame {
      * Creates new form MedicoTriage
      */
     private int i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13;
-    private String color;
 
     public MedicoTriage() {
         initComponents();
@@ -517,14 +516,6 @@ public class MedicoTriage extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jComboBox13ActionPerformed
-
-//Una vez tengo los 13 i cargados... 
-    //esto no va aca
-    public Triage instanciarTriage() {
-        System.out.println("Pruebita");
-        Triage t = new Triage(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
-        return t;
-    }
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
