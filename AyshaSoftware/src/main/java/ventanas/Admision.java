@@ -28,7 +28,7 @@ public class Admision extends javax.swing.JFrame {
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
         setIconImage(miIcono);
         SetImageLabel(LabelIconito, "src\\main\\java\\images\\icon.png");
-        SetImageLabel(ImagenRegistro, "src\\main\\java\\images\\user-plus-solid-24.png");
+        SetImageLabel(ImagenRegistro, "src\\main\\java\\images\\imagenRegistro.png");
         String userName = Login.user;
         LabelTitulo.setText("Bienvenido " + userName + "- Admisión de pacientes.");
         setTitle("Admisión - Sesión de " + userName);
@@ -84,7 +84,7 @@ public class Admision extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 150, 30));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, 150, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
