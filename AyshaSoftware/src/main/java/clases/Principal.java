@@ -12,9 +12,6 @@ public class Principal {
         MedicoTriage mt = new MedicoTriage();
         mt.setVisible(true);
 
-        Medico med = new Medico();
-        med.realizarTriage();
-
     }
 
 }

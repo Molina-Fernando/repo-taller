@@ -347,10 +347,9 @@ public class MedicoTriage extends javax.swing.JFrame {
 
     private void BotonInstanciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonInstanciaActionPerformed
         // TODO add your handling code here:
-        Triage t = new Triage(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
-        String colorPrueba = t.obtenerColor();
-        System.out.println(colorPrueba);
-        t.setColorTriage(colorPrueba);
+        Medico med = new Medico();
+        med.realizarTriage(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+
         //Prueba
 
     }//GEN-LAST:event_BotonInstanciaActionPerformed
