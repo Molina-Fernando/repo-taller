@@ -12,11 +12,12 @@ public abstract class Persona {
     private String telFijo;
     private String telCelular;
     private String correoElectronico;
+    private String estadoCivil;
 
     public Persona() {
     }
 
-    public Persona(String nombre, String apellido, LocalDate fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico) {
+    public Persona(String nombre, String apellido, LocalDate fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, String estadoCivil) {
         setNombre(nombre);
         setApellido(apellido);
         setFecNacimiento(fecNacimiento);
@@ -25,6 +26,7 @@ public abstract class Persona {
         setTelCelular(telCelular);
         setTelFijo(telFijo);
         setCorreoElectronico(correoElectronico);
+        setEstadoCivil(estadoCivil);
     }
 
     public final void setNombre(String nombre) {
@@ -70,6 +72,10 @@ public abstract class Persona {
     public LocalDate getFecNacimiento() {
         return fecNacimiento;
     }
+    
+    public String setEstadoCivil(String estadoCivil){
+        return estadoCivil;
+    }
 
     public String getDomicilio() {
         return domicilio;
@@ -93,7 +99,7 @@ public abstract class Persona {
 
     @Override
     public String toString() {
-        return "Persona{" + "nombre=" + nombre + ", apellido=" + apellido + ", fecNacimiento=" + fecNacimiento + ", domicilio=" + domicilio + ", dni=" + dni + ", telFijo=" + telFijo + ", telCelular=" + telCelular + ", correoElectronico=" + correoElectronico + '}';
+        return "Persona{" + "nombre=" + nombre + ", apellido=" + apellido + ", fecNacimiento=" + fecNacimiento + ", domicilio=" + domicilio + ", dni=" + dni + ", telFijo=" + telFijo + ", telCelular=" + telCelular + ", correoElectronico=" + correoElectronico + ", estadoCivil= " +'}';
     }
 
 }
