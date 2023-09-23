@@ -22,7 +22,6 @@ import javax.swing.JTable;
  * @author Jeremías Simian
  */
 public class ListaTriage extends javax.swing.JFrame {
-
     /**
      * Creates new form ListaTriage
      */
@@ -47,7 +46,6 @@ public class ListaTriage extends javax.swing.JFrame {
     
     public void refrescarTabla() {
      
-
     }
 
     /**

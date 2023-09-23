@@ -23,8 +23,9 @@ public class MedicoTriage extends javax.swing.JFrame {
      */
     private int i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13;
     private Color color;
+    private String colorDefinitivo;
+    private String motivoCambio;
     Map<String, Color> colores = new HashMap<>();
-    Medico med = new Medico();
 
     public MedicoTriage() {
         initComponents();
@@ -39,6 +40,7 @@ public class MedicoTriage extends javax.swing.JFrame {
         SetImageLabel(LabelIconito, "src\\main\\java\\images\\icon.png");
         String userName = Login.user;
         setTitle("Triage - Sesión de " + userName);
+        
 
     }
 
@@ -60,7 +62,7 @@ public class MedicoTriage extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        TextoCambio = new javax.swing.JTextArea();
         botonAceptar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -94,7 +96,6 @@ public class MedicoTriage extends javax.swing.JFrame {
         BotonTriagiar = new javax.swing.JButton();
         BotonModificar = new javax.swing.JButton();
 
-        ventanaEmergente.setPreferredSize(new java.awt.Dimension(226, 170));
         ventanaEmergente.setSize(new java.awt.Dimension(295, 217));
 
         PanelEmergente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -136,9 +137,9 @@ public class MedicoTriage extends javax.swing.JFrame {
         jLabel15.setText("Modificar color");
         jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        TextoCambio.setColumns(20);
+        TextoCambio.setRows(5);
+        jScrollPane1.setViewportView(TextoCambio);
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 200, 100));
 
@@ -465,6 +466,7 @@ public class MedicoTriage extends javax.swing.JFrame {
         // TODO add your handling code here:
         setVisible(false);
         ventanaEmergente.setVisible(false);
+        
         //Prueba
 
     }//GEN-LAST:event_BotonFinalizarActionPerformed
@@ -643,11 +645,11 @@ public class MedicoTriage extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jComboBox13ActionPerformed
-
+    
     private void BotonTriagiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonTriagiarActionPerformed
         // TODO add your handling code here:
-        //FALTA HACER ENFERMERO
-
+        //FALTA HACER ENFERMERo
+        Medico med = new Medico();
         mapeoDeColores();
         this.color = colores.get(med.realizarTriage(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13));
         PanelEmergente.setBackground(color);
@@ -706,13 +708,14 @@ public class MedicoTriage extends javax.swing.JFrame {
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
         // TODO add your handling code here:
         mapeoDeColores();
-        String colorDefinitivo = ComboBoxColores.getSelectedItem().toString();
-        med.cambiarTriage(colorDefinitivo);//aaa
+        this.colorDefinitivo = ComboBoxColores.getSelectedItem().toString();
+        // med.cambiarTriage(colorDefinitivo);//aaa
         this.color = colores.get(colorDefinitivo);
-
+        this.motivoCambio = this. TextoCambio.getText();
         FrameModificar.setVisible(false);
         PanelEmergente.setBackground(color);
         tiempoDeColor(color);
+        
 
     }//GEN-LAST:event_botonAceptarActionPerformed
 
@@ -756,6 +759,7 @@ public class MedicoTriage extends javax.swing.JFrame {
     private javax.swing.JFrame FrameModificar;
     private javax.swing.JLabel LabelIconito;
     private javax.swing.JPanel PanelEmergente;
+    private javax.swing.JTextArea TextoCambio;
     private javax.swing.JLabel TextoEmergente;
     private javax.swing.JButton botonAceptar;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -789,7 +793,6 @@ public class MedicoTriage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JDialog ventanaEmergente;
     // End of variables declaration//GEN-END:variables
 
