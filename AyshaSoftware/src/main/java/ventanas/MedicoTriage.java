@@ -25,7 +25,7 @@ public class MedicoTriage extends javax.swing.JFrame {
     private Color color;
     Map<String, Color> colores = new HashMap<>();
     Medico med = new Medico();
-    
+
     public MedicoTriage() {
         initComponents();
         ventanaEmergente.setResizable(false);
@@ -39,7 +39,7 @@ public class MedicoTriage extends javax.swing.JFrame {
         SetImageLabel(LabelIconito, "src\\main\\java\\images\\icon.png");
         String userName = Login.user;
         setTitle("Triage - Sesión de " + userName);
-       
+
     }
 
     /**
@@ -646,16 +646,16 @@ public class MedicoTriage extends javax.swing.JFrame {
 
     private void BotonTriagiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonTriagiarActionPerformed
         // TODO add your handling code here:
-         //FALTA HACER ENFERMERO
-     
+        //FALTA HACER ENFERMERO
+
         mapeoDeColores();
         this.color = colores.get(med.realizarTriage(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13));
         PanelEmergente.setBackground(color);
         tiempoDeColor(color);
         ventanaEmergente.setVisible(true);
     }//GEN-LAST:event_BotonTriagiarActionPerformed
-    
-    private void mapeoDeColores(){
+
+    private void mapeoDeColores() {
         colores.put("Rojo", Color.RED);
         colores.put("Verde", Color.GREEN);
         colores.put("Amarillo", Color.YELLOW);
@@ -666,7 +666,7 @@ public class MedicoTriage extends javax.swing.JFrame {
         // TODO add your handling code here:
         coloresSeleccionables(color);
         FrameModificar.setVisible(true);
-        
+
 
     }//GEN-LAST:event_BotonModificarActionPerformed
 
@@ -707,12 +707,13 @@ public class MedicoTriage extends javax.swing.JFrame {
         // TODO add your handling code here:
         mapeoDeColores();
         String colorDefinitivo = ComboBoxColores.getSelectedItem().toString();
-        this.color =colores.get(colorDefinitivo);
-        
+        med.cambiarTriage(colorDefinitivo);//aaa
+        this.color = colores.get(colorDefinitivo);
+
         FrameModificar.setVisible(false);
         PanelEmergente.setBackground(color);
         tiempoDeColor(color);
-        
+
     }//GEN-LAST:event_botonAceptarActionPerformed
 
     public static void main(String args[]) {
