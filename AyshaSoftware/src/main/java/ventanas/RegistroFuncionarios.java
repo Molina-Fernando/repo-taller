@@ -5,10 +5,15 @@
 package ventanas;
 
 import clases.Conexion;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +24,15 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
 
     public RegistroFuncionarios() {
         initComponents();
+        setVisible(true);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setTitle("Registro de Funcionarios");
+        SetImageLabel(jLabelIconito, "src\\main\\java\\images\\icon.png");
+        Toolkit miPantalla = Toolkit.getDefaultToolkit();
+        Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
+        SetImageLabel(jLabel12, "src\\main\\java\\images\\regFunc.png");
+        setIconImage(miIcono);
     }
 
     Conexion cn = new Conexion();
@@ -53,6 +67,8 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         botonEliminar1 = new javax.swing.JButton();
         botonBuscar1 = new javax.swing.JButton();
         botonAgregar1 = new javax.swing.JButton();
+        jLabelIconito = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
 
         botonAgregar.setText("Alta");
         botonAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -156,15 +172,21 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         });
         bg.add(botonAgregar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 450, -1, -1));
 
+        jLabelIconito.setText("jLabel1");
+        bg.add(jLabelIconito, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 60));
+
+        jLabel12.setText("jLabel12");
+        bg.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 170, 160));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
         );
 
         pack();
@@ -224,7 +246,7 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
                     PreparedStatement psi = conex.prepareStatement(insert);
                     //conex.prepareStatement(input);
 
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat( "dd-MM-yyyy");
                     String fechaFormateada = dateFormat.format(fechaNacimiento);
 
                     psi.setString(1, nombre);
@@ -238,7 +260,17 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
                     psi.setString(9, correoElectronico);
 
                     psi.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Usuario registrado con éxito");
+                    JOptionPane.showMessageDialog(null, "Usuario registrado con éxito - Recuerde que el Administrador del sistema deberá validar el usuario para su posterior ingreso al sistema.");
+                    textNombre.setText("");
+                    textApellido.setText("");
+                    dcFechaNac.setDate(null);
+                    textDomicilio.setText("");
+                    textDNI.setText("");
+                    textFijo.setText("");
+                    textCel.setText("");
+                    textEstadoCivil.setText("");
+                    textMail.setText("");
+                    
                 } else {
                     JOptionPane.showMessageDialog(null, "DNI ya registrado");
                 }
@@ -267,6 +299,13 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         
     }//GEN-LAST:event_botonBuscar1ActionPerformed
 
+        private void SetImageLabel(JLabel jLabel1, String root) {
+        ImageIcon image = new ImageIcon(root);
+        Icon icon = new ImageIcon(
+                image.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
+        jLabel1.setIcon(icon);
+        this.repaint();
+    }
     /**
      * @param args the command line arguments
      */
@@ -313,6 +352,7 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
     private javax.swing.JButton botonEliminar1;
     private com.toedter.calendar.JDateChooser dcFechaNac;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -321,6 +361,7 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelIconito;
     private javax.swing.JTextField textApellido;
     private javax.swing.JTextField textCel;
     private javax.swing.JTextField textDNI;
