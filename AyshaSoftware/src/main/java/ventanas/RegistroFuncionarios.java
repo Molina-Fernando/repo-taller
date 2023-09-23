@@ -64,8 +64,6 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         textCel = new javax.swing.JTextField();
         textEstadoCivil = new javax.swing.JTextField();
         dcFechaNac = new com.toedter.calendar.JDateChooser();
-        botonEliminar1 = new javax.swing.JButton();
-        botonBuscar1 = new javax.swing.JButton();
         botonAgregar1 = new javax.swing.JButton();
         jLabelIconito = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -153,24 +151,16 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         bg.add(textEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 370, 170, -1));
         bg.add(dcFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 170, -1));
 
-        botonEliminar1.setText("Editar");
-        bg.add(botonEliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 450, -1, -1));
-
-        botonBuscar1.setText("Buscar");
-        botonBuscar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonBuscar1ActionPerformed(evt);
-            }
-        });
-        bg.add(botonBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 450, -1, -1));
-
-        botonAgregar1.setText("Registrar");
+        botonAgregar1.setBackground(new java.awt.Color(0, 0, 153));
+        botonAgregar1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        botonAgregar1.setForeground(new java.awt.Color(255, 255, 255));
+        botonAgregar1.setText("REGISTRAR");
         botonAgregar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAgregar1ActionPerformed(evt);
             }
         });
-        bg.add(botonAgregar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 450, -1, -1));
+        bg.add(botonAgregar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, 130, 30));
 
         jLabelIconito.setText("jLabel1");
         bg.add(jLabelIconito, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 60));
@@ -206,7 +196,7 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
     }//GEN-LAST:event_botonEditarActionPerformed
 
     private void botonAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregar1ActionPerformed
-                String nombre = textNombre.getText().trim();
+        String nombre = textNombre.getText().trim();
         String apellido = textApellido.getText().trim();
         Date fechaNacimiento = dcFechaNac.getDate();
         String domicilio = textDomicilio.getText().trim();
@@ -246,7 +236,7 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
                     PreparedStatement psi = conex.prepareStatement(insert);
                     //conex.prepareStatement(input);
 
-                    SimpleDateFormat dateFormat = new SimpleDateFormat( "dd-MM-yyyy");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                     String fechaFormateada = dateFormat.format(fechaNacimiento);
 
                     psi.setString(1, nombre);
@@ -270,7 +260,7 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
                     textCel.setText("");
                     textEstadoCivil.setText("");
                     textMail.setText("");
-                    
+
                 } else {
                     JOptionPane.showMessageDialog(null, "DNI ya registrado");
                 }
@@ -293,19 +283,29 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
         }
     }//GEN-LAST:event_botonAgregar1ActionPerformed
+    private void buscarFuncionario(String dni) {
+        String query = "SELECT * FROM Funcionarios WHERE DNI = ?";
+        Connection conex = null;
+        try {
+            conex = cn.conectar();
+            PreparedStatement psq = conex.prepareStatement(query);
+            psq.setString(1, dni);
+            ResultSet rs = psq.executeQuery();
 
-    private void botonBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscar1ActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_botonBuscar1ActionPerformed
+        } catch (Exception e) {
 
-        private void SetImageLabel(JLabel jLabel1, String root) {
+        }
+
+    }
+
+    private void SetImageLabel(JLabel jLabel1, String root) {
         ImageIcon image = new ImageIcon(root);
         Icon icon = new ImageIcon(
                 image.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
         jLabel1.setIcon(icon);
         this.repaint();
     }
+
     /**
      * @param args the command line arguments
      */
@@ -346,10 +346,8 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
     private javax.swing.JButton botonAgregar;
     private javax.swing.JButton botonAgregar1;
     private javax.swing.JButton botonBuscar;
-    private javax.swing.JButton botonBuscar1;
     private javax.swing.JButton botonEditar;
     private javax.swing.JButton botonEliminar;
-    private javax.swing.JButton botonEliminar1;
     private com.toedter.calendar.JDateChooser dcFechaNac;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;

@@ -43,12 +43,13 @@ public class CrudUsuarios extends javax.swing.JFrame {
         bg = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        botonEliminar = new javax.swing.JButton();
         botonAgregar = new javax.swing.JButton();
         botonEditar = new javax.swing.JButton();
-        botonBuscar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         cBoxRol = new javax.swing.JComboBox<>();
+        cBoxRol1 = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,16 +74,13 @@ public class CrudUsuarios extends javax.swing.JFrame {
 
         bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 620, 220));
 
-        botonEliminar.setText("Editar");
-        bg.add(botonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 430, -1, -1));
-
         botonAgregar.setText("Alta");
         botonAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAgregarActionPerformed(evt);
             }
         });
-        bg.add(botonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 430, -1, -1));
+        bg.add(botonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 460, -1, -1));
 
         botonEditar.setText("Eliminar");
         botonEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -90,16 +88,32 @@ public class CrudUsuarios extends javax.swing.JFrame {
                 botonEditarActionPerformed(evt);
             }
         });
-        bg.add(botonEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 430, -1, -1));
-
-        botonBuscar.setText("Buscar");
-        bg.add(botonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, -1, -1));
+        bg.add(botonEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 460, -1, -1));
 
         jLabel5.setText("Rol");
-        bg.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 330, 30, 30));
+        bg.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 330, 30, 30));
 
         cBoxRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cBoxRol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cBoxRolActionPerformed(evt);
+            }
+        });
         bg.add(cBoxRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 330, 210, 30));
+
+        cBoxRol1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cBoxRol1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cBoxRol1ActionPerformed(evt);
+            }
+        });
+        bg.add(cBoxRol1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 380, 210, 30));
+
+        jLabel6.setText("Sector");
+        bg.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 380, 40, 30));
+
+        jLabel1.setText("USUARIOS REGISTRADOS - PENDIENTES DE ALTA");
+        bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 260, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -172,6 +186,14 @@ public class CrudUsuarios extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botonEditarActionPerformed
 
+    private void cBoxRolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBoxRolActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cBoxRolActionPerformed
+
+    private void cBoxRol1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBoxRol1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cBoxRol1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -210,11 +232,12 @@ public class CrudUsuarios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton botonAgregar;
-    private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonEditar;
-    private javax.swing.JButton botonEliminar;
     private javax.swing.JComboBox<String> cBoxRol;
+    private javax.swing.JComboBox<String> cBoxRol1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
