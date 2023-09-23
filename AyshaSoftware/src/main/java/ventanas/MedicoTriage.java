@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -6,8 +7,11 @@ package ventanas;
 
 import clases.Medico;
 import clases.Triage;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -18,9 +22,15 @@ public class MedicoTriage extends javax.swing.JFrame {
      * Creates new form MedicoTriage
      */
     private int i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13;
-
+    private Color color;
+    Map<String, Color> colores = new HashMap<>();
+    Medico med = new Medico();
+    
     public MedicoTriage() {
         initComponents();
+        ventanaEmergente.setResizable(false);
+        FrameModificar.setResizable(false);
+        FrameModificar.setLocationRelativeTo(null);
         setLocationRelativeTo(null);
         setResizable(false);
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
@@ -29,6 +39,7 @@ public class MedicoTriage extends javax.swing.JFrame {
         SetImageLabel(LabelIconito, "src\\main\\java\\images\\icon.png");
         String userName = Login.user;
         setTitle("Triage - Sesión de " + userName);
+       
     }
 
     /**
@@ -40,6 +51,17 @@ public class MedicoTriage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        ventanaEmergente = new javax.swing.JDialog();
+        PanelEmergente = new javax.swing.JPanel();
+        TextoEmergente = new javax.swing.JLabel();
+        FrameModificar = new javax.swing.JFrame();
+        jPanel2 = new javax.swing.JPanel();
+        ComboBoxColores = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        botonAceptar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
@@ -54,7 +76,7 @@ public class MedicoTriage extends javax.swing.JFrame {
         jComboBox11 = new javax.swing.JComboBox<>();
         jComboBox12 = new javax.swing.JComboBox<>();
         jComboBox13 = new javax.swing.JComboBox<>();
-        BotonInstancia = new javax.swing.JButton();
+        BotonFinalizar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -69,6 +91,78 @@ public class MedicoTriage extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         LabelIconito = new javax.swing.JLabel();
+        BotonTriagiar = new javax.swing.JButton();
+        BotonModificar = new javax.swing.JButton();
+
+        ventanaEmergente.setPreferredSize(new java.awt.Dimension(226, 170));
+        ventanaEmergente.setSize(new java.awt.Dimension(295, 217));
+
+        PanelEmergente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        TextoEmergente.setBackground(new java.awt.Color(0, 0, 0));
+        TextoEmergente.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        PanelEmergente.add(TextoEmergente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 280, 20));
+
+        javax.swing.GroupLayout ventanaEmergenteLayout = new javax.swing.GroupLayout(ventanaEmergente.getContentPane());
+        ventanaEmergente.getContentPane().setLayout(ventanaEmergenteLayout);
+        ventanaEmergenteLayout.setHorizontalGroup(
+            ventanaEmergenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(PanelEmergente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        ventanaEmergenteLayout.setVerticalGroup(
+            ventanaEmergenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(PanelEmergente, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+        );
+
+        FrameModificar.setSize(new java.awt.Dimension(400, 300));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        ComboBoxColores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboBoxColoresActionPerformed(evt);
+            }
+        });
+        jPanel2.add(ComboBoxColores, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 90, 30));
+
+        jLabel14.setBackground(new java.awt.Color(0, 0, 153));
+        jLabel14.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel14.setText("Motivo de cambio");
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, -1));
+
+        jLabel15.setBackground(new java.awt.Color(0, 0, 153));
+        jLabel15.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel15.setText("Modificar color");
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 200, 100));
+
+        botonAceptar.setBackground(new java.awt.Color(0, 0, 153));
+        botonAceptar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        botonAceptar.setForeground(new java.awt.Color(255, 255, 255));
+        botonAceptar.setText("ACEPTAR");
+        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAceptarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(botonAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, -1, -1));
+
+        javax.swing.GroupLayout FrameModificarLayout = new javax.swing.GroupLayout(FrameModificar.getContentPane());
+        FrameModificar.getContentPane().setLayout(FrameModificarLayout);
+        FrameModificarLayout.setHorizontalGroup(
+            FrameModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        FrameModificarLayout.setVerticalGroup(
+            FrameModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -219,16 +313,16 @@ public class MedicoTriage extends javax.swing.JFrame {
         });
         jPanel1.add(jComboBox13, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, 90, -1));
 
-        BotonInstancia.setBackground(new java.awt.Color(0, 0, 153));
-        BotonInstancia.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        BotonInstancia.setForeground(new java.awt.Color(255, 255, 255));
-        BotonInstancia.setText("TRIAGIAR");
-        BotonInstancia.addActionListener(new java.awt.event.ActionListener() {
+        BotonFinalizar.setBackground(new java.awt.Color(0, 0, 153));
+        BotonFinalizar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        BotonFinalizar.setForeground(new java.awt.Color(255, 255, 255));
+        BotonFinalizar.setText("FINALIZAR");
+        BotonFinalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotonInstanciaActionPerformed(evt);
+                BotonFinalizarActionPerformed(evt);
             }
         });
-        jPanel1.add(BotonInstancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, -1, -1));
+        jPanel1.add(BotonFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, -1, -1));
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 153));
         jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -309,7 +403,29 @@ public class MedicoTriage extends javax.swing.JFrame {
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 90, 20));
 
         LabelIconito.setText("jLabel14");
-        jPanel1.add(LabelIconito, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 60));
+        jPanel1.add(LabelIconito, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
+
+        BotonTriagiar.setBackground(new java.awt.Color(0, 0, 153));
+        BotonTriagiar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        BotonTriagiar.setForeground(new java.awt.Color(255, 255, 255));
+        BotonTriagiar.setText("TRIAGIAR");
+        BotonTriagiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonTriagiarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BotonTriagiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, -1, -1));
+
+        BotonModificar.setBackground(new java.awt.Color(0, 0, 153));
+        BotonModificar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        BotonModificar.setForeground(new java.awt.Color(255, 255, 255));
+        BotonModificar.setText("MODIFICAR");
+        BotonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonModificarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BotonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 280, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -345,15 +461,27 @@ public class MedicoTriage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void BotonInstanciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonInstanciaActionPerformed
+    private void BotonFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonFinalizarActionPerformed
         // TODO add your handling code here:
-        Medico med = new Medico();
-        med.realizarTriage(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
-
+        setVisible(false);
+        ventanaEmergente.setVisible(false);
         //Prueba
 
-    }//GEN-LAST:event_BotonInstanciaActionPerformed
+    }//GEN-LAST:event_BotonFinalizarActionPerformed
 
+    private void tiempoDeColor(Color color) {
+        if (color == Color.RED) {
+            TextoEmergente.setText("ATENCIÓN URGENTE");
+        } else if (color == Color.ORANGE) {
+            TextoEmergente.setText("Tiempo de espera : 10 - 15 minutos");
+        } else if (color == Color.GREEN) {
+            TextoEmergente.setText("Tiempo de espera : 2 horas");
+        } else if (color == Color.BLUE) {
+            TextoEmergente.setText("Tiempo de espera : 4 horas");
+        } else {
+            TextoEmergente.setText("Tiempo de espera : 60 minutos");
+        }
+    }
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
         String selectedOption = (String) jComboBox2.getSelectedItem();
@@ -516,6 +644,77 @@ public class MedicoTriage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jComboBox13ActionPerformed
 
+    private void BotonTriagiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonTriagiarActionPerformed
+        // TODO add your handling code here:
+         //FALTA HACER ENFERMERO
+     
+        mapeoDeColores();
+        this.color = colores.get(med.realizarTriage(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13));
+        PanelEmergente.setBackground(color);
+        tiempoDeColor(color);
+        ventanaEmergente.setVisible(true);
+    }//GEN-LAST:event_BotonTriagiarActionPerformed
+    
+    private void mapeoDeColores(){
+        colores.put("Rojo", Color.RED);
+        colores.put("Verde", Color.GREEN);
+        colores.put("Amarillo", Color.YELLOW);
+        colores.put("Azul", Color.BLUE);
+        colores.put("Naranja", Color.ORANGE);
+    }
+    private void BotonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonModificarActionPerformed
+        // TODO add your handling code here:
+        coloresSeleccionables(color);
+        FrameModificar.setVisible(true);
+        
+
+    }//GEN-LAST:event_BotonModificarActionPerformed
+
+    private void coloresSeleccionables(Color color) {
+        if (color == Color.RED) {
+            ComboBoxColores.removeAllItems(); //Vacia el combo box
+            ComboBoxColores.addItem("Naranja");
+            ComboBoxColores.addItem("Amarillo");
+        } else if (color == Color.ORANGE) {
+            ComboBoxColores.removeAllItems();
+            ComboBoxColores.addItem("Rojo");
+            ComboBoxColores.addItem("Amarillo");
+            ComboBoxColores.addItem("Verde");
+        } else if (color == Color.GREEN) {
+            ComboBoxColores.removeAllItems();
+            ComboBoxColores.addItem("Naranja");
+            ComboBoxColores.addItem("Amarillo");
+            ComboBoxColores.addItem("Azul");
+        } else if (color == Color.BLUE) {
+            ComboBoxColores.removeAllItems();
+            ComboBoxColores.addItem("Amarillo");
+            ComboBoxColores.addItem("Verde");
+        } else {
+            ComboBoxColores.removeAllItems();
+            ComboBoxColores.addItem("Rojo");
+            ComboBoxColores.addItem("Naranja");
+            ComboBoxColores.addItem("Verde");
+            ComboBoxColores.addItem("Azul");
+        }
+    }
+
+
+    private void ComboBoxColoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxColoresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboBoxColoresActionPerformed
+
+    private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
+        // TODO add your handling code here:
+        mapeoDeColores();
+        String colorDefinitivo = ComboBoxColores.getSelectedItem().toString();
+        this.color =colores.get(colorDefinitivo);
+        
+        FrameModificar.setVisible(false);
+        PanelEmergente.setBackground(color);
+        tiempoDeColor(color);
+        
+    }//GEN-LAST:event_botonAceptarActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -549,8 +748,15 @@ public class MedicoTriage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BotonInstancia;
+    private javax.swing.JButton BotonFinalizar;
+    private javax.swing.JButton BotonModificar;
+    private javax.swing.JButton BotonTriagiar;
+    private javax.swing.JComboBox<String> ComboBoxColores;
+    private javax.swing.JFrame FrameModificar;
     private javax.swing.JLabel LabelIconito;
+    private javax.swing.JPanel PanelEmergente;
+    private javax.swing.JLabel TextoEmergente;
+    private javax.swing.JButton botonAceptar;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox10;
     private javax.swing.JComboBox<String> jComboBox11;
@@ -569,6 +775,8 @@ public class MedicoTriage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -578,6 +786,10 @@ public class MedicoTriage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JDialog ventanaEmergente;
     // End of variables declaration//GEN-END:variables
 
     private void SetImageLabel(JLabel jLabel1, String root) {

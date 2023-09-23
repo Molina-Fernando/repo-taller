@@ -38,7 +38,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
         SetImageLabel(LabelIconito, "src\\main\\java\\images\\icon.png");
         String userName = Login.user;
         LabelTitulo.setText("Bienvenido " + userName + "- Registro de pacientes.");
-        setTitle("Admisión - Sesión de " + userName);
+        setTitle("Registro de pacientes - Sesión de " + userName);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
     private String nombre, apellido, dni, domicilio, estadoCivil, telFijo, telCelular, correo, personaContacto;
@@ -235,6 +235,19 @@ public class RegistroPaciente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_TextFijoActionPerformed
 
+    private void limpiarCampos(){
+        TextNombre.setText("");
+        TextApellido.setText("");
+        TextDomicilio.setText("");
+        TextFijo.setText("");
+        TextCelular.setText("");
+        TextDNI.setText("");
+        TextCorreo.setText("");
+        TextPersonaContacto.setText("");
+        TextEstadoCivil.setText("");
+        TextFechaNac.setDate(null);
+        
+    }
     private void botonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistroActionPerformed
 
         Date date = TextFechaNac.getDate();//Se guarda la fecha del dateChooser
@@ -256,9 +269,12 @@ public class RegistroPaciente extends javax.swing.JFrame {
             Instant instant = date.toInstant();
             ZoneId zoneId = ZoneId.systemDefault();
             this.fecNacimiento = instant.atZone(zoneId).toLocalDate();
+            
             Administrativo admin = new Administrativo();
             System.out.println("Prueba");
             admin.cargarPacientes(nombre, apellido, fecNacimiento, domicilio, dni, telFijo, telCelular, correo, personaContacto, estadoCivil);
+             JOptionPane.showMessageDialog(null, "Se registro exitosamente");
+            limpiarCampos();
         } else {
             JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
         }
