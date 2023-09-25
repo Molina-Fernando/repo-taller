@@ -9,14 +9,13 @@ import java.util.Iterator;
 
 public class Medico extends Funcionario implements ProfesionalSanitario {
 
-    MedicoTriage t = new MedicoTriage();
    
     private int numMatricula;
     private ArrayList<Especialidad> especialidad;
-
+    
     public Medico() {
     }
-
+    Triage triage = new Triage();
     public Medico(String nombre, String apellido, LocalDate fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, String user, String password, int matricula, String estadoCivil) {
         super(nombre, apellido, fecNacimiento, domicilio, dni, telFijo, telCelular, correoElectronico, user, password, estadoCivil);
         this.numMatricula = matricula;
@@ -30,21 +29,37 @@ public class Medico extends Funcionario implements ProfesionalSanitario {
     }
 
     @Override
-    public String realizarTriage(int i1, int i2,int i3, int i4, int i5, int i6,int i7, int i8,int i9, int i10, int i11, int i12, int i13) {
-        Triage t = new Triage(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
-        String color = t.obtenerColor();
-        t.setColorTriage(color);
+    public String realizarTriage(int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, int i11, int i12, int i13) {
+        triage.setRespiracion(i1);
+        triage.setPulso(i2);
+        triage.setEstadoMental(i3);
+        triage.setConciencia(i4);
+        triage.setDolorPecho(i5);
+        triage.setLesionGrave(i6);
+        triage.setEdad(i7);
+        triage.setFiebre(i8);
+        triage.setVomitos(i9);
+        triage.setDolorAbdominal(i10);
+        triage.setSignosDeShock(i11);
+        triage.setDoloresLeves(i12);
+        triage.setSangrado(i13);
+        
+        String color = triage.obtenerColor();
+        triage.setColorTriage(color);
         return color;
     }
+    
+           
 
     public void asignarBox(Paciente paciente1) {
         // Método a resolver...
     }
 
     @Override
-    public void cambiarTriage(String colorFinal) {
-        //t.setColorFinal(colorFinal);
-
+    public void cambiarTriage(String colorFinal, String motivoCambio) {
+        triage.setColorFinal(colorFinal);
+        triage.setMotivoCambio(motivoCambio);
+        System.out.println("El color final es: " + colorFinal + " y lo cambie al original por: " + motivoCambio);
     }
 
     @Override

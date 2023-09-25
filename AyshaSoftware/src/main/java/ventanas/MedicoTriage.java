@@ -1,12 +1,6 @@
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ventanas;
 
 import clases.Medico;
-import clases.Triage;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -21,11 +15,13 @@ public class MedicoTriage extends javax.swing.JFrame {
     /**
      * Creates new form MedicoTriage
      */
+    
     private int i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13;
     private Color color;
     private String colorDefinitivo;
     private String motivoCambio;
     Map<String, Color> colores = new HashMap<>();
+    private Medico med;
 
     public MedicoTriage() {
         initComponents();
@@ -40,6 +36,7 @@ public class MedicoTriage extends javax.swing.JFrame {
         SetImageLabel(LabelIconito, "src\\main\\java\\images\\icon.png");
         String userName = Login.user;
         setTitle("Triage - Sesión de " + userName);
+        med = new Medico();
         
 
     }
@@ -466,7 +463,7 @@ public class MedicoTriage extends javax.swing.JFrame {
         // TODO add your handling code here:
         setVisible(false);
         ventanaEmergente.setVisible(false);
-        
+
         //Prueba
 
     }//GEN-LAST:event_BotonFinalizarActionPerformed
@@ -647,9 +644,7 @@ public class MedicoTriage extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox13ActionPerformed
     
     private void BotonTriagiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonTriagiarActionPerformed
-        // TODO add your handling code here:
         //FALTA HACER ENFERMERo
-        Medico med = new Medico();
         mapeoDeColores();
         this.color = colores.get(med.realizarTriage(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13));
         PanelEmergente.setBackground(color);
@@ -709,13 +704,13 @@ public class MedicoTriage extends javax.swing.JFrame {
         // TODO add your handling code here:
         mapeoDeColores();
         this.colorDefinitivo = ComboBoxColores.getSelectedItem().toString();
-        // med.cambiarTriage(colorDefinitivo);//aaa
         this.color = colores.get(colorDefinitivo);
-        this.motivoCambio = this. TextoCambio.getText();
+        this.motivoCambio = this.TextoCambio.getText();
+        med.cambiarTriage(colorDefinitivo, motivoCambio);
         FrameModificar.setVisible(false);
         PanelEmergente.setBackground(color);
         tiempoDeColor(color);
-        
+
 
     }//GEN-LAST:event_botonAceptarActionPerformed
 
@@ -803,4 +798,57 @@ public class MedicoTriage extends javax.swing.JFrame {
         jLabel1.setIcon(icon);
         this.repaint();
     }
+
+    public int getI1() {
+        return i1;
+    }
+
+    public int getI2() {
+        return i2;
+    }
+
+    public int getI3() {
+        return i3;
+    }
+
+    public int getI4() {
+        return i4;
+    }
+
+    public int getI5() {
+        return i5;
+    }
+
+    public int getI6() {
+        return i6;
+    }
+
+    public int getI7() {
+        return i7;
+    }
+
+    public int getI8() {
+        return i8;
+    }
+
+    public int getI9() {
+        return i9;
+    }
+
+    public int getI10() {
+        return i10;
+    }
+
+    public int getI11() {
+        return i11;
+    }
+
+    public int getI12() {
+        return i12;
+    }
+
+    public int getI13() {
+        return i13;
+    }
+
 }
