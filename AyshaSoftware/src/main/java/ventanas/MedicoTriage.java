@@ -9,13 +9,13 @@ import java.util.Map;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class MedicoTriage extends javax.swing.JFrame {
 
     /**
      * Creates new form MedicoTriage
      */
-    
     private int i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13;
     private Color color;
     private String colorDefinitivo;
@@ -37,7 +37,6 @@ public class MedicoTriage extends javax.swing.JFrame {
         String userName = Login.user;
         setTitle("Triage - Sesión de " + userName);
         med = new Medico();
-        
 
     }
 
@@ -461,8 +460,12 @@ public class MedicoTriage extends javax.swing.JFrame {
 
     private void BotonFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonFinalizarActionPerformed
         // TODO add your handling code here:
-        setVisible(false);
-        ventanaEmergente.setVisible(false);
+        if (ventanaEmergente.isVisible()) {
+            setVisible(false);
+            ventanaEmergente.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe realizar el triage");
+        }
 
         //Prueba
 
@@ -642,7 +645,7 @@ public class MedicoTriage extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jComboBox13ActionPerformed
-    
+
     private void BotonTriagiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonTriagiarActionPerformed
         //FALTA HACER ENFERMERo
         mapeoDeColores();
@@ -661,9 +664,12 @@ public class MedicoTriage extends javax.swing.JFrame {
     }
     private void BotonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonModificarActionPerformed
         // TODO add your handling code here:
-        coloresSeleccionables(color);
-        FrameModificar.setVisible(true);
-
+        if (ventanaEmergente.isVisible()) {
+            coloresSeleccionables(color);
+            FrameModificar.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe realizar el triage");
+        }
 
     }//GEN-LAST:event_BotonModificarActionPerformed
 
@@ -705,13 +711,16 @@ public class MedicoTriage extends javax.swing.JFrame {
         mapeoDeColores();
         this.colorDefinitivo = ComboBoxColores.getSelectedItem().toString();
         this.color = colores.get(colorDefinitivo);
-        this.motivoCambio = this.TextoCambio.getText();
-        med.cambiarTriage(colorDefinitivo, motivoCambio);
-        FrameModificar.setVisible(false);
-        PanelEmergente.setBackground(color);
-        tiempoDeColor(color);
 
-
+        if (!TextoCambio.getText().isEmpty()) {
+            this.motivoCambio = this.TextoCambio.getText();
+            med.cambiarTriage(colorDefinitivo, motivoCambio);
+            FrameModificar.setVisible(false);
+            PanelEmergente.setBackground(color);
+            tiempoDeColor(color);
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe aclarar el motivo de cambio");
+        }
     }//GEN-LAST:event_botonAceptarActionPerformed
 
     public static void main(String args[]) {
