@@ -10,7 +10,6 @@ public class Admision extends javax.swing.JFrame {
 
     public Admision() {
         initComponents();
-        ImageIcon icon = new ImageIcon("src\\main\\java\\images\\user-plus-solid-24.png");
         setLocationRelativeTo(null);
         setResizable(false);
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
@@ -51,7 +50,7 @@ public class Admision extends javax.swing.JFrame {
         LabelIconito.setPreferredSize(new java.awt.Dimension(39, 16));
         jPanel1.add(LabelIconito, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 60));
 
-        LabelTitulo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        LabelTitulo.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         LabelTitulo.setForeground(new java.awt.Color(0, 0, 153));
         LabelTitulo.setText("Label2");
         jPanel1.add(LabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 420, 30));
@@ -90,6 +89,7 @@ public class Admision extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new RegistroPaciente().setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 

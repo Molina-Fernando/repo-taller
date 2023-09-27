@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package ventanas;
 
 import clases.Conexion;
@@ -18,10 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Fernando
- */
+
 public class RegistroFuncionarios extends javax.swing.JFrame {
 
     public RegistroFuncionarios() {
@@ -258,7 +252,7 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
                         psi.setString(9, correoElectronico);
 
                         psi.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Usuario registrado con éxito - Recuerde que el Administrador del sistema deberá validar el usuario para su posterior ingreso al sistema.");
+                        JOptionPane.showMessageDialog(null, "Usuario registrado con éxito - Recuerde que un informático deberá validar el usuario para su posterior ingreso al sistema.");
                         textNombre.setText("");
                         textApellido.setText("");
                         dcFechaNac.setDate(null);
@@ -294,7 +288,7 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
         }
     }//GEN-LAST:event_botonAgregar1ActionPerformed
-    private void buscarFuncionario(String dni) {
+ /*   private void buscarFuncionario(String dni) {
         String query = "SELECT * FROM Funcionarios WHERE DNI = ?";
         Connection conex = null;
         try {
@@ -306,7 +300,7 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         } catch (Exception e) {
 
         }
-    }
+    }*/
 
     private void SetImageLabel(JLabel jLabel1, String root) {
         ImageIcon image = new ImageIcon(root);

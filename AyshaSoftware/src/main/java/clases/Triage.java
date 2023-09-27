@@ -20,7 +20,7 @@ public class Triage {
     private String colorTriage;
     private String colorFinal;
     private String motivoCambio;
-    MedicoTriage medicoTriage = new MedicoTriage();
+
 
     public Triage() {
     }
@@ -91,5 +91,59 @@ public class Triage {
         return respiracion + pulso + estadoMental + conciencia + dolorPecho + lesionGrave + edad + fiebre + vomitos + dolorAbdominal + signosDeShock + doloresLeves + sangrado;
         // Método a resolver...
     }
+
+    public void setRespiracion(int respiracion) {
+        this.respiracion = respiracion;
+    }
+
+    public void setPulso(int pulso) {
+        this.pulso = pulso;
+    }
+
+    public void setEstadoMental(int estadoMental) {
+        this.estadoMental = estadoMental;
+    }
+
+    public void setConciencia(int conciencia) {
+        this.conciencia = conciencia;
+    }
+
+    public void setDolorPecho(int dolorPecho) {
+        this.dolorPecho = dolorPecho;
+    }
+
+    public void setLesionGrave(int lesionGrave) {
+        this.lesionGrave = lesionGrave;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public void setFiebre(int fiebre) {
+        this.fiebre = fiebre;
+    }
+
+    public void setVomitos(int vomitos) {
+        this.vomitos = vomitos;
+    }
+
+    public void setDolorAbdominal(int dolorAbdominal) {
+        this.dolorAbdominal = dolorAbdominal;
+    }
+
+    public void setSignosDeShock(int signosDeShock) {
+        this.signosDeShock = signosDeShock;
+    }
+
+    public void setDoloresLeves(int doloresLeves) {
+        this.doloresLeves = doloresLeves;
+    }
+
+    public void setSangrado(int sangrado) {
+        this.sangrado = sangrado;
+    }
+    
+    
 
 }

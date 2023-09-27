@@ -13,8 +13,8 @@ public abstract class Funcionario extends Persona {
     public Funcionario() {
     }
 
-    public Funcionario(String nombre, String apellido, LocalDate fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, String user, String password) {
-        super(nombre, apellido, fecNacimiento, domicilio, dni, telFijo, telCelular, correoElectronico);
+    public Funcionario(String nombre, String apellido, LocalDate fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, String user, String password, String estadoCivil) {
+        super(nombre, apellido, fecNacimiento, domicilio, dni, telFijo, telCelular, correoElectronico, estadoCivil);
         setUsuario(usuario);
         setContrasenia(contrasenia);
     }

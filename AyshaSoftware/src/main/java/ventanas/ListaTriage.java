@@ -4,17 +4,48 @@
  */
 package ventanas;
 
+import clases.Paciente;
+import javax.swing.table.DefaultTableModel;
+import java.sql.*;
+import clases.Conexion;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+
 /**
  *
  * @author Jeremías Simian
  */
 public class ListaTriage extends javax.swing.JFrame {
-
     /**
      * Creates new form ListaTriage
      */
+    public static String nombreUpdate = "";
+    DefaultTableModel modelo = new DefaultTableModel();
+    
     public ListaTriage() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
+        Toolkit miPantalla = Toolkit.getDefaultToolkit();
+        Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
+        setIconImage(miIcono);
+        SetImageLabel(LabelIconito, "src\\main\\java\\images\\icon.png");
+        String userName = Login.user;
+        setTitle("Lista Triage - Sesión de " + userName);
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("DNI");
+        tablaUsuarios.getTableHeader().setReorderingAllowed(false);//No deja mover las columnas de lugar
+    }
+    
+    public void refrescarTabla() {
+     
     }
 
     /**
@@ -28,15 +59,16 @@ public class ListaTriage extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaUsuarios = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        LabelIconito = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -55,12 +87,24 @@ public class ListaTriage extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaUsuarios);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 550, 180));
 
+        jButton1.setBackground(new java.awt.Color(0, 0, 153));
+        jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Realizar Triage");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, -1, 30));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, -1, 30));
+
+        LabelIconito.setText("Label1");
+        LabelIconito.setPreferredSize(new java.awt.Dimension(39, 16));
+        jPanel1.add(LabelIconito, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -75,6 +119,11 @@ public class ListaTriage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        new MedicoTriage().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -110,11 +159,19 @@ public class ListaTriage extends javax.swing.JFrame {
             }
         });
     }
+     private void SetImageLabel(JLabel jLabel1, String root) {
+        ImageIcon image = new ImageIcon(root);
+        Icon icon = new ImageIcon(
+                image.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
+        jLabel1.setIcon(icon);
+        this.repaint();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LabelIconito;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaUsuarios;
     // End of variables declaration//GEN-END:variables
 }
