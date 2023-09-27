@@ -461,8 +461,8 @@ public class MedicoTriage extends javax.swing.JFrame {
     private void BotonFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonFinalizarActionPerformed
         // TODO add your handling code here:
         if (ventanaEmergente.isVisible()) {
-            setVisible(false);
             ventanaEmergente.setVisible(false);
+            System.exit(0); //Cierra por completo el programas
         } else {
             JOptionPane.showMessageDialog(null, "Debe realizar el triage");
         }
