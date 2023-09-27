@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 import ventanas.panelesmedicos.Panel1;
 import ventanas.panelesmedicos.Panel2;
 import ventanas.panelesmedicos.Panel3;
-import ventanas.panelesmedicos.Panel4;
 
 
 /**
@@ -49,7 +48,6 @@ public class MedicoSala extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        Boton4 = new javax.swing.JButton();
         Boton3 = new javax.swing.JButton();
         Boton1 = new javax.swing.JButton();
         Boton2 = new javax.swing.JButton();
@@ -62,17 +60,6 @@ public class MedicoSala extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 204));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        Boton4.setBackground(new java.awt.Color(0, 0, 204));
-        Boton4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        Boton4.setText("Pagina 4");
-        Boton4.setBorder(null);
-        Boton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton4ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(Boton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 311, 200, 70));
 
         Boton3.setBackground(new java.awt.Color(0, 0, 204));
         Boton3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -153,10 +140,6 @@ public class MedicoSala extends javax.swing.JFrame {
         showPanel(new Panel3());
     }//GEN-LAST:event_Boton3ActionPerformed
 
-    private void Boton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton4ActionPerformed
-        showPanel(new Panel4());
-    }//GEN-LAST:event_Boton4ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -177,7 +160,6 @@ public class MedicoSala extends javax.swing.JFrame {
     private javax.swing.JButton Boton1;
     private javax.swing.JButton Boton2;
     private javax.swing.JButton Boton3;
-    private javax.swing.JButton Boton4;
     private javax.swing.JPanel content;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
