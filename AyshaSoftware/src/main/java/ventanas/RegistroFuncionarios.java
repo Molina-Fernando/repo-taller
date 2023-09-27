@@ -11,6 +11,8 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -206,6 +208,10 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         String estadoCivil = textEstadoCivil.getText().trim();
         String correoElectronico = textMail.getText().trim();
 
+        String mail = "^[A-Za-z0-9+_.-]+@(.+)$";
+        Pattern pattern = Pattern.compile(mail);
+        Matcher matcher = pattern.matcher(correoElectronico);
+
         if (!nombre.isEmpty()
                 && !apellido.isEmpty()
                 && fechaNacimiento != null
@@ -216,67 +222,72 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
                 && !estadoCivil.isEmpty()
                 && !correoElectronico.isEmpty()) {
 
-            Connection conex = null;
-            try {
-                conex = cn.conectar();
-                //
-                //
-                String query = "SELECT * FROM Funcionarios WHERE DNI = ?";
-                // String input = "INSERT INTO Usuarios VALUES(?,?,?);";
+            if (matcher.matches()) {
 
-                // ResultSet rs = .executeQuery();
-                PreparedStatement psq = conex.prepareStatement(query);
-                psq.setString(1, dni);
-
-                ResultSet rs = psq.executeQuery();
-
-                if (!rs.next()) {
-
-                    String insert = "INSERT INTO Funcionarios(Nombre, Apellido, FechaNacimiento, Domicilio, DNI, TelFijo, telCel, EstadoCivil, Mail) VALUES(?,?,?,?,?,?,?,?,?);";
-                    PreparedStatement psi = conex.prepareStatement(insert);
-                    //conex.prepareStatement(input);
-
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                    String fechaFormateada = dateFormat.format(fechaNacimiento);
-
-                    psi.setString(1, nombre);
-                    psi.setString(2, apellido);
-                    psi.setString(3, fechaFormateada);
-                    psi.setString(4, domicilio);
-                    psi.setString(5, dni);
-                    psi.setString(6, telFijo);
-                    psi.setString(7, telCelular);
-                    psi.setString(8, estadoCivil);
-                    psi.setString(9, correoElectronico);
-
-                    psi.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Usuario registrado con éxito - Recuerde que el Administrador del sistema deberá validar el usuario para su posterior ingreso al sistema.");
-                    textNombre.setText("");
-                    textApellido.setText("");
-                    dcFechaNac.setDate(null);
-                    textDomicilio.setText("");
-                    textDNI.setText("");
-                    textFijo.setText("");
-                    textCel.setText("");
-                    textEstadoCivil.setText("");
-                    textMail.setText("");
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "DNI ya registrado");
-                }
-
-                //JOptionPane.showMessageDialog(null, "Usuario registrado con éxito");
-            } catch (SQLException e) {
-                System.out.println("EXCEP SQL" + e);
-                JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
-            } finally {
+                Connection conex = null;
                 try {
-                    if (conex != null) {
-                        conex.close();
+                    conex = cn.conectar();
+                    //
+                    //
+                    String query = "SELECT * FROM Funcionarios WHERE DNI = ?";
+                    // String input = "INSERT INTO Usuarios VALUES(?,?,?);";
+
+                    // ResultSet rs = .executeQuery();
+                    PreparedStatement psq = conex.prepareStatement(query);
+                    psq.setString(1, dni);
+
+                    ResultSet rs = psq.executeQuery();
+
+                    if (!rs.next()) {
+
+                        String insert = "INSERT INTO Funcionarios(Nombre, Apellido, FechaNacimiento, Domicilio, DNI, TelFijo, telCel, EstadoCivil, Mail) VALUES(?,?,?,?,?,?,?,?,?);";
+                        PreparedStatement psi = conex.prepareStatement(insert);
+                        //conex.prepareStatement(input);
+
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                        String fechaFormateada = dateFormat.format(fechaNacimiento);
+
+                        psi.setString(1, nombre);
+                        psi.setString(2, apellido);
+                        psi.setString(3, fechaFormateada);
+                        psi.setString(4, domicilio);
+                        psi.setString(5, dni);
+                        psi.setString(6, telFijo);
+                        psi.setString(7, telCelular);
+                        psi.setString(8, estadoCivil);
+                        psi.setString(9, correoElectronico);
+
+                        psi.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "Usuario registrado con éxito - Recuerde que el Administrador del sistema deberá validar el usuario para su posterior ingreso al sistema.");
+                        textNombre.setText("");
+                        textApellido.setText("");
+                        dcFechaNac.setDate(null);
+                        textDomicilio.setText("");
+                        textDNI.setText("");
+                        textFijo.setText("");
+                        textCel.setText("");
+                        textEstadoCivil.setText("");
+                        textMail.setText("");
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "DNI ya registrado");
                     }
-                } catch (SQLException excSql) {
-                    System.err.println("ERROR SQL" + excSql);
+
+                    //JOptionPane.showMessageDialog(null, "Usuario registrado con éxito");
+                } catch (SQLException e) {
+                    System.out.println("EXCEP SQL" + e);
+                    JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
+                } finally {
+                    try {
+                        if (conex != null) {
+                            conex.close();
+                        }
+                    } catch (SQLException excSql) {
+                        System.err.println("ERROR SQL" + excSql);
+                    }
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "Correo electrónico no válido");
             }
 
         } else {
@@ -295,7 +306,6 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         } catch (Exception e) {
 
         }
-
     }
 
     private void SetImageLabel(JLabel jLabel1, String root) {
