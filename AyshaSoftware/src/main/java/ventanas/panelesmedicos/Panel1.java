@@ -70,7 +70,7 @@ public class Panel1 extends javax.swing.JPanel {
                 {null, null}
             },
             new String [] {
-                "Número", "Dispinibilidad"
+                "Número", "Disponibilidad"
             }
         ));
         jScrollPane2.setViewportView(jTable2);

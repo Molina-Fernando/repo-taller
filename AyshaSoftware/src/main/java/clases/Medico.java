@@ -4,9 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import ventanas.MedicoTriage;
-import java.util.Iterator;
-
 public class Medico extends Funcionario implements ProfesionalSanitario {
 
    

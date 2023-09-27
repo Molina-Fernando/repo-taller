@@ -1,39 +1,38 @@
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Registro.java
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Funcionario.java
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Medico.java
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Especialidad.java
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\HistoriaClinica.java
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Lugares.java
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Consulta.java
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Estadistica.java
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\InfoEspecialidad.java
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\AdminInformatico.java
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Paciente.java
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Administrativo.java
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Estudio.java
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Rol.java
-<<<<<<< HEAD
-=======
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\Admision.java
->>>>>>> rama2
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\Login.java
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Conexion.java
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Enfermero.java
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\AdminSistemas.java
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Triage.java
-<<<<<<< HEAD
-=======
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\MedicoTriage.java
->>>>>>> rama2
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Persona.java
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Principal.java
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\ProfesionalSanitario.java
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Sector.java
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Datos.java
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Box.java
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\CrudUsuarios.java
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\Funcionario.java
-<<<<<<< HEAD
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\Medico.java
-=======
->>>>>>> rama2
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\panelesmedicos\Panel2.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\InfoEspecialidad.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\Especialidad.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\Persona.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\MedicoTriage.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\Conexion.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\MedicoSala.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\Administrativo.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\Enfermero.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\Rol.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\Sector.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\ListaTriage.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\Medico.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\Estudio.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\Triage.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\Estadistica.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\Lugares.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\Registro.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\Funcionario.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\AdminInformatico.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\AdminSistemas.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\panelesmedicos\PanelDescripcionEstudio.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\RegistroFuncionarios.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\panelesmedicos\Panel3.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\Box.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\Principal.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\Consulta.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\CrudUsuarios.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\Admision.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\Login.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\panelesmedicos\Panel1.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\Funcionario.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\RRHH.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\Datos.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\ProfesionalSanitario.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\Paciente.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\RegistroPaciente.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\panelesmedicos\PanelDescripcionRegistro.java

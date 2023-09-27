@@ -6,7 +6,7 @@ import ventanas.ListaTriage;
 
 public class Administrativo extends Funcionario {
 
-    private ArrayList<Sector> sectores;
+    private Sector sector;
 
     public Administrativo() {  }
 
@@ -14,8 +14,8 @@ public class Administrativo extends Funcionario {
         super(nombre, apellido, fecNacimiento, domicilio, dni, telFijo, telCelular, correoElectronico, user, password,estadoCivil);
     }
 
-    public void setSectores(Sector e) {
-        this.sectores.add(e);
+    public void setSector(Sector e) {
+        this.sector = e;
     }
     
     public void cargarPacientes(String nombre, String apellido, LocalDate fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correo, String personaContacto, String estadoCivil){
@@ -23,5 +23,11 @@ public class Administrativo extends Funcionario {
         
         
     }
+
+    public Sector getSector() {
+        return sector;
+    }
+    
+    
 
 }
