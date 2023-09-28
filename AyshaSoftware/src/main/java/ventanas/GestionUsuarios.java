@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class GestionUsuarios extends javax.swing.JFrame {
 
-    DefaultTableModel modelo = new DefaultTableModel();
+    DefaultTableModel modelo;
     Conexion cn = new Conexion();
 
     public GestionUsuarios() {
@@ -26,13 +26,25 @@ public class GestionUsuarios extends javax.swing.JFrame {
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
+        modelo = new DefaultTableModel();
+        modelo.addColumn("DNI");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Rol");
+        modelo.addColumn("Sector");
+        actualizarTabla();
+    }
+
+    private void actualizarTabla() {
+        modelo.setRowCount(0);
         tablaFuncionarios = new javax.swing.JTable();
+
         tablaFuncionarios.setModel(modelo);
         Connection conex = null;
         try {
             conex = cn.conectar();
 
-            String query = "SELECT DNI, Nombre, Apellido FROM Funcionarios";
+            String query = "SELECT DNI, Nombre, Apellido, Rol, Sector FROM Funcionarios";
 
             PreparedStatement psq = conex.prepareStatement(query);
 
@@ -42,17 +54,13 @@ public class GestionUsuarios extends javax.swing.JFrame {
 
             jScrollPane1.setViewportView(tablaFuncionarios);
 
-            modelo.addColumn("DNI");
-            modelo.addColumn("Nombre");
-            modelo.addColumn("Apellido");
-            modelo.addColumn("Rol");
-            modelo.addColumn("Sector");
-
             while (rs.next()) {
-                Object ob[] = new Object[3];
+                Object ob[] = new Object[5];
                 ob[0] = rs.getString("DNI");
                 ob[1] = rs.getString("Nombre");
                 ob[2] = rs.getString("Apellido");
+                ob[3] = rs.getString("Rol");
+                ob[4] = rs.getString("Sector");
 
                 modelo.addRow(ob);
                 tablaFuncionarios.setModel(modelo);
@@ -92,6 +100,11 @@ public class GestionUsuarios extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tablaFuncionarios = new javax.swing.JTable(){
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
         tablaFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -103,9 +116,11 @@ public class GestionUsuarios extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablaFuncionarios.getTableHeader().setResizingAllowed(false);
+        tablaFuncionarios.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaFuncionarios);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 620, 200));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 730, 190));
 
         jLabel1.setText("FUNCIONARIOS PENDIENTES DE ALTA");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 290, 40));
@@ -119,6 +134,11 @@ public class GestionUsuarios extends javax.swing.JFrame {
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, -1, -1));
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admision", "RRHH", "Compras", "Auditoria", "Gestion", "RegistrosMedicos" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 290, -1, -1));
 
         jLabel2.setText("Sector");
@@ -147,11 +167,11 @@ public class GestionUsuarios extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 746, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
         );
 
         pack();
@@ -195,6 +215,7 @@ public class GestionUsuarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonEliminarActionPerformed
     private String selectedOption;
+    private String selectedOption2;
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
         selectedOption = (String) jComboBox1.getSelectedItem();
@@ -222,12 +243,16 @@ public class GestionUsuarios extends javax.swing.JFrame {
                 ResultSet rs = psq.executeQuery();
 
                 if (rs.next()) {
-                    String update = "UPDATE Funcionarios SET Rol = ? WHERE DNI = ?;";
+                    String update = "UPDATE Funcionarios SET Rol = ?, Sector = ? WHERE DNI = ?;";
                     PreparedStatement psi = conex.prepareStatement(update);
                     psi.setString(1, selectedOption);
-                    psi.setInt(2,dni);
-                    //psi.setString(2, sector);
+                    psi.setString(2, selectedOption2);
+                    psi.setInt(3, dni);
+
                     psi.executeUpdate();
+
+                    actualizarTabla();
+
                 }
             } catch (SQLException e) {
                 System.out.println("EXCEP SQL" + e);
@@ -243,6 +268,11 @@ public class GestionUsuarios extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_botonAltaActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+        selectedOption2 = (String) jComboBox2.getSelectedItem();
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
     /**
      * @param args the command line arguments
