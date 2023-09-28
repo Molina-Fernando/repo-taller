@@ -16,6 +16,9 @@ import javax.swing.JOptionPane;
 import java.util.Date;
 import clases.Conexion;
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.Icon;
 import javax.swing.WindowConstants;
 
@@ -36,13 +39,13 @@ public class RegistroPaciente extends javax.swing.JFrame {
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
         setIconImage(miIcono);
         SetImageLabel(LabelIconito, "src\\main\\java\\images\\icon.png");
+        SetImageLabel(LabelFoto, "src\\main\\java\\images\\regFunc.png");
         String userName = Login.user;
         LabelTitulo.setText("Bienvenido " + userName + "- Registro de pacientes.");
         setTitle("Registro de pacientes - Sesión de " + userName);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
-    private String nombre, apellido, dni, domicilio, estadoCivil, telFijo, telCelular, correo, personaContacto;
-    private LocalDate fecNacimiento;
+    Conexion cn = new Conexion();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,20 +66,21 @@ public class RegistroPaciente extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         TextCorreo = new javax.swing.JTextField();
-        TextNombre = new javax.swing.JTextField();
         TextEstadoCivil = new javax.swing.JTextField();
         TextDNI = new javax.swing.JTextField();
         TextFijo = new javax.swing.JTextField();
         TextCelular = new javax.swing.JTextField();
         botonRegistro = new javax.swing.JButton();
         TextFechaNac = new com.toedter.calendar.JDateChooser();
-        TextApellido = new javax.swing.JTextField();
+        TextNombre = new javax.swing.JTextField();
         LabelIconito = new javax.swing.JLabel();
-        LabelTitulo = new javax.swing.JLabel();
+        LabelFoto = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         TextDomicilio = new javax.swing.JTextField();
         TextPersonaContacto = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
+        TextApellido = new javax.swing.JTextField();
+        LabelTitulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,84 +90,77 @@ public class RegistroPaciente extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 153));
         jLabel1.setText("Persona de contacto");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 120, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 120, -1));
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 153));
         jLabel2.setText("Apellido");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 50, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, 50, -1));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 153));
         jLabel3.setText("Fecha de Nacimiento");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 130, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 130, -1));
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 153));
         jLabel4.setText("DNI");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, 30, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 30, -1));
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 153));
         jLabel5.setText("Telefono fijo");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 150, 80, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 290, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 153));
         jLabel6.setText("Telefono celular");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 100, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 100, -1));
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 153));
         jLabel7.setText("Estado civil");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 270, 70, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 100, -1));
 
         jLabel9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 153));
         jLabel9.setText("Nombre");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 50, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 50, -1));
 
         TextCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextCorreoActionPerformed(evt);
             }
         });
-        jPanel1.add(TextCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, 80, 30));
-
-        TextNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TextNombreActionPerformed(evt);
-            }
-        });
-        jPanel1.add(TextNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 80, 30));
+        jPanel1.add(TextCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 350, 110, -1));
 
         TextEstadoCivil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextEstadoCivilActionPerformed(evt);
             }
         });
-        jPanel1.add(TextEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 80, 30));
+        jPanel1.add(TextEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 386, 110, -1));
 
         TextDNI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextDNIActionPerformed(evt);
             }
         });
-        jPanel1.add(TextDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, 80, 30));
+        jPanel1.add(TextDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 156, 110, -1));
 
         TextFijo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextFijoActionPerformed(evt);
             }
         });
-        jPanel1.add(TextFijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, 80, 30));
+        jPanel1.add(TextFijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 286, 110, -1));
 
         TextCelular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextCelularActionPerformed(evt);
             }
         });
-        jPanel1.add(TextCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 180, 80, 30));
+        jPanel1.add(TextCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 316, 110, -1));
 
         botonRegistro.setBackground(new java.awt.Color(0, 0, 153));
         botonRegistro.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -174,57 +171,69 @@ public class RegistroPaciente extends javax.swing.JFrame {
                 botonRegistroActionPerformed(evt);
             }
         });
-        jPanel1.add(botonRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 200, 40));
-        jPanel1.add(TextFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 80, 30));
+        jPanel1.add(botonRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, 200, 40));
+        jPanel1.add(TextFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, 110, -1));
 
-        TextApellido.addActionListener(new java.awt.event.ActionListener() {
+        TextNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TextApellidoActionPerformed(evt);
+                TextNombreActionPerformed(evt);
             }
         });
-        jPanel1.add(TextApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 80, 30));
+        jPanel1.add(TextNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 96, 110, -1));
 
         LabelIconito.setText("jLabel8");
         jPanel1.add(LabelIconito, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 60));
 
-        LabelTitulo.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        LabelTitulo.setForeground(new java.awt.Color(0, 0, 153));
-        LabelTitulo.setText("Label2");
-        jPanel1.add(LabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 420, 30));
+        LabelFoto.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        LabelFoto.setForeground(new java.awt.Color(0, 0, 153));
+        LabelFoto.setText("Label2");
+        jPanel1.add(LabelFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, 120, 110));
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 153));
         jLabel8.setText("Domicilio");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 70, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 60, -1));
 
         TextDomicilio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextDomicilioActionPerformed(evt);
             }
         });
-        jPanel1.add(TextDomicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 80, 30));
+        jPanel1.add(TextDomicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 226, 110, -1));
 
         TextPersonaContacto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextPersonaContactoActionPerformed(evt);
             }
         });
-        jPanel1.add(TextPersonaContacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 80, 30));
+        jPanel1.add(TextPersonaContacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 256, 110, -1));
 
         jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 153));
         jLabel10.setText("Correo");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 230, 50, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 360, 40, -1));
+
+        TextApellido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextApellidoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(TextApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 126, 110, -1));
+
+        LabelTitulo.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        LabelTitulo.setForeground(new java.awt.Color(0, 0, 153));
+        LabelTitulo.setText("Label2");
+        jPanel1.add(LabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 420, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -235,60 +244,106 @@ public class RegistroPaciente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_TextFijoActionPerformed
 
-    private void limpiarCampos(){
-        TextNombre.setText("");
-        TextApellido.setText("");
-        TextDomicilio.setText("");
-        TextFijo.setText("");
-        TextCelular.setText("");
-        TextDNI.setText("");
-        TextCorreo.setText("");
-        TextPersonaContacto.setText("");
-        TextEstadoCivil.setText("");
-        TextFechaNac.setDate(null);
-        
-    }
+
     private void botonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistroActionPerformed
 
-        Date date = TextFechaNac.getDate();//Se guarda la fecha del dateChooser
+        
+        String nombre = TextNombre.getText().trim();
+        String apellido = TextApellido.getText().trim();
+        String domicilio = TextDomicilio.getText().trim();
+        Date fechaNacimiento = TextFechaNac.getDate();
+        String telFijo = TextFijo.getText().trim();
+        String personaContacto = TextPersonaContacto.getText().trim();
+        String dni = TextDNI.getText().trim();
+        String telCelular = TextCelular.getText().trim();
+        String correo = TextCorreo.getText().trim();
+        String estadoCivil = TextEstadoCivil.getText().trim();
 
-        this.nombre = TextNombre.getText().trim();
-        this.apellido = TextApellido.getText().trim();
-        this.domicilio = TextDomicilio.getText().trim();
-        this.telFijo = TextFijo.getText().trim();
-        this.personaContacto = TextPersonaContacto.getText().trim();
-        this.dni = TextDNI.getText().trim();
-        this.telCelular = TextCelular.getText().trim();
-        this.correo = TextCorreo.getText().trim();
-        this.estadoCivil = TextEstadoCivil.getText().trim();
+        String mail = "^[A-Za-z0-9+_.-]+@(.+)$";
+        Pattern pattern = Pattern.compile(mail);
+        Matcher matcher = pattern.matcher(correo);
 
-        if (date != null && !nombre.isEmpty() && !apellido.isEmpty() && !domicilio.isEmpty() && !dni.isEmpty() && !telFijo.isEmpty() && !telCelular.isEmpty() && !correo.isEmpty() && !personaContacto.isEmpty() && !estadoCivil.isEmpty()) {
+        if (fechaNacimiento != null && !nombre.isEmpty() && !apellido.isEmpty() && !domicilio.isEmpty() && !dni.isEmpty() && !telFijo.isEmpty() && !telCelular.isEmpty() && !correo.isEmpty() && !personaContacto.isEmpty() && !estadoCivil.isEmpty()) {
 
-            
-            //Se convierte el date en LocalDate
-            Instant instant = date.toInstant();
-            ZoneId zoneId = ZoneId.systemDefault();
-            this.fecNacimiento = instant.atZone(zoneId).toLocalDate();
-            
-            Administrativo admin = new Administrativo();
-            System.out.println("Prueba");
-            admin.cargarPacientes(nombre, apellido, fecNacimiento, domicilio, dni, telFijo, telCelular, correo, personaContacto, estadoCivil);
-             JOptionPane.showMessageDialog(null, "Se registro exitosamente");
-            limpiarCampos();
+            if (matcher.matches()) {
+
+                Connection conex = null;
+                try {
+                    conex = cn.conectar();
+                    //
+                    //
+                    String query = "SELECT * FROM Pacientes WHERE DNI = ?";
+                    // String input = "INSERT INTO Usuarios VALUES(?,?,?);";
+
+                    // ResultSet rs = .executeQuery();
+                    PreparedStatement psq = conex.prepareStatement(query);
+                    psq.setString(1, dni);
+
+                    ResultSet rs = psq.executeQuery();
+
+                    if (!rs.next()) {
+
+                        String insert = "INSERT INTO Pacientes(Nombre, Apellido, FechaNacimiento, Domicilio, DNI, TelFijo, telCel, EstadoCivil, Mail, personaContacto) VALUES(?,?,?,?,?,?,?,?,?,?);";
+                        PreparedStatement psi = conex.prepareStatement(insert);
+                        //conex.prepareStatement(input);
+
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                        String fechaFormateada = dateFormat.format(fechaNacimiento);
+
+                        psi.setString(1, nombre);
+                        psi.setString(2, apellido);
+                        psi.setString(3, fechaFormateada);
+                        psi.setString(4, domicilio);
+                        psi.setString(5, dni);
+                        psi.setString(6, telFijo);
+                        psi.setString(7, telCelular);
+                        psi.setString(8, estadoCivil);
+                        psi.setString(9, correo);
+                        psi.setString(10, personaContacto);
+
+                        psi.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "Usuario registrado con éxito - Recuerde que un informático deberá validar el usuario para su posterior ingreso al sistema.");
+                        TextNombre.setText("");
+                        TextApellido.setText("");
+                        TextFechaNac.setDate(null);
+                        TextDomicilio.setText("");
+                        TextDNI.setText("");
+                        TextFijo.setText("");
+                        TextCelular.setText("");
+                        TextEstadoCivil.setText("");
+                        TextCorreo.setText("");
+                        TextPersonaContacto.setText("");
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "DNI ya registrado");
+                    }
+
+                    //JOptionPane.showMessageDialog(null, "Usuario registrado con éxito");
+                } catch (SQLException e) {
+                    System.out.println("EXCEP SQL" + e);
+                    JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
+                } finally {
+                    try {
+                        if (conex != null) {
+                            conex.close();
+                        }
+                    } catch (SQLException excSql) {
+                        System.err.println("ERROR SQL" + excSql);
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Correo electrónico no válido");
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
-        }
 
+        }
 
     }//GEN-LAST:event_botonRegistroActionPerformed
 
     private void TextNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextNombreActionPerformed
 
     }//GEN-LAST:event_TextNombreActionPerformed
-
-    private void TextApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextApellidoActionPerformed
-
-    }//GEN-LAST:event_TextApellidoActionPerformed
 
     private void TextDomicilioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextDomicilioActionPerformed
         // TODO add your handling code here:
@@ -319,6 +374,10 @@ public class RegistroPaciente extends javax.swing.JFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_TextEstadoCivilActionPerformed
+
+    private void TextApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextApellidoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextApellidoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -356,6 +415,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LabelFoto;
     private javax.swing.JLabel LabelIconito;
     private javax.swing.JLabel LabelTitulo;
     private javax.swing.JTextField TextApellido;

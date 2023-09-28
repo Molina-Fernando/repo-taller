@@ -131,6 +131,12 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(0, 0, 153));
         jLabel10.setText("Correo Electronico");
         bg.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 140, 20));
+
+        textMail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textMailActionPerformed(evt);
+            }
+        });
         bg.add(textMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 400, 170, -1));
 
         textNombre.addActionListener(new java.awt.event.ActionListener() {
@@ -178,10 +184,6 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textNombreActionPerformed
-
     private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarActionPerformed
         // TODO add your handling code here:
 
@@ -201,6 +203,7 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         String telCelular = textCel.getText().trim();
         String estadoCivil = textEstadoCivil.getText().trim();
         String correoElectronico = textMail.getText().trim();
+        
 
         String mail = "^[A-Za-z0-9+_.-]+@(.+)$";
         Pattern pattern = Pattern.compile(mail);
@@ -248,8 +251,8 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
                         psi.setString(5, dni);
                         psi.setString(6, telFijo);
                         psi.setString(7, telCelular);
-                        psi.setString(8, estadoCivil);
-                        psi.setString(9, correoElectronico);
+                        psi.setString(8, correoElectronico);
+                        psi.setString(9, estadoCivil);
 
                         psi.executeUpdate();
                         JOptionPane.showMessageDialog(null, "Usuario registrado con éxito - Recuerde que un informático deberá validar el usuario para su posterior ingreso al sistema.");
@@ -288,6 +291,14 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
         }
     }//GEN-LAST:event_botonAgregar1ActionPerformed
+
+    private void textMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textMailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textMailActionPerformed
+
+    private void textNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textNombreActionPerformed
  /*   private void buscarFuncionario(String dni) {
         String query = "SELECT * FROM Funcionarios WHERE DNI = ?";
         Connection conex = null;
