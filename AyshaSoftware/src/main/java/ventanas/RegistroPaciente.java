@@ -8,15 +8,18 @@ import clases.Administrativo;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.ZoneId;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.util.Date;
 import clases.Conexion;
+import clases.Paciente;
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.Icon;
@@ -31,6 +34,8 @@ public class RegistroPaciente extends javax.swing.JFrame {
     /**
      * Creates new form RegistroPaciente
      */
+    Paciente pac = new Paciente();
+    
     public RegistroPaciente() {
         initComponents();
         setLocationRelativeTo(null);
@@ -43,7 +48,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
         String userName = Login.user;
         LabelTitulo.setText("Bienvenido " + userName + "- Registro de pacientes.");
         setTitle("Registro de pacientes - Sesión de " + userName);
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);  
     }
     Conexion cn = new Conexion();
 
@@ -258,12 +263,27 @@ public class RegistroPaciente extends javax.swing.JFrame {
         String telCelular = TextCelular.getText().trim();
         String correo = TextCorreo.getText().trim();
         String estadoCivil = TextEstadoCivil.getText().trim();
+        
+        Instant instant = fechaNacimiento.toInstant();
+        LocalDate fecNac = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+        
+        pac.setNombre(nombre);
+        pac.setApellido(apellido);
+        pac.setDomicilio(domicilio);
+        pac.setFecNacimiento(fecNac);
+        pac.setDni(dni);
+        pac.setCorreoElectronico(correo);
+        pac.setEstadoCivil(estadoCivil);
+        pac.setTelCelular(telCelular);
+        pac.setTelFijo(telFijo);
+        pac.setPersonaContacto(personaContacto);
+        
 
         String mail = "^[A-Za-z0-9+_.-]+@(.+)$";
         Pattern pattern = Pattern.compile(mail);
         Matcher matcher = pattern.matcher(correo);
 
-        if (fechaNacimiento != null && !nombre.isEmpty() && !apellido.isEmpty() && !domicilio.isEmpty() && !dni.isEmpty() && !telFijo.isEmpty() && !telCelular.isEmpty() && !correo.isEmpty() && !personaContacto.isEmpty() && !estadoCivil.isEmpty()) {
+        if (fecNac != null && !nombre.isEmpty() && !apellido.isEmpty() && !domicilio.isEmpty() && !dni.isEmpty() && !telFijo.isEmpty() && !telCelular.isEmpty() && !correo.isEmpty() && !personaContacto.isEmpty() && !estadoCivil.isEmpty()) {
 
             if (matcher.matches()) {
 
@@ -290,19 +310,19 @@ public class RegistroPaciente extends javax.swing.JFrame {
                         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                         String fechaFormateada = dateFormat.format(fechaNacimiento);
 
-                        psi.setString(1, nombre);
-                        psi.setString(2, apellido);
+                        psi.setString(1, pac.getNombre());
+                        psi.setString(2, pac.getApellido());
                         psi.setString(3, fechaFormateada);
-                        psi.setString(4, domicilio);
-                        psi.setString(5, dni);
-                        psi.setString(6, telFijo);
-                        psi.setString(7, telCelular);
-                        psi.setString(8, estadoCivil);
-                        psi.setString(9, correo);
-                        psi.setString(10, personaContacto);
+                        psi.setString(4, pac.getDomicilio());
+                        psi.setString(5, pac.getDni());
+                        psi.setString(6, pac.getTelFijo());
+                        psi.setString(7, pac.getTelCelular());
+                        psi.setString(8, pac.getEstadoCivil());
+                        psi.setString(9, pac.getCorreoElectronico());
+                        psi.setString(10, pac.getPersonaContacto());
 
                         psi.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Usuario registrado con éxito - Recuerde que un informático deberá validar el usuario para su posterior ingreso al sistema.");
+                        JOptionPane.showMessageDialog(null, "Paciente registrado con éxito.");
                         TextNombre.setText("");
                         TextApellido.setText("");
                         TextFechaNac.setDate(null);

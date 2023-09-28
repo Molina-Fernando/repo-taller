@@ -17,6 +17,10 @@ public class Paciente extends Persona {
         this.registros = new ArrayList<>();
         this.estudios = new ArrayList<>();
     }
+    public Paciente(){
+        this.registros = new ArrayList<>();
+        this.estudios = new ArrayList<>();
+    }
 
     public String getPersonaContacto() {
         return personaContacto;

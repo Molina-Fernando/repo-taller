@@ -15,6 +15,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 /**
@@ -27,6 +28,7 @@ public class ListaTriage extends javax.swing.JFrame {
      */
     public static String nombreUpdate = "";
     DefaultTableModel modelo = new DefaultTableModel();
+    Conexion cn = new Conexion();
     
     public ListaTriage() {
         initComponents();
@@ -41,11 +43,52 @@ public class ListaTriage extends javax.swing.JFrame {
         modelo.addColumn("Nombre");
         modelo.addColumn("Apellido");
         modelo.addColumn("DNI");
+        tablaUsuarios = new javax.swing.JTable();
         tablaUsuarios.getTableHeader().setReorderingAllowed(false);//No deja mover las columnas de lugar
+        actualizarTabla();
     }
     
-    public void refrescarTabla() {
-     
+     private void actualizarTabla() {
+        modelo.setRowCount(0);
+        
+
+        tablaUsuarios.setModel(modelo);
+        Connection conex = null;
+        try {
+            conex = cn.conectar();
+
+            String query = "SELECT Nombre, Apellido, DNI FROM Pacientes";
+
+            PreparedStatement psq = conex.prepareStatement(query);
+
+            ResultSet rs = psq.executeQuery();
+
+            tablaUsuarios = new JTable(modelo);
+
+            jScrollPane1.setViewportView(tablaUsuarios);
+
+            while (rs.next()) {
+                Object ob[] = new Object[3];
+                ob[0] = rs.getString("Nombre");
+                ob[1] = rs.getString("Apellido");
+                ob[2] = rs.getString("DNI");
+
+                modelo.addRow(ob);
+                tablaUsuarios.setModel(modelo);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("EXCEP SQL" + e);
+            JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
+        } finally {
+            try {
+                if (conex != null) {
+                    conex.close();
+                }
+            } catch (SQLException excSql) {
+                System.err.println("ERROR SQL" + excSql);
+            }
+        }
     }
 
     /**
