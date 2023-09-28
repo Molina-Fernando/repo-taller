@@ -97,6 +97,12 @@ public abstract class Persona {
         return correoElectronico;
     }
 
+    public String getEstadoCivil() {
+        return estadoCivil;
+    }
+    
+    
+
     @Override
     public String toString() {
         return "Persona{" + "nombre=" + nombre + ", apellido=" + apellido + ", fecNacimiento=" + fecNacimiento + ", domicilio=" + domicilio + ", dni=" + dni + ", telFijo=" + telFijo + ", telCelular=" + telCelular + ", correoElectronico=" + correoElectronico + ", estadoCivil= " +'}';

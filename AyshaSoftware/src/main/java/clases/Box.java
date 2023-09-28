@@ -13,6 +13,14 @@ public class Box {
         setNumero(numero);
     }
 
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
 
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
