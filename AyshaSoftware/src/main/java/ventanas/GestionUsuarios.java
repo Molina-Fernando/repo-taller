@@ -1,0 +1,294 @@
+package ventanas;
+
+import clases.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
+import static ventanas.Login.user;
+import java.sql.*;
+import java.util.ArrayList;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+public class GestionUsuarios extends javax.swing.JFrame {
+
+    DefaultTableModel modelo = new DefaultTableModel();
+    Conexion cn = new Conexion();
+
+    public GestionUsuarios() {
+        initComponents();
+        setTitle("Gestión de Usuarios");
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+        tablaFuncionarios = new javax.swing.JTable();
+        tablaFuncionarios.setModel(modelo);
+        Connection conex = null;
+        try {
+            conex = cn.conectar();
+
+            String query = "SELECT DNI, Nombre, Apellido FROM Funcionarios";
+
+            PreparedStatement psq = conex.prepareStatement(query);
+
+            ResultSet rs = psq.executeQuery();
+
+            tablaFuncionarios = new JTable(modelo);
+
+            jScrollPane1.setViewportView(tablaFuncionarios);
+
+            modelo.addColumn("DNI");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Apellido");
+            modelo.addColumn("Rol");
+            modelo.addColumn("Sector");
+
+            while (rs.next()) {
+                Object ob[] = new Object[3];
+                ob[0] = rs.getString("DNI");
+                ob[1] = rs.getString("Nombre");
+                ob[2] = rs.getString("Apellido");
+
+                modelo.addRow(ob);
+                tablaFuncionarios.setModel(modelo);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("EXCEP SQL" + e);
+            JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
+        } finally {
+            try {
+                if (conex != null) {
+                    conex.close();
+                }
+            } catch (SQLException excSql) {
+                System.err.println("ERROR SQL" + excSql);
+            }
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaFuncionarios = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        botonEliminar = new javax.swing.JButton();
+        botonAlta = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tablaFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaFuncionarios);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 620, 200));
+
+        jLabel1.setText("FUNCIONARIOS PENDIENTES DE ALTA");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 290, 40));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MedicoTriage", "MedicoSala", "AdminInformatico", "Administrativo" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, -1, -1));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admision", "RRHH", "Compras", "Auditoria", "Gestion", "RegistrosMedicos" }));
+        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 290, -1, -1));
+
+        jLabel2.setText("Sector");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 290, -1, -1));
+
+        jLabel3.setText("Rol");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, -1, -1));
+
+        botonEliminar.setText("ELIMINAR");
+        botonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(botonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 360, -1, -1));
+
+        botonAlta.setText("ALTA");
+        botonAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAltaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(botonAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, -1, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
+
+        int numFila = tablaFuncionarios.getSelectedRow();
+        if (numFila != -1) {
+            String dnistr = (String) tablaFuncionarios.getValueAt(numFila, 0);
+            int dni = Integer.parseInt(dnistr);
+            Connection conex = null;
+            try {
+
+                conex = cn.conectar();
+
+                String deleteQuery = "DELETE FROM FUNCIONARIOS WHERE DNI = ?";
+                PreparedStatement psq = conex.prepareStatement(deleteQuery);
+
+                psq.setInt(1, dni);
+                int filaModificada = psq.executeUpdate();
+
+                if (filaModificada > 0) {
+
+                    DefaultTableModel model = (DefaultTableModel) tablaFuncionarios.getModel();
+                    model.removeRow(numFila);
+                }
+
+            } catch (SQLException e) {
+                System.out.println("EXCEP SQL" + e);
+                JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
+            } finally {
+                try {
+                    if (conex != null) {
+                        conex.close();
+                    }
+                } catch (SQLException excSql) {
+                    System.err.println("ERROR SQL" + excSql);
+                }
+            }
+        }
+    }//GEN-LAST:event_botonEliminarActionPerformed
+    private String selectedOption;
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        selectedOption = (String) jComboBox1.getSelectedItem();
+
+
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void botonAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAltaActionPerformed
+        // TODO add your handling code here:
+        int numFila = tablaFuncionarios.getSelectedRow();
+        if (numFila != -1) {
+
+            String dnistr = (String) tablaFuncionarios.getValueAt(numFila, 0);
+            int dni = Integer.parseInt(dnistr);
+
+            Connection conex = null;
+            try {
+                conex = cn.conectar();
+
+                String query = "SELECT * FROM Funcionarios WHERE DNI = ?";
+
+                PreparedStatement psq = conex.prepareStatement(query);
+                psq.setInt(1, dni);
+
+                ResultSet rs = psq.executeQuery();
+
+                if (rs.next()) {
+                    String update = "UPDATE Funcionarios SET Rol = ? WHERE DNI = ?;";
+                    PreparedStatement psi = conex.prepareStatement(update);
+                    psi.setString(1, selectedOption);
+                    psi.setInt(2,dni);
+                    //psi.setString(2, sector);
+                    psi.executeUpdate();
+                }
+            } catch (SQLException e) {
+                System.out.println("EXCEP SQL" + e);
+                JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
+            } finally {
+                try {
+                    if (conex != null) {
+                        conex.close();
+                    }
+                } catch (SQLException excSql) {
+                    System.err.println("ERROR SQL" + excSql);
+                }
+            }
+        }
+    }//GEN-LAST:event_botonAltaActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(GestionUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(GestionUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(GestionUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(GestionUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new GestionUsuarios().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonAlta;
+    private javax.swing.JButton botonEliminar;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tablaFuncionarios;
+    // End of variables declaration//GEN-END:variables
+}
