@@ -31,7 +31,7 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         setIconImage(miIcono);
     }
 
-    Conexion cn = new Conexion();
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -193,6 +193,8 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botonEditarActionPerformed
 
+    Conexion cn = new Conexion();
+    
     private void botonAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregar1ActionPerformed
         String nombre = textNombre.getText().trim();
         String apellido = textApellido.getText().trim();
@@ -224,12 +226,9 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
                 Connection conex = null;
                 try {
                     conex = cn.conectar();
-                    //
-                    //
+                 
                     String query = "SELECT * FROM Funcionarios WHERE DNI = ?";
-                    // String input = "INSERT INTO Usuarios VALUES(?,?,?);";
-
-                    // ResultSet rs = .executeQuery();
+                 
                     PreparedStatement psq = conex.prepareStatement(query);
                     psq.setString(1, dni);
 
@@ -239,7 +238,6 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
 
                         String insert = "INSERT INTO Funcionarios(Nombre, Apellido, FechaNacimiento, Domicilio, DNI, TelFijo, telCel, EstadoCivil, Mail) VALUES(?,?,?,?,?,?,?,?,?);";
                         PreparedStatement psi = conex.prepareStatement(insert);
-                        //conex.prepareStatement(input);
 
                         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                         String fechaFormateada = dateFormat.format(fechaNacimiento);
@@ -270,7 +268,6 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "DNI ya registrado");
                     }
 
-                    //JOptionPane.showMessageDialog(null, "Usuario registrado con éxito");
                 } catch (SQLException e) {
                     System.out.println("EXCEP SQL" + e);
                     JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
