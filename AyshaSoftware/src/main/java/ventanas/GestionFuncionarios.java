@@ -50,20 +50,14 @@ public class GestionFuncionarios extends javax.swing.JFrame {
     private void actualizarTabla() {
         modelo.setRowCount(0);
         tablaFuncionarios = new javax.swing.JTable();
-
         tablaFuncionarios.setModel(modelo);
         Connection conex = null;
         try {
             conex = cn.conectar();
-
             String query = "SELECT DNI, Nombre, Apellido, Rol, Sector FROM Funcionarios";
-
             PreparedStatement psq = conex.prepareStatement(query);
-
             ResultSet rs = psq.executeQuery();
-
             tablaFuncionarios = new JTable(modelo);
-
             jScrollPane1.setViewportView(tablaFuncionarios);
 
             while (rs.next()) {
@@ -221,20 +215,21 @@ public class GestionFuncionarios extends javax.swing.JFrame {
             int dni = Integer.parseInt(dnistr);
             Connection conex = null;
             try {
-
                 conex = cn.conectar();
-
                 String deleteQuery = "DELETE FROM FUNCIONARIOS WHERE DNI = ?";
                 PreparedStatement psq = conex.prepareStatement(deleteQuery);
-
                 psq.setInt(1, dni);
                 int filaModificada = psq.executeUpdate();
-
                 if (filaModificada > 0) {
-
                     DefaultTableModel model = (DefaultTableModel) tablaFuncionarios.getModel();
                     model.removeRow(numFila);
                 }
+                
+                //se elimina el usuario cuando se elimina un Funcionario
+                String deleteUserQuery = "DELETE FROM Usuarios WHERE Usuario = ?";
+                psq = conex.prepareStatement(deleteUserQuery);
+                psq.setInt(1,dni);
+                psq.executeUpdate();
 
             } catch (SQLException e) {
                 System.out.println("EXCEP SQL" + e);
@@ -276,14 +271,11 @@ public class GestionFuncionarios extends javax.swing.JFrame {
             Connection conex = null;
             try {
                 conex = cn.conectar();
-
                 String query = "SELECT * FROM Funcionarios WHERE DNI = ?";
-
                 PreparedStatement psq = conex.prepareStatement(query);
                 psq.setInt(1, dni);
-
                 ResultSet rs = psq.executeQuery();
-
+                
                 if (rs.next()) {
                     String update = "UPDATE Funcionarios SET Rol = ?, Sector = ? WHERE DNI = ?;";
                     PreparedStatement psi = conex.prepareStatement(update);
@@ -292,9 +284,6 @@ public class GestionFuncionarios extends javax.swing.JFrame {
                     psi.setInt(3, dni);
                     psi.executeUpdate();
                     actualizarTabla();
-                    
-                    
-
                 }
             } catch (SQLException e) {
                 System.out.println("EXCEP SQL" + e);
@@ -316,9 +305,7 @@ public class GestionFuncionarios extends javax.swing.JFrame {
 
         int tresUltimosDigitosDni = dni % 1000;
         String tresPrimerasLetrasNombre = obtenerTresPrimerasLetras(nombre);
-
         String contrasenia = tresPrimerasLetrasNombre + String.valueOf(tresUltimosDigitosDni);
-
         //System.out.println(contrasenia);
         return contrasenia;
     }
@@ -339,15 +326,30 @@ public class GestionFuncionarios extends javax.swing.JFrame {
 
         try {
             conex = cn.conectar();
-            String queryInsert = "INSERT INTO Usuarios(Usuario, Contrasenia, Rol, Sector) VALUES (?,?,?,?);";
-            PreparedStatement psq = conex.prepareStatement(queryInsert);
+            String queryInsert1 = "INSERT INTO Usuarios(Usuario, Contrasenia, Rol, Sector) VALUES (?,?,?,?);";
+            String queryInsert2 = "UPDATE Usuarios SET Rol = ?, Sector = ? WHERE Usuario = ?";
+            String queryMatch = "SELECT * FROM Usuarios WHERE Usuario = ?";
+            
+            PreparedStatement psq = conex.prepareStatement(queryMatch);
+            psq.setString(1, usuario);
+            
+            ResultSet rs = psq.executeQuery();
+            
+            if (rs.next()) {
+                psq = conex.prepareStatement(queryInsert2);
+                psq.setString(1, opcion1);
+                psq.setString(2, opcion2);
+                psq.setString(3, usuario);
+                psq.executeUpdate();
+            } else{
+              psq = conex.prepareStatement(queryInsert1);
             psq.setString(1, usuario);
             psq.setString(2, contrasenia);
             psq.setString(3, opcion1);
             psq.setString(4, opcion2);
-
             psq.executeUpdate();
-            
+            }
+
             System.out.println("acá ando");
             
         } catch (Exception e) {
@@ -361,7 +363,6 @@ public class GestionFuncionarios extends javax.swing.JFrame {
                 System.err.println("ERROR SQL" + excSql);
             }
         }
-
     }
 
     /* switch(SelectOpt1){
