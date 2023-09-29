@@ -45,9 +45,9 @@ public class RegistroPaciente extends javax.swing.JFrame {
         setIconImage(miIcono);
         SetImageLabel(LabelIconito, "src\\main\\java\\images\\icon.png");
         SetImageLabel(LabelFoto, "src\\main\\java\\images\\regFunc.png");
-        String userName = Login.user;
-        LabelTitulo.setText("Bienvenido " + userName + "- Registro de pacientes.");
-        setTitle("Registro de pacientes - Sesión de " + userName);
+        
+        
+        setTitle("Registro de pacientes");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);  
     }
     Conexion cn = new Conexion();
@@ -85,90 +85,89 @@ public class RegistroPaciente extends javax.swing.JFrame {
         TextPersonaContacto = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         TextApellido = new javax.swing.JTextField();
-        LabelTitulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 153));
         jLabel1.setText("Persona de contacto");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 120, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 150, -1));
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 153));
         jLabel2.setText("Apellido");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, 50, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 153));
         jLabel3.setText("Fecha de Nacimiento");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 130, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 160, -1));
 
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 153));
         jLabel4.setText("DNI");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 30, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 30, -1));
 
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 153));
         jLabel5.setText("Telefono fijo");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 290, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 153));
         jLabel6.setText("Telefono celular");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 100, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, 120, -1));
 
-        jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 153));
         jLabel7.setText("Estado civil");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 100, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, 90, -1));
 
-        jLabel9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 153));
         jLabel9.setText("Nombre");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 50, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 60, -1));
 
         TextCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextCorreoActionPerformed(evt);
             }
         });
-        jPanel1.add(TextCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 350, 110, -1));
+        jPanel1.add(TextCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 360, 150, -1));
 
         TextEstadoCivil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextEstadoCivilActionPerformed(evt);
             }
         });
-        jPanel1.add(TextEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 386, 110, -1));
+        jPanel1.add(TextEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 390, 150, -1));
 
         TextDNI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextDNIActionPerformed(evt);
             }
         });
-        jPanel1.add(TextDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 156, 110, -1));
+        jPanel1.add(TextDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, 150, -1));
 
         TextFijo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextFijoActionPerformed(evt);
             }
         });
-        jPanel1.add(TextFijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 286, 110, -1));
+        jPanel1.add(TextFijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 300, 150, -1));
 
         TextCelular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextCelularActionPerformed(evt);
             }
         });
-        jPanel1.add(TextCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 316, 110, -1));
+        jPanel1.add(TextCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 330, 150, -1));
 
         botonRegistro.setBackground(new java.awt.Color(0, 0, 153));
-        botonRegistro.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        botonRegistro.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         botonRegistro.setForeground(new java.awt.Color(255, 255, 255));
         botonRegistro.setText("REGISTRAR PACIENTE");
         botonRegistro.addActionListener(new java.awt.event.ActionListener() {
@@ -176,15 +175,15 @@ public class RegistroPaciente extends javax.swing.JFrame {
                 botonRegistroActionPerformed(evt);
             }
         });
-        jPanel1.add(botonRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, 200, 40));
-        jPanel1.add(TextFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, 110, -1));
+        jPanel1.add(botonRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 430, 190, 30));
+        jPanel1.add(TextFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 210, 150, -1));
 
         TextNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextNombreActionPerformed(evt);
             }
         });
-        jPanel1.add(TextNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 96, 110, -1));
+        jPanel1.add(TextNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 150, -1));
 
         LabelIconito.setText("jLabel8");
         jPanel1.add(LabelIconito, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 60));
@@ -192,43 +191,38 @@ public class RegistroPaciente extends javax.swing.JFrame {
         LabelFoto.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         LabelFoto.setForeground(new java.awt.Color(0, 0, 153));
         LabelFoto.setText("Label2");
-        jPanel1.add(LabelFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, 120, 110));
+        jPanel1.add(LabelFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 150, 120));
 
-        jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 153));
         jLabel8.setText("Domicilio");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 60, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, 70, -1));
 
         TextDomicilio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextDomicilioActionPerformed(evt);
             }
         });
-        jPanel1.add(TextDomicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 226, 110, -1));
+        jPanel1.add(TextDomicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 150, -1));
 
         TextPersonaContacto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextPersonaContactoActionPerformed(evt);
             }
         });
-        jPanel1.add(TextPersonaContacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 256, 110, -1));
+        jPanel1.add(TextPersonaContacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, 150, -1));
 
-        jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 153));
         jLabel10.setText("Correo");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 360, 40, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 360, 50, -1));
 
         TextApellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextApellidoActionPerformed(evt);
             }
         });
-        jPanel1.add(TextApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 126, 110, -1));
-
-        LabelTitulo.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        LabelTitulo.setForeground(new java.awt.Color(0, 0, 153));
-        LabelTitulo.setText("Label2");
-        jPanel1.add(LabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 420, 30));
+        jPanel1.add(TextApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 150, 150, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -437,7 +431,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelFoto;
     private javax.swing.JLabel LabelIconito;
-    private javax.swing.JLabel LabelTitulo;
     private javax.swing.JTextField TextApellido;
     private javax.swing.JTextField TextCelular;
     private javax.swing.JTextField TextCorreo;
