@@ -7,6 +7,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
+import clases.Medico;
+import clases.Administrativo;
+import clases.AdminSistemas;
 import static ventanas.Login.user;
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,18 +19,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class GestionUsuarios extends javax.swing.JFrame {
+public class GestionFuncionarios extends javax.swing.JFrame {
 
     DefaultTableModel modelo;
     Conexion cn = new Conexion();
 
-    public GestionUsuarios() {
+    public GestionFuncionarios() {
         initComponents();
-        setTitle("Gestión de Usuarios");
+        setTitle("Gestión de Funcionarios");
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        
+
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
         setIconImage(miIcono);
@@ -40,7 +43,10 @@ public class GestionUsuarios extends javax.swing.JFrame {
         modelo.addColumn("Sector");
         actualizarTabla();
     }
-
+    
+    String nomDB;
+    int dniDB;
+    
     private void actualizarTabla() {
         modelo.setRowCount(0);
         tablaFuncionarios = new javax.swing.JTable();
@@ -67,6 +73,10 @@ public class GestionUsuarios extends javax.swing.JFrame {
                 ob[2] = rs.getString("Apellido");
                 ob[3] = rs.getString("Rol");
                 ob[4] = rs.getString("Sector");
+                
+                String dniParcialString = ob[0].toString();
+                dniDB = Integer.parseInt(dniParcialString);
+                nomDB = ob[1].toString();
 
                 modelo.addRow(ob);
                 tablaFuncionarios.setModel(modelo);
@@ -87,6 +97,7 @@ public class GestionUsuarios extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -100,6 +111,7 @@ public class GestionUsuarios extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         botonEliminar = new javax.swing.JButton();
         botonAlta = new javax.swing.JButton();
+        btnElimUser = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -184,6 +196,9 @@ public class GestionUsuarios extends javax.swing.JFrame {
         });
         jPanel1.add(botonAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 300, 80, 30));
 
+        btnElimUser.setText("Eliminar Usuario");
+        jPanel1.add(btnElimUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -198,7 +213,7 @@ public class GestionUsuarios extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
+    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_botonEliminarActionPerformed
 
         int numFila = tablaFuncionarios.getSelectedRow();
         if (numFila != -1) {
@@ -234,17 +249,23 @@ public class GestionUsuarios extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_botonEliminarActionPerformed
+    }// GEN-LAST:event_botonEliminarActionPerformed
+
     private String selectedOption;
     private String selectedOption2;
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
         selectedOption = (String) jComboBox1.getSelectedItem();
+        // GEN-LAST:event_jComboBox1ActionPerformed
+    }
 
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+        selectedOption2 = (String) jComboBox2.getSelectedItem();
+    }// GEN-LAST:event_jComboBox2ActionPerformed
 
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
-    private void botonAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAltaActionPerformed
+    private void botonAltaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_botonAltaActionPerformed
         // TODO add your handling code here:
         int numFila = tablaFuncionarios.getSelectedRow();
         if (numFila != -1) {
@@ -269,10 +290,10 @@ public class GestionUsuarios extends javax.swing.JFrame {
                     psi.setString(1, selectedOption);
                     psi.setString(2, selectedOption2);
                     psi.setInt(3, dni);
-
                     psi.executeUpdate();
-
                     actualizarTabla();
+                    
+                    
 
                 }
             } catch (SQLException e) {
@@ -287,22 +308,86 @@ public class GestionUsuarios extends javax.swing.JFrame {
                     System.err.println("ERROR SQL" + excSql);
                 }
             }
+            generarUsuario(selectedOption, selectedOption2, nomDB, dniDB);
         }
-    }//GEN-LAST:event_botonAltaActionPerformed
+    }// GEN-LAST:event_botonAltaActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
-        selectedOption2 = (String) jComboBox2.getSelectedItem();
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    private String generarContrasenia(String nombre, int dni) {
 
-    /**
-     * @param args the command line arguments
-     */
+        int tresUltimosDigitosDni = dni % 1000;
+        String tresPrimerasLetrasNombre = obtenerTresPrimerasLetras(nombre);
+
+        String contrasenia = tresPrimerasLetrasNombre + String.valueOf(tresUltimosDigitosDni);
+
+        //System.out.println(contrasenia);
+        return contrasenia;
+    }
+
+    private String obtenerTresPrimerasLetras(String nombre) {
+        if (nombre.length() < 3) {
+            return nombre;
+        } else {
+            return nombre.substring(0, 3);
+        }
+    }
+
+    private void generarUsuario(String opcion1, String opcion2, String nombre, int dni) {
+        String contrasenia = generarContrasenia(nombre, dni);
+        String usuario = String.valueOf(dni);
+
+        Connection conex = null;
+
+        try {
+            conex = cn.conectar();
+            String queryInsert = "INSERT INTO Usuarios(Usuario, Contrasenia, Rol, Sector) VALUES (?,?,?,?);";
+            PreparedStatement psq = conex.prepareStatement(queryInsert);
+            psq.setString(1, usuario);
+            psq.setString(2, contrasenia);
+            psq.setString(3, opcion1);
+            psq.setString(4, opcion2);
+
+            psq.executeUpdate();
+            
+            System.out.println("acá ando");
+            
+        } catch (Exception e) {
+            System.out.println("EXCEP SQL" + e);
+        } finally {
+            try {
+                if (conex != null) {
+                    conex.close();
+                }
+            } catch (SQLException excSql) {
+                System.err.println("ERROR SQL" + excSql);
+            }
+        }
+
+    }
+
+    /* switch(SelectOpt1){
+            case "MedicoTriage" :
+                //Instancia de Medico
+                break;
+            case "MedicoSala" :
+                //Instancia de Medico
+                break;
+            case "AdminInformatico":
+                //Instancia de AdminSistemas
+                break;
+            case "Administrativo" :
+                //Instancia de Administrativo
+                break;
+        }*/
     public static void main(String args[]) {
+
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
+        // (optional) ">
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the default
+         * look and feel.
+         * For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -312,20 +397,25 @@ public class GestionUsuarios extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GestionUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE,
+                    null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GestionUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE,
+                    null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GestionUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE,
+                    null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GestionUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE,
+                    null, ex);
         }
-        //</editor-fold>
+        // </editor-fold>
+        // </editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GestionUsuarios().setVisible(true);
+                new GestionFuncionarios().setVisible(true);
             }
         });
     }
@@ -333,6 +423,7 @@ public class GestionUsuarios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAlta;
     private javax.swing.JButton botonEliminar;
+    private javax.swing.JButton btnElimUser;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
