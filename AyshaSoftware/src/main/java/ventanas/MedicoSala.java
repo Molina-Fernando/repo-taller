@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import ventanas.panelesmedicos.Panel1;
 import ventanas.panelesmedicos.Panel2;
 import ventanas.panelesmedicos.Panel3;
+import ventanas.panelesmedicos.Panel4;
 
 
 /**
@@ -19,6 +20,7 @@ public class MedicoSala extends javax.swing.JFrame {
      */
     public MedicoSala() {
         initComponents();
+        this.setLocationRelativeTo(null);
         showPanel(new Panel1());
     }
     
@@ -47,6 +49,7 @@ public class MedicoSala extends javax.swing.JFrame {
         Boton3 = new javax.swing.JButton();
         Boton1 = new javax.swing.JButton();
         Boton2 = new javax.swing.JButton();
+        Boton4 = new javax.swing.JButton();
         content = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -67,7 +70,7 @@ public class MedicoSala extends javax.swing.JFrame {
                 Boton3ActionPerformed(evt);
             }
         });
-        jPanel2.add(Boton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 241, 200, 70));
+        jPanel2.add(Boton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 200, 70));
 
         Boton1.setBackground(new java.awt.Color(0, 0, 204));
         Boton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -92,6 +95,18 @@ public class MedicoSala extends javax.swing.JFrame {
             }
         });
         jPanel2.add(Boton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 172, 200, 70));
+
+        Boton4.setBackground(new java.awt.Color(0, 0, 204));
+        Boton4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        Boton4.setForeground(new java.awt.Color(255, 255, 255));
+        Boton4.setText("Carga estudio");
+        Boton4.setBorder(null);
+        Boton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Boton4ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Boton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 200, 70));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 510));
 
@@ -136,6 +151,10 @@ public class MedicoSala extends javax.swing.JFrame {
         showPanel(new Panel3());
     }//GEN-LAST:event_Boton3ActionPerformed
 
+    private void Boton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton4ActionPerformed
+        showPanel(new Panel4());
+    }//GEN-LAST:event_Boton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -155,6 +174,7 @@ public class MedicoSala extends javax.swing.JFrame {
     private javax.swing.JButton Boton1;
     private javax.swing.JButton Boton2;
     private javax.swing.JButton Boton3;
+    private javax.swing.JButton Boton4;
     private javax.swing.JPanel content;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
