@@ -1,10 +1,15 @@
 package ventanas;
 
 import clases.Conexion;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
+import clases.Medico;
+import clases.Administrativo;
+import clases.AdminSistemas;
 import static ventanas.Login.user;
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,17 +19,21 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class GestionUsuarios extends javax.swing.JFrame {
+public class GestionFuncionarios extends javax.swing.JFrame {
 
     DefaultTableModel modelo;
     Conexion cn = new Conexion();
 
-    public GestionUsuarios() {
+    public GestionFuncionarios() {
         initComponents();
-        setTitle("Gestión de Usuarios");
+        setTitle("Gestión de Funcionarios");
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+        Toolkit miPantalla = Toolkit.getDefaultToolkit();
+        Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
+        setIconImage(miIcono);
 
         modelo = new DefaultTableModel();
         modelo.addColumn("DNI");
@@ -34,24 +43,21 @@ public class GestionUsuarios extends javax.swing.JFrame {
         modelo.addColumn("Sector");
         actualizarTabla();
     }
-
+    
+    String nomDB;
+    int dniDB;
+    
     private void actualizarTabla() {
         modelo.setRowCount(0);
         tablaFuncionarios = new javax.swing.JTable();
-
         tablaFuncionarios.setModel(modelo);
         Connection conex = null;
         try {
             conex = cn.conectar();
-
             String query = "SELECT DNI, Nombre, Apellido, Rol, Sector FROM Funcionarios";
-
             PreparedStatement psq = conex.prepareStatement(query);
-
             ResultSet rs = psq.executeQuery();
-
             tablaFuncionarios = new JTable(modelo);
-
             jScrollPane1.setViewportView(tablaFuncionarios);
 
             while (rs.next()) {
@@ -61,6 +67,10 @@ public class GestionUsuarios extends javax.swing.JFrame {
                 ob[2] = rs.getString("Apellido");
                 ob[3] = rs.getString("Rol");
                 ob[4] = rs.getString("Sector");
+                
+                String dniParcialString = ob[0].toString();
+                dniDB = Integer.parseInt(dniParcialString);
+                nomDB = ob[1].toString();
 
                 modelo.addRow(ob);
                 tablaFuncionarios.setModel(modelo);
@@ -81,6 +91,7 @@ public class GestionUsuarios extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -94,6 +105,7 @@ public class GestionUsuarios extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         botonEliminar = new javax.swing.JButton();
         botonAlta = new javax.swing.JButton();
+        btnElimUser = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,64 +132,82 @@ public class GestionUsuarios extends javax.swing.JFrame {
         tablaFuncionarios.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaFuncionarios);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 730, 190));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 730, 190));
 
-        jLabel1.setText("FUNCIONARIOS PENDIENTES DE ALTA");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 290, 40));
+        jLabel1.setBackground(new java.awt.Color(0, 0, 153));
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel1.setText("  PENDIENTES DE ALTA (quienes no tienen rol y sector)");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 390, 40));
 
+        jComboBox1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MedicoTriage", "MedicoSala", "AdminInformatico", "Administrativo" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, -1, -1));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, -1, -1));
 
+        jComboBox2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admision", "RRHH", "Compras", "Auditoria", "Gestion", "RegistrosMedicos" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 290, -1, -1));
+        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 300, -1, -1));
 
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 153));
         jLabel2.setText("Sector");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 290, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, -1, 20));
 
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 153));
         jLabel3.setText("Rol");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, 30, 20));
 
+        botonEliminar.setBackground(new java.awt.Color(0, 0, 153));
+        botonEliminar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        botonEliminar.setForeground(new java.awt.Color(255, 255, 255));
         botonEliminar.setText("ELIMINAR");
         botonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(botonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 360, -1, -1));
+        jPanel1.add(botonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 300, 90, 30));
 
+        botonAlta.setBackground(new java.awt.Color(0, 0, 153));
+        botonAlta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        botonAlta.setForeground(new java.awt.Color(255, 255, 255));
         botonAlta.setText("ALTA");
         botonAlta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAltaActionPerformed(evt);
             }
         });
-        jPanel1.add(botonAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, -1, -1));
+        jPanel1.add(botonAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 300, 80, 30));
+
+        btnElimUser.setText("Eliminar Usuario");
+        jPanel1.add(btnElimUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 746, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
+    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_botonEliminarActionPerformed
 
         int numFila = tablaFuncionarios.getSelectedRow();
         if (numFila != -1) {
@@ -185,20 +215,21 @@ public class GestionUsuarios extends javax.swing.JFrame {
             int dni = Integer.parseInt(dnistr);
             Connection conex = null;
             try {
-
                 conex = cn.conectar();
-
                 String deleteQuery = "DELETE FROM FUNCIONARIOS WHERE DNI = ?";
                 PreparedStatement psq = conex.prepareStatement(deleteQuery);
-
                 psq.setInt(1, dni);
                 int filaModificada = psq.executeUpdate();
-
                 if (filaModificada > 0) {
-
                     DefaultTableModel model = (DefaultTableModel) tablaFuncionarios.getModel();
                     model.removeRow(numFila);
                 }
+                
+                //se elimina el usuario cuando se elimina un Funcionario
+                String deleteUserQuery = "DELETE FROM Usuarios WHERE Usuario = ?";
+                psq = conex.prepareStatement(deleteUserQuery);
+                psq.setInt(1,dni);
+                psq.executeUpdate();
 
             } catch (SQLException e) {
                 System.out.println("EXCEP SQL" + e);
@@ -213,17 +244,23 @@ public class GestionUsuarios extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_botonEliminarActionPerformed
+    }// GEN-LAST:event_botonEliminarActionPerformed
+
     private String selectedOption;
     private String selectedOption2;
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
         selectedOption = (String) jComboBox1.getSelectedItem();
+        // GEN-LAST:event_jComboBox1ActionPerformed
+    }
 
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+        selectedOption2 = (String) jComboBox2.getSelectedItem();
+    }// GEN-LAST:event_jComboBox2ActionPerformed
 
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
-    private void botonAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAltaActionPerformed
+    private void botonAltaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_botonAltaActionPerformed
         // TODO add your handling code here:
         int numFila = tablaFuncionarios.getSelectedRow();
         if (numFila != -1) {
@@ -234,25 +271,19 @@ public class GestionUsuarios extends javax.swing.JFrame {
             Connection conex = null;
             try {
                 conex = cn.conectar();
-
                 String query = "SELECT * FROM Funcionarios WHERE DNI = ?";
-
                 PreparedStatement psq = conex.prepareStatement(query);
                 psq.setInt(1, dni);
-
                 ResultSet rs = psq.executeQuery();
-
+                
                 if (rs.next()) {
                     String update = "UPDATE Funcionarios SET Rol = ?, Sector = ? WHERE DNI = ?;";
                     PreparedStatement psi = conex.prepareStatement(update);
                     psi.setString(1, selectedOption);
                     psi.setString(2, selectedOption2);
                     psi.setInt(3, dni);
-
                     psi.executeUpdate();
-
                     actualizarTabla();
-
                 }
             } catch (SQLException e) {
                 System.out.println("EXCEP SQL" + e);
@@ -266,22 +297,98 @@ public class GestionUsuarios extends javax.swing.JFrame {
                     System.err.println("ERROR SQL" + excSql);
                 }
             }
+            generarUsuario(selectedOption, selectedOption2, nomDB, dniDB);
         }
-    }//GEN-LAST:event_botonAltaActionPerformed
+    }// GEN-LAST:event_botonAltaActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
-        selectedOption2 = (String) jComboBox2.getSelectedItem();
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    private String generarContrasenia(String nombre, int dni) {
 
-    /**
-     * @param args the command line arguments
-     */
+        int tresUltimosDigitosDni = dni % 1000;
+        String tresPrimerasLetrasNombre = obtenerTresPrimerasLetras(nombre);
+        String contrasenia = tresPrimerasLetrasNombre + String.valueOf(tresUltimosDigitosDni);
+        //System.out.println(contrasenia);
+        return contrasenia;
+    }
+
+    private String obtenerTresPrimerasLetras(String nombre) {
+        if (nombre.length() < 3) {
+            return nombre;
+        } else {
+            return nombre.substring(0, 3);
+        }
+    }
+
+    private void generarUsuario(String opcion1, String opcion2, String nombre, int dni) {
+        String contrasenia = generarContrasenia(nombre, dni);
+        String usuario = String.valueOf(dni);
+
+        Connection conex = null;
+
+        try {
+            conex = cn.conectar();
+            String queryInsert1 = "INSERT INTO Usuarios(Usuario, Contrasenia, Rol, Sector) VALUES (?,?,?,?);";
+            String queryInsert2 = "UPDATE Usuarios SET Rol = ?, Sector = ? WHERE Usuario = ?";
+            String queryMatch = "SELECT * FROM Usuarios WHERE Usuario = ?";
+            
+            PreparedStatement psq = conex.prepareStatement(queryMatch);
+            psq.setString(1, usuario);
+            
+            ResultSet rs = psq.executeQuery();
+            
+            if (rs.next()) {
+                psq = conex.prepareStatement(queryInsert2);
+                psq.setString(1, opcion1);
+                psq.setString(2, opcion2);
+                psq.setString(3, usuario);
+                psq.executeUpdate();
+            } else{
+              psq = conex.prepareStatement(queryInsert1);
+            psq.setString(1, usuario);
+            psq.setString(2, contrasenia);
+            psq.setString(3, opcion1);
+            psq.setString(4, opcion2);
+            psq.executeUpdate();
+            }
+
+            System.out.println("acá ando");
+            
+        } catch (Exception e) {
+            System.out.println("EXCEP SQL" + e);
+        } finally {
+            try {
+                if (conex != null) {
+                    conex.close();
+                }
+            } catch (SQLException excSql) {
+                System.err.println("ERROR SQL" + excSql);
+            }
+        }
+    }
+
+    /* switch(SelectOpt1){
+            case "MedicoTriage" :
+                //Instancia de Medico
+                break;
+            case "MedicoSala" :
+                //Instancia de Medico
+                break;
+            case "AdminInformatico":
+                //Instancia de AdminSistemas
+                break;
+            case "Administrativo" :
+                //Instancia de Administrativo
+                break;
+        }*/
     public static void main(String args[]) {
+
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
+        // (optional) ">
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the default
+         * look and feel.
+         * For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -291,20 +398,25 @@ public class GestionUsuarios extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GestionUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE,
+                    null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GestionUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE,
+                    null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GestionUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE,
+                    null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GestionUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE,
+                    null, ex);
         }
-        //</editor-fold>
+        // </editor-fold>
+        // </editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GestionUsuarios().setVisible(true);
+                new GestionFuncionarios().setVisible(true);
             }
         });
     }
@@ -312,6 +424,7 @@ public class GestionUsuarios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAlta;
     private javax.swing.JButton botonEliminar;
+    private javax.swing.JButton btnElimUser;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;

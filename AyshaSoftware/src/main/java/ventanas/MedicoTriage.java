@@ -34,6 +34,7 @@ public class MedicoTriage extends javax.swing.JFrame {
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
         setIconImage(miIcono);
         SetImageLabel(LabelIconito, "src\\main\\java\\images\\icon.png");
+       
         String userName = Login.user;
         setTitle("Triage - Sesión de " + userName);
         med = new Medico();
