@@ -73,7 +73,7 @@ public abstract class Persona {
         return fecNacimiento;
     }
     
-    public String setEstadoCivil(String estadoCivil){
+    public final String setEstadoCivil(String estadoCivil){
         return estadoCivil;
     }
 

@@ -296,8 +296,12 @@ public class Panel1 extends javax.swing.JPanel {
 
     private void SeleccionPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeleccionPacienteActionPerformed
         try{
-            boxes[boxElegido.getNumero()].setDisponible(false);
-            //elegido tal cosa como que se pase a los paneles correspondientes.
+            if (boxElegido.isDisponible()){
+                boxes[boxElegido.getNumero()].setDisponible(false);
+                //recargarPanel metodo para actualizar lista
+                //elegido tal cosa como que se pase a los paneles correspondientes.                
+            }
+
             
         }catch(NullPointerException e){
             JOptionPane.showMessageDialog(null, "No fue posible asignar box, falto seleccionar paciente o box", "Error", JOptionPane.ERROR_MESSAGE);
