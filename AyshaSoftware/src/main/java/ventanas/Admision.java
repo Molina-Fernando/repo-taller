@@ -17,9 +17,7 @@ public class Admision extends javax.swing.JFrame {
         setIconImage(miIcono);
         SetImageLabel(LabelIconito, "src\\main\\java\\images\\icon.png");
         SetImageLabel(ImagenRegistro, "src\\main\\java\\images\\imagenRegistro.png");
-        String userName = Login.user;
-        LabelTitulo.setText("Bienvenido " + userName + "- Admisión de pacientes.");
-        setTitle("Admisión - Sesión de " + userName);
+        setTitle("Admisión");
 
     }
 
@@ -34,7 +32,6 @@ public class Admision extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         LabelIconito = new javax.swing.JLabel();
-        LabelTitulo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         ImagenRegistro = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -49,11 +46,6 @@ public class Admision extends javax.swing.JFrame {
         LabelIconito.setText("Label1");
         LabelIconito.setPreferredSize(new java.awt.Dimension(39, 16));
         jPanel1.add(LabelIconito, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 60));
-
-        LabelTitulo.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        LabelTitulo.setForeground(new java.awt.Color(0, 0, 153));
-        LabelTitulo.setText("Label2");
-        jPanel1.add(LabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 420, 30));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 153));
@@ -131,7 +123,6 @@ public class Admision extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ImagenRegistro;
     private javax.swing.JLabel LabelIconito;
-    private javax.swing.JLabel LabelTitulo;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

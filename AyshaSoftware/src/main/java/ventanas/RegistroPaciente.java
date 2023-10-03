@@ -35,7 +35,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
      * Creates new form RegistroPaciente
      */
     Paciente pac = new Paciente();
-    
+
     public RegistroPaciente() {
         initComponents();
         setLocationRelativeTo(null);
@@ -45,10 +45,8 @@ public class RegistroPaciente extends javax.swing.JFrame {
         setIconImage(miIcono);
         SetImageLabel(LabelIconito, "src\\main\\java\\images\\icon.png");
         SetImageLabel(LabelFoto, "src\\main\\java\\images\\regFunc.png");
-        String userName = Login.user;
-        LabelTitulo.setText("Bienvenido " + userName + "- Registro de pacientes.");
-        setTitle("Registro de pacientes - Sesión de " + userName);
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);  
+        setTitle("Registro de pacientes");
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
     Conexion cn = new Conexion();
 
@@ -85,7 +83,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
         TextPersonaContacto = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         TextApellido = new javax.swing.JTextField();
-        LabelTitulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -225,11 +222,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
         });
         jPanel1.add(TextApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 126, 110, -1));
 
-        LabelTitulo.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        LabelTitulo.setForeground(new java.awt.Color(0, 0, 153));
-        LabelTitulo.setText("Label2");
-        jPanel1.add(LabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 420, 30));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -252,7 +244,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
 
     private void botonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistroActionPerformed
 
-        
         String nombre = TextNombre.getText().trim();
         String apellido = TextApellido.getText().trim();
         String domicilio = TextDomicilio.getText().trim();
@@ -263,10 +254,16 @@ public class RegistroPaciente extends javax.swing.JFrame {
         String telCelular = TextCelular.getText().trim();
         String correo = TextCorreo.getText().trim();
         String estadoCivil = TextEstadoCivil.getText().trim();
-        
-        Instant instant = fechaNacimiento.toInstant();
-        LocalDate fecNac = instant.atZone(ZoneId.systemDefault()).toLocalDate();
-        
+        LocalDate fecNac = null;
+        if (fechaNacimiento != null) {
+            // La fecha está seleccionada, puedes realizar la conversión
+            Instant instant = fechaNacimiento.toInstant();
+            fecNac = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+            // Resto de tu código aquí
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione una fecha de nacimiento válida.");
+        }
+
         pac.setNombre(nombre);
         pac.setApellido(apellido);
         pac.setDomicilio(domicilio);
@@ -277,7 +274,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
         pac.setTelCelular(telCelular);
         pac.setTelFijo(telFijo);
         pac.setPersonaContacto(personaContacto);
-        
 
         String mail = "^[A-Za-z0-9+_.-]+@(.+)$";
         Pattern pattern = Pattern.compile(mail);
@@ -437,7 +433,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelFoto;
     private javax.swing.JLabel LabelIconito;
-    private javax.swing.JLabel LabelTitulo;
     private javax.swing.JTextField TextApellido;
     private javax.swing.JTextField TextCelular;
     private javax.swing.JTextField TextCorreo;

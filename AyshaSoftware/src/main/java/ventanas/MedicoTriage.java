@@ -1,6 +1,7 @@
 package ventanas;
 
 import clases.Medico;
+import ventanas.ListaTriage;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -22,9 +23,12 @@ public class MedicoTriage extends javax.swing.JFrame {
     private String motivoCambio;
     Map<String, Color> colores = new HashMap<>();
     private Medico med;
-
+    ListaTriage datosTabla = new ListaTriage();
+    
     public MedicoTriage() {
+        
         initComponents();
+        
         ventanaEmergente.setResizable(false);
         FrameModificar.setResizable(false);
         FrameModificar.setLocationRelativeTo(null);
@@ -34,9 +38,7 @@ public class MedicoTriage extends javax.swing.JFrame {
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
         setIconImage(miIcono);
         SetImageLabel(LabelIconito, "src\\main\\java\\images\\icon.png");
-       
-        String userName = Login.user;
-        setTitle("Triage - Sesión de " + userName);
+        setTitle("Triage");
         med = new Medico();
 
     }
@@ -89,9 +91,9 @@ public class MedicoTriage extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        LabelIconito = new javax.swing.JLabel();
         BotonTriagiar = new javax.swing.JButton();
         BotonModificar = new javax.swing.JButton();
+        LabelIconito = new javax.swing.JLabel();
 
         ventanaEmergente.setSize(new java.awt.Dimension(295, 217));
 
@@ -400,9 +402,6 @@ public class MedicoTriage extends javax.swing.JFrame {
         jLabel13.setText("Lesiones leves");
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 90, 20));
 
-        LabelIconito.setText("jLabel14");
-        jPanel1.add(LabelIconito, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
-
         BotonTriagiar.setBackground(new java.awt.Color(0, 0, 153));
         BotonTriagiar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         BotonTriagiar.setForeground(new java.awt.Color(255, 255, 255));
@@ -424,6 +423,9 @@ public class MedicoTriage extends javax.swing.JFrame {
             }
         });
         jPanel1.add(BotonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 280, -1, -1));
+
+        LabelIconito.setText("jLabel14");
+        jPanel1.add(LabelIconito, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
