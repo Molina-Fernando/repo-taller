@@ -24,8 +24,19 @@ public class Panel1 extends javax.swing.JPanel {
         
     ArrayList<Paciente> listaPacientes = new ArrayList<>();
     Box[] boxes = new Box[10];
-    DefaultTableModel modelo= new DefaultTableModel();
-    DefaultTableModel modelo2= new DefaultTableModel();
+    DefaultTableModel modelo= new DefaultTableModel(){
+        @Override
+        public boolean isCellEditable(int row, int column){
+            return false;
+        }
+    };
+    DefaultTableModel modelo2= new DefaultTableModel(){
+                @Override
+        public boolean isCellEditable(int row, int column){
+            return false;
+        }
+    };
+
     Paciente elegido=null;
     Box boxElegido=null;
 
@@ -38,6 +49,7 @@ public class Panel1 extends javax.swing.JPanel {
     }
     
     public void cargaDatos(){
+        
         
         //aca creo que deberia llamarse a la base de datos pero por ahora la carga va a ser manual con muchos atributos
         //PRIMER PACIENTE
@@ -101,6 +113,8 @@ public class Panel1 extends javax.swing.JPanel {
         modelo.addColumn("Nombre");
         modelo.addColumn("Apellido");
         modelo.addColumn("Color");
+        
+
         tablaPacientes.setModel(modelo);
         for (Paciente pac : listaPacientes){
             String nombre = pac.getNombre();
@@ -109,7 +123,6 @@ public class Panel1 extends javax.swing.JPanel {
             String[]cosasPacientes={nombre,apellido,color};
             modelo.addRow(cosasPacientes);
         }
-        
         //CARGA DE DATOS DE LOS BOXES POR DEFECTO
         int numeracion = 1;
         for (int i =0;i<10;i++) {
@@ -127,6 +140,8 @@ public class Panel1 extends javax.swing.JPanel {
             modelo2.addRow(cosasBox);
         }
         
+
+
     }
     
     public Paciente pacienteNombreApellido(ArrayList<Paciente>list,String nombre,String apellido){
@@ -180,11 +195,6 @@ public class Panel1 extends javax.swing.JPanel {
                 "Nombre", "Apellido", "Color"
             }
         ));
-        tablaPacientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablaPacientesMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(tablaPacientes);
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -198,14 +208,9 @@ public class Panel1 extends javax.swing.JPanel {
                 {null, null}
             },
             new String [] {
-                "Número", "Disponibilidad "
+                "Número", "Disponibilidad"
             }
         ));
-        tablaBoxes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablaBoxesMouseClicked(evt);
-            }
-        });
         jScrollPane2.setViewportView(tablaBoxes);
 
         jButton1.setText("Asignar box");
@@ -248,7 +253,7 @@ public class Panel1 extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 16, Short.MAX_VALUE))
+                .addGap(0, 28, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(199, 199, 199)
                 .addComponent(jLabel2)
@@ -271,7 +276,7 @@ public class Panel1 extends javax.swing.JPanel {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
         );
@@ -280,24 +285,22 @@ public class Panel1 extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(17, 17, 17))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void SeleccionPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeleccionPacienteActionPerformed
         try{
-            boxes[boxElegido.getNumero()].setDisponible(false);
-            //elegido tal cosa como que se pase a los paneles correspondientes.
+            if (boxElegido.isDisponible()){
+                boxes[boxElegido.getNumero()].setDisponible(false);
+                //recargarPanel metodo para actualizar lista
+                //elegido tal cosa como que se pase a los paneles correspondientes.                
+            }
+
             
         }catch(NullPointerException e){
             JOptionPane.showMessageDialog(null, "No fue posible asignar box, falto seleccionar paciente o box", "Error", JOptionPane.ERROR_MESSAGE);

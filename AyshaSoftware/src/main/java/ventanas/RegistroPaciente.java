@@ -25,10 +25,7 @@ import java.util.regex.Pattern;
 import javax.swing.Icon;
 import javax.swing.WindowConstants;
 
-/**
- *
- * @author Jeremías Simian
- */
+
 public class RegistroPaciente extends javax.swing.JFrame {
 
     /**
