@@ -73,8 +73,8 @@ public abstract class Persona {
         return fecNacimiento;
     }
     
-    public final void setEstadoCivil(String estadoCivil){
-        this.estadoCivil = estadoCivil;
+    public final String setEstadoCivil(String estadoCivil){
+        return estadoCivil;
     }
 
     public String getDomicilio() {
