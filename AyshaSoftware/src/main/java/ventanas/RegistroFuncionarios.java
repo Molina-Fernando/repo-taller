@@ -59,10 +59,10 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         textFijo = new javax.swing.JTextField();
         textCel = new javax.swing.JTextField();
         textEstadoCivil = new javax.swing.JTextField();
-        dcFechaNac = new com.toedter.calendar.JDateChooser();
         botonAgregar1 = new javax.swing.JButton();
         jLabelIconito = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        dcFechaNac = new com.toedter.calendar.JDateChooser();
 
         botonAgregar.setText("Alta");
         botonAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -151,7 +151,6 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         bg.add(textFijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 170, -1));
         bg.add(textCel, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 340, 170, -1));
         bg.add(textEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 370, 170, -1));
-        bg.add(dcFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 170, -1));
 
         botonAgregar1.setBackground(new java.awt.Color(0, 0, 153));
         botonAgregar1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
@@ -169,6 +168,7 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
 
         jLabel12.setText("jLabel12");
         bg.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 170, 160));
+        bg.add(dcFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 170, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

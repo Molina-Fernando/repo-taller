@@ -76,7 +76,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
         TextFijo = new javax.swing.JTextField();
         TextCelular = new javax.swing.JTextField();
         botonRegistro = new javax.swing.JButton();
-        TextFechaNac = new com.toedter.calendar.JDateChooser();
         TextNombre = new javax.swing.JTextField();
         LabelIconito = new javax.swing.JLabel();
         LabelFoto = new javax.swing.JLabel();
@@ -85,6 +84,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
         TextPersonaContacto = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         TextApellido = new javax.swing.JTextField();
+        textFechaNac = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -176,7 +176,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
             }
         });
         jPanel1.add(botonRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 430, 190, 30));
-        jPanel1.add(TextFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 210, 150, -1));
 
         TextNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,6 +222,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
             }
         });
         jPanel1.add(TextApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 150, 150, -1));
+        jPanel1.add(textFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 210, 150, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -250,7 +250,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
         String nombre = TextNombre.getText().trim();
         String apellido = TextApellido.getText().trim();
         String domicilio = TextDomicilio.getText().trim();
-        Date fechaNacimiento = TextFechaNac.getDate();
+        Date fechaNacimiento = textFechaNac.getDate();
         String telFijo = TextFijo.getText().trim();
         String personaContacto = TextPersonaContacto.getText().trim();
         String dni = TextDNI.getText().trim();
@@ -319,7 +319,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Paciente registrado con éxito.");
                         TextNombre.setText("");
                         TextApellido.setText("");
-                        TextFechaNac.setDate(null);
+                        textFechaNac.setDate(null);
                         TextDomicilio.setText("");
                         TextDNI.setText("");
                         TextFijo.setText("");
@@ -437,7 +437,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
     private javax.swing.JTextField TextDNI;
     private javax.swing.JTextField TextDomicilio;
     private javax.swing.JTextField TextEstadoCivil;
-    private com.toedter.calendar.JDateChooser TextFechaNac;
     private javax.swing.JTextField TextFijo;
     private javax.swing.JTextField TextNombre;
     private javax.swing.JTextField TextPersonaContacto;
@@ -453,6 +452,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private com.toedter.calendar.JDateChooser textFechaNac;
     // End of variables declaration//GEN-END:variables
 private void SetImageLabel(JLabel jLabel1, String root) {
         ImageIcon image = new ImageIcon(root);
