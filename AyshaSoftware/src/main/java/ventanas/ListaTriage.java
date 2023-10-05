@@ -18,10 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
-/**
- *
- * @author Jeremías Simian
- */
+
 public class ListaTriage extends javax.swing.JFrame {
     /**
      * Creates new form ListaTriage

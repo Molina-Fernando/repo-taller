@@ -148,6 +148,9 @@ public class Login extends javax.swing.JFrame {
 
                 ResultSet rs = preparedStatement.executeQuery();
 
+                /*
+                    TO DO: Modificar roles, en base a lo último hecho en Alta Funcionarios desde el panel del adminiInformatico. 
+                */
                 if (rs.next()) {
                     String nivelAcceso = rs.getString("NivelAcceso");
 
