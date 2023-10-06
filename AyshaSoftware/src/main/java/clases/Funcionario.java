@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public abstract class Funcionario extends Persona {
+public class Funcionario extends Persona {
 
     private String usuario;
     private String contrasenia;
@@ -13,7 +13,7 @@ public abstract class Funcionario extends Persona {
     public Funcionario() {
     }
 
-    public Funcionario(String nombre, String apellido, LocalDate fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, String user, String password, String estadoCivil) {
+    public Funcionario(String nombre, String apellido, String fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, String user, String password, String estadoCivil) {
         super(nombre, apellido, fecNacimiento, domicilio, dni, telFijo, telCelular, correoElectronico, estadoCivil);
         setUsuario(usuario);
         setContrasenia(contrasenia);

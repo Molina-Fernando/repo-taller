@@ -47,6 +47,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
     }
     Conexion cn = new Conexion();
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -276,13 +277,17 @@ public class RegistroPaciente extends javax.swing.JFrame {
         String correo = TextCorreo.getText().trim();
         String estadoCivil = TextEstadoCivil.getText().trim();
 
+  
         //Instant instant = fechaNacimiento.toInstant();
         //LocalDate fecNac = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+
+        String fechaFormateada = dateFormat.format(fechaNacimiento);
+         
 
         pac.setNombre(nombre);
         pac.setApellido(apellido);
         pac.setDomicilio(domicilio);
-        pac.setFecNacimiento(fechaNacimiento);
+        pac.setFecNacimiento(fechaFormateada);
         pac.setDni(dni);
         pac.setCorreoElectronico(correo);
         pac.setEstadoCivil(estadoCivil);
@@ -294,13 +299,13 @@ public class RegistroPaciente extends javax.swing.JFrame {
         Pattern pattern = Pattern.compile(mail);
         Matcher matcher = pattern.matcher(correo);
 
-        if (fechaNacimiento != null && !nombre.isEmpty() && !apellido.isEmpty() && !domicilio.isEmpty() && !dni.isEmpty() && !telFijo.isEmpty() && !telCelular.isEmpty() && !correo.isEmpty() && !personaContacto.isEmpty() && !estadoCivil.isEmpty()) {
+        if (fechaFormateada != null && !nombre.isEmpty() && !apellido.isEmpty() && !domicilio.isEmpty() && !dni.isEmpty() && !telFijo.isEmpty() && !telCelular.isEmpty() && !correo.isEmpty() && !personaContacto.isEmpty() && !estadoCivil.isEmpty()) {
 
             if (matcher.matches()) {
 
                 Connection conex = null;
                 try {
-                    conex = cn.conectar();
+                    conex = Conexion.conectar();
                     //
                     //
                     String query = "SELECT * FROM Pacientes WHERE DNI = ?";
@@ -318,12 +323,11 @@ public class RegistroPaciente extends javax.swing.JFrame {
                         PreparedStatement psi = conex.prepareStatement(insert);
                         //conex.prepareStatement(input);
 
-                        
-                        String fechaFormateada = dateFormat.format(fechaNacimiento);
-
+                        // SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                        //String fechaFormateada = dateFormat.format(fechaNacimiento);
                         psi.setString(1, pac.getNombre());
                         psi.setString(2, pac.getApellido());
-                        psi.setString(3, fechaFormateada);
+                        psi.setString(3, pac.getFecNacimiento());
                         psi.setString(4, pac.getDomicilio());
                         psi.setString(5, pac.getDni());
                         psi.setString(6, pac.getTelFijo());
@@ -430,8 +434,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
             PreparedStatement psq = conex.prepareStatement(query);
             psq.setString(1, TextDNI.getText());
             ResultSet rs = psq.executeQuery();
-            
-            
+
             if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "Paciente registrado");
                 String fechaFormateada = rs.getString("FechaNacimiento");
@@ -464,10 +467,10 @@ public class RegistroPaciente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonBuscarActionPerformed
 
-/**
- * @param args the command line arguments
- */
-public static void main(String args[]) {
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -479,27 +482,23 @@ public static void main(String args[]) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
 
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistroPaciente.class  
+            java.util.logging.Logger.getLogger(RegistroPaciente.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(RegistroPaciente.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistroPaciente.class  
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(RegistroPaciente.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistroPaciente.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistroPaciente.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(RegistroPaciente.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
