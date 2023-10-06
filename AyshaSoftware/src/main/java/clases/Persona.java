@@ -1,12 +1,12 @@
 package clases;
 
-import java.time.LocalDate;
+
 
 public abstract class Persona {
 
     private String nombre;
     private String apellido;
-    private LocalDate fecNacimiento;
+    private String fecNacimiento;
     private String domicilio;
     private String dni;
     private String telFijo;
@@ -17,7 +17,7 @@ public abstract class Persona {
     public Persona() {
     }
 
-    public Persona(String nombre, String apellido, LocalDate fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, String estadoCivil) {
+    public Persona(String nombre, String apellido, String fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, String estadoCivil) {
         setNombre(nombre);
         setApellido(apellido);
         setFecNacimiento(fecNacimiento);
@@ -37,7 +37,7 @@ public abstract class Persona {
         this.apellido = apellido;
     }
 
-    public final void setFecNacimiento(LocalDate fecNacimiento) {
+    public final void setFecNacimiento(String fecNacimiento) {
         this.fecNacimiento = fecNacimiento;
     }
 
@@ -69,7 +69,7 @@ public abstract class Persona {
         return apellido;
     }
 
-    public LocalDate getFecNacimiento() {
+    public String getFecNacimiento() {
         return fecNacimiento;
     }
     

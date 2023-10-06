@@ -22,14 +22,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.WindowConstants;
 
-
 public class RegistroPaciente extends javax.swing.JFrame {
 
     /**
      * Creates new form RegistroPaciente
      */
     Paciente pac = new Paciente();
-    
+
     public RegistroPaciente() {
         initComponents();
         setLocationRelativeTo(null);
@@ -39,10 +38,9 @@ public class RegistroPaciente extends javax.swing.JFrame {
         setIconImage(miIcono);
         SetImageLabel.setImageLabel(LabelIconito, "src\\main\\java\\images\\icon.png");
         SetImageLabel.setImageLabel(LabelFoto, "src\\main\\java\\images\\regFunc.png");
-        
-        
+
         setTitle("Registro de pacientes");
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);  
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
     Conexion cn = new Conexion();
 
@@ -240,7 +238,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
 
     private void botonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistroActionPerformed
 
-        
         String nombre = TextNombre.getText().trim();
         String apellido = TextApellido.getText().trim();
         String domicilio = TextDomicilio.getText().trim();
@@ -251,33 +248,32 @@ public class RegistroPaciente extends javax.swing.JFrame {
         String telCelular = TextCelular.getText().trim();
         String correo = TextCorreo.getText().trim();
         String estadoCivil = TextEstadoCivil.getText().trim();
-        
-        Instant instant = fechaNacimiento.toInstant();
-        LocalDate fecNac = instant.atZone(ZoneId.systemDefault()).toLocalDate();
-        
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaFormateada = formato.format(fechaNacimiento);
+
         pac.setNombre(nombre);
         pac.setApellido(apellido);
         pac.setDomicilio(domicilio);
-        pac.setFecNacimiento(fecNac);
+        pac.setFecNacimiento(fechaFormateada);
         pac.setDni(dni);
         pac.setCorreoElectronico(correo);
         pac.setEstadoCivil(estadoCivil);
         pac.setTelCelular(telCelular);
         pac.setTelFijo(telFijo);
         pac.setPersonaContacto(personaContacto);
-        
 
         String mail = "^[A-Za-z0-9+_.-]+@(.+)$";
         Pattern pattern = Pattern.compile(mail);
         Matcher matcher = pattern.matcher(correo);
 
-        if (fecNac != null && !nombre.isEmpty() && !apellido.isEmpty() && !domicilio.isEmpty() && !dni.isEmpty() && !telFijo.isEmpty() && !telCelular.isEmpty() && !correo.isEmpty() && !personaContacto.isEmpty() && !estadoCivil.isEmpty()) {
+        if (fechaFormateada != null && !nombre.isEmpty() && !apellido.isEmpty() && !domicilio.isEmpty() && !dni.isEmpty() && !telFijo.isEmpty() && !telCelular.isEmpty() && !correo.isEmpty() && !personaContacto.isEmpty() && !estadoCivil.isEmpty()) {
 
             if (matcher.matches()) {
 
                 Connection conex = null;
                 try {
-                    conex = cn.conectar();
+                    conex = Conexion.conectar();
                     //
                     //
                     String query = "SELECT * FROM Pacientes WHERE DNI = ?";
@@ -295,8 +291,8 @@ public class RegistroPaciente extends javax.swing.JFrame {
                         PreparedStatement psi = conex.prepareStatement(insert);
                         //conex.prepareStatement(input);
 
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                        String fechaFormateada = dateFormat.format(fechaNacimiento);
+                       // SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                        //String fechaFormateada = dateFormat.format(fechaNacimiento);
 
                         psi.setString(1, pac.getNombre());
                         psi.setString(2, pac.getApellido());

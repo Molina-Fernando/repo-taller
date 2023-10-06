@@ -1,18 +1,14 @@
 package ventanas;
 
-import dbController.Conexion;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import javax.swing.JOptionPane;
+
 import javax.swing.WindowConstants;
-import java.sql.*;
+
 import dbController.CtrlGestionFuncionarios;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
-
 
 public class GestionFuncionarios extends javax.swing.JFrame {
 
@@ -197,11 +193,11 @@ public class GestionFuncionarios extends javax.swing.JFrame {
         if (numFila != -1) {
             String dnistr = (String) tablaFuncionarios.getValueAt(numFila, 0);
             int dni = Integer.parseInt(dnistr);
-            
+
             dbCtrl.eliminarFuncionario(dni);
             DefaultTableModel model = (DefaultTableModel) tablaFuncionarios.getModel();
             model.removeRow(numFila);
-          
+
         }
     }
 

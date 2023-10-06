@@ -49,7 +49,7 @@ public class Panel1 extends javax.swing.JPanel {
         
         //aca creo que deberia llamarse a la base de datos pero por ahora la carga va a ser manual con muchos atributos
         //PRIMER PACIENTE
-        Paciente p1 = new Paciente("Sebastian","Romero",LocalDate.of(2001, Month.SEPTEMBER, 19),"Chile 2150","43382385","4213544","3454234594","sebas2001@gmail.com","3454803293","SOLTERO");
+        Paciente p1 = new Paciente("Sebastian","Romero"," ","Chile 2150","43382385","4213544","3454234594","sebas2001@gmail.com","3454803293","SOLTERO");
         //Primer estudio
         LocalDate fecha3=LocalDate.of(2021, Month.JANUARY, 20);
         LocalTime hora3=LocalTime.of(23, 50,15);
@@ -78,7 +78,7 @@ public class Panel1 extends javax.swing.JPanel {
         
 
         //SEGUNDO PACIENTE
-        Paciente p2 = new Paciente("Santiago","Nuñez",LocalDate.of(2001, Month.APRIL, 11),"Gregoria Perez","42570987","4233324","3454857219","santicarp@gmail.com","3454803293","CASADO");
+        Paciente p2 = new Paciente("Santiago","Nuñez"," ","Gregoria Perez","42570987","4233324","3454857219","santicarp@gmail.com","3454803293","CASADO");
         
         //Primer estudio
         LocalDate fecha9=LocalDate.of(2018, Month.DECEMBER, 3);
