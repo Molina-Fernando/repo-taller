@@ -4,7 +4,7 @@
  */
 package ventanas;
 
-import clases.Paciente;
+
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import dbController.Conexion;
@@ -47,7 +47,7 @@ public class ListaTriage extends javax.swing.JFrame {
         try {
             conex = cn.conectar();
 
-            String query = "SELECT Nombre, Apellido, DNI FROM Pacientes";
+            String query = "SELECT Nombre, Apellido, DNI FROM ListaTriage";
 
             PreparedStatement psq = conex.prepareStatement(query);
 

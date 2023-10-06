@@ -4,21 +4,17 @@
  */
 package ventanas;
 
-import clases.Administrativo;
+
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.time.Instant;
-import java.time.ZoneId;
 import javax.swing.JOptionPane;
 import java.util.Date;
 import dbController.Conexion;
 import clases.Paciente;
+import dbController.CtrlRegistroPaciente;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -30,7 +26,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
     /**
      * Creates new form RegistroPaciente
      */
-    Paciente pac = new Paciente();
 
     public RegistroPaciente() {
         initComponents();
@@ -44,6 +39,8 @@ public class RegistroPaciente extends javax.swing.JFrame {
 
         setTitle("Registro de pacientes");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        botonRegistro1.setVisible(false);
+        botonLista.setVisible(false);
     }
     Conexion cn = new Conexion();
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -276,105 +273,39 @@ public class RegistroPaciente extends javax.swing.JFrame {
         String telCelular = TextCelular.getText().trim();
         String correo = TextCorreo.getText().trim();
         String estadoCivil = TextEstadoCivil.getText().trim();
-
-  
-        //Instant instant = fechaNacimiento.toInstant();
-        //LocalDate fecNac = instant.atZone(ZoneId.systemDefault()).toLocalDate();
-
         String fechaFormateada = dateFormat.format(fechaNacimiento);
-         
 
-        pac.setNombre(nombre);
-        pac.setApellido(apellido);
-        pac.setDomicilio(domicilio);
-        pac.setFecNacimiento(fechaFormateada);
-        pac.setDni(dni);
-        pac.setCorreoElectronico(correo);
-        pac.setEstadoCivil(estadoCivil);
-        pac.setTelCelular(telCelular);
-        pac.setTelFijo(telFijo);
-        pac.setPersonaContacto(personaContacto);
 
-        String mail = "^[A-Za-z0-9+_.-]+@(.+)$";
-        Pattern pattern = Pattern.compile(mail);
-        Matcher matcher = pattern.matcher(correo);
+        String patronMail = "^[A-Za-z0-9+_.-]+@(.+)$";
+        String patronDNI = "^[0-9]{7,10}$";
+
+        Pattern patternMail = Pattern.compile(patronMail);
+        Matcher matcherMail = patternMail.matcher(correo);
+
+        Pattern patternDNI = Pattern.compile(patronDNI);
+        Matcher matcherDNI = patternDNI.matcher(dni);
+        
 
         if (fechaFormateada != null && !nombre.isEmpty() && !apellido.isEmpty() && !domicilio.isEmpty() && !dni.isEmpty() && !telFijo.isEmpty() && !telCelular.isEmpty() && !correo.isEmpty() && !personaContacto.isEmpty() && !estadoCivil.isEmpty()) {
 
-            if (matcher.matches()) {
-
-                Connection conex = null;
-                try {
-                    conex = Conexion.conectar();
-                    //
-                    //
-                    String query = "SELECT * FROM Pacientes WHERE DNI = ?";
-                    // String input = "INSERT INTO Usuarios VALUES(?,?,?);";
-
-                    // ResultSet rs = .executeQuery();
-                    PreparedStatement psq = conex.prepareStatement(query);
-                    psq.setString(1, dni);
-
-                    ResultSet rs = psq.executeQuery();
-
-                    if (!rs.next()) {
-
-                        String insert = "INSERT INTO Pacientes(Nombre, Apellido, FechaNacimiento, Domicilio, DNI, TelFijo, telCel, EstadoCivil, Mail, personaContacto) VALUES(?,?,?,?,?,?,?,?,?,?);";
-                        PreparedStatement psi = conex.prepareStatement(insert);
-                        //conex.prepareStatement(input);
-
-                        // SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                        //String fechaFormateada = dateFormat.format(fechaNacimiento);
-                        psi.setString(1, pac.getNombre());
-                        psi.setString(2, pac.getApellido());
-                        psi.setString(3, pac.getFecNacimiento());
-                        psi.setString(4, pac.getDomicilio());
-                        psi.setString(5, pac.getDni());
-                        psi.setString(6, pac.getTelFijo());
-                        psi.setString(7, pac.getTelCelular());
-                        psi.setString(8, pac.getEstadoCivil());
-                        psi.setString(9, pac.getCorreoElectronico());
-                        psi.setString(10, pac.getPersonaContacto());
-
-                        psi.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Paciente registrado con éxito.");
-                        TextNombre.setText("");
-                        TextApellido.setText("");
-                        textFechaNac.setDate(null);
-                        TextDomicilio.setText("");
-                        TextDNI.setText("");
-                        TextFijo.setText("");
-                        TextCelular.setText("");
-                        TextEstadoCivil.setText("");
-                        TextCorreo.setText("");
-                        TextPersonaContacto.setText("");
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "DNI ya registrado");
-                        //TO DO: Método que traiga los datos del paciente y los lleve a la esperaTriage
-                        //
-                    }
-
-                    //JOptionPane.showMessageDialog(null, "Usuario registrado con éxito");
-                } catch (SQLException e) {
-                    System.out.println("EXCEP SQL" + e);
-                    JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
-                } finally {
-                    try {
-                        if (conex != null) {
-                            conex.close();
-                        }
-                    } catch (SQLException excSql) {
-                        System.err.println("ERROR SQL" + excSql);
-                    }
+            if (matcherMail.matches()) {
+                
+                if (matcherDNI.matches()) {
+                    
+                    CtrlRegistroPaciente.registrarPacientes(nombre, apellido, domicilio, fechaFormateada, dni, correo, estadoCivil, telCelular, telFijo, personaContacto);
+                    botonLista.setVisible(true);
+       
+                } else {
+                    JOptionPane.showMessageDialog(null, "DNI no válido");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Correo electrónico no válido");
             }
+
         } else {
             JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
 
-        }
+}
 
     }//GEN-LAST:event_botonRegistro1ActionPerformed
 
@@ -417,11 +348,25 @@ public class RegistroPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_TextApellidoActionPerformed
 
     private void botonListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonListaActionPerformed
-        // TODO add your handling code here:
+
+        TextNombre.setText("");
+        TextApellido.setText("");
+        textFechaNac.setDate(null);
+        TextDomicilio.setText("");
+        TextDNI.setText("");
+        TextFijo.setText("");
+        TextCelular.setText("");
+        TextEstadoCivil.setText("");
+        TextCorreo.setText("");
+        TextPersonaContacto.setText("");
+        botonRegistro1.setVisible(false);
+        botonLista.setVisible(false);
+
     }//GEN-LAST:event_botonListaActionPerformed
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         // TODO add your handling code here:
+        if (TextDNI.getText().length() >= 7 && TextDNI.getText().length() <= 8) {
         Connection conex = null;
         try {
             conex = cn.conectar();
@@ -435,21 +380,30 @@ public class RegistroPaciente extends javax.swing.JFrame {
             psq.setString(1, TextDNI.getText());
             ResultSet rs = psq.executeQuery();
 
-            if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "Paciente registrado");
-                String fechaFormateada = rs.getString("FechaNacimiento");
-                Date fecha = dateFormat.parse(fechaFormateada);
-                TextNombre.setText(rs.getString("Nombre"));
-                TextApellido.setText(rs.getString("Apellido"));
-                textFechaNac.setDate(fecha);
-                TextDomicilio.setText(rs.getString("Domicilio"));
-                TextFijo.setText(rs.getString("TelFijo"));
-                TextCelular.setText(rs.getString("telCel"));
-                TextEstadoCivil.setText(rs.getString("EstadoCivil"));
-                TextCorreo.setText(rs.getString("Mail"));
-                TextPersonaContacto.setText(rs.getString("personaContacto"));
+            if (!TextDNI.getText().isEmpty()) {
+
+                if (rs.next()) {
+
+                    JOptionPane.showMessageDialog(null, "Paciente registrado");
+                    botonLista.setVisible(true);
+                    String fechaFormateada = rs.getString("FechaNacimiento");
+                    Date fecha = dateFormat.parse(fechaFormateada);
+                    TextNombre.setText(rs.getString("Nombre"));
+                    TextApellido.setText(rs.getString("Apellido"));
+                    textFechaNac.setDate(fecha);
+                    TextDomicilio.setText(rs.getString("Domicilio"));
+                    TextFijo.setText(rs.getString("TelFijo"));
+                    TextCelular.setText(rs.getString("telCel"));
+                    TextEstadoCivil.setText(rs.getString("EstadoCivil"));
+                    TextCorreo.setText(rs.getString("Mail"));
+                    TextPersonaContacto.setText(rs.getString("personaContacto"));
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Paciente no registrado, complete sus datos.");
+                    botonRegistro1.setVisible(true);
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "Paciente no registrado, complete sus datos.");
+                JOptionPane.showMessageDialog(null, "Debe completar el campo del DNI");
             }
         } catch (SQLException e) {
             System.out.println("EXCEP SQL" + e);
@@ -464,6 +418,9 @@ public class RegistroPaciente extends javax.swing.JFrame {
             } catch (SQLException excSql) {
                 System.err.println("ERROR SQL" + excSql);
             }
+        }
+        } else {
+                    JOptionPane.showMessageDialog(null, "El DNI debe tener entre 7 y 8 caracteres");
         }
     }//GEN-LAST:event_botonBuscarActionPerformed
 

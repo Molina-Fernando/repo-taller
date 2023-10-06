@@ -20,7 +20,6 @@ public class MedicoTriage extends javax.swing.JFrame {
     private String motivoCambio;
     Map<String, Color> colores = new HashMap<>();
     private Medico med;
-    ListaTriage datosTabla = new ListaTriage();
     
     public MedicoTriage() {
         
