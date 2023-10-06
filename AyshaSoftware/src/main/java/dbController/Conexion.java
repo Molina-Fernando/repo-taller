@@ -1,12 +1,13 @@
-package clases;
+package dbController;
+
 
 import java.sql.*;
 
 public class Conexion {
 
-    Connection conectar = null;
+    static Connection conectar = null;
 
-    public Connection conectar() {
+    public static Connection conectar() {
 
         try {
             Class.forName("org.sqlite.JDBC");

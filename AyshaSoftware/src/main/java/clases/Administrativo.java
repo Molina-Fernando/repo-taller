@@ -2,7 +2,7 @@ package clases;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import ventanas.ListaTriage;
+
 
 public class Administrativo extends Funcionario {
 

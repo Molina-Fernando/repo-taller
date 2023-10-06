@@ -2,11 +2,8 @@ package ventanas;
 
 import java.awt.Image;
 import java.awt.Toolkit;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import java.sql.*;
-import clases.Conexion;
+import dbController.Conexion;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
@@ -17,9 +14,9 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         this.setLocationRelativeTo(this);
-        SetImageLabel(labelImagen, "src\\main\\java\\images\\LogoAysha.png");
-        SetImageLabel(labelUser, "src\\main\\java\\images\\user.png");
-        SetImageLabel(labelPass, "src\\main\\java\\images\\pass.png");
+        SetImageLabel.setImageLabel(labelImagen, "src\\main\\java\\images\\LogoAysha.png");
+        SetImageLabel.setImageLabel(labelUser, "src\\main\\java\\images\\user.png");
+        SetImageLabel.setImageLabel(labelPass, "src\\main\\java\\images\\pass.png");
         setVisible(true);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -148,6 +145,9 @@ public class Login extends javax.swing.JFrame {
 
                 ResultSet rs = preparedStatement.executeQuery();
 
+                /*
+                    TO DO: Modificar roles, en base a lo último hecho en Alta Funcionarios desde el panel del adminiInformatico. 
+                */
                 if (rs.next()) {
                     String nivelAcceso = rs.getString("NivelAcceso");
 
@@ -221,14 +221,6 @@ public class Login extends javax.swing.JFrame {
                 new Login().setVisible(true);
             }
         });
-    }
-
-    private void SetImageLabel(JLabel jLabel1, String root) {
-        ImageIcon image = new ImageIcon(root);
-        Icon icon = new ImageIcon(
-                image.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
-        jLabel1.setIcon(icon);
-        this.repaint();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,7 +1,7 @@
 
 package ventanas;
 
-import clases.Conexion;
+import dbController.Conexion;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.*;
@@ -10,9 +10,6 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 
@@ -24,10 +21,10 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Registro de Funcionarios");
-        SetImageLabel(jLabelIconito, "src\\main\\java\\images\\icon.png");
+        SetImageLabel.setImageLabel(jLabelIconito, "src\\main\\java\\images\\icon.png");
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
-        SetImageLabel(jLabel12, "src\\main\\java\\images\\regFunc.png");
+        SetImageLabel.setImageLabel(jLabel12, "src\\main\\java\\images\\regFunc.png");
         setIconImage(miIcono);
     }
 
@@ -310,17 +307,6 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         }
     }*/
 
-    private void SetImageLabel(JLabel jLabel1, String root) {
-        ImageIcon image = new ImageIcon(root);
-        Icon icon = new ImageIcon(
-                image.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
-        jLabel1.setIcon(icon);
-        this.repaint();
-    }
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
