@@ -21,7 +21,9 @@ ventanas\panelesmedicos\Panel3.class
 ventanas\ListaTriage.class
 clases\Funcionario.class
 ventanas\MedicoTriage$3.class
+dbController\Conexion.class
 clases\Especialidad.class
+main\Principal.class
 ventanas\RegistroFuncionarios.class
 clases\Enfermero.class
 clases\Rol.class
@@ -43,8 +45,8 @@ ventanas\MedicoSala$4.class
 clases\Administrativo.class
 clases\ProfesionalSanitario.class
 ventanas\MedicoTriage$5.class
+ventanas\GestionFuncionarios$7.class
 ventanas\panelesmedicos\Panel2.class
-clases\Conexion.class
 ventanas\MedicoSala$1.class
 ventanas\Admision$1.class
 ventanas\MedicoTriage$14.class
@@ -62,6 +64,7 @@ ventanas\MedicoTriage$13.class
 ventanas\panelesmedicos\Panel2$1.class
 clases\Persona.class
 ventanas\RegistroPaciente$2.class
+ventanas\SetImageLabel.class
 clases\Box.class
 ventanas\Login$4.class
 ventanas\panelesmedicos\Panel1.class
@@ -71,7 +74,6 @@ clases\Lugares.class
 ventanas\MedicoTriage$7.class
 clases\Consulta.class
 ventanas\MedicoTriage.class
-clases\Principal.class
 clases\Sector.class
 ventanas\MedicoTriage$12.class
 ventanas\MedicoSala.class
@@ -80,3 +82,4 @@ clases\Estudio.class
 ventanas\MedicoTriage$6.class
 ventanas\MedicoSala$2.class
 ventanas\Funcionario$1.class
+dbController\CtrlGestionFuncionarios.class

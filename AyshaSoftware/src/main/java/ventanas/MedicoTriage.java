@@ -7,9 +7,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.HashMap;
 import java.util.Map;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+
 import javax.swing.JOptionPane;
 
 public class MedicoTriage extends javax.swing.JFrame {
@@ -37,7 +35,7 @@ public class MedicoTriage extends javax.swing.JFrame {
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
         setIconImage(miIcono);
-        SetImageLabel(LabelIconito, "src\\main\\java\\images\\icon.png");
+        SetImageLabel.setImageLabel(LabelIconito, "src\\main\\java\\images\\icon.png");
         setTitle("Triage");
         med = new Medico();
 
@@ -803,13 +801,6 @@ public class MedicoTriage extends javax.swing.JFrame {
     private javax.swing.JDialog ventanaEmergente;
     // End of variables declaration//GEN-END:variables
 
-    private void SetImageLabel(JLabel jLabel1, String root) {
-        ImageIcon image = new ImageIcon(root);
-        Icon icon = new ImageIcon(
-                image.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
-        jLabel1.setIcon(icon);
-        this.repaint();
-    }
 
     public int getI1() {
         return i1;

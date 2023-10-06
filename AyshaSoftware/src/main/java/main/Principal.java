@@ -1,5 +1,6 @@
-package clases;
+package main;
 
+import dbController.Conexion;
 import java.sql.*;
 import ventanas.Login;
 
