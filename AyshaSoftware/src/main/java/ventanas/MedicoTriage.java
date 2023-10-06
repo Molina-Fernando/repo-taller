@@ -1,7 +1,6 @@
 package ventanas;
 
 import clases.Medico;
-import ventanas.ListaTriage;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
