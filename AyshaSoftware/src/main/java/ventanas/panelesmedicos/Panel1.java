@@ -16,10 +16,6 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author joaqu
- */
 public class Panel1 extends javax.swing.JPanel {
         
     ArrayList<Paciente> listaPacientes = new ArrayList<>();
@@ -253,7 +249,7 @@ public class Panel1 extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 28, Short.MAX_VALUE))
+                .addGap(0, 16, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(199, 199, 199)
                 .addComponent(jLabel2)
@@ -276,7 +272,7 @@ public class Panel1 extends javax.swing.JPanel {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
         );
@@ -285,28 +281,19 @@ public class Panel1 extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(17, 17, 17))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void SeleccionPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeleccionPacienteActionPerformed
-        try{
-            if (boxElegido.isDisponible()){
-                boxes[boxElegido.getNumero()].setDisponible(false);
-                //recargarPanel metodo para actualizar lista
-                //elegido tal cosa como que se pase a los paneles correspondientes.                
-            }
-
-            
-        }catch(NullPointerException e){
-            JOptionPane.showMessageDialog(null, "No fue posible asignar box, falto seleccionar paciente o box", "Error", JOptionPane.ERROR_MESSAGE);
-       
-        }
-    }//GEN-LAST:event_SeleccionPacienteActionPerformed
 
     private void tablaPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPacientesMouseClicked
         int seleccion = tablaPacientes.rowAtPoint(evt.getPoint());
@@ -322,6 +309,20 @@ public class Panel1 extends javax.swing.JPanel {
         boolean disponibilidad=Boolean.parseBoolean((String) tablaBoxes.getValueAt(seleccion, 1));
         boxElegido=new Box(disponibilidad,numero);
     }//GEN-LAST:event_tablaBoxesMouseClicked
+
+    private void SeleccionPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeleccionPacienteActionPerformed
+        try{
+            if (boxElegido.isDisponible()){
+                boxes[boxElegido.getNumero()].setDisponible(false);
+                //recargarPanel metodo para actualizar lista
+                //elegido tal cosa como que se pase a los paneles correspondientes.
+            }
+
+        }catch(NullPointerException e){
+            JOptionPane.showMessageDialog(null, "No fue posible asignar box, falto seleccionar paciente o box", "Error", JOptionPane.ERROR_MESSAGE);
+
+        }
+    }//GEN-LAST:event_SeleccionPacienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

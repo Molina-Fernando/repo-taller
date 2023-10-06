@@ -3,9 +3,7 @@ package ventanas;
 
 import java.awt.Image;
 import java.awt.Toolkit;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+
 
 
 public class RRHH extends javax.swing.JFrame {
@@ -17,21 +15,14 @@ public class RRHH extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Recursos Humanos");
-        SetImageLabel(labelUsuarios, "src\\main\\java\\images\\regFunc.png");
+        SetImageLabel.setImageLabel(labelUsuarios, "src\\main\\java\\images\\regFunc.png");
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
         setIconImage(miIcono);
-        SetImageLabel(jLabelIconito, "src\\main\\java\\images\\icon.png");
+        SetImageLabel.setImageLabel(jLabelIconito, "src\\main\\java\\images\\icon.png");
         
     }
 
-        private void SetImageLabel(JLabel jLabel1, String root) {
-        ImageIcon image = new ImageIcon(root);
-        Icon icon = new ImageIcon(
-                image.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
-        jLabel1.setIcon(icon);
-        this.repaint();
-    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

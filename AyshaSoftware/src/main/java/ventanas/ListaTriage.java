@@ -7,21 +7,13 @@ package ventanas;
 import clases.Paciente;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
-import clases.Conexion;
+import dbController.Conexion;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
-/**
- *
- * @author Jeremías Simian
- */
+
 public class ListaTriage extends javax.swing.JFrame {
     /**
      * Creates new form ListaTriage
@@ -37,7 +29,7 @@ public class ListaTriage extends javax.swing.JFrame {
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
         setIconImage(miIcono);
-        SetImageLabel(LabelIconito, "src\\main\\java\\images\\icon.png");
+        SetImageLabel.setImageLabel(LabelIconito, "src\\main\\java\\images\\icon.png");
         setTitle("Lista para Triage");
         modelo.addColumn("Nombre");
         modelo.addColumn("Apellido");
@@ -203,13 +195,6 @@ public class ListaTriage extends javax.swing.JFrame {
                 new ListaTriage().setVisible(true);
             }
         });
-    }
-     private void SetImageLabel(JLabel jLabel1, String root) {
-        ImageIcon image = new ImageIcon(root);
-        Icon icon = new ImageIcon(
-                image.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
-        jLabel1.setIcon(icon);
-        this.repaint();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
