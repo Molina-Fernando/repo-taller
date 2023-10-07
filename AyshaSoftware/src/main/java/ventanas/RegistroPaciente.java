@@ -163,7 +163,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
                 botonRegistro1ActionPerformed(evt);
             }
         });
-        jPanel1.add(botonRegistro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 180, 30));
+        jPanel1.add(botonRegistro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 190, 30));
 
         TextNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,7 +221,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
                 botonListaActionPerformed(evt);
             }
         });
-        jPanel1.add(botonLista, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, 150, 30));
+        jPanel1.add(botonLista, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 430, 160, 30));
 
         botonBuscar.setBackground(new java.awt.Color(0, 0, 153));
         botonBuscar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -255,7 +255,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
 
 
     private void botonRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistro1ActionPerformed
-
+        String fechaFormateada = null;
         String nombre = TextNombre.getText().trim();
         String apellido = TextApellido.getText().trim();
         String domicilio = TextDomicilio.getText().trim();
@@ -266,7 +266,9 @@ public class RegistroPaciente extends javax.swing.JFrame {
         String telCelular = TextCelular.getText().trim();
         String correo = TextCorreo.getText().trim();
         String estadoCivil = TextEstadoCivil.getText().trim();
-        String fechaFormateada = dateFormat.format(fechaNacimiento);
+        if (fechaNacimiento != null) {
+            fechaFormateada = dateFormat.format(fechaNacimiento);
+        }
 
         String patronMail = "^[A-Za-z0-9+_.-]+@(.+)$";
         String patronDNI = "^[0-9]{7,10}$";
@@ -350,22 +352,23 @@ public class RegistroPaciente extends javax.swing.JFrame {
         TextEstadoCivil.setText("");
         TextCorreo.setText("");
         TextPersonaContacto.setText("");
+
         botonRegistro1.setVisible(false);
         botonLista.setVisible(false);
 
+
     }//GEN-LAST:event_botonListaActionPerformed
- 
+
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         // TODO add your handling code here:
         String dni = TextDNI.getText();
-
+       
         String patronDNI = "^[0-9]{7,10}$";
 
         Pattern patternDNI = Pattern.compile(patronDNI);
         Matcher matcherDNI = patternDNI.matcher(dni);
 
         if (matcherDNI.matches()) {
-
             CtrlRegistroPaciente.buscarPaciente(dni, botonRegistro1, botonLista, TextNombre, TextApellido, TextDomicilio, TextFijo, TextCelular, TextEstadoCivil, TextCorreo, TextPersonaContacto, textFechaNac);
 
         } else {

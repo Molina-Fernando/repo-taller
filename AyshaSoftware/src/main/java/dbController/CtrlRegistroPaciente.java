@@ -17,6 +17,8 @@ import javax.swing.JTextField;
 import ventanas.RegistroPaciente;
 
 public class CtrlRegistroPaciente {
+    
+    private static Paciente pac = new Paciente();
 
     public static void registrarPacientes(String nombre,
             String apellido,
@@ -29,14 +31,14 @@ public class CtrlRegistroPaciente {
             String telFijo,
             String personaContacto) {
 
-        Paciente pac = new Paciente();
+        
         pac.setNombre(nombre);
         pac.setApellido(apellido);
         pac.setDomicilio(domicilio);
         pac.setFecNacimiento(fechaFormateada);
         pac.setDni(dni);
         pac.setCorreoElectronico(correo);
-        pac.setEstadoCivil(estadoCivil);
+        pac.setEstadoCivil(estadoCivil); 
         pac.setTelCelular(telCelular);
         pac.setTelFijo(telFijo);
         pac.setPersonaContacto(personaContacto);
@@ -86,36 +88,48 @@ public class CtrlRegistroPaciente {
         }
     }
 
-    public static void buscarPaciente(String dni, JButton botonRegistro, JButton botonLista, JTextField nombre, JTextField apellido, JTextField domicilio, JTextField telFijo, JTextField telCel, JTextField estadoCivil, JTextField mail, JTextField personaContacto, JDateChooser fecNac) {
+    public static void buscarPaciente(String dni, JButton botonRegistro, JButton botonLista, JTextField Textnombre, JTextField Textapellido, JTextField Textdomicilio, JTextField TexttelFijo, JTextField TexttelCel, JTextField TextestadoCivil, JTextField Textmail, JTextField TextpersonaContacto, JDateChooser TextfecNac) {
+        
+        
+        pac.setDni(dni);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Connection conex = null;
         try {
             conex = Conexion.conectar();
-            //
-            //
-            String query = "SELECT * FROM Pacientes WHERE DNI = ?";
-            // String input = "INSERT INTO Usuarios VALUES(?,?,?);";
 
-            // ResultSet rs = .executeQuery();
+            String query = "SELECT * FROM Pacientes WHERE DNI = ?";
+
             PreparedStatement psq = conex.prepareStatement(query);
             psq.setString(1, dni);
             ResultSet rs = psq.executeQuery();
-
+            
             if (rs.next()) {
-              
-                 JOptionPane.showMessageDialog(null, "Paciente registrado");
+                    String nombre = rs.getString(1);
+                    String apellido = rs.getString(2);
+                    pac.setNombre(nombre);
+                    pac.setApellido(apellido);
+                    String listaEspera = "INSERT INTO ListaTriage(Nombre, Apellido, DNI) VALUES(?,?,?);";
+                    PreparedStatement psi1 = conex.prepareStatement(listaEspera);
+                    
+                     psi1.setString(1, pac.getNombre());
+                     psi1.setString(2, pac.getApellido());
+                     psi1.setString(3, pac.getDni());
+                     psi1.executeUpdate();
+                     
+                    JOptionPane.showMessageDialog(null, "Paciente registrado");
                     botonLista.setVisible(true);
                     String fechaFormateada = rs.getString("FechaNacimiento");
                     Date fecha = dateFormat.parse(fechaFormateada);
-                    nombre.setText(rs.getString("Nombre"));
-                    apellido.setText(rs.getString("Apellido"));
-                    fecNac.setDate(fecha);
-                    domicilio.setText(rs.getString("Domicilio"));
-                    telFijo.setText(rs.getString("TelFijo"));
-                    telCel.setText(rs.getString("telCel"));
-                    estadoCivil.setText(rs.getString("EstadoCivil"));
-                    mail.setText(rs.getString("Mail"));
-                    personaContacto.setText(rs.getString("personaContacto"));
+                    Textnombre.setText(rs.getString("Nombre"));
+                    Textapellido.setText(rs.getString("Apellido"));
+                    TextfecNac.setDate(fecha);
+                    Textdomicilio.setText(rs.getString("Domicilio"));
+                    TexttelFijo.setText(rs.getString("TelFijo"));
+                    TexttelCel.setText(rs.getString("telCel"));
+                    TextestadoCivil.setText(rs.getString("EstadoCivil"));
+                    Textmail.setText(rs.getString("Mail"));
+                    TextpersonaContacto.setText(rs.getString("personaContacto"));
+                    
 
             } else {
                 JOptionPane.showMessageDialog(null, "Paciente no registrado, complete sus datos.");

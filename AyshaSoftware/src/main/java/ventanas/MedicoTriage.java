@@ -646,7 +646,7 @@ public class MedicoTriage extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox13ActionPerformed
 
     private void BotonTriagiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonTriagiarActionPerformed
-        //FALTA HACER ENFERMERo
+
         mapeoDeColores();
         this.color = colores.get(med.realizarTriage(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13));
         PanelEmergente.setBackground(color);
