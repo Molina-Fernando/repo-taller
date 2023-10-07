@@ -13,14 +13,18 @@ public class Medico extends Funcionario implements ProfesionalSanitario {
     public Medico() {
     }
     
+    public Medico(Medico med, String rol, String sector){
+        
+    }
+    
     Triage triage = new Triage();
     
-    public Medico(String nombre, String apellido, LocalDate fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, String user, String password, int matricula, String estadoCivil) {
+    public Medico(String nombre, String apellido, String fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, String user, String password, int matricula, String estadoCivil) {
         super(nombre, apellido, fecNacimiento, domicilio, dni, telFijo, telCelular, correoElectronico, user, password, estadoCivil);
         this.numMatricula = matricula;
     }
 
-    public Medico(String nombre, String apellido, LocalDate fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, String user, String password, int matricula, Especialidad especialidad, String estadoCivil) {
+    public Medico(String nombre, String apellido, String fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, String user, String password, int matricula, Especialidad especialidad, String estadoCivil) {
         super(nombre, apellido, fecNacimiento, domicilio, dni, telFijo, telCelular, correoElectronico, user, password, estadoCivil);
         this.numMatricula = matricula;
         setEspecialidad(especialidad);

@@ -18,6 +18,7 @@ ventanas\RegistroFuncionarios$2.class
 ventanas\RRHH.class
 clases\Registro.class
 ventanas\panelesmedicos\Panel3.class
+dbController\CtrlRegistroPaciente.class
 ventanas\ListaTriage.class
 clases\Funcionario.class
 ventanas\MedicoTriage$3.class
@@ -29,6 +30,7 @@ clases\Enfermero.class
 clases\Rol.class
 ventanas\AdminInformatico.class
 ventanas\RegistroFuncionarios$3.class
+dbController\CtrlRegistroFuncionarios.class
 ventanas\MedicoTriage$10.class
 ventanas\MedicoTriage$9.class
 ventanas\MedicoSala$5.class

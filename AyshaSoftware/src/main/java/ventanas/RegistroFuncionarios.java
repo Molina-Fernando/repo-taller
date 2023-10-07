@@ -1,17 +1,14 @@
-
 package ventanas;
 
-import dbController.Conexion;
+import dbController.CtrlRegistroFuncionarios;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
-
 
 public class RegistroFuncionarios extends javax.swing.JFrame {
 
@@ -27,8 +24,6 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         SetImageLabel.setImageLabel(jLabel12, "src\\main\\java\\images\\regFunc.png");
         setIconImage(miIcono);
     }
-
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -190,8 +185,6 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botonEditarActionPerformed
 
-    Conexion cn = new Conexion();
-    
     private void botonAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregar1ActionPerformed
         String nombre = textNombre.getText().trim();
         String apellido = textApellido.getText().trim();
@@ -202,11 +195,15 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         String telCelular = textCel.getText().trim();
         String estadoCivil = textEstadoCivil.getText().trim();
         String correoElectronico = textMail.getText().trim();
-        
 
-        String mail = "^[A-Za-z0-9+_.-]+@(.+)$";
-        Pattern pattern = Pattern.compile(mail);
-        Matcher matcher = pattern.matcher(correoElectronico);
+        String patronMail = "^[A-Za-z0-9+_.-]+@(.+)$";
+        String patronDNI = "^[0-9]{7,10}$";
+
+        Pattern patternMail = Pattern.compile(patronMail);
+        Matcher matcherMail = patternMail.matcher(correoElectronico);
+
+        Pattern patternDNI = Pattern.compile(patronDNI);
+        Matcher matcherDNI = patternDNI.matcher(dni);
 
         if (!nombre.isEmpty()
                 && !apellido.isEmpty()
@@ -218,65 +215,28 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
                 && !estadoCivil.isEmpty()
                 && !correoElectronico.isEmpty()) {
 
-            if (matcher.matches()) {
+            if (matcherMail.matches()) {
 
-                Connection conex = null;
-                try {
-                    conex = cn.conectar();
-                 
-                    String query = "SELECT * FROM Funcionarios WHERE DNI = ?";
-                 
-                    PreparedStatement psq = conex.prepareStatement(query);
-                    psq.setString(1, dni);
+                if (matcherDNI.matches()) {
 
-                    ResultSet rs = psq.executeQuery();
+                    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                    String fechaFormateada = formato.format(fechaNacimiento);
 
-                    if (!rs.next()) {
+                    CtrlRegistroFuncionarios.registrarFuncionario(nombre, apellido, fechaFormateada, domicilio, dni, telFijo, telCelular, estadoCivil, correoElectronico);
 
-                        String insert = "INSERT INTO Funcionarios(Nombre, Apellido, FechaNacimiento, Domicilio, DNI, TelFijo, telCel, EstadoCivil, Mail) VALUES(?,?,?,?,?,?,?,?,?);";
-                        PreparedStatement psi = conex.prepareStatement(insert);
-
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                        String fechaFormateada = dateFormat.format(fechaNacimiento);
-
-                        psi.setString(1, nombre);
-                        psi.setString(2, apellido);
-                        psi.setString(3, fechaFormateada);
-                        psi.setString(4, domicilio);
-                        psi.setString(5, dni);
-                        psi.setString(6, telFijo);
-                        psi.setString(7, telCelular);
-                        psi.setString(8, correoElectronico);
-                        psi.setString(9, estadoCivil);
-
-                        psi.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Usuario registrado con éxito - Recuerde que un informático deberá validar el usuario para su posterior ingreso al sistema.");
-                        textNombre.setText("");
-                        textApellido.setText("");
-                        dcFechaNac.setDate(null);
-                        textDomicilio.setText("");
-                        textDNI.setText("");
-                        textFijo.setText("");
-                        textCel.setText("");
-                        textEstadoCivil.setText("");
-                        textMail.setText("");
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "DNI ya registrado");
-                    }
-
-                } catch (SQLException e) {
-                    System.out.println("EXCEP SQL" + e);
-                    JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
-                } finally {
-                    try {
-                        if (conex != null) {
-                            conex.close();
-                        }
-                    } catch (SQLException excSql) {
-                        System.err.println("ERROR SQL" + excSql);
-                    }
+                    textNombre.setText("");
+                    textApellido.setText("");
+                    dcFechaNac.setDate(null);
+                    textDomicilio.setText("");
+                    textDNI.setText("");
+                    textFijo.setText("");
+                    textCel.setText("");
+                    textEstadoCivil.setText("");
+                    textMail.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(null, "DNI no válido");
                 }
+
             } else {
                 JOptionPane.showMessageDialog(null, "Correo electrónico no válido");
             }
@@ -293,7 +253,7 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
     private void textNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textNombreActionPerformed
- /*   private void buscarFuncionario(String dni) {
+    /*   private void buscarFuncionario(String dni) {
         String query = "SELECT * FROM Funcionarios WHERE DNI = ?";
         Connection conex = null;
         try {
