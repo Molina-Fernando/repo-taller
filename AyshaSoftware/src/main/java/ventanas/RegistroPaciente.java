@@ -4,19 +4,13 @@
  */
 package ventanas;
 
-
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import java.util.Date;
 import dbController.Conexion;
-import clases.Paciente;
 import dbController.CtrlRegistroPaciente;
-import java.sql.*;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.WindowConstants;
@@ -26,7 +20,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
     /**
      * Creates new form RegistroPaciente
      */
-
     public RegistroPaciente() {
         initComponents();
         setLocationRelativeTo(null);
@@ -170,7 +163,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
                 botonRegistro1ActionPerformed(evt);
             }
         });
-        jPanel1.add(botonRegistro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 430, 200, 30));
+        jPanel1.add(botonRegistro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 180, 30));
 
         TextNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,7 +221,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
                 botonListaActionPerformed(evt);
             }
         });
-        jPanel1.add(botonLista, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 430, 150, 30));
+        jPanel1.add(botonLista, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, 150, 30));
 
         botonBuscar.setBackground(new java.awt.Color(0, 0, 153));
         botonBuscar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -239,7 +232,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
                 botonBuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(botonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 430, 90, 30));
+        jPanel1.add(botonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 430, 90, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -275,7 +268,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
         String estadoCivil = TextEstadoCivil.getText().trim();
         String fechaFormateada = dateFormat.format(fechaNacimiento);
 
-
         String patronMail = "^[A-Za-z0-9+_.-]+@(.+)$";
         String patronDNI = "^[0-9]{7,10}$";
 
@@ -284,17 +276,16 @@ public class RegistroPaciente extends javax.swing.JFrame {
 
         Pattern patternDNI = Pattern.compile(patronDNI);
         Matcher matcherDNI = patternDNI.matcher(dni);
-        
 
         if (fechaFormateada != null && !nombre.isEmpty() && !apellido.isEmpty() && !domicilio.isEmpty() && !dni.isEmpty() && !telFijo.isEmpty() && !telCelular.isEmpty() && !correo.isEmpty() && !personaContacto.isEmpty() && !estadoCivil.isEmpty()) {
 
             if (matcherMail.matches()) {
-                
+
                 if (matcherDNI.matches()) {
-                    
+
                     CtrlRegistroPaciente.registrarPacientes(nombre, apellido, domicilio, fechaFormateada, dni, correo, estadoCivil, telCelular, telFijo, personaContacto);
                     botonLista.setVisible(true);
-       
+
                 } else {
                     JOptionPane.showMessageDialog(null, "DNI no válido");
                 }
@@ -305,7 +296,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
 
-}
+        }
 
     }//GEN-LAST:event_botonRegistro1ActionPerformed
 
@@ -363,64 +354,22 @@ public class RegistroPaciente extends javax.swing.JFrame {
         botonLista.setVisible(false);
 
     }//GEN-LAST:event_botonListaActionPerformed
-
+ 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         // TODO add your handling code here:
-        if (TextDNI.getText().length() >= 7 && TextDNI.getText().length() <= 8) {
-        Connection conex = null;
-        try {
-            conex = cn.conectar();
-            //
-            //
-            String query = "SELECT * FROM Pacientes WHERE DNI = ?";
-            // String input = "INSERT INTO Usuarios VALUES(?,?,?);";
+        String dni = TextDNI.getText();
 
-            // ResultSet rs = .executeQuery();
-            PreparedStatement psq = conex.prepareStatement(query);
-            psq.setString(1, TextDNI.getText());
-            ResultSet rs = psq.executeQuery();
+        String patronDNI = "^[0-9]{7,10}$";
 
-            if (!TextDNI.getText().isEmpty()) {
+        Pattern patternDNI = Pattern.compile(patronDNI);
+        Matcher matcherDNI = patternDNI.matcher(dni);
 
-                if (rs.next()) {
+        if (matcherDNI.matches()) {
 
-                    JOptionPane.showMessageDialog(null, "Paciente registrado");
-                    botonLista.setVisible(true);
-                    String fechaFormateada = rs.getString("FechaNacimiento");
-                    Date fecha = dateFormat.parse(fechaFormateada);
-                    TextNombre.setText(rs.getString("Nombre"));
-                    TextApellido.setText(rs.getString("Apellido"));
-                    textFechaNac.setDate(fecha);
-                    TextDomicilio.setText(rs.getString("Domicilio"));
-                    TextFijo.setText(rs.getString("TelFijo"));
-                    TextCelular.setText(rs.getString("telCel"));
-                    TextEstadoCivil.setText(rs.getString("EstadoCivil"));
-                    TextCorreo.setText(rs.getString("Mail"));
-                    TextPersonaContacto.setText(rs.getString("personaContacto"));
+            CtrlRegistroPaciente.buscarPaciente(dni, botonRegistro1, botonLista, TextNombre, TextApellido, TextDomicilio, TextFijo, TextCelular, TextEstadoCivil, TextCorreo, TextPersonaContacto, textFechaNac);
 
-                } else {
-                    JOptionPane.showMessageDialog(null, "Paciente no registrado, complete sus datos.");
-                    botonRegistro1.setVisible(true);
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Debe completar el campo del DNI");
-            }
-        } catch (SQLException e) {
-            System.out.println("EXCEP SQL" + e);
-            JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
-        } catch (ParseException ex) {
-            Logger.getLogger(RegistroPaciente.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                if (conex != null) {
-                    conex.close();
-                }
-            } catch (SQLException excSql) {
-                System.err.println("ERROR SQL" + excSql);
-            }
-        }
         } else {
-                    JOptionPane.showMessageDialog(null, "El DNI debe tener entre 7 y 8 caracteres");
+            JOptionPane.showMessageDialog(null, "El DNI no es válido");
         }
     }//GEN-LAST:event_botonBuscarActionPerformed
 
