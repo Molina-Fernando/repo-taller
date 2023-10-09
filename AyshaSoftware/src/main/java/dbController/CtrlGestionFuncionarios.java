@@ -6,15 +6,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
-import clases.AdminSistemas;
-import clases.Administrativo;
-import clases.Medico;
+//import clases.AdminSistemas;
+//import clases.Administrativo;
+//import clases.Medico;
+//import clases.Rol;
+//import clases.Sector;
 
 
 
 public class CtrlGestionFuncionarios {
     
-    public void instanciarFuncionario(int dni, String selectedOption, String selectedOption2, String nomDB, int dniDB){
+    /*public void instanciarFuncionario(int dni, String selectedOption, String selectedOption2, String nomDB, int dniDB){
         switch(selectedOption){
             case "MedicoTriage" :
                 Medico medicoTriage = new Medico();
@@ -33,7 +35,7 @@ public class CtrlGestionFuncionarios {
                 Administrativo administrativo = new Administrativo();
                 break;
         }
-    }
+    }*/
 
     public ArrayList<Object[]> getTablaFuncionarios(int dniDB, String nomDB) {
         ArrayList<Object[]> arrayListDeVectores = new ArrayList<>();
@@ -136,7 +138,7 @@ public class CtrlGestionFuncionarios {
             generarUsuario(selectedOption, selectedOption2, nomDB, dniDB);
     }
     
-    public void altaMedico(int dni, String selectedOption, String selectedOption2, String nomDB, int dniDB, Medico medico){
+    /*public void altaMedico(int dni, String selectedOption, String selectedOption2, String nomDB, int dniDB, Medico medico){
         Connection conex = null;
             try {
                 conex = Conexion.conectar();
@@ -148,8 +150,13 @@ public class CtrlGestionFuncionarios {
                 if (rs.next()) {
                     String update = "UPDATE Funcionarios SET Rol = ?, Sector = ? WHERE DNI = ?;";
                     PreparedStatement psi = conex.prepareStatement(update);
-                   // psi.setString(1, medico.setRol(selectedOption));
-                    psi.setString(2, selectedOption2);
+                   // 
+                    Rol rol = new Rol(selectedOption);
+                    String rolDB = rol.getNombreRol();
+                    psi.setString(1, rolDB);
+                    Sector sector = new Sector(selectedOption2);
+                    String sectorDB = sector.getSector();
+                    psi.setString(2, sectorDB);
                     psi.setInt(3, dni);
                     psi.executeUpdate();
                     //actualizarTabla();
@@ -169,15 +176,15 @@ public class CtrlGestionFuncionarios {
             
             generarUsuario(selectedOption, selectedOption2, nomDB, dniDB);
         
-    }
+    }*/
     
-    public void altaAdministrativo(){
+    /*public void altaAdministrativo(){
         
     }
     
     public void altaAdminInformatica(){
         
-    }
+    }*/
     
     private String generarContrasenia(String nombre, int dni) {
 
