@@ -32,77 +32,77 @@ public class Panel2 extends javax.swing.JPanel {
      */
     public Panel2() {
         initComponents();
-        cargarDatos();
+        //cargarDatos();
         
     }
-    public void cargarDatos(){
-        
-        //CARGA MANUAL DE REGISTROS Y ESTUDIOS A AMBAS TABLAS SIN LÖGICA DE BASE DE DATOS 
-        //MUCHO DE ESTO SE HACE EN OTRO LADO
-
-        
-        
-        //CARGA DE REGISTROS
-        LocalDate fecha=LocalDate.of(2023, Month.JANUARY, 21);
-        LocalTime hora=LocalTime.of(23, 50);
-        Lugares lugar=Lugares.EMERGENCIA;
-        Registro reg=new Registro(fecha,hora,"Presenta apnea del sueño",lugar);
-
-        LocalDate fecha1=LocalDate.of(2023, Month.APRIL, 15);
-        LocalTime hora1=LocalTime.of(10, 10);
-        Lugares lugar1=Lugares.CONSULTORIO;
-        Registro reg1=new Registro(fecha1,hora1,"Presenta fibromialgia",lugar1);
-        
-        lista.add(reg);
-        lista.add(reg1);
-        
-        modelo.addColumn("Fecha");
-        modelo.addColumn("Lugar");
-        tablaRegistros.setModel(modelo);
-        
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Define el formato deseado
-        
-        
-        for (Registro registro : lista){
-            String fechaFormateada = registro.getFecha().format(formato);
-            String lugarFormateado = String.valueOf(registro.getLugares());
-            String[]cosas={fechaFormateada,lugarFormateado};
-            modelo.addRow(cosas);
-        }
-        
-        tablaRegistros.setModel(modelo);
-        
-        //CARGA DE ESTUDIOS
-        LocalDate fecha3=LocalDate.of(2023, Month.JANUARY, 21);
-        LocalTime hora3=LocalTime.of(23, 50);
-        Estudio es =new Estudio(fecha3,hora3,"Espirometría","Positivo");
-
-        LocalDate fecha4=LocalDate.of(2023, Month.APRIL, 15);
-        LocalTime hora4=LocalTime.of(10, 10);
-        Estudio es1 =new Estudio(fecha4,hora4,"Espirometría","Positivo");
-
-        otraLista.add(es);
-        otraLista.add(es1);
-        
-        modelo2.addColumn("Fecha");
-        modelo2.addColumn("Tipo");
-        tablaEstudios.setModel(modelo2);
-
-        
-        for (Estudio est : otraLista){
-            String fechaFormateada = est.getFecha().format(formato);
-            String tipo = est.getTipo();
-            String[]cosas2={fechaFormateada,tipo};
-            modelo2.addRow(cosas2);
-        }
-        tablaEstudios.setModel(modelo2);     
-    }
+//    public void cargarDatos(){
+//        
+//        //CARGA MANUAL DE REGISTROS Y ESTUDIOS A AMBAS TABLAS SIN LÖGICA DE BASE DE DATOS 
+//        //MUCHO DE ESTO SE HACE EN OTRO LADO
+//
+//        
+//        
+//        //CARGA DE REGISTROS
+//        LocalDate fecha=LocalDate.of(2023, Month.JANUARY, 21);
+//        LocalTime hora=LocalTime.of(23, 50);
+//        Lugares lugar=Lugares.EMERGENCIA;
+//        Registro reg=new Registro(fecha,hora,"Presenta apnea del sueño",lugar,p.getDni());
+//
+//        LocalDate fecha1=LocalDate.of(2023, Month.APRIL, 15);
+//        LocalTime hora1=LocalTime.of(10, 10);
+//        Lugares lugar1=Lugares.CONSULTORIO;
+//        Registro reg1=new Registro(fecha1,hora1,"Presenta fibromialgia",lugar1,);
+//        
+//        lista.add(reg);
+//        lista.add(reg1);
+//        
+//        modelo.addColumn("Fecha");
+//        modelo.addColumn("Lugar");
+//        tablaRegistros.setModel(modelo);
+//        
+//        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Define el formato deseado
+//        
+//        
+//        for (Registro registro : lista){
+//            String fechaFormateada = registro.getFecha().format(formato);
+//            String lugarFormateado = String.valueOf(registro.getLugares());
+//            String[]cosas={fechaFormateada,lugarFormateado};
+//            modelo.addRow(cosas);
+//        }
+//        
+//        tablaRegistros.setModel(modelo);
+//        
+//        //CARGA DE ESTUDIOS
+//        LocalDate fecha3=LocalDate.of(2023, Month.JANUARY, 21);
+//        LocalTime hora3=LocalTime.of(23, 50);
+//        Estudio es =new Estudio(fecha3,hora3,"Espirometría","Positivo",);
+//
+//        LocalDate fecha4=LocalDate.of(2023, Month.APRIL, 15);
+//        LocalTime hora4=LocalTime.of(10, 10);
+//        Estudio es1 =new Estudio(fecha4,hora4,"Espirometría","Positivo");
+//
+//        otraLista.add(es);
+//        otraLista.add(es1);
+//        
+//        modelo2.addColumn("Fecha");
+//        modelo2.addColumn("Tipo");
+//        tablaEstudios.setModel(modelo2);
+//
+//        
+//        for (Estudio est : otraLista){
+//            String fechaFormateada = est.getFecha().format(formato);
+//            String tipo = est.getTipo();
+//            String[]cosas2={fechaFormateada,tipo};
+//            modelo2.addRow(cosas2);
+//        }
+//        tablaEstudios.setModel(modelo2);     
+//    }
     
     public static Registro registroFechaLugar(ArrayList<Registro> r, String fecha, String lugar) {
         Registro resultado = null;
         for (Registro reg : r) {
             if (String.valueOf(reg.getFecha().format(DateTimeFormatter.ofPattern("dd'/'MM'/'yyyy"))).equals(fecha) && String.valueOf(reg.getLugares()).equals(lugar)) {
-                resultado = new Registro(reg.getFecha(), reg.getHora(), reg.getDiagnostico(), reg.getLugares());
+                //resultado = new Registro(reg.getFecha(), reg.getHora(), reg.getDiagnostico(), reg.getLugares(),reg.getDni());
                 break;
             }
         }
@@ -112,7 +112,7 @@ public class Panel2 extends javax.swing.JPanel {
         Estudio resultado = null;
         for (Estudio est : r) {
             if (String.valueOf(est.getFecha().format(DateTimeFormatter.ofPattern("dd'/'MM'/'yyyy"))).equals(fecha) && String.valueOf(est.getTipo()).equals(lugar)) {
-                resultado = new Estudio(est.getFecha(), est.getHora(), est.getTipo(), est.getResultado());
+                //resultado = new Estudio(est.getFecha(), est.getHora(), est.getTipo(), est.getResultado(), est.getDni());
                 break;
             }
         }

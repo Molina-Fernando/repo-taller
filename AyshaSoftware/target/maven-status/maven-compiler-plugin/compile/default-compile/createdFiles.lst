@@ -1,4 +1,5 @@
 ventanas\Admision$2.class
+ventanas\EntradaMedicoSala.class
 ventanas\panelesmedicos\Panel3$1.class
 ventanas\RegistroPaciente$7.class
 ventanas\panelesmedicos\PanelDescripcionEstudio.class
@@ -6,6 +7,7 @@ clases\Paciente.class
 ventanas\AdminInformatico$2.class
 clases\Triage.class
 ventanas\MedicoTriage$1.class
+ventanas\EntradaMedicoSala$2.class
 ventanas\ListaTriage$1.class
 ventanas\MedicoTriage$15.class
 ventanas\MedicoTriage$18.class
@@ -18,6 +20,7 @@ ventanas\RegistroPaciente$4.class
 ventanas\RRHH$1.class
 ventanas\RegistroMedicos$6.class
 ventanas\RegistroPaciente$1.class
+dbController\CtrlEntradaMedicoSala.class
 ventanas\RegistroFuncionarios$5.class
 ventanas\MedicoSala$3.class
 ventanas\GestionFuncionarios$6.class
@@ -54,6 +57,7 @@ ventanas\RegistroPaciente$6.class
 ventanas\GestionFuncionarios$5.class
 ventanas\RegistroMedicos$1.class
 ventanas\RegistroFuncionarios$4.class
+ventanas\EntradaMedicoSala$1.class
 clases\Medico.class
 ventanas\MedicoTriage$16.class
 ventanas\RegistroPaciente.class
@@ -82,13 +86,19 @@ ventanas\MedicoTriage$17.class
 ventanas\ListaTriage$2.class
 clases\Datos.class
 ventanas\MedicoTriage$11.class
+ventanas\EntradaMedicoSala$6.class
 ventanas\Login$3.class
+<<<<<<< HEAD
 ventanas\RegistroPaciente$5.class
 ventanas\RegistroPaciente$8.class
+=======
+ventanas\EntradaMedicoSala$3.class
+>>>>>>> 54390743d42985db68763501dce8fc309df74f99
 ventanas\Admision.class
 ventanas\CrudUsuarios$3.class
 ventanas\MedicoTriage$8.class
 ventanas\panelesmedicos\Panel1$1.class
+ventanas\EntradaMedicoSala$4.class
 ventanas\MedicoTriage$13.class
 ventanas\panelesmedicos\Panel2$1.class
 ventanas\RegistroFuncionarios$6.class
@@ -115,6 +125,7 @@ clases\Sector.class
 ventanas\MedicoTriage$12.class
 ventanas\CrudUsuarios$1.class
 ventanas\MedicoSala.class
+ventanas\EntradaMedicoSala$5.class
 ventanas\panelesmedicos\PanelDescripcionRegistro.class
 clases\Estudio.class
 ventanas\CrudUsuarios.class
