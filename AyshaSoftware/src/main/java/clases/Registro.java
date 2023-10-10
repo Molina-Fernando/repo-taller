@@ -2,7 +2,7 @@ package clases;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+
 
 public class Registro {
     
@@ -11,8 +11,6 @@ public class Registro {
     private final LocalTime hora;
     private final String diagnostico;
     private final Lugares lugares;
-    private final DateTimeFormatter formatoFecha=DateTimeFormatter.ofPattern("dd'/'MM'/'yyyy");
-    private final DateTimeFormatter formatoHora=DateTimeFormatter.ofPattern("HH':'mm':'ss");
 
 
     public Registro(String dni,LocalDate fecha, LocalTime hora, String diagnostico, Lugares lugares) {
@@ -55,7 +53,7 @@ public class Registro {
 
     @Override
     public String toString() {
-        return "Registro{" + "fecha=" + fecha.format(formatoFecha) + ", hora=" + hora.format(formatoHora) + ", diagnostico=" + diagnostico + ", lugares=" + lugares + '}';
+        return "Registro{" + "fecha=" + fecha.format(FormatosValidos.FORMATO_FECHA) + ", hora=" + hora.format(FormatosValidos.FORMATO_HORA) + ", diagnostico=" + diagnostico + ", lugares=" + lugares + '}';
     }
 
     

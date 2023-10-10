@@ -53,5 +53,41 @@ public class CtrlEntradaMedicoSala {
 
         return listaPacientes;
     }
+        
+    
+        public ArrayList<Object[]> getTablaBoxes(String numeroDB, Boolean disponibleDB) {
+        ArrayList<Object[]> listaBoxes = new ArrayList<>();
+        Connection conex = null;
+        try {
+            conex = Conexion.conectar();
+            String query = "SELECT Numero, Disponibilidad FROM Boxes";
+            PreparedStatement psq = conex.prepareStatement(query);
+            ResultSet rs = psq.executeQuery();
+
+            while (rs.next()) {
+                Object ob[] = new Object[2];
+                ob[0] = rs.getString("Numero");
+                ob[1] = rs.getString("Disponibilidad");
+                System.out.println(ob[0]);
+                System.out.println(ob[1]);
+                listaBoxes.add(ob);
+                
+            }
+
+        } catch (SQLException e) {
+            System.out.println("EXCEP SQL" + e);
+            JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
+        } finally {
+            try {
+                if (conex != null) {
+                    conex.close();
+                }
+            } catch (SQLException excSql) {
+                System.err.println("ERROR SQL" + excSql);
+            }
+        }
+
+        return listaBoxes;
+    }
     
 }

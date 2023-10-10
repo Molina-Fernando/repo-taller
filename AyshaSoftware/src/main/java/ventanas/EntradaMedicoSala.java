@@ -4,8 +4,7 @@
  */
 package ventanas;
 
-import clases.Box;
-import clases.Paciente;
+
 import dbController.CtrlEntradaMedicoSala;
 import java.util.ArrayList;
 import javax.swing.JTable;
@@ -18,7 +17,7 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
     
            
     ArrayList<Object[]> listaPacientes = new ArrayList<>();
-    Box[] boxes = new Box[10];
+    ArrayList<Object[]> listaBoxes = new ArrayList<>();
     DefaultTableModel modelo= new DefaultTableModel(){
         @Override
         public boolean isCellEditable(int row, int column){
@@ -31,13 +30,14 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
             return false;
         }
     };
-    Paciente elegido=null;
-    Box boxElegido=null; 
-    
+
     CtrlEntradaMedicoSala ctrlDB = new CtrlEntradaMedicoSala();
     
     String nomDB;
     int dniDB;
+    
+    String numeroDB;
+    Boolean disponibleDB;
 
     /**
      * Creates new form EntradaMedicoSala
@@ -46,7 +46,7 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         setResizable(false);
-        //cargaDatos();
+        
         modelo.addColumn("Nombre");
         modelo.addColumn("DNI");
         modelo.addColumn("Color"); 
@@ -55,7 +55,10 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
         
         modelo2.addColumn("Número");
         modelo2.addColumn("Disponibilidad");
+        
+        actualizarTablaBoxes();
     }
+    
     
     private void actualizarTablaPacientesEnEspera(){
         modelo.setRowCount(0);
@@ -77,40 +80,38 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
         }
     }
     
-    //Métodos de juguete para muestra sin uso de bases de datos
-//        public void cargaDatos(){   
-//        tablaPacientes.setModel(modelo);
-//        for (Paciente pac : listaPacientes){
-//            String nombre = pac.getNombre();
-//            String apellido = pac.getApellido();
-//            String color = "AMARILLO";
-//            String[]cosasPacientes={nombre,apellido,color};
-//            modelo.addRow(cosasPacientes);
-//        }
-//        //CARGA DE DATOS DE LOS BOXES POR DEFECTO
-//        int numeracion = 1;
-//        for (int i =0;i<10;i++) {
-//            boxes[i]=new Box(true, numeracion);
-//            numeracion++;
-//        }
-//        tablaBoxes.setModel(modelo2);
-//        for (Box box : boxes){
-//            String disponibilidad = String.valueOf(box.isDisponible());
-//            String numero = String.valueOf(box.getNumero());
-//            String[]cosasBox={numero,disponibilidad};
-//            modelo2.addRow(cosasBox);
-//        }
-//    }
-//    
-//    public Paciente pacienteNombreApellido(ArrayList<Paciente>list,String nombre,String apellido){
-//        Paciente pac = null;
-//        for (Paciente p : list){
-//            if (p.getNombre().equals(nombre) && p.getApellido().equals(apellido)){
-//                pac= new Paciente(p.getNombre(),p.getApellido(),p.getFecNacimiento(),p.getDomicilio(),p.getDni(),p.getTelFijo(),p.getTelCelular(),p.getCorreoElectronico(),p.getPersonaContacto(),p.getEstadoCivil());
-//            }
-//        }
-//        return pac;
-//    }
+    private void actualizarTablaBoxes(){
+        modelo2.setRowCount(0);
+        tablaBoxes = new javax.swing.JTable();
+        tablaBoxes.setModel(modelo2);
+        listaBoxes=ctrlDB.getTablaBoxes(numeroDB, disponibleDB);
+        
+        tablaBoxes = new JTable(modelo2);
+        jScrollPane2.setViewportView(tablaBoxes);
+
+        for (Object[] vector : listaBoxes) {
+
+            numeroDB =  (String) vector[1];
+            disponibleDB = isDisponible(vector[0].toString());
+
+            modelo2.addRow(vector);
+            tablaBoxes.setModel(modelo2);
+        }
+    }
+    
+    private Boolean isDisponible(String disponibilidad){
+        return "Disponible".equals(disponibilidad);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 
     /**
