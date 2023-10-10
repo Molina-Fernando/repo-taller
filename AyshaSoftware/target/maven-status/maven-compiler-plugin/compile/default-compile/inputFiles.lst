@@ -2,6 +2,7 @@ D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Registro.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Funcionario.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Medico.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Especialidad.java
+D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\dbController\CtrlRegistroFuncionarios.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Lugares.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Consulta.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Estadistica.java
@@ -33,6 +34,7 @@ D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Datos.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\GestionFuncionarios.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\dbController\Conexion.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\dbController\CtrlGestionFuncionarios.java
+D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\dbController\CtrlRegistroPaciente.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\panelesmedicos\Panel1.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\panelesmedicos\Panel2.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Box.java
@@ -40,3 +42,4 @@ D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\RRHH.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\CrudUsuarios.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\MedicoSala.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\Funcionario.java
+D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\RegistroMedicos.java

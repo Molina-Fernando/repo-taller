@@ -33,6 +33,7 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         botonEditar = new javax.swing.JButton();
         botonBuscar = new javax.swing.JButton();
         botonEliminar = new javax.swing.JButton();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         bg = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -306,6 +307,7 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
     private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonEditar;
     private javax.swing.JButton botonEliminar;
+    private javax.swing.ButtonGroup buttonGroup1;
     private com.toedter.calendar.JDateChooser dcFechaNac;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
