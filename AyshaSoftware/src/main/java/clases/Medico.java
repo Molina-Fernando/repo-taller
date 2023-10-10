@@ -52,6 +52,7 @@ public class Medico extends Funcionario implements ProfesionalSanitario {
         return color;
     }
     
+    
            
 
     public void asignarBox(Paciente paciente1) {
@@ -62,7 +63,18 @@ public class Medico extends Funcionario implements ProfesionalSanitario {
     public void cambiarTriage(String colorFinal, String motivoCambio) {
         triage.setColorFinal(colorFinal);
         triage.setMotivoCambio(motivoCambio);
-        System.out.println("El color final es: " + colorFinal + " y lo cambie al original por: " + motivoCambio);
+    }
+    
+    public String getColorParcial(){
+        return triage.getColorTriage();
+    }
+    
+    public String getColorDefinitivo(){
+        return triage.getColorFinal();
+    }
+    
+    public String getMotivoCambio(){
+        return triage.getMotivoCambio();
     }
 
     @Override

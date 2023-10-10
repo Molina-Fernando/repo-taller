@@ -35,7 +35,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
         botonRegistro1.setVisible(false);
         botonLista.setVisible(false);
     }
-    Conexion cn = new Conexion();
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
     /**
