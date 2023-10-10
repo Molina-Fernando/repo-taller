@@ -1,7 +1,7 @@
 package clases;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
+
 
 public class Paciente extends Persona {
 
@@ -11,7 +11,9 @@ public class Paciente extends Persona {
     
     
 
+
     public Paciente(String nombre, String apellido, String fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, String personaContacto, String estadoCivil) {
+
         super(nombre, apellido, fecNacimiento, domicilio, dni, telFijo, telCelular, correoElectronico, estadoCivil);
         this.personaContacto = personaContacto;
         this.registros = new ArrayList<>();

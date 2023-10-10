@@ -24,6 +24,8 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         SetImageLabel.setImageLabel(jLabel12, "src\\main\\java\\images\\regFunc.png");
         setIconImage(miIcono);
     }
+    
+    CtrlRegistroFuncionarios ctrlRegistroFuncionarios = new CtrlRegistroFuncionarios();
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -223,7 +225,8 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                     String fechaFormateada = formato.format(fechaNacimiento);
 
-                    CtrlRegistroFuncionarios.registrarFuncionario(nombre, apellido, fechaFormateada, domicilio, dni, telFijo, telCelular, estadoCivil, correoElectronico);
+                    ctrlRegistroFuncionarios.registrarFuncionario(nombre, apellido, fechaFormateada, domicilio, dni, telFijo, telCelular, estadoCivil, correoElectronico);
+                    
 
                     textNombre.setText("");
                     textApellido.setText("");
