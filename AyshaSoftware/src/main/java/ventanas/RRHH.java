@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 
 public class RRHH extends javax.swing.JFrame {
 
+    
     public RRHH() {
         initComponents();
         this.setLocationRelativeTo(this);

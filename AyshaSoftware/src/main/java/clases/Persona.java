@@ -2,6 +2,7 @@ package clases;
 
 
 
+
 public abstract class Persona {
 
     private String nombre;
@@ -17,7 +18,9 @@ public abstract class Persona {
     public Persona() {
     }
 
+
     public Persona(String nombre, String apellido, String fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, String estadoCivil) {
+
         setNombre(nombre);
         setApellido(apellido);
         setFecNacimiento(fecNacimiento);
@@ -69,12 +72,13 @@ public abstract class Persona {
         return apellido;
     }
 
+
     public String getFecNacimiento() {
         return fecNacimiento;
     }
     
-    public final String setEstadoCivil(String estadoCivil){
-        return estadoCivil;
+    public final void setEstadoCivil(String estadoCivil){
+        this.estadoCivil = estadoCivil;
     }
 
     public String getDomicilio() {

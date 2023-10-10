@@ -28,6 +28,8 @@ public class RegistroMedicos extends javax.swing.JFrame {
     private Date fechaTitulo;
     private Date fechaNacimiento;
     private String universidad;
+    
+    CtrlRegistroFuncionarios ctrlRegistroFuncionarios = new CtrlRegistroFuncionarios();
 
     public RegistroMedicos() {
         initComponents();
@@ -251,6 +253,7 @@ public class RegistroMedicos extends javax.swing.JFrame {
         telCelular = textCel.getText().trim();
         estadoCivil = textEstadoCivil.getText().trim();
         correoElectronico = textMail.getText().trim();
+        numMatricula = textNumMatricula.getText().trim();
        
 
         String patronMail = "^[A-Za-z0-9+_.-]+@(.+)$";
@@ -280,7 +283,9 @@ public class RegistroMedicos extends javax.swing.JFrame {
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                     String fechaFormateada = formato.format(fechaNacimiento);
 
-                    CtrlRegistroFuncionarios.registrarFuncionario(nombre, apellido, fechaFormateada, domicilio, dni, telFijo, telCelular, estadoCivil, correoElectronico);
+                    ctrlRegistroFuncionarios.setMatricula(numMatricula);
+                    ctrlRegistroFuncionarios.registrarFuncionario(nombre, apellido, fechaFormateada, domicilio, dni, telFijo, telCelular, estadoCivil, correoElectronico);
+                    
 
                     textNombre.setText("");
                     textApellido.setText("");

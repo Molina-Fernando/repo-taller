@@ -13,7 +13,13 @@ import clases.Funcionario;
 
 public class CtrlRegistroFuncionarios {
     
-    public static void registrarFuncionario(
+    private String matricula;
+    
+    public void setMatricula(String matricula){
+        this.matricula = matricula;
+    }
+    
+    public void registrarFuncionario(
             String nombre,
             String apellido,
             String fechaFormateada,
@@ -48,7 +54,7 @@ public class CtrlRegistroFuncionarios {
 
             if (!rs.next()) {
 
-                String insert = "INSERT INTO Funcionarios(Nombre, Apellido, FechaNacimiento, Domicilio, DNI, TelFijo, telCel, EstadoCivil, Mail) VALUES(?,?,?,?,?,?,?,?,?);";
+                String insert = "INSERT INTO Funcionarios(Nombre, Apellido, FechaNacimiento, Domicilio, DNI, TelFijo, telCel, EstadoCivil, Mail, Matricula) VALUES(?,?,?,?,?,?,?,?,?,?);";
                 PreparedStatement psi = conex.prepareStatement(insert);
 
                 psi.setString(1, func.getNombre());
@@ -60,6 +66,9 @@ public class CtrlRegistroFuncionarios {
                 psi.setString(7, func.getTelCelular());
                 psi.setString(8, func.getDomicilio());
                 psi.setString(9, func.getCorreoElectronico());
+
+                psi.setString(10,matricula);
+                
 
                 psi.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Usuario registrado con éxito - Recuerde que un informático deberá validar el usuario para su posterior ingreso al sistema.");
