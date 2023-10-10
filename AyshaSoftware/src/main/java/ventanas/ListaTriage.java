@@ -4,24 +4,23 @@
  */
 package ventanas;
 
-import clases.Paciente;
 import javax.swing.table.DefaultTableModel;
-import java.sql.*;
-import dbController.Conexion;
+import dbController.CtrlListaTriage;
 import java.awt.Image;
 import java.awt.Toolkit;
-import javax.swing.JOptionPane;
+import java.util.ArrayList;
 import javax.swing.JTable;
 
-
 public class ListaTriage extends javax.swing.JFrame {
+
     /**
      * Creates new form ListaTriage
      */
     public static String nombreUpdate = "";
     DefaultTableModel modelo = new DefaultTableModel();
-    Conexion cn = new Conexion();
-   
+    ArrayList<Object[]> arrayListEspera;
+    CtrlListaTriage dbCtrl = new CtrlListaTriage();
+
     public ListaTriage() {
         initComponents();
         setLocationRelativeTo(null);
@@ -35,49 +34,25 @@ public class ListaTriage extends javax.swing.JFrame {
         modelo.addColumn("Apellido");
         modelo.addColumn("DNI");
         tablaUsuarios = new javax.swing.JTable();
+        arrayListEspera = new ArrayList<>();
         actualizarTabla();
     }
-    
-     private void actualizarTabla() {
+ 
+
+    private void actualizarTabla() {
         modelo.setRowCount(0);
-        
 
         tablaUsuarios.setModel(modelo);
-        Connection conex = null;
-        try {
-            conex = cn.conectar();
+        arrayListEspera = dbCtrl.tablaLista();
 
-            String query = "SELECT Nombre, Apellido, DNI FROM Pacientes";
+        tablaUsuarios = new JTable(modelo);
+        jScrollPane1.setViewportView(tablaUsuarios);
 
-            PreparedStatement psq = conex.prepareStatement(query);
+        for (Object[] vector : arrayListEspera) {
 
-            ResultSet rs = psq.executeQuery();
 
-            tablaUsuarios = new JTable(modelo);
-
-            jScrollPane1.setViewportView(tablaUsuarios);
-
-            while (rs.next()) {
-                Object ob[] = new Object[3];
-                ob[0] = rs.getString("Nombre");
-                ob[1] = rs.getString("Apellido");
-                ob[2] = rs.getString("DNI");
-
-                modelo.addRow(ob);
-                tablaUsuarios.setModel(modelo);
-            }
-
-        } catch (SQLException e) {
-            System.out.println("EXCEP SQL" + e);
-            JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
-        } finally {
-            try {
-                if (conex != null) {
-                    conex.close();
-                }
-            } catch (SQLException excSql) {
-                System.err.println("ERROR SQL" + excSql);
-            }
+            modelo.addRow(vector);
+            tablaUsuarios.setModel(modelo);
         }
     }
 
@@ -153,13 +128,20 @@ public class ListaTriage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+
     private void botonTriageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonTriageActionPerformed
-        
-        
+
         int numFila = tablaUsuarios.getSelectedRow();
 
-        new MedicoTriage().setVisible(true);
+        if (numFila != -1) {
+            String dnistr = (String) tablaUsuarios.getValueAt(numFila, 2);
+            int dni = Integer.parseInt(dnistr);
+
+            dbCtrl.eliminarPacienteEsperaTriage(dni);
+            DefaultTableModel model = (DefaultTableModel) tablaUsuarios.getModel();
+            model.removeRow(numFila);
+            new MedicoTriage().setVisible(true);
+        }
     }//GEN-LAST:event_botonTriageActionPerformed
 
     /**

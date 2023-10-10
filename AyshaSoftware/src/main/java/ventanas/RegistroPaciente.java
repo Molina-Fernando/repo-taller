@@ -4,23 +4,13 @@
  */
 package ventanas;
 
-import clases.Administrativo;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.time.Instant;
-import java.time.ZoneId;
 import javax.swing.JOptionPane;
 import java.util.Date;
 import dbController.Conexion;
-import clases.Paciente;
-import java.sql.*;
-import java.text.ParseException;
+import dbController.CtrlRegistroPaciente;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.WindowConstants;
@@ -30,8 +20,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
     /**
      * Creates new form RegistroPaciente
      */
-    Paciente pac = new Paciente();
-
     public RegistroPaciente() {
         initComponents();
         setLocationRelativeTo(null);
@@ -44,6 +32,8 @@ public class RegistroPaciente extends javax.swing.JFrame {
 
         setTitle("Registro de pacientes");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        botonRegistro1.setVisible(false);
+        botonLista.setVisible(false);
     }
     Conexion cn = new Conexion();
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -173,7 +163,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
                 botonRegistro1ActionPerformed(evt);
             }
         });
-        jPanel1.add(botonRegistro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 430, 200, 30));
+        jPanel1.add(botonRegistro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 190, 30));
 
         TextNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,7 +221,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
                 botonListaActionPerformed(evt);
             }
         });
-        jPanel1.add(botonLista, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 430, 150, 30));
+        jPanel1.add(botonLista, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 430, 160, 30));
 
         botonBuscar.setBackground(new java.awt.Color(0, 0, 153));
         botonBuscar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -242,7 +232,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
                 botonBuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(botonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 430, 90, 30));
+        jPanel1.add(botonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 430, 90, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -265,7 +255,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
 
 
     private void botonRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistro1ActionPerformed
-
+        String fechaFormateada = null;
         String nombre = TextNombre.getText().trim();
         String apellido = TextApellido.getText().trim();
         String domicilio = TextDomicilio.getText().trim();
@@ -276,101 +266,35 @@ public class RegistroPaciente extends javax.swing.JFrame {
         String telCelular = TextCelular.getText().trim();
         String correo = TextCorreo.getText().trim();
         String estadoCivil = TextEstadoCivil.getText().trim();
+        if (fechaNacimiento != null) {
+            fechaFormateada = dateFormat.format(fechaNacimiento);
+        }
 
-  
-        //Instant instant = fechaNacimiento.toInstant();
-        //LocalDate fecNac = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+        String patronMail = "^[A-Za-z0-9+_.-]+@(.+)$";
+        String patronDNI = "^[0-9]{7,10}$";
 
-        String fechaFormateada = dateFormat.format(fechaNacimiento);
-         
+        Pattern patternMail = Pattern.compile(patronMail);
+        Matcher matcherMail = patternMail.matcher(correo);
 
-        pac.setNombre(nombre);
-        pac.setApellido(apellido);
-        pac.setDomicilio(domicilio);
-        pac.setFecNacimiento(fechaFormateada);
-        pac.setDni(dni);
-        pac.setCorreoElectronico(correo);
-        pac.setEstadoCivil(estadoCivil);
-        pac.setTelCelular(telCelular);
-        pac.setTelFijo(telFijo);
-        pac.setPersonaContacto(personaContacto);
-
-        String mail = "^[A-Za-z0-9+_.-]+@(.+)$";
-        Pattern pattern = Pattern.compile(mail);
-        Matcher matcher = pattern.matcher(correo);
+        Pattern patternDNI = Pattern.compile(patronDNI);
+        Matcher matcherDNI = patternDNI.matcher(dni);
 
         if (fechaFormateada != null && !nombre.isEmpty() && !apellido.isEmpty() && !domicilio.isEmpty() && !dni.isEmpty() && !telFijo.isEmpty() && !telCelular.isEmpty() && !correo.isEmpty() && !personaContacto.isEmpty() && !estadoCivil.isEmpty()) {
 
-            if (matcher.matches()) {
+            if (matcherMail.matches()) {
 
-                Connection conex = null;
-                try {
-                    conex = Conexion.conectar();
-                    //
-                    //
-                    String query = "SELECT * FROM Pacientes WHERE DNI = ?";
-                    // String input = "INSERT INTO Usuarios VALUES(?,?,?);";
+                if (matcherDNI.matches()) {
 
-                    // ResultSet rs = .executeQuery();
-                    PreparedStatement psq = conex.prepareStatement(query);
-                    psq.setString(1, dni);
+                    CtrlRegistroPaciente.registrarPacientes(nombre, apellido, domicilio, fechaFormateada, dni, correo, estadoCivil, telCelular, telFijo, personaContacto);
+                    botonLista.setVisible(true);
 
-                    ResultSet rs = psq.executeQuery();
-
-                    if (!rs.next()) {
-
-                        String insert = "INSERT INTO Pacientes(Nombre, Apellido, FechaNacimiento, Domicilio, DNI, TelFijo, telCel, EstadoCivil, Mail, personaContacto) VALUES(?,?,?,?,?,?,?,?,?,?);";
-                        PreparedStatement psi = conex.prepareStatement(insert);
-                        //conex.prepareStatement(input);
-
-                        // SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                        //String fechaFormateada = dateFormat.format(fechaNacimiento);
-                        psi.setString(1, pac.getNombre());
-                        psi.setString(2, pac.getApellido());
-                        psi.setString(3, pac.getFecNacimiento());
-                        psi.setString(4, pac.getDomicilio());
-                        psi.setString(5, pac.getDni());
-                        psi.setString(6, pac.getTelFijo());
-                        psi.setString(7, pac.getTelCelular());
-                        psi.setString(8, pac.getEstadoCivil());
-                        psi.setString(9, pac.getCorreoElectronico());
-                        psi.setString(10, pac.getPersonaContacto());
-
-                        psi.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Paciente registrado con éxito.");
-                        TextNombre.setText("");
-                        TextApellido.setText("");
-                        textFechaNac.setDate(null);
-                        TextDomicilio.setText("");
-                        TextDNI.setText("");
-                        TextFijo.setText("");
-                        TextCelular.setText("");
-                        TextEstadoCivil.setText("");
-                        TextCorreo.setText("");
-                        TextPersonaContacto.setText("");
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "DNI ya registrado");
-                        //TO DO: Método que traiga los datos del paciente y los lleve a la esperaTriage
-                        //
-                    }
-
-                    //JOptionPane.showMessageDialog(null, "Usuario registrado con éxito");
-                } catch (SQLException e) {
-                    System.out.println("EXCEP SQL" + e);
-                    JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
-                } finally {
-                    try {
-                        if (conex != null) {
-                            conex.close();
-                        }
-                    } catch (SQLException excSql) {
-                        System.err.println("ERROR SQL" + excSql);
-                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "DNI no válido");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Correo electrónico no válido");
             }
+
         } else {
             JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
 
@@ -417,53 +341,38 @@ public class RegistroPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_TextApellidoActionPerformed
 
     private void botonListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonListaActionPerformed
-        // TODO add your handling code here:
+
+        TextNombre.setText("");
+        TextApellido.setText("");
+        textFechaNac.setDate(null);
+        TextDomicilio.setText("");
+        TextDNI.setText("");
+        TextFijo.setText("");
+        TextCelular.setText("");
+        TextEstadoCivil.setText("");
+        TextCorreo.setText("");
+        TextPersonaContacto.setText("");
+
+        botonRegistro1.setVisible(false);
+        botonLista.setVisible(false);
+
+
     }//GEN-LAST:event_botonListaActionPerformed
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         // TODO add your handling code here:
-        Connection conex = null;
-        try {
-            conex = cn.conectar();
-            //
-            //
-            String query = "SELECT * FROM Pacientes WHERE DNI = ?";
-            // String input = "INSERT INTO Usuarios VALUES(?,?,?);";
+        String dni = TextDNI.getText();
+       
+        String patronDNI = "^[0-9]{7,10}$";
 
-            // ResultSet rs = .executeQuery();
-            PreparedStatement psq = conex.prepareStatement(query);
-            psq.setString(1, TextDNI.getText());
-            ResultSet rs = psq.executeQuery();
+        Pattern patternDNI = Pattern.compile(patronDNI);
+        Matcher matcherDNI = patternDNI.matcher(dni);
 
-            if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "Paciente registrado");
-                String fechaFormateada = rs.getString("FechaNacimiento");
-                Date fecha = dateFormat.parse(fechaFormateada);
-                TextNombre.setText(rs.getString("Nombre"));
-                TextApellido.setText(rs.getString("Apellido"));
-                textFechaNac.setDate(fecha);
-                TextDomicilio.setText(rs.getString("Domicilio"));
-                TextFijo.setText(rs.getString("TelFijo"));
-                TextCelular.setText(rs.getString("telCel"));
-                TextEstadoCivil.setText(rs.getString("EstadoCivil"));
-                TextCorreo.setText(rs.getString("Mail"));
-                TextPersonaContacto.setText(rs.getString("personaContacto"));
-            } else {
-                JOptionPane.showMessageDialog(null, "Paciente no registrado, complete sus datos.");
-            }
-        } catch (SQLException e) {
-            System.out.println("EXCEP SQL" + e);
-            JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
-        } catch (ParseException ex) {
-            Logger.getLogger(RegistroPaciente.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                if (conex != null) {
-                    conex.close();
-                }
-            } catch (SQLException excSql) {
-                System.err.println("ERROR SQL" + excSql);
-            }
+        if (matcherDNI.matches()) {
+            CtrlRegistroPaciente.buscarPaciente(dni, botonRegistro1, botonLista, TextNombre, TextApellido, TextDomicilio, TextFijo, TextCelular, TextEstadoCivil, TextCorreo, TextPersonaContacto, textFechaNac);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "El DNI no es válido");
         }
     }//GEN-LAST:event_botonBuscarActionPerformed
 
