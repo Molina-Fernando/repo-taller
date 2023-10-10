@@ -51,15 +51,15 @@ public class CtrlRegistroFuncionarios {
                 String insert = "INSERT INTO Funcionarios(Nombre, Apellido, FechaNacimiento, Domicilio, DNI, TelFijo, telCel, EstadoCivil, Mail) VALUES(?,?,?,?,?,?,?,?,?);";
                 PreparedStatement psi = conex.prepareStatement(insert);
 
-                psi.setString(1, nombre);
-                psi.setString(2, apellido);
-                psi.setString(3, fechaFormateada);
-                psi.setString(4, domicilio);
-                psi.setString(5, dni);
-                psi.setString(6, telFijo);
-                psi.setString(7, telCelular);
-                psi.setString(8, correoElectronico);
-                psi.setString(9, estadoCivil);
+                psi.setString(1, func.getNombre());
+                psi.setString(2, func.getApellido());
+                psi.setString(3, func.getFecNacimiento());
+                psi.setString(4, func.getDomicilio());
+                psi.setString(5, func.getDni());
+                psi.setString(6, func.getTelFijo());
+                psi.setString(7, func.getTelCelular());
+                psi.setString(8, func.getDomicilio());
+                psi.setString(9, func.getCorreoElectronico());
 
                 psi.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Usuario registrado con éxito - Recuerde que un informático deberá validar el usuario para su posterior ingreso al sistema.");

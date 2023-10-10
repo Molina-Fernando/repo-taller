@@ -11,8 +11,12 @@ public class AdminSistemas extends Funcionario {
         super(nombre, apellido, fecNacimiento, domicilio, dni, telFijo, telCelular, correoElectronico, user, password, estadoCivil);
     }
 
+    public AdminSistemas(){
+        
+    }
+    
     public void asignarRol(Funcionario funcionario1, Rol rol) {
-        funcionario1.setRoles(rol);
+        funcionario1.setRol(rol);
     }
 
     @Override

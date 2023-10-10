@@ -6,9 +6,36 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
+//import clases.AdminSistemas;
+//import clases.Administrativo;
+//import clases.Medico;
+//import clases.Rol;
+//import clases.Sector;
+
 
 
 public class CtrlGestionFuncionarios {
+    
+    /*public void instanciarFuncionario(int dni, String selectedOption, String selectedOption2, String nomDB, int dniDB){
+        switch(selectedOption){
+            case "MedicoTriage" :
+                Medico medicoTriage = new Medico();
+                //Instancia de Medico altaFuncionario
+                break;
+            case "MedicoSala" :
+                //Instancia de Medico
+                Medico medicoSala = new Medico();
+                break;
+            case "AdminInformatico":
+                //Instancia de AdminSistemas
+                AdminSistemas adminInformatica = new AdminSistemas();
+                break;
+            case "Administrativo" :
+                //Instancia de Administrativo
+                Administrativo administrativo = new Administrativo();
+                break;
+        }
+    }*/
 
     public ArrayList<Object[]> getTablaFuncionarios(int dniDB, String nomDB) {
         ArrayList<Object[]> arrayListDeVectores = new ArrayList<>();
@@ -54,7 +81,6 @@ public class CtrlGestionFuncionarios {
             String deleteQuery = "DELETE FROM FUNCIONARIOS WHERE DNI = ?";
             PreparedStatement psq = conex.prepareStatement(deleteQuery);
             psq.setInt(1, dni);
-            
             
             psq.executeUpdate();
 
@@ -111,6 +137,54 @@ public class CtrlGestionFuncionarios {
             
             generarUsuario(selectedOption, selectedOption2, nomDB, dniDB);
     }
+    
+    /*public void altaMedico(int dni, String selectedOption, String selectedOption2, String nomDB, int dniDB, Medico medico){
+        Connection conex = null;
+            try {
+                conex = Conexion.conectar();
+                String query = "SELECT * FROM Funcionarios WHERE DNI = ?";
+                PreparedStatement psq = conex.prepareStatement(query);
+                psq.setInt(1, dni);
+                ResultSet rs = psq.executeQuery();
+
+                if (rs.next()) {
+                    String update = "UPDATE Funcionarios SET Rol = ?, Sector = ? WHERE DNI = ?;";
+                    PreparedStatement psi = conex.prepareStatement(update);
+                   // 
+                    Rol rol = new Rol(selectedOption);
+                    String rolDB = rol.getNombreRol();
+                    psi.setString(1, rolDB);
+                    Sector sector = new Sector(selectedOption2);
+                    String sectorDB = sector.getSector();
+                    psi.setString(2, sectorDB);
+                    psi.setInt(3, dni);
+                    psi.executeUpdate();
+                    //actualizarTabla();
+                }
+            } catch (SQLException e) {
+                System.out.println("EXCEP SQL" + e);
+                JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
+            } finally {
+                try {
+                    if (conex != null) {
+                        conex.close();
+                    }
+                } catch (SQLException excSql) {
+                    System.err.println("ERROR SQL" + excSql);
+                }
+            }
+            
+            generarUsuario(selectedOption, selectedOption2, nomDB, dniDB);
+        
+    }*/
+    
+    /*public void altaAdministrativo(){
+        
+    }
+    
+    public void altaAdminInformatica(){
+        
+    }*/
     
     private String generarContrasenia(String nombre, int dni) {
 
@@ -175,5 +249,21 @@ public class CtrlGestionFuncionarios {
             }
         }
     }
+    
+    
+    /* switch(SelectOpt1){
+            case "MedicoTriage" :
+                //Instancia de Medico
+                break;
+            case "MedicoSala" :
+                //Instancia de Medico
+                break;
+            case "AdminInformatico":
+                //Instancia de AdminSistemas
+                break;
+            case "Administrativo" :
+                //Instancia de Administrativo
+                break;
+        }*/
 
 }

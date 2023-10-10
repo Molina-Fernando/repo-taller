@@ -19,7 +19,7 @@ public class Funcionario extends Persona {
         setContrasenia(contrasenia);
     }
 
-    public void setRoles(Rol e) {
+    public void setRol(Rol e) {
         this.roles.add(e);
     }
 

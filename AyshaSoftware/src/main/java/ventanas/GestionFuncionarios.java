@@ -227,20 +227,6 @@ public class GestionFuncionarios extends javax.swing.JFrame {
         }
     }
 
-    /* switch(SelectOpt1){
-            case "MedicoTriage" :
-                //Instancia de Medico
-                break;
-            case "MedicoSala" :
-                //Instancia de Medico
-                break;
-            case "AdminInformatico":
-                //Instancia de AdminSistemas
-                break;
-            case "Administrativo" :
-                //Instancia de Administrativo
-                break;
-        }*/
     public static void main(String args[]) {
 
         /* Set the Nimbus look and feel */
