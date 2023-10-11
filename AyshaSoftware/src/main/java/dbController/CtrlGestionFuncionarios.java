@@ -86,15 +86,14 @@ public class CtrlGestionFuncionarios {
         return arrayOpciones;
     }
 
-    ArrayList<String> arrayRoles = new ArrayList<>();
+    
 
-    public void agregarRoles(String rol, int dni) {
-        arrayRoles.add(rol);
-        asignarRoles(arrayRoles,dni);
+    public void agregarRoles(ArrayList<String> roles, int dni) {
+        
+        asignarRoles(roles, dni);
     }
 
     public void asignarRoles(ArrayList<String> arrayList, int dni) {
-        ArrayList<Integer> arrayIDS = new ArrayList<>();
         Connection conex = null;
 
         try {

@@ -250,6 +250,8 @@ public class GestionFuncionarios extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botonActualizarActionPerformed
 
+    ArrayList<String> arrayRolesInputDB = new ArrayList<>();
+    
     private void botonAlta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAlta1ActionPerformed
         // TODO add your handling code here:
         //modeloLista.clear();
@@ -258,15 +260,13 @@ public class GestionFuncionarios extends javax.swing.JFrame {
         if(!modeloLista.contains(rol)){
         modeloLista.addElement(rol);
         lista.updateUI();
-        int numFila = tablaFuncionarios.getSelectedRow();
-        if (numFila != -1) {
-            String dnistr = (String) tablaFuncionarios.getValueAt(numFila, 0);
-            int dniDB = Integer.parseInt(dnistr);
+        
+            arrayRolesInputDB.add(rol);
             
-        dbCtrl.agregarRoles(rol,dniDB);
-            System.out.println(dniDB);
+        //dbCtrl.agregarRoles(rol,dniDB);
+            //System.out.println(dniDB);
         }
-        }else{
+        else{
             JOptionPane.showMessageDialog(null, "Ya asignó el rol " + rol);
         
         }
@@ -275,8 +275,17 @@ public class GestionFuncionarios extends javax.swing.JFrame {
 
     private void botonAlta2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAlta2ActionPerformed
         // TODO add your handling code here:
+            int numFila = tablaFuncionarios.getSelectedRow();
+        if (numFila != -1) {
+            String dnistr = (String) tablaFuncionarios.getValueAt(numFila, 0);
+            int dniDBA = Integer.parseInt(dnistr);
+            System.out.println(dniDBA);
+            dbCtrl.agregarRoles(arrayRolesInputDB,dniDBA);
+            modeloLista.clear();
+        
+       //dbCtrl.agregarRoles(rol,dniDB);
     }//GEN-LAST:event_botonAlta2ActionPerformed
-
+    }
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_botonEliminarActionPerformed
 
         int numFila = tablaFuncionarios.getSelectedRow();
