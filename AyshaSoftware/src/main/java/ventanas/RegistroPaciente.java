@@ -8,7 +8,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import java.util.Date;
-import dbController.Conexion;
 import dbController.CtrlRegistroPaciente;
 import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;

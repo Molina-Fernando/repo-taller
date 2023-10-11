@@ -33,7 +33,7 @@ public class CtrlMedicoTriage {
     
     public void finalizarTriage(){
         
-        String dniMedico = "987654";//Login.user;
+        String dniMedico = Login.user;
         String dniPac = obtenerUltimoDniPac();
          Connection conex = null;
         try {
@@ -71,8 +71,6 @@ public class CtrlMedicoTriage {
                 psu.executeUpdate();
                 psu1.executeUpdate();
                 
-            } else{
-                System.out.println("No tiene sentido que no exista");
             }
             
         } catch (SQLException e) {
