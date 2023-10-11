@@ -141,6 +141,7 @@ public class ListaTriage extends javax.swing.JFrame {
             DefaultTableModel model = (DefaultTableModel) tablaUsuarios.getModel();
             model.removeRow(numFila);
             new MedicoTriage().setVisible(true);
+            
         }
     }//GEN-LAST:event_botonTriageActionPerformed
 
