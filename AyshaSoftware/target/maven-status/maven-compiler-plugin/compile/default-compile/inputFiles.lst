@@ -14,6 +14,7 @@ C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\sr
 C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\AdminSistemas.java
 C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\panelesmedicos\PanelDescripcionEstudio.java
 C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\RegistroFuncionarios.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\Principal.java
 C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\CrudUsuarios.java
 C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\panelesmedicos\Panel4.java
 C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\Login.java
@@ -25,6 +26,7 @@ C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\sr
 C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\Especialidad.java
 C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\Persona.java
 C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\MedicoTriage.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\Conexion.java
 C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\MedicoSala.java
 C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\EntradaMedicoSala.java
 C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\dbController\CtrlMedicoTriage.java
@@ -43,6 +45,7 @@ C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\sr
 C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\FormatosValidos.java
 C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\Admision.java
 C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\dbController\CtrlRegistroFuncionarios.java
+C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\panelesmedicos\registro.java
 C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\Funcionario.java
 C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\ventanas\RRHH.java
 C:\Users\joaqu\OneDrive\Documentos\NetBeansProjects\repo-taller\AyshaSoftware\src\main\java\clases\Datos.java

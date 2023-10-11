@@ -90,7 +90,6 @@ ventanas\MedicoTriage$17.class
 ventanas\ListaTriage$2.class
 clases\Datos.class
 ventanas\MedicoTriage$11.class
-ventanas\EntradaMedicoSala$6.class
 ventanas\Login$3.class
 ventanas\RegistroPaciente$5.class
 ventanas\RegistroPaciente$8.class
@@ -126,7 +125,6 @@ clases\Sector.class
 ventanas\MedicoTriage$12.class
 ventanas\CrudUsuarios$1.class
 ventanas\MedicoSala.class
-ventanas\EntradaMedicoSala$5.class
 ventanas\panelesmedicos\PanelDescripcionRegistro.class
 ventanas\RegistroPaciente$13.class
 clases\Estudio.class
