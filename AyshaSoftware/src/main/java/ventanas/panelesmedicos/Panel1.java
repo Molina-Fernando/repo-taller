@@ -46,66 +46,6 @@ public class Panel1 extends javax.swing.JPanel {
     
     public void cargaDatos(){
         
-        
-        //aca creo que deberia llamarse a la base de datos pero por ahora la carga va a ser manual con muchos atributos
-        //PRIMER PACIENTE
-        Paciente p1 = new Paciente("Sebastian","Romero"," ","Chile 2150","43382385","4213544","3454234594","sebas2001@gmail.com","3454803293","SOLTERO");
-        //Primer estudio
-        LocalDate fecha3=LocalDate.of(2021, Month.JANUARY, 20);
-        LocalTime hora3=LocalTime.of(23, 50,15);
-        Estudio es =new Estudio(fecha3,hora3,"Espirometría","Positivo");
-        //carga del primer estudio 
-        p1.setEstudios(es);
-        //Segundo estudio
-        LocalDate fecha4=LocalDate.of(2019, Month.JANUARY, 14);
-        LocalTime hora4=LocalTime.of(8, 45,15);
-        Estudio es1 =new Estudio(fecha4,hora4,"Tomografía","negativo");
-        //carga del segundo estudio
-        p1.setEstudios(es1);
-        //Primer registro
-        LocalDate fecha=LocalDate.of(2023, Month.JANUARY, 25);
-        LocalTime hora=LocalTime.of(23, 50,38);
-        Registro reg=new Registro(fecha,hora,"Presenta apnea del sueño",Lugares.CONSULTORIO);
-        p1.setRegistros(reg);
-        //Segundo registro
-        LocalDate fecha1=LocalDate.of(2022, Month.AUGUST, 12);
-        LocalTime hora1=LocalTime.of(12, 30,18);
-        Registro reg1=new Registro(fecha1,hora1,"Presenta lesiones debido a un accidente",Lugares.EMERGENCIA);
-        p1.setRegistros(reg);  
-        //Carga del paciente completo en la lista de pacientes
-        listaPacientes.add(p1);
-        
-        
-
-        //SEGUNDO PACIENTE
-        Paciente p2 = new Paciente("Santiago","Nuñez"," ","Gregoria Perez","42570987","4233324","3454857219","santicarp@gmail.com","3454803293","CASADO");
-        
-        //Primer estudio
-        LocalDate fecha9=LocalDate.of(2018, Month.DECEMBER, 3);
-        LocalTime hora9=LocalTime.of(06, 05,15);
-        Estudio es9 =new Estudio(fecha9,hora9,"Encefálograma","Positivo");
-        //carga del primer estudio 
-        p1.setEstudios(es9);
-        //Segundo estudio
-        LocalDate fecha8=LocalDate.of(2015, Month.JANUARY, 13);
-        LocalTime hora8=LocalTime.of(8, 45,15);
-        Estudio es8 =new Estudio(fecha8,hora8,"Hemograma","negativo");
-        //carga del segundo estudio
-        p1.setEstudios(es8);
-        //Primer registro
-        LocalDate fecha7=LocalDate.of(2023, Month.SEPTEMBER, 21);
-        LocalTime hora7=LocalTime.of(21, 30,00);
-        Registro reg7=new Registro(fecha7,hora7,"Presenta apnea del sueño",Lugares.INTERNACION);
-        p1.setRegistros(reg7);
-        //Segundo registro
-        LocalDate fecha6=LocalDate.of(2022, Month.MARCH, 30);
-        LocalTime hora6=LocalTime.of(11, 35,13);
-        Registro reg6=new Registro(fecha6,hora6,"Presenta lesiones debido a un accidente",Lugares.EMERGENCIA);
-        p1.setRegistros(reg6);
-        //CARGA SEGUNDO PACIENTE
-        listaPacientes.add(p2);
-        
-        //
         modelo.addColumn("Nombre");
         modelo.addColumn("Apellido");
         modelo.addColumn("Color");

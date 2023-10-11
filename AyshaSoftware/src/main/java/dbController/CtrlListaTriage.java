@@ -1,0 +1,85 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package dbController;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+
+/**
+ *
+ * @author Jeremías Simian
+ */
+public class CtrlListaTriage {
+
+    public ArrayList<Object[]> tablaLista() {
+        ArrayList<Object[]> arrayListEspera = new ArrayList<>();
+        Connection conex = null;
+        try {
+            conex = Conexion.conectar();
+
+            String query = "SELECT Nombre, Apellido, DNI FROM ListaTriage";
+
+            PreparedStatement psq = conex.prepareStatement(query);
+
+            ResultSet rs = psq.executeQuery();
+
+            while (rs.next()) {
+                Object ob[] = new Object[3];
+                ob[0] = rs.getString("Nombre");
+                ob[1] = rs.getString("Apellido");
+                ob[2] = rs.getString("DNI");
+
+                arrayListEspera.add(ob);
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println("EXCEP SQL" + e);
+            JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
+        } finally {
+            try {
+                if (conex != null) {
+                    conex.close();
+                }
+            } catch (SQLException excSql) {
+                System.err.println("ERROR SQL" + excSql);
+            }
+        }
+        return arrayListEspera;
+    }
+    
+    public void eliminarPacienteEsperaTriage(int dni){
+        Connection conex = null;
+        try {
+
+            conex = Conexion.conectar();
+            String deleteQuery = "DELETE FROM LISTATRIAGE WHERE DNI = ?";
+            PreparedStatement psq = conex.prepareStatement(deleteQuery);
+            psq.setInt(1, dni);
+            
+            
+            psq.executeUpdate();
+
+
+        } catch (SQLException e) {
+            System.out.println("EXCEP SQL" + e);
+            JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
+        } finally {
+            try {
+                if (conex != null) {
+                    conex.close();
+                }
+            } catch (SQLException excSql) {
+                System.err.println("ERROR SQL" + excSql);
+            }
+        }
+    }
+
+}
