@@ -3,6 +3,7 @@ ventanas\EntradaMedicoSala.class
 ventanas\panelesmedicos\Panel3$1.class
 ventanas\RegistroPaciente$7.class
 ventanas\panelesmedicos\PanelDescripcionEstudio.class
+clases\AsignacionRol.class
 clases\Paciente.class
 ventanas\AdminInformatico$2.class
 clases\Triage.class
@@ -38,6 +39,7 @@ clases\Funcionario.class
 ventanas\MedicoTriage$3.class
 dbController\Conexion.class
 ventanas\CrudUsuarios$5.class
+ventanas\RegistroMedicos$7.class
 clases\Especialidad.class
 main\Principal.class
 ventanas\RegistroFuncionarios.class

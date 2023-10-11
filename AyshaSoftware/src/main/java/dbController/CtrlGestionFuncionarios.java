@@ -12,10 +12,8 @@ import java.util.ArrayList;
 //import clases.Rol;
 //import clases.Sector;
 
-
-
 public class CtrlGestionFuncionarios {
-    
+
     /*public void instanciarFuncionario(int dni, String selectedOption, String selectedOption2, String nomDB, int dniDB){
         switch(selectedOption){
             case "MedicoTriage" :
@@ -32,23 +30,22 @@ public class CtrlGestionFuncionarios {
                 break;
         }
     }*/
-
     public ArrayList<Object[]> getTablaFuncionarios(int dniDB, String nomDB) {
         ArrayList<Object[]> arrayListDeVectores = new ArrayList<>();
         Connection conex = null;
         try {
             conex = Conexion.conectar();
-            String query = "SELECT DNI, Nombre, Apellido, Rol, Sector FROM Funcionarios";
+            String query = "SELECT DNI, Nombre, Apellido, Sector FROM Funcionarios";
             PreparedStatement psq = conex.prepareStatement(query);
             ResultSet rs = psq.executeQuery();
 
             while (rs.next()) {
-                Object ob[] = new Object[5];
+                Object ob[] = new Object[4];
                 ob[0] = rs.getString("DNI");
                 ob[1] = rs.getString("Nombre");
                 ob[2] = rs.getString("Apellido");
-                ob[3] = rs.getString("Rol");
-                ob[4] = rs.getString("Sector");
+                //ob[3] = rs.getString("Rol");
+                ob[3] = rs.getString("Sector");
 
                 arrayListDeVectores.add(ob);
             }
@@ -69,6 +66,71 @@ public class CtrlGestionFuncionarios {
         return arrayListDeVectores;
     }
 
+    public ArrayList cargaComboBoxRoles() {
+
+        ArrayList<String> arrayOpciones = new ArrayList<>();
+
+        Connection conex = null;
+        try {
+            conex = Conexion.conectar();
+            PreparedStatement psq = conex.prepareStatement("SELECT Nombre FROM Rol");
+            ResultSet rs = psq.executeQuery();
+
+            while (rs.next()) {
+                arrayOpciones.add(rs.getString("Nombre"));
+
+            }
+
+        } catch (Exception e) {
+        }
+        return arrayOpciones;
+    }
+
+    ArrayList<String> arrayRoles = new ArrayList<>();
+
+    public void agregarRoles(String rol, int dni) {
+        arrayRoles.add(rol);
+        asignarRoles(arrayRoles,dni);
+    }
+
+    public void asignarRoles(ArrayList<String> arrayList, int dni) {
+        ArrayList<Integer> arrayIDS = new ArrayList<>();
+        Connection conex = null;
+
+        try {
+            conex = Conexion.conectar();
+            PreparedStatement psq = conex.prepareStatement("SELECT ID FROM Rol WHERE Nombre = ?");
+            PreparedStatement insercionRoles = conex.prepareStatement("INSERT INTO AsignacionRoles (idFuncionario, idRol) VALUES (?, ?)");
+
+            for (String rol : arrayList) {
+                psq.setString(1, rol);
+                ResultSet rs = psq.executeQuery();
+
+                if (rs.next()) {
+                    int idRol = rs.getInt("ID");
+                    insercionRoles.setInt(1, dni);
+                    insercionRoles.setInt(2, idRol);
+                    insercionRoles.executeUpdate();
+
+                    //arrayIDS.add(idRol);
+                }
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
+        } finally {
+            // Cierra la conexión
+            if (conex != null) {
+                try {
+                    conex.close();
+                } catch (SQLException e) {
+                    System.err.println("ERROR SQL" + e);
+                }
+            }
+        }
+
+        //return arrayIDS;
+    }
+
     public void eliminarFuncionario(int dni) {
         Connection conex = null;
         try {
@@ -77,7 +139,7 @@ public class CtrlGestionFuncionarios {
             String deleteQuery = "DELETE FROM FUNCIONARIOS WHERE DNI = ?";
             PreparedStatement psq = conex.prepareStatement(deleteQuery);
             psq.setInt(1, dni);
-            
+
             psq.executeUpdate();
 
             //se elimina el usuario cuando se elimina un Funcionario
@@ -99,41 +161,41 @@ public class CtrlGestionFuncionarios {
             }
         }
     }
-    
-    public void altaFuncionario(int dni, String selectedOption, String selectedOption2, String nomDB, int dniDB){
-        Connection conex = null;
-            try {
-                conex = Conexion.conectar();
-                String query = "SELECT * FROM Funcionarios WHERE DNI = ?";
-                PreparedStatement psq = conex.prepareStatement(query);
-                psq.setInt(1, dni);
-                ResultSet rs = psq.executeQuery();
 
-                if (rs.next()) {
-                    String update = "UPDATE Funcionarios SET Rol = ?, Sector = ? WHERE DNI = ?;";
-                    PreparedStatement psi = conex.prepareStatement(update);
-                    psi.setString(1, selectedOption);
-                    psi.setString(2, selectedOption2);
-                    psi.setInt(3, dni);
-                    psi.executeUpdate();
-                    //actualizarTabla();
-                }
-            } catch (SQLException e) {
-                System.out.println("EXCEP SQL" + e);
-                JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
-            } finally {
-                try {
-                    if (conex != null) {
-                        conex.close();
-                    }
-                } catch (SQLException excSql) {
-                    System.err.println("ERROR SQL" + excSql);
-                }
+    public void altaFuncionario(int dni, String selectedOption, String selectedOption2, String nomDB, int dniDB) {
+        Connection conex = null;
+        try {
+            conex = Conexion.conectar();
+            String query = "SELECT * FROM Funcionarios WHERE DNI = ?";
+            PreparedStatement psq = conex.prepareStatement(query);
+            psq.setInt(1, dni);
+            ResultSet rs = psq.executeQuery();
+
+            if (rs.next()) {
+                String update = "UPDATE Funcionarios SET Rol = ?, Sector = ? WHERE DNI = ?;";
+                PreparedStatement psi = conex.prepareStatement(update);
+                psi.setString(1, selectedOption);
+                psi.setString(2, selectedOption2);
+                psi.setInt(3, dni);
+                psi.executeUpdate();
+                //actualizarTabla();
             }
-            
-            generarUsuario(selectedOption, selectedOption2, nomDB, dniDB);
+        } catch (SQLException e) {
+            System.out.println("EXCEP SQL" + e);
+            JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
+        } finally {
+            try {
+                if (conex != null) {
+                    conex.close();
+                }
+            } catch (SQLException excSql) {
+                System.err.println("ERROR SQL" + excSql);
+            }
+        }
+
+        generarUsuario(selectedOption, selectedOption2, nomDB, dniDB);
     }
-    
+
     /*public void altaMedico(int dni, String selectedOption, String selectedOption2, String nomDB, int dniDB, Funcionario func){
         
         
@@ -175,15 +237,13 @@ public class CtrlGestionFuncionarios {
             generarUsuario(selectedOption, selectedOption2, nomDB, dniDB);
         
     }*/
-    
-    /*public void altaAdministrativo(){
+ /*public void altaAdministrativo(){
         
     }
     
     public void altaAdminInformatica(){
         
     }*/
-    
     private String generarContrasenia(String nombre, int dni) {
 
         int tresUltimosDigitosDni = dni % 1000;
@@ -247,8 +307,7 @@ public class CtrlGestionFuncionarios {
             }
         }
     }
-    
-    
+
     /* switch(SelectOpt1){
             case "MedicoTriage" :
                 //Instancia de Medico
@@ -263,5 +322,4 @@ public class CtrlGestionFuncionarios {
                 //Instancia de Administrativo
                 break;
         }*/
-
 }
