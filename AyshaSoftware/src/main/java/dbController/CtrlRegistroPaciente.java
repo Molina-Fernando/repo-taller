@@ -18,7 +18,7 @@ import ventanas.RegistroPaciente;
 
 public class CtrlRegistroPaciente {
     
-    private static Paciente pac = new Paciente();
+    private static final Paciente pac = new Paciente();
 
     public static void registrarPacientes(String nombre,
             String apellido,

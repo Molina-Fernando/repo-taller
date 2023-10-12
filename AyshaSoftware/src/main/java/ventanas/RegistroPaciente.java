@@ -8,7 +8,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import java.util.Date;
-import dbController.Conexion;
 import dbController.CtrlRegistroPaciente;
 import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
@@ -35,7 +34,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
         botonRegistro1.setVisible(false);
         botonLista.setVisible(false);
     }
-    Conexion cn = new Conexion();
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
     /**
