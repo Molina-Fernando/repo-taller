@@ -4,6 +4,7 @@ import dbController.CtrlRegistroFuncionarios;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -11,7 +12,10 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 public class RegistroFuncionarios extends javax.swing.JFrame {
-
+    
+    CtrlRegistroFuncionarios ctrlRegistroFuncionarios = new CtrlRegistroFuncionarios();
+    private String[] elementosBox = new String[5];
+    
     public RegistroFuncionarios() {
         initComponents();
         setVisible(true);
@@ -23,7 +27,16 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
         SetImageLabel.setImageLabel(jLabel12, "src\\main\\java\\images\\regFunc.png");
         setIconImage(miIcono);
+        
+        cargarBoxSectores(ctrlRegistroFuncionarios.cargaComboBoxSectores());
     }
+    
+   private void cargarBoxSectores(ArrayList<String> arrayList){
+        for(String elemento : arrayList){
+            boxSector.addItem(elemento);
+        }
+    }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -56,6 +69,8 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         jLabelIconito = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         dcFechaNac = new com.toedter.calendar.JDateChooser();
+        boxSector = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
 
         botonAgregar.setText("Alta");
         botonAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -123,7 +138,7 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 153));
         jLabel10.setText("Correo Electronico");
-        bg.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 140, 20));
+        bg.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 400, 140, 20));
 
         textMail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,7 +169,7 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
                 botonAgregar1ActionPerformed(evt);
             }
         });
-        bg.add(botonAgregar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, 130, 30));
+        bg.add(botonAgregar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 520, 130, 30));
 
         jLabelIconito.setText("jLabel1");
         bg.add(jLabelIconito, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 60));
@@ -163,15 +178,22 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         bg.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 170, 160));
         bg.add(dcFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 170, -1));
 
+        bg.add(boxSector, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 430, 170, -1));
+
+        jLabel11.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel11.setText("Sector(es)");
+        bg.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 430, 80, 20));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
         );
 
         pack();
@@ -196,6 +218,7 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         String telCelular = textCel.getText().trim();
         String estadoCivil = textEstadoCivil.getText().trim();
         String correoElectronico = textMail.getText().trim();
+        String sector = (String) boxSector.getSelectedItem();
 
         String patronMail = "^[A-Za-z0-9+_.-]+@(.+)$";
         String patronDNI = "^[0-9]{7,10}$";
@@ -214,7 +237,9 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
                 && !telFijo.isEmpty()
                 && !telCelular.isEmpty()
                 && !estadoCivil.isEmpty()
-                && !correoElectronico.isEmpty()) {
+                && !correoElectronico.isEmpty()
+                && !sector.isEmpty()) {
+            
 
             if (matcherMail.matches()) {
 
@@ -223,7 +248,8 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                     String fechaFormateada = formato.format(fechaNacimiento);
 
-                    CtrlRegistroFuncionarios.registrarFuncionario(nombre, apellido, fechaFormateada, domicilio, dni, telFijo, telCelular, estadoCivil, correoElectronico);
+                    ctrlRegistroFuncionarios.registrarFuncionario(nombre, apellido, fechaFormateada, domicilio, dni, telFijo, telCelular, estadoCivil, correoElectronico, sector);
+                    
 
                     textNombre.setText("");
                     textApellido.setText("");
@@ -307,9 +333,11 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
     private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonEditar;
     private javax.swing.JButton botonEliminar;
+    private javax.swing.JComboBox<String> boxSector;
     private javax.swing.ButtonGroup buttonGroup1;
     private com.toedter.calendar.JDateChooser dcFechaNac;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

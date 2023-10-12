@@ -9,12 +9,19 @@ import dbController.CtrlGestionFuncionarios;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 public class GestionFuncionarios extends javax.swing.JFrame {
 
     DefaultTableModel modelo;
+    DefaultTableModel modeloR;
     ArrayList<Object[]> arrayListVectores;
+    ArrayList<Object[]> arrayListRoles;
     CtrlGestionFuncionarios dbCtrl = new CtrlGestionFuncionarios();
+    private DefaultListModel<String> modeloLista;
+    private String rol;
 
     public GestionFuncionarios() {
         initComponents();
@@ -23,18 +30,37 @@ public class GestionFuncionarios extends javax.swing.JFrame {
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         arrayListVectores = new ArrayList<>();
+        arrayListRoles = new ArrayList<>();
 
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
         setIconImage(miIcono);
 
+        modeloLista = new DefaultListModel<>();
+        lista = new JList<>(modeloLista);
+        jScrollPane2.setViewportView(lista);
         modelo = new DefaultTableModel();
         modelo.addColumn("DNI");
         modelo.addColumn("Nombre");
         modelo.addColumn("Apellido");
-        modelo.addColumn("Rol");
         modelo.addColumn("Sector");
+        
+        modeloR = new DefaultTableModel();
+        modeloR.addColumn("DNI");
+        modeloR.addColumn("Rol");
+        
+        //modelo.addColumn("Rol");
+        
         actualizarTabla();
+        actualizarTablaRoles();
+        
+        cargarBoxRoles(dbCtrl.cargaComboBoxRoles());
+    }
+
+    private void cargarBoxRoles(ArrayList<String> arrayList) {
+        for (String elemento : arrayList) {
+            comboBoxRoles.addItem(elemento);
+        }
     }
 
     String nomDB;
@@ -60,6 +86,17 @@ public class GestionFuncionarios extends javax.swing.JFrame {
             tablaFuncionarios.setModel(modelo);
         }
     }
+    
+    private void actualizarTablaRoles(){
+        modeloR.setRowCount(0);
+        tablaRoles = new javax.swing.JTable();
+        tablaRoles.setModel(modeloR);
+        
+        tablaRoles = new JTable(modeloR);
+        jScrollPane3.setViewportView(tablaRoles);
+    }
+    
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
@@ -70,13 +107,20 @@ public class GestionFuncionarios extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaFuncionarios = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         botonEliminar = new javax.swing.JButton();
         botonAlta = new javax.swing.JButton();
-        btnElimUser = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        lista = new javax.swing.JList<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablaRoles = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        botonActualizar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        botonAlta1 = new javax.swing.JButton();
+        comboBoxRoles = new javax.swing.JComboBox<>();
+        botonAlta2 = new javax.swing.JButton();
+        botonLimpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,44 +147,21 @@ public class GestionFuncionarios extends javax.swing.JFrame {
         tablaFuncionarios.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaFuncionarios);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 730, 190));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 730, 190));
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 153));
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 153));
-        jLabel1.setText("  PENDIENTES DE ALTA (quienes no tienen rol y sector)");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 390, 40));
-
-        jComboBox1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MedicoTriage", "MedicoSala", "AdminInformatico", "Administrativo" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, -1, -1));
-
-        jComboBox2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admision", "RRHH", "Compras", "Auditoria", "Gestion", "RegistrosMedicos" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 300, -1, -1));
-
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 153));
-        jLabel2.setText("Sector");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, -1, 20));
+        jLabel1.setText("Roles a asignar");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 260, 120, 40));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 153));
-        jLabel3.setText("Rol");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, 30, 20));
+        jLabel3.setText("Rol(es)");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 50, 20));
 
         botonEliminar.setBackground(new java.awt.Color(0, 0, 153));
-        botonEliminar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        botonEliminar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         botonEliminar.setForeground(new java.awt.Color(255, 255, 255));
         botonEliminar.setText("ELIMINAR");
         botonEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -148,10 +169,10 @@ public class GestionFuncionarios extends javax.swing.JFrame {
                 botonEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(botonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 300, 90, 30));
+        jPanel1.add(botonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 380, 120, 30));
 
         botonAlta.setBackground(new java.awt.Color(0, 0, 153));
-        botonAlta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        botonAlta.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         botonAlta.setForeground(new java.awt.Color(255, 255, 255));
         botonAlta.setText("ALTA");
         botonAlta.addActionListener(new java.awt.event.ActionListener() {
@@ -159,34 +180,177 @@ public class GestionFuncionarios extends javax.swing.JFrame {
                 botonAltaActionPerformed(evt);
             }
         });
-        jPanel1.add(botonAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 300, 80, 30));
+        jPanel1.add(botonAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 340, 120, 30));
 
-        btnElimUser.setText("Eliminar Usuario");
-        btnElimUser.addActionListener(new java.awt.event.ActionListener() {
+        jScrollPane2.setViewportView(lista);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 290, 220, 120));
+
+        tablaRoles.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(tablaRoles);
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 530, 470, 160));
+
+        jLabel2.setBackground(new java.awt.Color(0, 0, 153));
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel2.setText("  PENDIENTES DE ALTA (quienes no tienen rol y sector)");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, 390, 40));
+
+        botonActualizar.setBackground(new java.awt.Color(0, 0, 153));
+        botonActualizar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        botonActualizar.setForeground(new java.awt.Color(255, 255, 255));
+        botonActualizar.setText("ACTUALIZAR");
+        botonActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnElimUserActionPerformed(evt);
+                botonActualizarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnElimUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, -1, -1));
+        jPanel1.add(botonActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 420, 120, 30));
+
+        jLabel4.setBackground(new java.awt.Color(0, 0, 153));
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel4.setText("Roles asociados");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 500, 120, 40));
+
+        botonAlta1.setBackground(new java.awt.Color(0, 0, 153));
+        botonAlta1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        botonAlta1.setForeground(new java.awt.Color(255, 255, 255));
+        botonAlta1.setText("Agregar a la Lista");
+        botonAlta1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAlta1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(botonAlta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 430, 160, 30));
+
+        jPanel1.add(comboBoxRoles, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, -1, -1));
+
+        botonAlta2.setBackground(new java.awt.Color(0, 0, 153));
+        botonAlta2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        botonAlta2.setForeground(new java.awt.Color(255, 255, 255));
+        botonAlta2.setText("Asignar Roles");
+        botonAlta2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAlta2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(botonAlta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 430, 140, 30));
+
+        botonLimpiar.setBackground(new java.awt.Color(0, 0, 153));
+        botonLimpiar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        botonLimpiar.setForeground(new java.awt.Color(255, 255, 255));
+        botonLimpiar.setText("Limpiar");
+        botonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonLimpiarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(botonLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 530, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 910, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 694, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnElimUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimUserActionPerformed
+    private void botonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnElimUserActionPerformed
+        
+        int numFila = tablaFuncionarios.getSelectedRow();
+        if (numFila != -1) {
 
+            String dnistr = (String) tablaFuncionarios.getValueAt(numFila, 0);
+            
+            arrayListRoles = dbCtrl.getTablaRolesAsociados(Integer.parseInt(dnistr));
+            
+            for (Object[] vector : arrayListRoles) {
+
+           // String dniParcialString = vector[0].toString();
+           // dniDB = Integer.parseInt(dniParcialString);
+            //nomDB = vector[1].toString();
+
+            modeloR.addRow(vector);
+            tablaRoles.setModel(modeloR);
+        }
+            
+            
+        }
+        
+        
+    }//GEN-LAST:event_botonActualizarActionPerformed
+
+    ArrayList<String> arrayRolesInputDB = new ArrayList<>();
+    
+    private void botonAlta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAlta1ActionPerformed
+        // TODO add your handling code here:
+        //modeloLista.clear();
+        rol = (String) comboBoxRoles.getSelectedItem();
+        System.out.println(rol);
+        if(!modeloLista.contains(rol)){
+        modeloLista.addElement(rol);
+        lista.updateUI();
+        
+            arrayRolesInputDB.add(rol);
+            
+        //dbCtrl.agregarRoles(rol,dniDB);
+            //System.out.println(dniDB);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Ya asignó el rol " + rol);
+        
+        }
+        //modeloLista.clear();
+    }//GEN-LAST:event_botonAlta1ActionPerformed
+
+    private void botonAlta2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAlta2ActionPerformed
+        // TODO add your handling code here:
+            int numFila = tablaFuncionarios.getSelectedRow();
+        if (numFila != -1) {
+            String dnistr = (String) tablaFuncionarios.getValueAt(numFila, 0);
+            int dniDBA = Integer.parseInt(dnistr);
+            System.out.println(dniDBA);
+            dbCtrl.asignarRoles(arrayRolesInputDB,dniDBA);
+            modeloLista.clear();
+       //dbCtrl.agregarRoles(rol,dniDB);
+        } else {JOptionPane.showMessageDialog(null, "Debe seleccionar un funcionario de la tabla");
+        }
+    
+    }//GEN-LAST:event_botonAlta2ActionPerformed
+    
+        
+        
+    private void botonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLimpiarActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel modeloTabla = (DefaultTableModel) tablaRoles.getModel();
+        modeloTabla.setRowCount(0);
+    }//GEN-LAST:event_botonLimpiarActionPerformed
+        
+    
+    
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_botonEliminarActionPerformed
 
         int numFila = tablaFuncionarios.getSelectedRow();
@@ -201,19 +365,6 @@ public class GestionFuncionarios extends javax.swing.JFrame {
         }
     }
 
-    private String selectedOption;
-    private String selectedOption2;
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-        selectedOption = (String) jComboBox1.getSelectedItem();
-        // GEN-LAST:event_jComboBox1ActionPerformed
-    }
-
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
-        selectedOption2 = (String) jComboBox2.getSelectedItem();
-    }// GEN-LAST:event_jComboBox2ActionPerformed
 
     private void botonAltaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_botonAltaActionPerformed
         // TODO add your handling code here:
@@ -221,8 +372,10 @@ public class GestionFuncionarios extends javax.swing.JFrame {
         if (numFila != -1) {
 
             String dnistr = (String) tablaFuncionarios.getValueAt(numFila, 0);
+            String nomstr = (String) tablaFuncionarios.getValueAt(numFila, 1);
             int dni = Integer.parseInt(dnistr);
-            dbCtrl.altaFuncionario(dni, selectedOption, selectedOption2, nomDB, dniDB);
+            System.out.println(dni);
+            dbCtrl.altaFuncionario(nomstr, dni);
             actualizarTabla();
         }
     }
@@ -270,16 +423,23 @@ public class GestionFuncionarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonActualizar;
     private javax.swing.JButton botonAlta;
+    private javax.swing.JButton botonAlta1;
+    private javax.swing.JButton botonAlta2;
     private javax.swing.JButton botonEliminar;
-    private javax.swing.JButton btnElimUser;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JButton botonLimpiar;
+    private javax.swing.JComboBox<String> comboBoxRoles;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JList<String> lista;
     private javax.swing.JTable tablaFuncionarios;
+    private javax.swing.JTable tablaRoles;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,7 @@ import dbController.CtrlRegistroMedicos;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,6 +29,12 @@ public class RegistroMedicos extends javax.swing.JFrame {
     private Date fechaTitulo;
     private Date fechaNacimiento;
     private String universidad;
+    private String especialidadElegida;
+
+    ArrayList<String> arrayEspecialidades = new ArrayList<>();
+
+    CtrlRegistroFuncionarios ctrlRegistroFuncionarios = new CtrlRegistroFuncionarios();
+    CtrlRegistroMedicos ctrlRegistroMedicos = new CtrlRegistroMedicos();
 
     public RegistroMedicos() {
         initComponents();
@@ -43,6 +50,13 @@ public class RegistroMedicos extends javax.swing.JFrame {
         modeloLista = new DefaultListModel<>();
         lista = new JList<>(modeloLista);
         jScrollPane1.setViewportView(lista);
+        cargarBoxEspecialidades(ctrlRegistroMedicos.cargaComboBoxEspecialidades());
+    }
+
+    private void cargarBoxEspecialidades(ArrayList<String> arrayList) {
+        for (String elemento : arrayList) {
+            comboBoxEspecialidades.addItem(elemento);
+        }
     }
 
     /**
@@ -87,6 +101,7 @@ public class RegistroMedicos extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         dcFechaNac = new com.toedter.calendar.JDateChooser();
         textNumMatricula = new javax.swing.JTextField();
+        comboBoxEspecialidades = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -143,7 +158,7 @@ public class RegistroMedicos extends javax.swing.JFrame {
                 textEspecialidadActionPerformed(evt);
             }
         });
-        bg.add(textEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 460, 170, -1));
+        bg.add(textEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 430, 170, -1));
 
         textNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,6 +233,13 @@ public class RegistroMedicos extends javax.swing.JFrame {
         bg.add(dcFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 170, -1));
         bg.add(textNumMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 430, 170, -1));
 
+        comboBoxEspecialidades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxEspecialidadesActionPerformed(evt);
+            }
+        });
+        bg.add(comboBoxEspecialidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 460, 170, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -251,7 +273,7 @@ public class RegistroMedicos extends javax.swing.JFrame {
         telCelular = textCel.getText().trim();
         estadoCivil = textEstadoCivil.getText().trim();
         correoElectronico = textMail.getText().trim();
-       
+        numMatricula = textNumMatricula.getText().trim();
 
         String patronMail = "^[A-Za-z0-9+_.-]+@(.+)$";
         String patronDNI = "^[0-9]{7,10}$";
@@ -277,23 +299,28 @@ public class RegistroMedicos extends javax.swing.JFrame {
 
                 if (matcherDNI.matches()) {
 
-                    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-                    String fechaFormateada = formato.format(fechaNacimiento);
+                    if (validarMatricula(numMatricula)) {
+                        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                        String fechaFormateada = formato.format(fechaNacimiento);
 
-                    CtrlRegistroFuncionarios.registrarFuncionario(nombre, apellido, fechaFormateada, domicilio, dni, telFijo, telCelular, estadoCivil, correoElectronico);
+                        ctrlRegistroMedicos.setMatricula(numMatricula);
+                        ctrlRegistroMedicos.registrarMedico(nombre, apellido, fechaFormateada, domicilio, dni, telFijo, telCelular, estadoCivil, correoElectronico, numMatricula);
 
-                    textNombre.setText("");
-                    textApellido.setText("");
-                    dcFechaNac.setDate(null);
-                    textDomicilio.setText("");
-                    textDNI.setText("");
-                    textFijo.setText("");
-                    textCel.setText("");
-                    textEstadoCivil.setText("");
-                    textMail.setText("");
-                    textNumMatricula.setText("");
-                    modeloLista.clear();
+                        textNombre.setText("");
+                        textApellido.setText("");
+                        dcFechaNac.setDate(null);
+                        textDomicilio.setText("");
+                        textDNI.setText("");
+                        textFijo.setText("");
+                        textCel.setText("");
+                        textEstadoCivil.setText("");
+                        textMail.setText("");
+                        textNumMatricula.setText("");
+                        modeloLista.clear();
 
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Matricula no válida.");
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "DNI no válido");
                 }
@@ -310,29 +337,42 @@ public class RegistroMedicos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textMailActionPerformed
 
+    public boolean validarMatricula(String matricula) {
+        String patronMat = "^[0-9]{2,10}$";
+        Pattern pattern = Pattern.compile(patronMat);
+        Matcher matcher = pattern.matcher(matricula);
+
+        return matcher.matches();
+    }
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
         dni = textDNI.getText().trim();
         numMatricula = textNumMatricula.getText().trim();
-        especialidad = textEspecialidad.getText().trim();
+        //especialidad = textEspecialidad.getText().trim();
+        especialidad = (String) comboBoxEspecialidades.getSelectedItem();
         fechaTitulo = dcFechaTitulo.getDate();
         universidad = textUniversidad.getText().trim();
 
         if (!dni.isEmpty()) {
-            // to do: controlar campos vacios al agregar una especialidad
-            SimpleDateFormat formato2 = new SimpleDateFormat("dd/MM/yyyy");
-            String fechaFormateada2 = formato2.format(fechaTitulo);
+            if (!numMatricula.isEmpty() && !especialidad.isEmpty() && fechaTitulo != null && !universidad.isEmpty()) {
 
-            CtrlRegistroMedicos.registrarMedicos(especialidad, fechaFormateada2, universidad, dni,numMatricula);
+                SimpleDateFormat formato2 = new SimpleDateFormat("dd/MM/yyyy");
+                String fechaFormateada2 = formato2.format(fechaTitulo);
 
-            textEspecialidad.setText("");
-            dcFechaTitulo.setDate(null);
-            textUniversidad.setText("");
+                CtrlRegistroMedicos.registrarMedicos(especialidad, fechaFormateada2, universidad, dni, numMatricula);
 
-            modeloLista.addElement(especialidad);
-            lista.updateUI();
+                textEspecialidad.setText("");
+                dcFechaTitulo.setDate(null);
+                textUniversidad.setText("");
 
+                modeloLista.addElement(especialidad);
+                lista.updateUI();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Faltan datos asociados a la especialidad.");
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Debe ingresar el DNI del médico a registrar especialidad.");
         }
@@ -340,6 +380,10 @@ public class RegistroMedicos extends javax.swing.JFrame {
         // lista.setSelectedValue(especialidad, true);
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void comboBoxEspecialidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxEspecialidadesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxEspecialidadesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -379,6 +423,7 @@ public class RegistroMedicos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton botonRegistrar;
+    private javax.swing.JComboBox<String> comboBoxEspecialidades;
     private com.toedter.calendar.JDateChooser dcFechaNac;
     private com.toedter.calendar.JDateChooser dcFechaTitulo;
     private javax.swing.JButton jButton1;
