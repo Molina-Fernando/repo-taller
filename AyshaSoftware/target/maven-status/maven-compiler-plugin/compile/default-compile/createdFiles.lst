@@ -39,7 +39,6 @@ clases\Funcionario.class
 ventanas\MedicoTriage$3.class
 dbController\Conexion.class
 ventanas\CrudUsuarios$5.class
-ventanas\RegistroMedicos$7.class
 clases\Especialidad.class
 main\Principal.class
 ventanas\RegistroFuncionarios.class
