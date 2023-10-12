@@ -8,7 +8,6 @@ public class Especialidad {
     public Especialidad(String especialidad, InfoEspecialidad informacion) {
         this.especialidad = especialidad;
         this.info = informacion;
-
     }
 
     @Override
