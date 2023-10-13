@@ -78,7 +78,6 @@ public class RegistroMedicos extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        textEspecialidad = new javax.swing.JTextField();
         textNombre = new javax.swing.JTextField();
         textApellido = new javax.swing.JTextField();
         textDomicilio = new javax.swing.JTextField();
@@ -153,13 +152,6 @@ public class RegistroMedicos extends javax.swing.JFrame {
         jLabel10.setText("Correo Electronico");
         bg.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 140, 20));
 
-        textEspecialidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textEspecialidadActionPerformed(evt);
-            }
-        });
-        bg.add(textEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 430, 170, -1));
-
         textNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textNombreActionPerformed(evt);
@@ -189,7 +181,7 @@ public class RegistroMedicos extends javax.swing.JFrame {
                 botonRegistrarActionPerformed(evt);
             }
         });
-        bg.add(botonRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 700, 130, 30));
+        bg.add(botonRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 600, 130, 30));
         bg.add(textUniversidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 520, 170, -1));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -253,10 +245,6 @@ public class RegistroMedicos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void textEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textEspecialidadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textEspecialidadActionPerformed
 
     private void textNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNombreActionPerformed
         // TODO add your handling code here:
@@ -363,7 +351,6 @@ public class RegistroMedicos extends javax.swing.JFrame {
 
                 CtrlRegistroMedicos.registrarMedicos(especialidad, fechaFormateada2, universidad, dni, numMatricula);
 
-                textEspecialidad.setText("");
                 dcFechaTitulo.setDate(null);
                 textUniversidad.setText("");
 
@@ -448,7 +435,6 @@ public class RegistroMedicos extends javax.swing.JFrame {
     private javax.swing.JTextField textCel;
     private javax.swing.JTextField textDNI;
     private javax.swing.JTextField textDomicilio;
-    private javax.swing.JTextField textEspecialidad;
     private javax.swing.JTextField textEstadoCivil;
     private javax.swing.JTextField textFijo;
     private javax.swing.JTextField textMail;

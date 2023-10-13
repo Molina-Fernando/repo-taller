@@ -56,9 +56,10 @@ public class CtrlRegistroMedicos {
             if (!rs.next()) {
 
                 String insert = "INSERT INTO Funcionarios(Nombre, Apellido, FechaNacimiento, Domicilio, DNI, TelFijo, telCel, EstadoCivil, Mail, Matricula) VALUES(?,?,?,?,?,?,?,?,?,?);";
-                
+                String insertMed = "INSERT INTO Medicos(Nombre, Apellido, DNI, Matricula, telCel, Mail) VALUES(?, ?, ?, ?, ?, ?);";
                 PreparedStatement psi = conex.prepareStatement(insert);
-
+                PreparedStatement psi1 = conex.prepareStatement(insertMed);
+                
                 psi.setString(1, func.getNombre());
                 psi.setString(2, func.getApellido());
                 psi.setString(3, func.getFecNacimiento());
@@ -69,8 +70,16 @@ public class CtrlRegistroMedicos {
                 psi.setString(8, func.getDomicilio());
                 psi.setString(9, func.getCorreoElectronico());
                 psi.setString(10, matricula);
+                
+                psi1.setString(1, func.getNombre());
+                psi1.setString(2, func.getApellido());
+                psi1.setString(3, func.getDni());
+                psi1.setString(4, matricula);
+                psi1.setString(5, func.getTelCelular());
+                psi1.setString(6, func.getCorreoElectronico());
 
                 psi.executeUpdate();
+                psi1.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Usuario registrado con éxito - Recuerde que un informático deberá validar el usuario para su posterior ingreso al sistema.");
 
             } else {
@@ -139,7 +148,7 @@ public class CtrlRegistroMedicos {
 
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
 
         return arrayOpciones;

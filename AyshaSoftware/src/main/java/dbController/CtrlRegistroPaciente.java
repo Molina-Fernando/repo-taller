@@ -18,30 +18,10 @@ import ventanas.RegistroPaciente;
 
 public class CtrlRegistroPaciente {
     
-    private static final Paciente pac = new Paciente();
 
-    public static void registrarPacientes(String nombre,
-            String apellido,
-            String domicilio,
-            String fechaFormateada,
-            String dni,
-            String correo,
-            String estadoCivil,
-            String telCelular,
-            String telFijo,
-            String personaContacto) {
 
-        
-        pac.setNombre(nombre);
-        pac.setApellido(apellido);
-        pac.setDomicilio(domicilio);
-        pac.setFecNacimiento(fechaFormateada);
-        pac.setDni(dni);
-        pac.setCorreoElectronico(correo);
-        pac.setEstadoCivil(estadoCivil); 
-        pac.setTelCelular(telCelular);
-        pac.setTelFijo(telFijo);
-        pac.setPersonaContacto(personaContacto);
+    public static void registrarPacientes(Paciente pac) {
+
 
         Connection conex = null;
         try {
@@ -87,11 +67,12 @@ public class CtrlRegistroPaciente {
             }
         }
     }
-
+    
+    private static final Paciente paciente = new Paciente();
     public static void buscarPaciente(String dni, JButton botonRegistro, JButton botonLista, JTextField Textnombre, JTextField Textapellido, JTextField Textdomicilio, JTextField TexttelFijo, JTextField TexttelCel, JTextField TextestadoCivil, JTextField Textmail, JTextField TextpersonaContacto, JDateChooser TextfecNac) {
         
         
-        pac.setDni(dni);
+        paciente.setDni(dni);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Connection conex = null;
         try {
@@ -106,14 +87,14 @@ public class CtrlRegistroPaciente {
             if (rs.next()) {
                     String nombre = rs.getString(1);
                     String apellido = rs.getString(2);
-                    pac.setNombre(nombre);
-                    pac.setApellido(apellido);
+                    paciente.setNombre(nombre);
+                    paciente.setApellido(apellido);
                     String listaEspera = "INSERT INTO ListaTriage(Nombre, Apellido, DNI) VALUES(?,?,?);";
                     PreparedStatement psi1 = conex.prepareStatement(listaEspera);
                     
-                     psi1.setString(1, pac.getNombre());
-                     psi1.setString(2, pac.getApellido());
-                     psi1.setString(3, pac.getDni());
+                     psi1.setString(1, paciente.getNombre());
+                     psi1.setString(2, paciente.getApellido());
+                     psi1.setString(3, paciente.getDni());
                      psi1.executeUpdate();
                      
                     JOptionPane.showMessageDialog(null, "Paciente registrado");

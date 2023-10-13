@@ -44,7 +44,6 @@ public class CtrlGestionFuncionarios {
                 ob[0] = rs.getString("DNI");
                 ob[1] = rs.getString("Nombre");
                 ob[2] = rs.getString("Apellido");
-                //ob[3] = rs.getString("Rol");
                 ob[3] = rs.getString("Sector");
 
                 arrayListDeVectores.add(ob);

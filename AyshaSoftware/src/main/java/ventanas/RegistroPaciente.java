@@ -4,6 +4,7 @@
  */
 package ventanas;
 
+import clases.Paciente;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
@@ -35,7 +36,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
         botonLista.setVisible(false);
     }
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -250,7 +251,8 @@ public class RegistroPaciente extends javax.swing.JFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_TextFijoActionPerformed
-
+    
+    Paciente pac;
 
     private void botonRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistro1ActionPerformed
         String fechaFormateada = null;
@@ -264,8 +266,11 @@ public class RegistroPaciente extends javax.swing.JFrame {
         String telCelular = TextCelular.getText().trim();
         String correo = TextCorreo.getText().trim();
         String estadoCivil = TextEstadoCivil.getText().trim();
+        
         if (fechaNacimiento != null) {
-            fechaFormateada = dateFormat.format(fechaNacimiento);
+             fechaFormateada = dateFormat.format(fechaNacimiento);
+             pac = new Paciente(nombre, apellido, fechaFormateada, domicilio, dni, telFijo, telCelular, correo, personaContacto, estadoCivil);
+        
         }
 
         String patronMail = "^[A-Za-z0-9+_.-]+@(.+)$";
@@ -283,7 +288,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
 
                 if (matcherDNI.matches()) {
 
-                    CtrlRegistroPaciente.registrarPacientes(nombre, apellido, domicilio, fechaFormateada, dni, correo, estadoCivil, telCelular, telFijo, personaContacto);
+                    CtrlRegistroPaciente.registrarPacientes(pac);
                     botonLista.setVisible(true);
 
                 } else {

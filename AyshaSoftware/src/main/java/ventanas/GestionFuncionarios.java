@@ -35,7 +35,6 @@ public class GestionFuncionarios extends javax.swing.JFrame {
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
         setIconImage(miIcono);
-
         modeloLista = new DefaultListModel<>();
         lista = new JList<>(modeloLista);
         jScrollPane2.setViewportView(lista);
@@ -288,11 +287,9 @@ public class GestionFuncionarios extends javax.swing.JFrame {
             arrayListRoles = dbCtrl.getTablaRolesAsociados(Integer.parseInt(dnistr));
             
             for (Object[] vector : arrayListRoles) {
-
            // String dniParcialString = vector[0].toString();
            // dniDB = Integer.parseInt(dniParcialString);
             //nomDB = vector[1].toString();
-
             modeloR.addRow(vector);
             tablaRoles.setModel(modeloR);
         }
