@@ -7,7 +7,6 @@ package ventanas;
 
 import dbController.CtrlEntradaMedicoSala;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -26,7 +25,7 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
     String dniDB;
     String numeroDB;
     String disponibleDB;
-    String dniV = null;
+    public static String  dniV = null;
     public String disponibleV = null;
     public String numeroV = null;
 
@@ -47,7 +46,6 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
         modelo2 = new DefaultTableModel();
         modelo2.addColumn("Numero");
         modelo2.addColumn("Disponibilidad");
-        
         
         actualizarTablaBoxes();
     }
@@ -82,20 +80,15 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tablaBoxes);
 
         for (Object[] vector : listaBoxes) {
-
             numeroDB = vector[1].toString();
             disponibleDB = vector[0].toString();
-            //System.out.println(disponibleDB);
             modelo2.addRow(vector);
             tablaBoxes.setModel(modelo2);
         }
     }
     
     private void cambiarDisponibilidad(String numeroV) {
-        // segun lo que  vengo probando la conexion a la base de datos se hace, 
-        //pero no se actualiza la tabla por lo que el metodo siguiente no actualiza nada
         ctrlDB.alternarDisponibilidad(numeroV);
-        // esto lo hace 
         actualizarTablaBoxes();
     }
 
@@ -248,29 +241,20 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SeleccionPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeleccionPacienteActionPerformed
-        try{
-            
             int numFila = tablaPacientes.getSelectedRow();
             int numFila2 = tablaBoxes.getSelectedRow();
-            
             if (numFila != -1 && numFila2 != -1) {
-                
-                this.dniV = (String) tablaPacientes.getValueAt(numFila, 1);
+                EntradaMedicoSala.dniV = (String) tablaPacientes.getValueAt(numFila, 1);
                 this.disponibleV = (String) tablaBoxes.getValueAt(numFila2, 1);
                 this.numeroV =(String) tablaBoxes.getValueAt(numFila2, 0);
                 if(disponibleV.equals("Disponible")){
                     cambiarDisponibilidad(numeroV);
-                    eliminarFilaTriage(dniV);
-                    MedicoSala m = new MedicoSala();
-                    m.setVisible(true);
+                    eliminarFilaTriage(EntradaMedicoSala.dniV);
+                     MedicoSala m = new MedicoSala();
+                     m.setVisible(true);
+                     EntradaMedicoSala.dniV=null;
                 }
-                
-                    
             }   
-        }catch(NullPointerException e){
-            JOptionPane.showMessageDialog(null, "No fue posible asignar box, falto seleccionar paciente o box", "Error", JOptionPane.ERROR_MESSAGE);
-
-        }
     }//GEN-LAST:event_SeleccionPacienteActionPerformed
 
     private void tablaPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPacientesMouseClicked

@@ -20,12 +20,14 @@ public class Registro {
         this.lugares = lugares;
         this.dni = dni;
     }
-        public Registro( String diagnostico, Lugares lugares,String dni) {
+    
+    public Registro(String dni, String diagnostico, Lugares lugares) {
+        this.dni = dni;
         this.fecha = LocalDate.now();
         this.hora = LocalTime.now();
         this.diagnostico = diagnostico;
         this.lugares = lugares;
-        this.dni = dni;
+        
     }
         
     

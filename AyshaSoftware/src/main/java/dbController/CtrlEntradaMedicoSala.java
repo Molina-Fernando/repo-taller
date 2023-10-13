@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -25,7 +26,6 @@ public class CtrlEntradaMedicoSala {
             String query = "SELECT NombrePac, DNI, ColorDefinitivo FROM ListaEsperaSala";
             PreparedStatement psq = conex.prepareStatement(query);
             ResultSet rs = psq.executeQuery();
-
             while (rs.next()) {
                 Object ob[] = new Object[3];
                 ob[0] = rs.getString("NombrePac");
@@ -35,9 +35,7 @@ public class CtrlEntradaMedicoSala {
                 System.out.println(ob[1]);
                 System.out.println(ob[2]);
                 listaPacientes.add(ob);
-                
             }
-
         } catch (SQLException e) {
             System.out.println("EXCEP SQL" + e);
             JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
@@ -50,11 +48,9 @@ public class CtrlEntradaMedicoSala {
                 System.err.println("ERROR SQL" + excSql);
             }
         }
-
         return listaPacientes;
     }
         
-    
         public ArrayList<Object[]> getTablaBoxes(String numeroDB, String disponibleDB) {
         ArrayList<Object[]> listaBoxes = new ArrayList<>();
         Connection conex = null;
@@ -63,17 +59,14 @@ public class CtrlEntradaMedicoSala {
             String query = "SELECT Numero, Disponibilidad FROM Boxes";
             PreparedStatement psq = conex.prepareStatement(query);
             ResultSet rs = psq.executeQuery();
-
             while (rs.next()) {
                 Object ob[] = new Object[2];
                 ob[0] = rs.getString("Numero");
                 ob[1] = rs.getString("Disponibilidad");
                 System.out.println(ob[0]);
                 System.out.println(ob[1]);
-                listaBoxes.add(ob);
-                
+                listaBoxes.add(ob);                
             }
-
         } catch (SQLException e) {
             System.out.println("EXCEP SQL" + e);
             JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
@@ -86,7 +79,6 @@ public class CtrlEntradaMedicoSala {
                 System.err.println("ERROR SQL" + excSql);
             }
         }
-
         return listaBoxes;
     }
         
@@ -149,5 +141,7 @@ public class CtrlEntradaMedicoSala {
             }
         }
     }
+    
+
           
 }
