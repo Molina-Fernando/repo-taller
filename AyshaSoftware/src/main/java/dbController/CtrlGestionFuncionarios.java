@@ -19,16 +19,12 @@ public class CtrlGestionFuncionarios {
     /*public void instanciarFuncionario(int dni, String selectedOption, String selectedOption2, String nomDB, int dniDB){
         switch(selectedOption){
             case "MedicoTriage" :
+                //Instancia de Medico 
                 Medico medicoTriage = new Medico();
-                //Instancia de Medico altaFuncionario
                 break;
             case "MedicoSala" :
                 //Instancia de Medico
                 Medico medicoSala = new Medico();
-                break;
-            case "AdminInformatico":
-                //Instancia de AdminSistemas
-                AdminSistemas adminInformatica = new AdminSistemas();
                 break;
             case "Administrativo" :
                 //Instancia de Administrativo
@@ -138,7 +134,9 @@ public class CtrlGestionFuncionarios {
             generarUsuario(selectedOption, selectedOption2, nomDB, dniDB);
     }
     
-    /*public void altaMedico(int dni, String selectedOption, String selectedOption2, String nomDB, int dniDB, Medico medico){
+    /*public void altaMedico(int dni, String selectedOption, String selectedOption2, String nomDB, int dniDB, Funcionario func){
+        
+        
         Connection conex = null;
             try {
                 conex = Conexion.conectar();
