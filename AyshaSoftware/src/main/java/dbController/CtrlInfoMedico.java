@@ -16,13 +16,13 @@ import javax.swing.JOptionPane;
  * @author Jeremías Simian
  */
 public class CtrlInfoMedico {
-    
+
     public ArrayList<Object[]> getTablaMedicos() {
         ArrayList<Object[]> arrayListDeVectores = new ArrayList<>();
         Connection conex = null;
         try {
             conex = Conexion.conectar();
-            String query = "SELECT DNI, Nombre, Apellido, Matricula, TelCel, Mail FROM Medicos"; 
+            String query = "SELECT DNI, Nombre, Apellido, Matricula, TelCel, Mail FROM Medicos";
             PreparedStatement psq = conex.prepareStatement(query);
             ResultSet rs = psq.executeQuery();
 
@@ -31,7 +31,6 @@ public class CtrlInfoMedico {
                 ob[0] = rs.getString("DNI");
                 ob[1] = rs.getString("Nombre");
                 ob[2] = rs.getString("Apellido");
-                //ob[3] = rs.getString("Rol");
                 ob[3] = rs.getString("TelCel");
                 ob[4] = rs.getString("Mail");
                 ob[5] = rs.getString("Matricula");
@@ -54,7 +53,7 @@ public class CtrlInfoMedico {
 
         return arrayListDeVectores;
     }
-    
+
     public ArrayList<Object[]> getTablaEspecialidades(int dniDB) {
         ArrayList<Object[]> arrayListDeRoles = new ArrayList<>();
         Connection conex = null;
@@ -64,16 +63,14 @@ public class CtrlInfoMedico {
             PreparedStatement psq = conex.prepareStatement(query);
             psq.setInt(1, dniDB);
             ResultSet rs = psq.executeQuery();
-            
-            
-            
+
             while (rs.next()) {
-                
+
                 String consulta = "SELECT Nombre FROM Especialidad WHERE ID = ?";
                 PreparedStatement psc = conex.prepareStatement(consulta);
                 psc.setInt(1, rs.getInt(2));
                 ResultSet rsc = psc.executeQuery();
-                
+
                 Object ob[] = new Object[4];
                 ob[0] = rs.getString(5);
                 ob[1] = rsc.getString("Nombre");
@@ -95,11 +92,6 @@ public class CtrlInfoMedico {
             }
         }
         return arrayListDeRoles;
-    
-    }
-    
 
-    
-    
-    
+    }
 }

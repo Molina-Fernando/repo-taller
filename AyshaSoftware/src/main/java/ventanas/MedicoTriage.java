@@ -462,7 +462,7 @@ public class MedicoTriage extends javax.swing.JFrame {
             
             ctrl.finalizarTriage();
             ventanaEmergente.setVisible(false);
-            System.exit(0); //Cierra por completo el programas
+            setVisible(false);
         } else {
             JOptionPane.showMessageDialog(null, "Debe realizar el triage");
         }

@@ -64,9 +64,7 @@ public class CtrlGestionFuncionarios {
 
         return arrayListDeVectores;
     }
-    
-    
-    
+
     public ArrayList<Object[]> getTablaRolesAsociados(int dniDB) {
         ArrayList<Object[]> arrayListDeRoles = new ArrayList<>();
         Connection conex = null;
@@ -75,7 +73,7 @@ public class CtrlGestionFuncionarios {
             String query = "SELECT Nombre FROM Rol WHERE id IN (SELECT idRol FROM AsignacionRoles WHERE idFuncionario = ?)";
             PreparedStatement psq = conex.prepareStatement(query);
             psq.setInt(1, dniDB);
-            
+
             ResultSet rs = psq.executeQuery();
 
             while (rs.next()) {
@@ -98,7 +96,7 @@ public class CtrlGestionFuncionarios {
             }
         }
         return arrayListDeRoles;
-    
+
     }
 
     public ArrayList cargaComboBoxRoles() {
@@ -116,7 +114,8 @@ public class CtrlGestionFuncionarios {
 
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
         }
         return arrayOpciones;
     }

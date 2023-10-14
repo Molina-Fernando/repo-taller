@@ -55,8 +55,7 @@ public class InfoMedico extends javax.swing.JFrame {
         actualizarTablaEspecialidades();
     }
 
-    String nomDB;
-    int dniDB;
+  
 
     private void actualizarTabla() {
         modelo.setRowCount(0);
@@ -69,11 +68,6 @@ public class InfoMedico extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tablaMedicos);
 
         for (Object[] vector : arrayListVectores) {
-
-            String dniParcialString = vector[0].toString();
-            dniDB = Integer.parseInt(dniParcialString);
-            nomDB = vector[1].toString();
-
             modelo.addRow(vector);
             tablaMedicos.setModel(modelo);
         }
@@ -192,9 +186,6 @@ public class InfoMedico extends javax.swing.JFrame {
             arrayListEspecialidades = ctrlDb.getTablaEspecialidades(Integer.parseInt(dnistr));
 
             for (Object[] vector : arrayListEspecialidades) {
-                // String dniParcialString = vector[0].toString();
-                // dniDB = Integer.parseInt(dniParcialString);
-                //nomDB = vector[1].toString();
                 modeloR.addRow(vector);
                 tablaEspecialidades.setModel(modeloR);
             }
