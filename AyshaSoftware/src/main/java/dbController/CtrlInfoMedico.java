@@ -64,11 +64,21 @@ public class CtrlInfoMedico {
             PreparedStatement psq = conex.prepareStatement(query);
             psq.setInt(1, dniDB);
             ResultSet rs = psq.executeQuery();
+            
+            
+            
             while (rs.next()) {
-                Object ob[] = new Object[3];
+                
+                String consulta = "SELECT Nombre FROM Especialidad WHERE ID = ?";
+                PreparedStatement psc = conex.prepareStatement(consulta);
+                psc.setInt(1, rs.getInt(2));
+                ResultSet rsc = psc.executeQuery();
+                
+                Object ob[] = new Object[4];
                 ob[0] = rs.getString(5);
-                ob[1] = rs.getString(2);
+                ob[1] = rsc.getString("Nombre");
                 ob[2] = rs.getString(4);
+                ob[3] = rs.getString(3);
                 arrayListDeRoles.add(ob);
             }
 
@@ -87,6 +97,8 @@ public class CtrlInfoMedico {
         return arrayListDeRoles;
     
     }
+    
+
     
     
     

@@ -1,6 +1,5 @@
 package ventanas;
 
-import dbController.CtrlRegistroFuncionarios;
 import dbController.CtrlRegistroMedicos;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -15,7 +14,7 @@ import javax.swing.JOptionPane;
 
 public class RegistroMedicos extends javax.swing.JFrame {
 
-    private DefaultListModel<String> modeloLista;
+    private final DefaultListModel<String> modeloLista;
     private String nombre;
     private String apellido;
     private String domicilio;
@@ -29,11 +28,11 @@ public class RegistroMedicos extends javax.swing.JFrame {
     private Date fechaTitulo;
     private Date fechaNacimiento;
     private String universidad;
-    private String especialidadElegida;
 
     ArrayList<String> arrayEspecialidades = new ArrayList<>();
+    ArrayList<String> arrayFechas = new ArrayList<>();
+    ArrayList<String> arrayUniversidades = new ArrayList<>();
 
-    CtrlRegistroFuncionarios ctrlRegistroFuncionarios = new CtrlRegistroFuncionarios();
     CtrlRegistroMedicos ctrlRegistroMedicos = new CtrlRegistroMedicos();
 
     public RegistroMedicos() {
@@ -101,6 +100,7 @@ public class RegistroMedicos extends javax.swing.JFrame {
         dcFechaNac = new com.toedter.calendar.JDateChooser();
         textNumMatricula = new javax.swing.JTextField();
         comboBoxEspecialidades = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -232,6 +232,9 @@ public class RegistroMedicos extends javax.swing.JFrame {
         });
         bg.add(comboBoxEspecialidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 460, 170, -1));
 
+        jButton2.setText("Asignar Especialidades");
+        bg.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 520, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -252,6 +255,7 @@ public class RegistroMedicos extends javax.swing.JFrame {
 
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
         // TODO add your handling code here:
+
         nombre = textNombre.getText().trim();
         apellido = textApellido.getText().trim();
         fechaNacimiento = dcFechaNac.getDate();
@@ -262,6 +266,8 @@ public class RegistroMedicos extends javax.swing.JFrame {
         estadoCivil = textEstadoCivil.getText().trim();
         correoElectronico = textMail.getText().trim();
         numMatricula = textNumMatricula.getText().trim();
+
+        ctrlRegistroMedicos.asignarEspecialidades(arrayEspecialidades, arrayFechas, arrayUniversidades, numMatricula, Integer.parseInt(dni));
 
         String patronMail = "^[A-Za-z0-9+_.-]+@(.+)$";
         String patronDNI = "^[0-9]{7,10}$";
@@ -291,7 +297,6 @@ public class RegistroMedicos extends javax.swing.JFrame {
                         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                         String fechaFormateada = formato.format(fechaNacimiento);
 
-                        ctrlRegistroMedicos.setMatricula(numMatricula);
                         ctrlRegistroMedicos.registrarMedico(nombre, apellido, fechaFormateada, domicilio, dni, telFijo, telCelular, estadoCivil, correoElectronico, numMatricula);
 
                         textNombre.setText("");
@@ -332,30 +337,36 @@ public class RegistroMedicos extends javax.swing.JFrame {
 
         return matcher.matches();
     }
+  
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        especialidad = (String) comboBoxEspecialidades.getSelectedItem();
+        fechaTitulo = dcFechaTitulo.getDate();
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaTituloFormat = formato.format(fechaTitulo);
+        universidad = textUniversidad.getText();
 
         dni = textDNI.getText().trim();
         numMatricula = textNumMatricula.getText().trim();
-        //especialidad = textEspecialidad.getText().trim();
-        especialidad = (String) comboBoxEspecialidades.getSelectedItem();
-        fechaTitulo = dcFechaTitulo.getDate();
-        universidad = textUniversidad.getText().trim();
+    
+
 
         if (!dni.isEmpty()) {
             if (!numMatricula.isEmpty() && !especialidad.isEmpty() && fechaTitulo != null && !universidad.isEmpty()) {
+                
+                if (!modeloLista.contains(especialidad)) {
 
-                SimpleDateFormat formato2 = new SimpleDateFormat("dd/MM/yyyy");
-                String fechaFormateada2 = formato2.format(fechaTitulo);
+                    modeloLista.addElement(especialidad);
+                    lista.updateUI();
 
-                CtrlRegistroMedicos.registrarMedicos(especialidad, fechaFormateada2, universidad, dni, numMatricula);
+                    arrayEspecialidades.add(especialidad);
+                    arrayFechas.add(fechaTituloFormat);
+                    arrayUniversidades.add(universidad);
 
-                dcFechaTitulo.setDate(null);
-                textUniversidad.setText("");
-
-                modeloLista.addElement(especialidad);
-                lista.updateUI();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ya asignó la especialidad " + especialidad);
+                }
 
             } else {
                 JOptionPane.showMessageDialog(null, "Faltan datos asociados a la especialidad.");
@@ -364,7 +375,7 @@ public class RegistroMedicos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Debe ingresar el DNI del médico a registrar especialidad.");
         }
 
-        // lista.setSelectedValue(especialidad, true);
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -414,6 +425,7 @@ public class RegistroMedicos extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser dcFechaNac;
     private com.toedter.calendar.JDateChooser dcFechaTitulo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

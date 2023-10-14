@@ -6,18 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
 
 public class CtrlRegistroMedicos {
-    
-    private String matricula;
 
-    public void setMatricula(String matricula) {
-        
-        this.matricula = matricula;
-    }
-    
 
     public void registrarMedico(
             String nombre,
@@ -59,7 +51,7 @@ public class CtrlRegistroMedicos {
                 String insertMed = "INSERT INTO Medicos(Nombre, Apellido, DNI, Matricula, telCel, Mail) VALUES(?, ?, ?, ?, ?, ?);";
                 PreparedStatement psi = conex.prepareStatement(insert);
                 PreparedStatement psi1 = conex.prepareStatement(insertMed);
-                
+
                 psi.setString(1, func.getNombre());
                 psi.setString(2, func.getApellido());
                 psi.setString(3, func.getFecNacimiento());
@@ -70,7 +62,7 @@ public class CtrlRegistroMedicos {
                 psi.setString(8, func.getDomicilio());
                 psi.setString(9, func.getCorreoElectronico());
                 psi.setString(10, matricula);
-                
+
                 psi1.setString(1, func.getNombre());
                 psi1.setString(2, func.getApellido());
                 psi1.setString(3, func.getDni());
@@ -100,43 +92,10 @@ public class CtrlRegistroMedicos {
         }
     }
 
-    public static void registrarMedicos(String especialidad, String fecha, String universidad, String dni, String matricula) {
-        Connection conex = null;
-        try {
-            conex = Conexion.conectar();
+    public ArrayList cargaComboBoxEspecialidades() {
 
-            String insert = "INSERT INTO AsignacionEspecialidad(DNI, Especialidad, Fecha, Universidad, Matricula) VALUES (?,?,?,?,?)";
-            PreparedStatement psi = conex.prepareStatement(insert);
-            psi.setString(1, dni);
-            psi.setString(2, especialidad);
-            psi.setString(3, fecha);
-            psi.setString(4, universidad);
-            psi.setString(5, matricula);
-
-            psi.executeUpdate();
-
-            // JOptionPane.showMessageDialog(null, "Usuario registrado con éxito - Recuerde que un informático deberá validar el usuario para su posterior ingreso al sistema.");
-        } catch (SQLException e) {
-            System.out.println("EXCEP SQL" + e);
-            JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
-        } finally {
-            try {
-                if (conex != null) {
-                    conex.close();
-                }
-            } catch (SQLException excSql) {
-                System.err.println("ERROR SQL" + excSql);
-            }
-        }
-
-    }
-
-  
-    
-     public ArrayList cargaComboBoxEspecialidades() {
-        
         ArrayList<String> arrayOpciones = new ArrayList<>();
-        
+
         Connection conex = null;
         try {
             conex = Conexion.conectar();
@@ -152,6 +111,49 @@ public class CtrlRegistroMedicos {
         }
 
         return arrayOpciones;
+    }
+    public void asignarEspecialidades(ArrayList<String> arrayEspecialidades, ArrayList<String> arrayFechas, ArrayList<String> arrayUniversidades, String matricula, int dni) {
+        Connection conex = null;
+
+        try {
+            conex = Conexion.conectar();
+            PreparedStatement psq = conex.prepareStatement("SELECT ID FROM Especialidad WHERE Nombre = ?");
+            PreparedStatement insercionEspecialidades = conex.prepareStatement("INSERT INTO AsignacionEspecialidad(DNI, idEspecialidad, Fecha, Universidad, Matricula) VALUES (?,?,?,?,?)");
+            int i = 0;
+            for (String especialidad : arrayEspecialidades) {
+  
+                
+                psq.setString(1, especialidad);
+                ResultSet rs = psq.executeQuery();
+
+                if (rs.next()) {
+                   
+                    int idEspecialidad = rs.getInt("ID");
+                    insercionEspecialidades.setInt(1, dni);
+                    insercionEspecialidades.setInt(2, idEspecialidad);
+                    insercionEspecialidades.setString(3, arrayFechas.get(i));
+                    insercionEspecialidades.setString(4, arrayUniversidades.get(i));
+                    insercionEspecialidades.setInt(5, Integer.parseInt(matricula));
+                    insercionEspecialidades.executeUpdate();
+                    i++;
+                    //arrayIDS.add(idRol);
+                }
+            }
+            arrayEspecialidades.clear();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
+        } finally {
+            // Cierra la conexión
+            if (conex != null) {
+                try {
+                    conex.close();
+                } catch (SQLException e) {
+                    System.err.println("ERROR SQL" + e);
+                }
+            }
+        }
+
+        //return arrayIDS;
     }
 
 }

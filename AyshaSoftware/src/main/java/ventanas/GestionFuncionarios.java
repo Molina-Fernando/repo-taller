@@ -43,16 +43,15 @@ public class GestionFuncionarios extends javax.swing.JFrame {
         modelo.addColumn("Nombre");
         modelo.addColumn("Apellido");
         modelo.addColumn("Sector");
-        
+
         modeloR = new DefaultTableModel();
         modeloR.addColumn("DNI");
         modeloR.addColumn("Rol");
-        
+
         //modelo.addColumn("Rol");
-        
         actualizarTabla();
         actualizarTablaRoles();
-        
+
         cargarBoxRoles(dbCtrl.cargaComboBoxRoles());
     }
 
@@ -85,17 +84,15 @@ public class GestionFuncionarios extends javax.swing.JFrame {
             tablaFuncionarios.setModel(modelo);
         }
     }
-    
-    private void actualizarTablaRoles(){
+
+    private void actualizarTablaRoles() {
         modeloR.setRowCount(0);
         tablaRoles = new javax.swing.JTable();
         tablaRoles.setModel(modeloR);
-        
+
         tablaRoles = new JTable(modeloR);
         jScrollPane3.setViewportView(tablaRoles);
     }
-    
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
@@ -234,6 +231,11 @@ public class GestionFuncionarios extends javax.swing.JFrame {
         });
         jPanel1.add(botonAlta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 430, 160, 30));
 
+        comboBoxRoles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxRolesActionPerformed(evt);
+            }
+        });
         jPanel1.add(comboBoxRoles, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, -1, -1));
 
         botonAlta2.setBackground(new java.awt.Color(0, 0, 153));
@@ -278,76 +280,77 @@ public class GestionFuncionarios extends javax.swing.JFrame {
 
     private void botonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarActionPerformed
         // TODO add your handling code here:
-        
+
         int numFila = tablaFuncionarios.getSelectedRow();
         if (numFila != -1) {
 
             String dnistr = (String) tablaFuncionarios.getValueAt(numFila, 0);
-            
+
             arrayListRoles = dbCtrl.getTablaRolesAsociados(Integer.parseInt(dnistr));
-            
+
             for (Object[] vector : arrayListRoles) {
-           // String dniParcialString = vector[0].toString();
-           // dniDB = Integer.parseInt(dniParcialString);
-            //nomDB = vector[1].toString();
-            modeloR.addRow(vector);
-            tablaRoles.setModel(modeloR);
+                // String dniParcialString = vector[0].toString();
+                // dniDB = Integer.parseInt(dniParcialString);
+                //nomDB = vector[1].toString();
+                modeloR.addRow(vector);
+                tablaRoles.setModel(modeloR);
+            }
+
         }
-            
-            
-        }
-        
-        
+
+
     }//GEN-LAST:event_botonActualizarActionPerformed
 
     ArrayList<String> arrayRolesInputDB = new ArrayList<>();
-    
+
     private void botonAlta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAlta1ActionPerformed
         // TODO add your handling code here:
         //modeloLista.clear();
         rol = (String) comboBoxRoles.getSelectedItem();
         System.out.println(rol);
-        if(!modeloLista.contains(rol)){
-        modeloLista.addElement(rol);
-        lista.updateUI();
-        
+        if (!modeloLista.contains(rol)) {
+
+            modeloLista.addElement(rol);
+            lista.updateUI();
+
             arrayRolesInputDB.add(rol);
-            
-        //dbCtrl.agregarRoles(rol,dniDB);
+
+            //dbCtrl.agregarRoles(rol,dniDB);
             //System.out.println(dniDB);
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "Ya asignó el rol " + rol);
-        
+
         }
         //modeloLista.clear();
     }//GEN-LAST:event_botonAlta1ActionPerformed
 
     private void botonAlta2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAlta2ActionPerformed
         // TODO add your handling code here:
-            int numFila = tablaFuncionarios.getSelectedRow();
+        int numFila = tablaFuncionarios.getSelectedRow();
         if (numFila != -1) {
             String dnistr = (String) tablaFuncionarios.getValueAt(numFila, 0);
             int dniDBA = Integer.parseInt(dnistr);
             System.out.println(dniDBA);
-            dbCtrl.asignarRoles(arrayRolesInputDB,dniDBA);
+            dbCtrl.asignarRoles(arrayRolesInputDB, dniDBA);
             modeloLista.clear();
-       //dbCtrl.agregarRoles(rol,dniDB);
-        } else {JOptionPane.showMessageDialog(null, "Debe seleccionar un funcionario de la tabla");
+            //dbCtrl.agregarRoles(rol,dniDB);
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un funcionario de la tabla");
         }
-    
+
     }//GEN-LAST:event_botonAlta2ActionPerformed
-    
-        
-        
+
+
     private void botonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLimpiarActionPerformed
         // TODO add your handling code here:
         DefaultTableModel modeloTabla = (DefaultTableModel) tablaRoles.getModel();
         modeloTabla.setRowCount(0);
     }//GEN-LAST:event_botonLimpiarActionPerformed
-        
-    
-    
+
+    private void comboBoxRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxRolesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxRolesActionPerformed
+
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_botonEliminarActionPerformed
 
         int numFila = tablaFuncionarios.getSelectedRow();
@@ -361,7 +364,6 @@ public class GestionFuncionarios extends javax.swing.JFrame {
 
         }
     }
-
 
     private void botonAltaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_botonAltaActionPerformed
         // TODO add your handling code here:
