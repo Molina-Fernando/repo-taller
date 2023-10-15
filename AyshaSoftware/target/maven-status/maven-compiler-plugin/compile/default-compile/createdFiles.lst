@@ -1,3 +1,4 @@
+clases\FormatosValidos.class
 ventanas\Admision$2.class
 ventanas\EntradaMedicoSala.class
 ventanas\panelesmedicos\Panel3$1.class
@@ -45,6 +46,7 @@ main\Principal.class
 ventanas\RegistroFuncionarios.class
 clases\Enfermero.class
 clases\Rol.class
+ventanas\panelesmedicos\Panel4$1.class
 ventanas\AdminInformatico.class
 ventanas\RegistroFuncionarios$3.class
 ventanas\ListaTriage$3.class
@@ -53,7 +55,6 @@ ventanas\RegistroPaciente$11.class
 dbController\CtrlRegistroFuncionarios.class
 ventanas\MedicoTriage$10.class
 ventanas\MedicoTriage$9.class
-ventanas\MedicoSala$5.class
 ventanas\AdminInformatico$3.class
 ventanas\RegistroMedicos.class
 ventanas\RRHH$3.class
@@ -91,7 +92,6 @@ ventanas\MedicoTriage$17.class
 ventanas\ListaTriage$2.class
 clases\Datos.class
 ventanas\MedicoTriage$11.class
-ventanas\EntradaMedicoSala$6.class
 ventanas\Login$3.class
 ventanas\RegistroPaciente$5.class
 ventanas\RegistroPaciente$8.class
@@ -99,18 +99,16 @@ ventanas\EntradaMedicoSala$3.class
 ventanas\Admision.class
 ventanas\CrudUsuarios$3.class
 ventanas\MedicoTriage$8.class
-ventanas\panelesmedicos\Panel1$1.class
+dbController\CtrlMedicoSala.class
 ventanas\EntradaMedicoSala$4.class
 ventanas\MedicoTriage$13.class
 ventanas\panelesmedicos\Panel2$1.class
 ventanas\RegistroFuncionarios$6.class
 clases\Persona.class
-ventanas\panelesmedicos\Panel1$3.class
 ventanas\RegistroPaciente$2.class
 ventanas\SetImageLabel.class
 clases\Box.class
 ventanas\Login$4.class
-ventanas\panelesmedicos\Panel1.class
 ventanas\CrudUsuarios$2.class
 ventanas\RegistroMedicos$4.class
 ventanas\RegistroPaciente$9.class
@@ -122,12 +120,10 @@ ventanas\MedicoTriage$7.class
 clases\Consulta.class
 ventanas\MedicoTriage.class
 dbController\CtrlRegistroMedicos.class
-ventanas\panelesmedicos\Panel1$2.class
 clases\Sector.class
 ventanas\MedicoTriage$12.class
 ventanas\CrudUsuarios$1.class
 ventanas\MedicoSala.class
-ventanas\EntradaMedicoSala$5.class
 ventanas\panelesmedicos\PanelDescripcionRegistro.class
 ventanas\RegistroPaciente$13.class
 clases\Estudio.class
