@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 
 /**
  *
@@ -54,19 +53,44 @@ public class CtrlListaTriage {
         }
         return arrayListEspera;
     }
-    
-    public void eliminarPacienteEsperaTriage(int dni){
+
+    public void eliminarPacienteEsperaTriage(int dni) {
+
+        String dniInsert = Integer.toString(dni);
         Connection conex = null;
+
         try {
 
             conex = Conexion.conectar();
-            String deleteQuery = "DELETE FROM LISTATRIAGE WHERE DNI = ?";
-            PreparedStatement psq = conex.prepareStatement(deleteQuery);
-            psq.setInt(1, dni);
-            
-            
-            psq.executeUpdate();
 
+            String query = "SELECT * FROM Pacientes WHERE DNI = ?";
+            PreparedStatement psq = conex.prepareStatement(query);
+            psq.setString(1, dniInsert);
+            ResultSet rs = psq.executeQuery();
+
+            if (rs.next()) {
+                String insertTriages = "INSERT INTO Triages(NombrePac, ApellidoPac, DNI) VALUES(?,?,?);";
+                PreparedStatement psi = conex.prepareStatement(insertTriages);
+
+                psi.setString(1, rs.getString("Nombre"));
+                psi.setString(2, rs.getString("Apellido"));
+                psi.setString(3, dniInsert);
+
+                psi.executeUpdate();
+
+                String insertListaEspera = "INSERT INTO ListaEsperaSala(NombrePac, DNI) VALUES(?,?);";
+                PreparedStatement psi1 = conex.prepareStatement(insertListaEspera);
+
+                psi1.setString(1, rs.getString("Nombre"));
+                psi1.setString(2, dniInsert);
+
+                psi1.executeUpdate();
+            }
+
+            String deleteQuery = "DELETE FROM LISTATRIAGE WHERE DNI = ?";
+            PreparedStatement psdq = conex.prepareStatement(deleteQuery);
+            psdq.setInt(1, dni);
+            psdq.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println("EXCEP SQL" + e);
