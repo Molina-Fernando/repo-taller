@@ -35,7 +35,7 @@ public class CtrlMedicoTriage {
         
         String colorDefinitivo;
         String motivoCambio = null;
-        String dniMedico = "47111111";//Login.user;
+        String dniMedico = Login.user;
         String dniPac = obtenerUltimoDniPac();
          Connection conex = null;
         try {
@@ -67,8 +67,9 @@ public class CtrlMedicoTriage {
                     motivoCambio = med.getMotivoCambio();
                 } else {
                     colorDefinitivo = med.getColorParcial();
+                    motivoCambio = "No hubo cambio";
                 }
-              
+    
                 psu.setString(3, colorDefinitivo);
                 psu.setString(4, motivoCambio);
                 psu.setString(5, rs.getString("Matricula"));
