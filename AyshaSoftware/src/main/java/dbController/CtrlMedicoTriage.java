@@ -35,7 +35,7 @@ public class CtrlMedicoTriage {
         
         String colorDefinitivo;
         String motivoCambio = null;
-        String dniMedico = Login.user;
+        String dniMedico = "47111111";//Login.user;
         String dniPac = obtenerUltimoDniPac();
          Connection conex = null;
         try {

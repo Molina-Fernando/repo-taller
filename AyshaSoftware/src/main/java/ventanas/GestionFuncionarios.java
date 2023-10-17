@@ -61,19 +61,24 @@ public class GestionFuncionarios extends javax.swing.JFrame {
         }
     }
 
-    
+    String nomDB;
+    int dniDB;
 
     private void actualizarTabla() {
         modelo.setRowCount(0);
         tablaFuncionarios = new javax.swing.JTable();
         tablaFuncionarios.setModel(modelo);
 
-        arrayListVectores = dbCtrl.getTablaFuncionarios();
+        arrayListVectores = dbCtrl.getTablaFuncionarios(dniDB, nomDB);
 
         tablaFuncionarios = new JTable(modelo);
         jScrollPane1.setViewportView(tablaFuncionarios);
 
         for (Object[] vector : arrayListVectores) {
+
+            String dniParcialString = vector[0].toString();
+            dniDB = Integer.parseInt(dniParcialString);
+            nomDB = vector[1].toString();
 
             modelo.addRow(vector);
             tablaFuncionarios.setModel(modelo);
