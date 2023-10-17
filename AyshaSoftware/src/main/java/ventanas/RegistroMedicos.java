@@ -337,7 +337,7 @@ public class RegistroMedicos extends javax.swing.JFrame {
 
         return matcher.matches();
     }
-  
+
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -349,12 +349,10 @@ public class RegistroMedicos extends javax.swing.JFrame {
 
         dni = textDNI.getText().trim();
         numMatricula = textNumMatricula.getText().trim();
-    
-
 
         if (!dni.isEmpty()) {
             if (!numMatricula.isEmpty() && !especialidad.isEmpty() && fechaTitulo != null && !universidad.isEmpty()) {
-                
+
                 if (!modeloLista.contains(especialidad)) {
 
                     modeloLista.addElement(especialidad);
@@ -363,6 +361,12 @@ public class RegistroMedicos extends javax.swing.JFrame {
                     arrayEspecialidades.add(especialidad);
                     arrayFechas.add(fechaTituloFormat);
                     arrayUniversidades.add(universidad);
+
+                    dcFechaTitulo.setDate(null);
+                    textUniversidad.setText("");
+
+                    modeloLista.addElement(especialidad);
+                    lista.updateUI();
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Ya asignó la especialidad " + especialidad);
@@ -374,7 +378,6 @@ public class RegistroMedicos extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debe ingresar el DNI del médico a registrar especialidad.");
         }
-
 
 
     }//GEN-LAST:event_jButton1ActionPerformed

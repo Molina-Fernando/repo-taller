@@ -30,7 +30,7 @@ public class CtrlGestionFuncionarios {
                 break;
         }
     }*/
-    public ArrayList<Object[]> getTablaFuncionarios(int dniDB, String nomDB) {
+    public ArrayList<Object[]> getTablaFuncionarios() {
         ArrayList<Object[]> arrayListDeVectores = new ArrayList<>();
         Connection conex = null;
         try {

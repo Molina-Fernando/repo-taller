@@ -5,6 +5,8 @@
 package ventanas;
 
 import clases.Paciente;
+import clases.Consulta;
+import dbController.CtrlConsulta;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
@@ -72,6 +74,8 @@ public class RegistroPaciente extends javax.swing.JFrame {
         textFechaNac = new com.toedter.calendar.JDateChooser();
         botonLista = new javax.swing.JButton();
         botonBuscar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TextMotivoConsulta = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -233,15 +237,21 @@ public class RegistroPaciente extends javax.swing.JFrame {
         });
         jPanel1.add(botonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 430, 90, 30));
 
+        TextMotivoConsulta.setColumns(20);
+        TextMotivoConsulta.setRows(5);
+        jScrollPane1.setViewportView(TextMotivoConsulta);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 330, 210, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -253,7 +263,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_TextFijoActionPerformed
     
     Paciente pac;
-
+    String motivoConsulta;
     private void botonRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistro1ActionPerformed
         String fechaFormateada = null;
         String nombre = TextNombre.getText().trim();
@@ -266,6 +276,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
         String telCelular = TextCelular.getText().trim();
         String correo = TextCorreo.getText().trim();
         String estadoCivil = TextEstadoCivil.getText().trim();
+        
         
         if (fechaNacimiento != null) {
              fechaFormateada = dateFormat.format(fechaNacimiento);
@@ -343,8 +354,11 @@ public class RegistroPaciente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TextApellidoActionPerformed
 
+    Consulta consulta;
+//    CtrlConsulta ctrlConsulta = new CtrlConsulta();
+    
     private void botonListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonListaActionPerformed
-
+        motivoConsulta = TextMotivoConsulta.getText().trim();
         TextNombre.setText("");
         TextApellido.setText("");
         textFechaNac.setDate(null);
@@ -358,7 +372,11 @@ public class RegistroPaciente extends javax.swing.JFrame {
 
         botonRegistro1.setVisible(false);
         botonLista.setVisible(false);
-
+        
+        consulta = new Consulta(pac, motivoConsulta );
+        
+        
+        
 
     }//GEN-LAST:event_botonListaActionPerformed
 
@@ -432,6 +450,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
     private javax.swing.JTextField TextDomicilio;
     private javax.swing.JTextField TextEstadoCivil;
     private javax.swing.JTextField TextFijo;
+    private javax.swing.JTextArea TextMotivoConsulta;
     private javax.swing.JTextField TextNombre;
     private javax.swing.JTextField TextPersonaContacto;
     private javax.swing.JButton botonBuscar;
@@ -448,6 +467,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private com.toedter.calendar.JDateChooser textFechaNac;
     // End of variables declaration//GEN-END:variables
 
