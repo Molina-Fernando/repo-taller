@@ -115,4 +115,12 @@ public class Medico extends Funcionario implements ProfesionalSanitario {
         return super.toString() + sb.toString();
     }
 
+    public int getNumMatricula() {
+        return numMatricula;
+    }
+
+    public void setNumMatricula(int numMatricula) {
+        this.numMatricula = numMatricula;
+    }
+
 }

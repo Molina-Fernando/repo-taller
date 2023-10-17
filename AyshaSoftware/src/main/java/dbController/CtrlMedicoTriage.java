@@ -33,12 +33,14 @@ public class CtrlMedicoTriage {
     
     public void finalizarTriage(){
         
+        String colorDefinitivo;
+        String motivoCambio = null;
         String dniMedico = Login.user;
         String dniPac = obtenerUltimoDniPac();
          Connection conex = null;
         try {
             conex = Conexion.conectar();
-            String query = "SELECT * FROM Funcionarios WHERE DNI = ?";
+            String query = "SELECT * FROM Medicos WHERE DNI = ?";
             String query1 = "SELECT * FROM Pacientes WHERE DNI = ?";
             
             PreparedStatement psq1 = conex.prepareStatement(query1);
@@ -59,13 +61,22 @@ public class CtrlMedicoTriage {
 
                 psu.setString(1, rs.getString("Apellido"));
                 psu.setString(2, med.getColorParcial());
-                psu.setString(3, med.getColorDefinitivo());
-                psu.setString(4, med.getMotivoCambio());
+                
+                if(med.getColorDefinitivo() != null){
+                    colorDefinitivo = med.getColorDefinitivo();
+                    motivoCambio = med.getMotivoCambio();
+                } else {
+                    colorDefinitivo = med.getColorParcial();
+                    motivoCambio = "No hubo cambio";
+                }
+    
+                psu.setString(3, colorDefinitivo);
+                psu.setString(4, motivoCambio);
                 psu.setString(5, rs.getString("Matricula"));
                 psu.setInt(6, Integer.parseInt(dniPac));
                 
           
-                psu1.setString(1, med.getColorDefinitivo());
+                psu1.setString(1, colorDefinitivo);
                 psu1.setInt(2, Integer.parseInt(dniPac));
                 
                 psu.executeUpdate();
