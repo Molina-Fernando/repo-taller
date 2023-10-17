@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 
 /**
  *
@@ -82,6 +81,10 @@ public class CtrlEntradaMedicoSala {
         return listaBoxes;
     }
         
+    /**
+     *
+     * @param numero
+     */
     public void alternarDisponibilidad(String numero) {
         Connection conex = null;
         try {

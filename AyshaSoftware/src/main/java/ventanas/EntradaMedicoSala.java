@@ -6,7 +6,10 @@ package ventanas;
 
 
 import dbController.CtrlEntradaMedicoSala;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -27,7 +30,7 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
     String disponibleDB;
     public static String  dniV = null;
     public String disponibleV = null;
-    public String numeroV = null;
+    public static String numeroV = null;
 
     /**
      * Creates new form EntradaMedicoSala
@@ -48,6 +51,16 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
         modelo2.addColumn("Disponibilidad");
         
         actualizarTablaBoxes();
+        
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.out.println("Cerrando JFrame");
+                cambiarDisponibilidad(numeroV);
+                dispose();
+            }
+        });
     }
     
     
@@ -70,7 +83,7 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
         }
     }
     
-    private void actualizarTablaBoxes(){
+    public void actualizarTablaBoxes(){
         modelo2.setRowCount(0);
         tablaBoxes = new javax.swing.JTable();
         tablaBoxes.setModel(modelo2);
@@ -87,7 +100,7 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
         }
     }
     
-    private void cambiarDisponibilidad(String numeroV) {
+    public void cambiarDisponibilidad(String numeroV) {
         ctrlDB.alternarDisponibilidad(numeroV);
         actualizarTablaBoxes();
     }
@@ -246,11 +259,11 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
             if (numFila != -1 && numFila2 != -1) {
                 EntradaMedicoSala.dniV = (String) tablaPacientes.getValueAt(numFila, 1);
                 this.disponibleV = (String) tablaBoxes.getValueAt(numFila2, 1);
-                this.numeroV =(String) tablaBoxes.getValueAt(numFila2, 0);
+                EntradaMedicoSala.numeroV =(String) tablaBoxes.getValueAt(numFila2, 0);
                 if(disponibleV.equals("Disponible")){
                     cambiarDisponibilidad(numeroV);
                     eliminarFilaTriage(EntradaMedicoSala.dniV);
-                     MedicoSala m = new MedicoSala();
+                     MedicoSala m = new MedicoSala(this);
                      m.setVisible(true);
                      EntradaMedicoSala.dniV=null;
                 }

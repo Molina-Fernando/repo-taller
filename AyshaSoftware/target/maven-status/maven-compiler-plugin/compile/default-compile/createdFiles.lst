@@ -19,7 +19,6 @@ ventanas\GestionFuncionarios.class
 ventanas\Login$2.class
 ventanas\Funcionario.class
 ventanas\RegistroPaciente$4.class
-ventanas\RRHH$1.class
 ventanas\RegistroMedicos$6.class
 ventanas\RegistroPaciente$1.class
 dbController\CtrlMedicoTriage.class
@@ -29,7 +28,6 @@ ventanas\MedicoSala$3.class
 ventanas\GestionFuncionarios$6.class
 dbController\CtrlListaTriage.class
 ventanas\RegistroFuncionarios$2.class
-ventanas\RRHH.class
 clases\Registro.class
 ventanas\GestionFuncionarios$3.class
 ventanas\panelesmedicos\Panel3.class
@@ -57,7 +55,6 @@ ventanas\MedicoTriage$10.class
 ventanas\MedicoTriage$9.class
 ventanas\AdminInformatico$3.class
 ventanas\RegistroMedicos.class
-ventanas\RRHH$3.class
 ventanas\RegistroPaciente$6.class
 ventanas\GestionFuncionarios$5.class
 ventanas\RegistroMedicos$1.class
@@ -71,7 +68,6 @@ clases\AdminSistemas.class
 ventanas\Login$1.class
 ventanas\Login.class
 ventanas\RegistroFuncionarios$1.class
-ventanas\RRHH$2.class
 ventanas\GestionFuncionarios$4.class
 ventanas\RegistroPaciente$12.class
 ventanas\MedicoSala$4.class
@@ -124,6 +120,7 @@ clases\Sector.class
 ventanas\MedicoTriage$12.class
 ventanas\CrudUsuarios$1.class
 ventanas\MedicoSala.class
+ventanas\EntradaMedicoSala$5.class
 ventanas\panelesmedicos\PanelDescripcionRegistro.class
 ventanas\RegistroPaciente$13.class
 clases\Estudio.class

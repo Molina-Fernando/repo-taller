@@ -24,15 +24,25 @@ import javax.swing.JOptionPane;
  */
 public class CtrlMedicoSala {
     
-     private String dni;     
-
+     private final String dni;
+     private String numero;
+     
     public CtrlMedicoSala(String dni) {
         this.dni = dni;
+        System.out.println(dni);
+    }
+    public CtrlMedicoSala(String dni,String numero) {
+        this.dni = dni;
+        this.numero = numero;
         System.out.println(dni);
     }
 
     public String getDni() {
         return dni;
+    }
+
+    public String getNumero() {
+        return numero;
     }
     
     
