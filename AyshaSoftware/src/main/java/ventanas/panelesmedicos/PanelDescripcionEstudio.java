@@ -5,9 +5,8 @@
 package ventanas.panelesmedicos;
 
 import clases.Estudio;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,20 +16,50 @@ public class PanelDescripcionEstudio extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelDescripcionEstudio
-     * @param est
+     * @param est de tipo Estudio 
      */
     public PanelDescripcionEstudio(Estudio est) {
         initComponents();
         setDatosVariables(est);
     }
     
+    /**
+     * 
+     * @param est de tipo Estudio
+     * @
+     */
     private void setDatosVariables(Estudio est){
 
         date.setText(est.getFecha().format(DateTimeFormatter.ofPattern("dd'/'MM'/'yyyy")));
         hour.setText(est.getHora().format(DateTimeFormatter.ofPattern("HH':'mm':'ss")));
-        result.setText(est.getResultado());
+        String textoAIncluir = splitString(est.getResultado());
+        result.setText(textoAIncluir);
         type.setText(est.getTipo());
     }
+    
+public static String splitString(String str) {
+    ArrayList<String> list = new ArrayList<>();
+    int i = 0;
+    while (i < str.length()) {
+        int end = Math.min(i + 64, str.length());
+        while (end > i && str.charAt(end - 1) != '.' && str.charAt(end - 1) != ',' && str.charAt(end - 1) != ' ') {
+            end--;
+        }
+        if (end == i) {
+            end = i + 64;
+            if (end < str.length()) {
+                while (end > i && str.charAt(end - 1) != '.' && str.charAt(end - 1) != ',' && str.charAt(end - 1) != ' ') {
+                    end--;
+                }
+            }
+        }
+        list.add(str.substring(i, Math.min(end, str.length())));
+        i = end;
+    }
+    return "<html>" + String.join("<br>", list) + "</html>";
+}
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,8 +79,6 @@ public class PanelDescripcionEstudio extends javax.swing.JPanel {
         type = new javax.swing.JLabel();
         result = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -68,10 +95,10 @@ public class PanelDescripcionEstudio extends javax.swing.JPanel {
         type.setText("{tipo}");
 
         result.setText("{result}");
+        result.setAlignmentY(0.0F);
+        result.setAutoscrolls(true);
 
         jLabel4.setText("Resultado:");
-
-        jScrollPane1.setViewportView(jTextPane1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -80,7 +107,7 @@ public class PanelDescripcionEstudio extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
@@ -90,7 +117,7 @@ public class PanelDescripcionEstudio extends javax.swing.JPanel {
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(hour)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                                 .addComponent(jLabel1)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(date)
@@ -98,10 +125,8 @@ public class PanelDescripcionEstudio extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(result))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(result, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,13 +141,11 @@ public class PanelDescripcionEstudio extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(type))
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(result))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                    .addComponent(result, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                    .addComponent(jLabel4))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -146,8 +169,6 @@ public class PanelDescripcionEstudio extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextPane jTextPane1;
     private javax.swing.JLabel result;
     private javax.swing.JLabel type;
     // End of variables declaration//GEN-END:variables

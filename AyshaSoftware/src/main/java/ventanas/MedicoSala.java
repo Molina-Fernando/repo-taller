@@ -1,8 +1,12 @@
 
 package ventanas;
 
+
 import dbController.CtrlMedicoSala;
 import java.awt.BorderLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import ventanas.panelesmedicos.Panel2;
 import ventanas.panelesmedicos.Panel3;
@@ -12,18 +16,43 @@ import ventanas.panelesmedicos.Panel4;
  * @author 
  */
 public class MedicoSala extends javax.swing.JFrame {
+    
+    
+    private static EntradaMedicoSala frameDeBase;
+    private CtrlMedicoSala ctrlMedSal = null;
+    private String dni;
+    private String numeroSala;
     /**
      * Creates new form MedicoSala
-     */
-    CtrlMedicoSala ctrlMedSal = null;
-    public MedicoSala() {
-        
+     * @param frameDeBase
+     */   
+
+    public MedicoSala(EntradaMedicoSala frameDeBase) {
         initComponents();
-        ctrlMedSal = new CtrlMedicoSala(EntradaMedicoSala.dniV);
+        dni = EntradaMedicoSala.dniV;
+        numeroSala = EntradaMedicoSala.numeroV;
+        ctrlMedSal = new CtrlMedicoSala(dni,numeroSala);
         setTitle("Paciente "+ nombreCompleto());
         this.setLocationRelativeTo(null);
         showPanel(new Panel2(ctrlMedSal.getDni()));
+        
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.out.println("Cerrando JFrame");
+                frameDeBase.cambiarDisponibilidad(numeroSala);
+                dispose();
+            }
+        });       
     }
+    
+   
+    
+    /**
+     * 
+     * @param p de Jpanel para mostrarlo y darle estilos al nuevo panel que se muestre
+     */
     public void showPanel(JPanel p){
         p.setSize(460,510);
         p.setLocation(0,0);
@@ -35,6 +64,8 @@ public class MedicoSala extends javax.swing.JFrame {
     public String nombreCompleto(){
         return ctrlMedSal.nombreCompleto();
     }
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -146,7 +177,7 @@ public class MedicoSala extends javax.swing.JFrame {
             @Override
             public void run() {
                 
-                new MedicoSala().setVisible(true);
+                new MedicoSala(frameDeBase).setVisible(true);
             }
         });
     }

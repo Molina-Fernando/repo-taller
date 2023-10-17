@@ -25,6 +25,7 @@ public class Panel4 extends javax.swing.JPanel {
     private String horaDB;
     private CtrlMedicoSala ctrlMedSal;
     private String dni;
+    private String numero;
     
     private String selectedOption;
     
