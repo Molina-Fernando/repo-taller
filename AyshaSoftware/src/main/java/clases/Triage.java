@@ -1,6 +1,6 @@
 package clases;
 
-import ventanas.MedicoTriage;
+
 
 public class Triage {
 

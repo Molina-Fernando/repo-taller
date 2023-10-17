@@ -30,7 +30,6 @@ public class Enfermero extends Funcionario implements ProfesionalSanitario {
     public void cambiarTriage(String colorFinal, String motivoCambio) {
         triage.setColorFinal(colorFinal);
         triage.setMotivoCambio(motivoCambio);
-        System.out.println("El color final es: " + colorFinal + " y lo cambie al original por: " + motivoCambio);
         // Método a resolver...
     }
 

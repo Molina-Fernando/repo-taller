@@ -1,11 +1,12 @@
 package ventanas;
 
-import clases.Medico;
+import dbController.CtrlMedicoTriage;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JLabel;
 
 import javax.swing.JOptionPane;
 
@@ -16,15 +17,14 @@ public class MedicoTriage extends javax.swing.JFrame {
      */
     private int i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13;
     private Color color;
-    private String colorDefinitivo;
-    private String motivoCambio;
+    private String colorParcial;
     Map<String, Color> colores = new HashMap<>();
-    private Medico med;
-    
+
+
     public MedicoTriage() {
-        
+
         initComponents();
-        
+
         ventanaEmergente.setResizable(false);
         FrameModificar.setResizable(false);
         FrameModificar.setLocationRelativeTo(null);
@@ -35,7 +35,6 @@ public class MedicoTriage extends javax.swing.JFrame {
         setIconImage(miIcono);
         SetImageLabel.setImageLabel(LabelIconito, "src\\main\\java\\images\\icon.png");
         setTitle("Triage");
-        med = new Medico();
 
     }
 
@@ -460,8 +459,10 @@ public class MedicoTriage extends javax.swing.JFrame {
     private void BotonFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonFinalizarActionPerformed
         // TODO add your handling code here:
         if (ventanaEmergente.isVisible()) {
+            
+            ctrl.finalizarTriage();
             ventanaEmergente.setVisible(false);
-            System.exit(0); //Cierra por completo el programas
+            setVisible(false);
         } else {
             JOptionPane.showMessageDialog(null, "Debe realizar el triage");
         }
@@ -644,13 +645,14 @@ public class MedicoTriage extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jComboBox13ActionPerformed
-
+    CtrlMedicoTriage ctrl = new CtrlMedicoTriage();
     private void BotonTriagiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonTriagiarActionPerformed
 
         mapeoDeColores();
-        this.color = colores.get(med.realizarTriage(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13));
+        this.colorParcial = ctrl.triagiarPaciente(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13);
+        color = colores.get(colorParcial);
         PanelEmergente.setBackground(color);
-        tiempoDeColor(color);
+        tiempoDeColor(TextoEmergente, color);
         ventanaEmergente.setVisible(true);
     }//GEN-LAST:event_BotonTriagiarActionPerformed
 
@@ -700,6 +702,19 @@ public class MedicoTriage extends javax.swing.JFrame {
         }
     }
 
+    private void tiempoDeColor(JLabel TextoEmergente, Color color) {
+        if (color == Color.RED) {
+            TextoEmergente.setText("ATENCIÓN URGENTE");
+        } else if (color == Color.ORANGE) {
+            TextoEmergente.setText("Tiempo de espera : 10 - 15 minutos");
+        } else if (color == Color.GREEN) {
+            TextoEmergente.setText("Tiempo de espera : 2 horas");
+        } else if (color == Color.BLUE) {
+            TextoEmergente.setText("Tiempo de espera : 4 horas");
+        } else {
+            TextoEmergente.setText("Tiempo de espera : 60 minutos");
+        }
+    }
 
     private void ComboBoxColoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxColoresActionPerformed
         // TODO add your handling code here:
@@ -708,12 +723,12 @@ public class MedicoTriage extends javax.swing.JFrame {
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
         // TODO add your handling code here:
         mapeoDeColores();
-        this.colorDefinitivo = ComboBoxColores.getSelectedItem().toString();
+         String colorDefinitivo = ComboBoxColores.getSelectedItem().toString();
         this.color = colores.get(colorDefinitivo);
 
         if (!TextoCambio.getText().isEmpty()) {
-            this.motivoCambio = this.TextoCambio.getText();
-            med.cambiarTriage(colorDefinitivo, motivoCambio);
+            String motivoCambio = this.TextoCambio.getText();
+            ctrl.cambiarTriage(colorDefinitivo, motivoCambio);
             FrameModificar.setVisible(false);
             PanelEmergente.setBackground(color);
             tiempoDeColor(color);
@@ -798,7 +813,6 @@ public class MedicoTriage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JDialog ventanaEmergente;
     // End of variables declaration//GEN-END:variables
-
 
     public int getI1() {
         return i1;

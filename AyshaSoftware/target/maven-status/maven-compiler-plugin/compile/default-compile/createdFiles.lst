@@ -4,6 +4,7 @@ ventanas\EntradaMedicoSala.class
 ventanas\panelesmedicos\Panel3$1.class
 ventanas\RegistroPaciente$7.class
 ventanas\panelesmedicos\PanelDescripcionEstudio.class
+clases\AsignacionRol.class
 clases\Paciente.class
 ventanas\AdminInformatico$2.class
 clases\Triage.class
@@ -129,4 +130,5 @@ ventanas\MedicoSala$2.class
 ventanas\RegistroPaciente$3.class
 ventanas\Funcionario$1.class
 dbController\CtrlGestionFuncionarios.class
+ventanas\GestionFuncionarios$8.class
 ventanas\MedicoTriage$19.class
