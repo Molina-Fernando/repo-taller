@@ -4,17 +4,64 @@
  */
 package ventanas.panelesmedicos;
 
+import clases.Lugares;
+import clases.Registro;
+import dbController.CtrlMedicoSala;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author joaqu
  */
 public class Panel3 extends javax.swing.JPanel {
+    
+    DefaultTableModel modelo= new DefaultTableModel();
+    ArrayList<Object[]>listaRegistros=new ArrayList<>();
+    
+    String fechaDB;
+    String tipoDB;
+    String horaDB;
+    CtrlMedicoSala ctrlMedSal;
+    String dni;
+    
 
     /**
      * Creates new form Panel2
+     * @param dni
      */
-    public Panel3() {
+    public Panel3(String dni) {
         initComponents();
+        
+        ctrlMedSal=new CtrlMedicoSala(dni);
+        this.dni=dni;
+        modelo.addColumn("Fecha");
+        modelo.addColumn("Hora");
+        modelo.addColumn("Lugar");
+        
+        actualizarRegistros();
+        
+    }
+    
+    private void actualizarRegistros(){
+        modelo.setRowCount(0);
+        tablaRegistros = new javax.swing.JTable();
+        tablaRegistros.setModel(modelo);
+        listaRegistros=ctrlMedSal.getTablaRegistros(fechaDB,horaDB,tipoDB);
+        tablaRegistros = new JTable(modelo);
+        jScrollPane1.setViewportView(tablaRegistros);
+
+        for (Object[] vector : listaRegistros) {
+
+            fechaDB  = vector[0].toString();
+            horaDB = vector[1].toString();
+            tipoDB = vector[2].toString();
+
+            modelo.addRow(vector);
+            tablaRegistros.setModel(modelo);
+        }
     }
 
     /**
@@ -28,13 +75,13 @@ public class Panel3 extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaRegistros = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        cargaDiagnostico = new javax.swing.JTextArea();
+        BotonCarga = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
 
@@ -43,7 +90,7 @@ public class Panel3 extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaRegistros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -54,7 +101,7 @@ public class Panel3 extends javax.swing.JPanel {
                 "Fecha", "Hora", "Lugar"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaRegistros);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, 270, 470, 240));
 
@@ -70,19 +117,19 @@ public class Panel3 extends javax.swing.JPanel {
         jLabel3.setText("Carga de Registro");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, -1));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
+        cargaDiagnostico.setColumns(20);
+        cargaDiagnostico.setRows(5);
+        jScrollPane3.setViewportView(cargaDiagnostico);
 
         jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 79, 310, -1));
 
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BotonCarga.setText("Agregar");
+        BotonCarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BotonCargaActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, -1, -1));
+        jPanel1.add(BotonCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, -1, -1));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, -1));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, 150, -1));
 
@@ -98,13 +145,23 @@ public class Panel3 extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void BotonCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCargaActionPerformed
+        String texto = cargaDiagnostico.getText();
+        // Verifica si el JTextArea está vacío o solo tiene espacios en blanco
+        if (texto.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "¡Error! El campo de texto está vacío");
+        } else {
+            
+            ctrlMedSal.cargarRegistro(new Registro(this.dni,texto,Lugares.EMERGENCIA));
+            actualizarRegistros();
+            cargaDiagnostico.setText("");
+        }
+    }//GEN-LAST:event_BotonCargaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton BotonCarga;
+    private javax.swing.JTextArea cargaDiagnostico;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -113,7 +170,6 @@ public class Panel3 extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTable tablaRegistros;
     // End of variables declaration//GEN-END:variables
 }

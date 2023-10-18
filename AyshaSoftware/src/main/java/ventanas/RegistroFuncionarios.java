@@ -1,20 +1,21 @@
-
 package ventanas;
 
-import dbController.Conexion;
+import dbController.CtrlRegistroFuncionarios;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
-
 public class RegistroFuncionarios extends javax.swing.JFrame {
-
+    
+    CtrlRegistroFuncionarios ctrlRegistroFuncionarios = new CtrlRegistroFuncionarios();
+    private String[] elementosBox = new String[5];
+    
     public RegistroFuncionarios() {
         initComponents();
         setVisible(true);
@@ -26,8 +27,15 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
         SetImageLabel.setImageLabel(jLabel12, "src\\main\\java\\images\\regFunc.png");
         setIconImage(miIcono);
+        
+        cargarBoxSectores(ctrlRegistroFuncionarios.cargaComboBoxSectores());
     }
-
+    
+   private void cargarBoxSectores(ArrayList<String> arrayList){
+        for(String elemento : arrayList){
+            boxSector.addItem(elemento);
+        }
+    }
     
 
     @SuppressWarnings("unchecked")
@@ -38,6 +46,7 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         botonEditar = new javax.swing.JButton();
         botonBuscar = new javax.swing.JButton();
         botonEliminar = new javax.swing.JButton();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         bg = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -60,6 +69,8 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         jLabelIconito = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         dcFechaNac = new com.toedter.calendar.JDateChooser();
+        boxSector = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
 
         botonAgregar.setText("Alta");
         botonAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +138,7 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 153));
         jLabel10.setText("Correo Electronico");
-        bg.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 140, 20));
+        bg.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 400, 140, 20));
 
         textMail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,7 +169,7 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
                 botonAgregar1ActionPerformed(evt);
             }
         });
-        bg.add(botonAgregar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, 130, 30));
+        bg.add(botonAgregar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 520, 130, 30));
 
         jLabelIconito.setText("jLabel1");
         bg.add(jLabelIconito, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 60));
@@ -167,15 +178,22 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         bg.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 170, 160));
         bg.add(dcFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 170, -1));
 
+        bg.add(boxSector, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 430, 170, -1));
+
+        jLabel11.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel11.setText("Sector(es)");
+        bg.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 430, 80, 20));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
         );
 
         pack();
@@ -190,8 +208,6 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botonEditarActionPerformed
 
-    Conexion cn = new Conexion();
-    
     private void botonAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregar1ActionPerformed
         String nombre = textNombre.getText().trim();
         String apellido = textApellido.getText().trim();
@@ -202,11 +218,16 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         String telCelular = textCel.getText().trim();
         String estadoCivil = textEstadoCivil.getText().trim();
         String correoElectronico = textMail.getText().trim();
-        
+        String sector = (String) boxSector.getSelectedItem();
 
-        String mail = "^[A-Za-z0-9+_.-]+@(.+)$";
-        Pattern pattern = Pattern.compile(mail);
-        Matcher matcher = pattern.matcher(correoElectronico);
+        String patronMail = "^[A-Za-z0-9+_.-]+@(.+)$";
+        String patronDNI = "^[0-9]{7,10}$";
+
+        Pattern patternMail = Pattern.compile(patronMail);
+        Matcher matcherMail = patternMail.matcher(correoElectronico);
+
+        Pattern patternDNI = Pattern.compile(patronDNI);
+        Matcher matcherDNI = patternDNI.matcher(dni);
 
         if (!nombre.isEmpty()
                 && !apellido.isEmpty()
@@ -216,67 +237,33 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
                 && !telFijo.isEmpty()
                 && !telCelular.isEmpty()
                 && !estadoCivil.isEmpty()
-                && !correoElectronico.isEmpty()) {
+                && !correoElectronico.isEmpty()
+                && !sector.isEmpty()) {
+            
 
-            if (matcher.matches()) {
+            if (matcherMail.matches()) {
 
-                Connection conex = null;
-                try {
-                    conex = cn.conectar();
-                 
-                    String query = "SELECT * FROM Funcionarios WHERE DNI = ?";
-                 
-                    PreparedStatement psq = conex.prepareStatement(query);
-                    psq.setString(1, dni);
+                if (matcherDNI.matches()) {
 
-                    ResultSet rs = psq.executeQuery();
+                    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                    String fechaFormateada = formato.format(fechaNacimiento);
 
-                    if (!rs.next()) {
+                    ctrlRegistroFuncionarios.registrarFuncionario(nombre, apellido, fechaFormateada, domicilio, dni, telFijo, telCelular, estadoCivil, correoElectronico, sector);
+                    
 
-                        String insert = "INSERT INTO Funcionarios(Nombre, Apellido, FechaNacimiento, Domicilio, DNI, TelFijo, telCel, EstadoCivil, Mail) VALUES(?,?,?,?,?,?,?,?,?);";
-                        PreparedStatement psi = conex.prepareStatement(insert);
-
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                        String fechaFormateada = dateFormat.format(fechaNacimiento);
-
-                        psi.setString(1, nombre);
-                        psi.setString(2, apellido);
-                        psi.setString(3, fechaFormateada);
-                        psi.setString(4, domicilio);
-                        psi.setString(5, dni);
-                        psi.setString(6, telFijo);
-                        psi.setString(7, telCelular);
-                        psi.setString(8, correoElectronico);
-                        psi.setString(9, estadoCivil);
-
-                        psi.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Usuario registrado con éxito - Recuerde que un informático deberá validar el usuario para su posterior ingreso al sistema.");
-                        textNombre.setText("");
-                        textApellido.setText("");
-                        dcFechaNac.setDate(null);
-                        textDomicilio.setText("");
-                        textDNI.setText("");
-                        textFijo.setText("");
-                        textCel.setText("");
-                        textEstadoCivil.setText("");
-                        textMail.setText("");
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "DNI ya registrado");
-                    }
-
-                } catch (SQLException e) {
-                    System.out.println("EXCEP SQL" + e);
-                    JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
-                } finally {
-                    try {
-                        if (conex != null) {
-                            conex.close();
-                        }
-                    } catch (SQLException excSql) {
-                        System.err.println("ERROR SQL" + excSql);
-                    }
+                    textNombre.setText("");
+                    textApellido.setText("");
+                    dcFechaNac.setDate(null);
+                    textDomicilio.setText("");
+                    textDNI.setText("");
+                    textFijo.setText("");
+                    textCel.setText("");
+                    textEstadoCivil.setText("");
+                    textMail.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(null, "DNI no válido");
                 }
+
             } else {
                 JOptionPane.showMessageDialog(null, "Correo electrónico no válido");
             }
@@ -293,7 +280,7 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
     private void textNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textNombreActionPerformed
- /*   private void buscarFuncionario(String dni) {
+    /*   private void buscarFuncionario(String dni) {
         String query = "SELECT * FROM Funcionarios WHERE DNI = ?";
         Connection conex = null;
         try {
@@ -346,8 +333,11 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
     private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonEditar;
     private javax.swing.JButton botonEliminar;
+    private javax.swing.JComboBox<String> boxSector;
+    private javax.swing.ButtonGroup buttonGroup1;
     private com.toedter.calendar.JDateChooser dcFechaNac;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
