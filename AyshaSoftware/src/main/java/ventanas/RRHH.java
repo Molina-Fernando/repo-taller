@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 
 public class RRHH extends javax.swing.JFrame {
 
+    
     public RRHH() {
         initComponents();
         this.setLocationRelativeTo(this);
@@ -15,7 +16,11 @@ public class RRHH extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Recursos Humanos");
-        SetImageLabel.setImageLabel(labelUsuarios, "src\\main\\java\\images\\regFunc.png");
+        SetImageLabel.setImageLabel(labelFuncMen, "src\\main\\java\\images\\menAdmin.png");
+        SetImageLabel.setImageLabel(labelFuncWomen, "src\\main\\java\\images\\womenAdmin.png");
+        SetImageLabel.setImageLabel(labelDocMen, "src\\main\\java\\images\\regMedicos.png");
+        SetImageLabel.setImageLabel(labelDocWomen, "src\\main\\java\\images\\femDoc.png");
+        
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
         setIconImage(miIcono);
@@ -29,11 +34,21 @@ public class RRHH extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
         bg = new javax.swing.JPanel();
         jButtonRegistrar = new javax.swing.JButton();
-        labelUsuarios = new javax.swing.JLabel();
+        labelFuncMen = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabelIconito = new javax.swing.JLabel();
+        labelFuncWomen = new javax.swing.JLabel();
+        labelDocWomen = new javax.swing.JLabel();
+        labelDocMen = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jButtonRegistrar1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 153));
@@ -47,34 +62,69 @@ public class RRHH extends javax.swing.JFrame {
         jButtonRegistrar.setBackground(new java.awt.Color(0, 0, 153));
         jButtonRegistrar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButtonRegistrar.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonRegistrar.setText("Registrar ");
+        jButtonRegistrar.setText("Registrar administrativo");
         jButtonRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonRegistrarActionPerformed(evt);
             }
         });
-        bg.add(jButtonRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 120, 30));
+        bg.add(jButtonRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, 200, 40));
 
-        labelUsuarios.setText("jLabel1");
-        bg.add(labelUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 140, 130));
+        labelFuncMen.setText("jLabel1");
+        bg.add(labelFuncMen, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 110, 100));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 153));
-        jLabel3.setText("REGISTRO DE FUNCIONARIOS");
-        bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 270, 30));
+        jLabel3.setText("PERSONAL DE SALUD");
+        bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, 270, 30));
 
         jLabelIconito.setText("jLabel1");
         bg.add(jLabelIconito, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 60));
+
+        labelFuncWomen.setText("jLabel1");
+        bg.add(labelFuncWomen, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, 110, 100));
+
+        labelDocWomen.setText("jLabel1");
+        bg.add(labelDocWomen, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 260, 110, 100));
+
+        labelDocMen.setText("jLabel1");
+        bg.add(labelDocMen, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 160, 110, 100));
+
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        bg.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 20, 370));
+        bg.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 660, 20));
+
+        jButtonRegistrar1.setBackground(new java.awt.Color(0, 0, 153));
+        jButtonRegistrar1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jButtonRegistrar1.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonRegistrar1.setText("Registrar médico");
+        jButtonRegistrar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRegistrar1ActionPerformed(evt);
+            }
+        });
+        bg.add(jButtonRegistrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 450, 160, 40));
+
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel4.setText("REGISTRO DE FUNCIONARIOS");
+        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 270, 30));
+
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel5.setText("ADMINISTRATIVOS");
+        bg.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 270, 30));
+        bg.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 140, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 741, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
         );
 
         pack();
@@ -85,6 +135,11 @@ public class RRHH extends javax.swing.JFrame {
         //dispose();
         new RegistroFuncionarios().setVisible(true);
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
+
+    private void jButtonRegistrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrar1ActionPerformed
+        // TODO add your handling code here:
+        new RegistroMedicos().setVisible(true);
+    }//GEN-LAST:event_jButtonRegistrar1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -121,9 +176,19 @@ public class RRHH extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton jButtonRegistrar;
+    private javax.swing.JButton jButtonRegistrar1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelIconito;
-    private javax.swing.JLabel labelUsuarios;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JLabel labelDocMen;
+    private javax.swing.JLabel labelDocWomen;
+    private javax.swing.JLabel labelFuncMen;
+    private javax.swing.JLabel labelFuncWomen;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,6 +1,5 @@
 package clases;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -13,18 +12,27 @@ public class Medico extends Funcionario implements ProfesionalSanitario {
     public Medico() {
     }
     
+    public Medico(Medico med, String rol, String sector){
+        
+    }
+    
     Triage triage = new Triage();
     
-    public Medico(String nombre, String apellido, LocalDate fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, String user, String password, int matricula, String estadoCivil) {
+    public Medico(String nombre, String apellido, String fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, String user, String password, int matricula, String estadoCivil) {
         super(nombre, apellido, fecNacimiento, domicilio, dni, telFijo, telCelular, correoElectronico, user, password, estadoCivil);
         this.numMatricula = matricula;
     }
 
-    public Medico(String nombre, String apellido, LocalDate fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, String user, String password, int matricula, Especialidad especialidad, String estadoCivil) {
+    public Medico(String nombre, String apellido, String fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, String user, String password, int matricula, Especialidad especialidad, String estadoCivil) {
         super(nombre, apellido, fecNacimiento, domicilio, dni, telFijo, telCelular, correoElectronico, user, password, estadoCivil);
         this.numMatricula = matricula;
         setEspecialidad(especialidad);
 
+    }
+    
+    public Medico(String nombre, String apellido, String fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, int matricula, String estadoCivil) {
+        super(nombre, apellido, fecNacimiento, domicilio, dni, telFijo, telCelular, correoElectronico, estadoCivil);
+        this.numMatricula = matricula;
     }
 
     @Override
@@ -48,6 +56,7 @@ public class Medico extends Funcionario implements ProfesionalSanitario {
         return color;
     }
     
+    
            
 
     public void asignarBox(Paciente paciente1) {
@@ -58,7 +67,18 @@ public class Medico extends Funcionario implements ProfesionalSanitario {
     public void cambiarTriage(String colorFinal, String motivoCambio) {
         triage.setColorFinal(colorFinal);
         triage.setMotivoCambio(motivoCambio);
-        System.out.println("El color final es: " + colorFinal + " y lo cambie al original por: " + motivoCambio);
+    }
+    
+    public String getColorParcial(){
+        return triage.getColorTriage();
+    }
+    
+    public String getColorDefinitivo(){
+        return triage.getColorFinal();
+    }
+    
+    public String getMotivoCambio(){
+        return triage.getMotivoCambio();
     }
 
     @Override
@@ -98,6 +118,14 @@ public class Medico extends Funcionario implements ProfesionalSanitario {
         sb.append('}');
 
         return super.toString() + sb.toString();
+    }
+
+    public int getNumMatricula() {
+        return numMatricula;
+    }
+
+    public void setNumMatricula(int numMatricula) {
+        this.numMatricula = numMatricula;
     }
 
 }

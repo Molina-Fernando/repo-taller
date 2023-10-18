@@ -157,7 +157,7 @@ public class Login extends javax.swing.JFrame {
                         new AdminInformatico().setVisible(true);
                     } else if ("Medico".equals(nivelAcceso)) { //Medico no va, seria MedicoSala, MedicoTriage
                         dispose();
-                        new MedicoTriage().setVisible(true);
+                        new ListaTriage().setVisible(true);
                     } else if ("Funcionario".equals(nivelAcceso)) {
                         dispose();
                         new Funcionario().setVisible(true);

@@ -1,38 +1,69 @@
 
 package ventanas;
 
+
+import dbController.CtrlMedicoSala;
 import java.awt.BorderLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
-import ventanas.panelesmedicos.Panel1;
 import ventanas.panelesmedicos.Panel2;
 import ventanas.panelesmedicos.Panel3;
 import ventanas.panelesmedicos.Panel4;
-
-
 /**
  *
- * @author joaqu
+ * @author 
  */
 public class MedicoSala extends javax.swing.JFrame {
-
+    
+    
+    private static EntradaMedicoSala frameDeBase;
+    private CtrlMedicoSala ctrlMedSal = null;
+    private String dni;
+    private String numeroSala;
     /**
      * Creates new form MedicoSala
-     */
-    public MedicoSala() {
+     * @param frameDeBase
+     */   
+
+    public MedicoSala(EntradaMedicoSala frameDeBase) {
         initComponents();
+        dni = EntradaMedicoSala.dniV;
+        numeroSala = EntradaMedicoSala.numeroV;
+        ctrlMedSal = new CtrlMedicoSala(dni,numeroSala);
+        setTitle("Paciente "+ ctrlMedSal.nombreCompleto(dni));
         this.setLocationRelativeTo(null);
-        showPanel(new Panel1());
+        showPanel(new Panel2(ctrlMedSal.getDni()));
+        
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.out.println("Cerrando JFrame");
+                frameDeBase.cambiarDisponibilidad(numeroSala);
+                dispose();
+            }
+        });       
     }
     
+   
+    
+    /**
+     * 
+     * @param p de Jpanel para mostrarlo y darle estilos al nuevo panel que se muestre
+     */
     public void showPanel(JPanel p){
         p.setSize(460,510);
         p.setLocation(0,0);
-        
         content.removeAll();
         content.add(p,BorderLayout.CENTER);
         content.revalidate();
         content.repaint();
     }
+//    public String nombreCompleto(){
+//        return ctrlMedSal.nombreCompleto();
+//    }
     
 
     /**
@@ -47,12 +78,11 @@ public class MedicoSala extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         Boton3 = new javax.swing.JButton();
-        Boton1 = new javax.swing.JButton();
         Boton2 = new javax.swing.JButton();
         Boton4 = new javax.swing.JButton();
         content = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -70,19 +100,7 @@ public class MedicoSala extends javax.swing.JFrame {
                 Boton3ActionPerformed(evt);
             }
         });
-        jPanel2.add(Boton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 200, 70));
-
-        Boton1.setBackground(new java.awt.Color(0, 0, 204));
-        Boton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        Boton1.setForeground(new java.awt.Color(255, 255, 255));
-        Boton1.setText("Pacientes en espera");
-        Boton1.setBorder(null);
-        Boton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton1ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(Boton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 97, 200, 70));
+        jPanel2.add(Boton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 200, 70));
 
         Boton2.setBackground(new java.awt.Color(0, 0, 204));
         Boton2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -94,7 +112,7 @@ public class MedicoSala extends javax.swing.JFrame {
                 Boton2ActionPerformed(evt);
             }
         });
-        jPanel2.add(Boton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 172, 200, 70));
+        jPanel2.add(Boton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 200, 70));
 
         Boton4.setBackground(new java.awt.Color(0, 0, 204));
         Boton4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -106,7 +124,7 @@ public class MedicoSala extends javax.swing.JFrame {
                 Boton4ActionPerformed(evt);
             }
         });
-        jPanel2.add(Boton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 200, 70));
+        jPanel2.add(Boton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 200, 70));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 510));
 
@@ -138,40 +156,32 @@ public class MedicoSala extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void Boton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton1ActionPerformed
-        showPanel(new Panel1());
-    }//GEN-LAST:event_Boton1ActionPerformed
-
     private void Boton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton2ActionPerformed
-        showPanel(new Panel2());
+        showPanel(new Panel2(ctrlMedSal.getDni()));
     }//GEN-LAST:event_Boton2ActionPerformed
 
     private void Boton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton3ActionPerformed
-        showPanel(new Panel3());
+        showPanel(new Panel3(ctrlMedSal.getDni()));
     }//GEN-LAST:event_Boton3ActionPerformed
 
     private void Boton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton4ActionPerformed
-        showPanel(new Panel4());
+        showPanel(new Panel4(ctrlMedSal.getDni()));
     }//GEN-LAST:event_Boton4ActionPerformed
-
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new MedicoSala().setVisible(true);
+                
+                new MedicoSala(frameDeBase).setVisible(true);
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Boton1;
     private javax.swing.JButton Boton2;
     private javax.swing.JButton Boton3;
     private javax.swing.JButton Boton4;
