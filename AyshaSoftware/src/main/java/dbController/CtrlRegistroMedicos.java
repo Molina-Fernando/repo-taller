@@ -47,8 +47,8 @@ public class CtrlRegistroMedicos {
 
             if (!rs.next()) {
 
-                String insert = "INSERT INTO Funcionarios(Nombre, Apellido, FechaNacimiento, Domicilio, DNI, TelFijo, telCel, EstadoCivil, Mail, Matricula) VALUES(?,?,?,?,?,?,?,?,?,?);";
-                String insertMed = "INSERT INTO Medicos(Nombre, Apellido, DNI, Matricula, telCel, Mail) VALUES(?, ?, ?, ?, ?, ?);";
+                String insert = "INSERT INTO Funcionarios(Nombre, Apellido, FechaNacimiento, Domicilio, DNI, TelFijo, telCel, EstadoCivil, Mail) VALUES(?,?,?,?,?,?,?,?,?);";
+                String insertMed = "INSERT INTO Medicos(Nombre, Apellido, DNI, Matricula, telCel, Mail, FechaNac, Domicilio, TelFijo, EstadoCivil) VALUES(?,?,?,?,?, ?, ?, ?, ?, ?);";
                 PreparedStatement psi = conex.prepareStatement(insert);
                 PreparedStatement psi1 = conex.prepareStatement(insertMed);
 
@@ -59,9 +59,8 @@ public class CtrlRegistroMedicos {
                 psi.setString(5, func.getDni());
                 psi.setString(6, func.getTelFijo());
                 psi.setString(7, func.getTelCelular());
-                psi.setString(8, func.getDomicilio());
+                psi.setString(8, func.getEstadoCivil());
                 psi.setString(9, func.getCorreoElectronico());
-                psi.setString(10, matricula);
 
                 psi1.setString(1, func.getNombre());
                 psi1.setString(2, func.getApellido());
@@ -69,6 +68,10 @@ public class CtrlRegistroMedicos {
                 psi1.setString(4, matricula);
                 psi1.setString(5, func.getTelCelular());
                 psi1.setString(6, func.getCorreoElectronico());
+                psi1.setString(7, func.getFecNacimiento());
+                psi1.setString(8, func.getDomicilio());
+                psi1.setString(9, func.getTelFijo());
+                psi1.setString(10, func.getEstadoCivil());
 
                 psi.executeUpdate();
                 psi1.executeUpdate();

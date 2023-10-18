@@ -18,6 +18,10 @@ public class Funcionario extends Persona {
         setUsuario(usuario);
         setContrasenia(contrasenia);
     }
+    
+    public Funcionario(String nombre, String apellido, String fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, String estadoCivil) {
+        super(nombre, apellido, fecNacimiento, domicilio, dni, telFijo, telCelular, correoElectronico, estadoCivil);
+    }
 
     public void setRol(Rol e) {
         this.roles.add(e);

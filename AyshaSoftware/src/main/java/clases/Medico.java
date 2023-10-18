@@ -29,6 +29,11 @@ public class Medico extends Funcionario implements ProfesionalSanitario {
         setEspecialidad(especialidad);
 
     }
+    
+    public Medico(String nombre, String apellido, String fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, int matricula, String estadoCivil) {
+        super(nombre, apellido, fecNacimiento, domicilio, dni, telFijo, telCelular, correoElectronico, estadoCivil);
+        this.numMatricula = matricula;
+    }
 
     @Override
     public String realizarTriage(int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, int i11, int i12, int i13) {

@@ -17,7 +17,7 @@ import ventanas.Login;
  * @author Jeremías Simian
  */
 public class CtrlMedicoTriage {
-
+    CtrlConsulta ctrlConsulta = new CtrlConsulta();
     private final Medico med = new Medico();
 
     public String triagiarPaciente(int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, int i11, int i12, int i13) {
@@ -29,15 +29,17 @@ public class CtrlMedicoTriage {
         med.cambiarTriage(colorDefinitivo, motivoCambio);
     }
 
+    
     public void finalizarTriage() {
 
-        String colorDefinitivo;
+        String colorDefinitivo = null;
         String motivoCambio = null;
-        String dniMedico = "47111111";//Login.user;
+        String dniMedico = "888888888";//Login.user;
         String dniPac = obtenerUltimoDniPac();
         Connection conex = null;
         try {
             conex = Conexion.conectar();
+            
             String query = "SELECT * FROM Medicos WHERE DNI = ?";
             String query1 = "SELECT * FROM Pacientes WHERE DNI = ?";
 
@@ -63,11 +65,14 @@ public class CtrlMedicoTriage {
                 if (med.getColorDefinitivo() != null) {
                     colorDefinitivo = med.getColorDefinitivo();
                     motivoCambio = med.getMotivoCambio();
+                    
                 } else {
                     colorDefinitivo = med.getColorParcial();
                     motivoCambio = "No hubo cambio";
                 }
+                
 
+                
                 psu.setString(3, colorDefinitivo);
                 psu.setString(4, motivoCambio);
                 psu.setString(5, rs.getString("Matricula"));
@@ -82,7 +87,7 @@ public class CtrlMedicoTriage {
             }
 
         } catch (SQLException e) {
-            System.out.println("EXCEP SQL" + e);
+            System.out.println("EXCEP SQL " + e);
             JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
         } finally {
             try {
@@ -93,27 +98,28 @@ public class CtrlMedicoTriage {
                 System.err.println("ERROR SQL" + excSql);
             }
         }
+        ctrlConsulta.segundaCarga(med.getColorParcial(), colorDefinitivo, dniPac);
     }
 
     public String obtenerUltimoDniPac() {
         String dniPac = null;
-        Connection conex = null;
+        Connection conexion = null;
         try {
-            conex = Conexion.conectar();
+            conexion = Conexion.conectar();
             String query = "SELECT DNI FROM ListaEsperaSala ORDER BY ROWID DESC LIMIT 1;";
-            PreparedStatement psq = conex.prepareStatement(query);
+            PreparedStatement psq = conexion.prepareStatement(query);
             ResultSet rs = psq.executeQuery();
 
             if (rs.next()) {
                 dniPac = rs.getString("DNI");
             }
         } catch (SQLException e) {
-            System.out.println("EXCEP SQL" + e);
+            System.out.println("EXCEP SQL " + e);
             JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
         } finally {
             try {
-                if (conex != null) {
-                    conex.close();
+                if (conexion != null) {
+                    conexion.close();
                 }
             } catch (SQLException excSql) {
                 System.err.println("ERROR SQL" + excSql);

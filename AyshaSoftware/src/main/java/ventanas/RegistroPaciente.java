@@ -4,13 +4,17 @@
  */
 package ventanas;
 
+import clases.FormatosValidos;
 import clases.Paciente;
+import dbController.CtrlConsulta;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import java.util.Date;
 import dbController.CtrlRegistroPaciente;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.WindowConstants;
@@ -36,7 +40,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
         botonLista.setVisible(false);
     }
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -72,6 +76,8 @@ public class RegistroPaciente extends javax.swing.JFrame {
         textFechaNac = new com.toedter.calendar.JDateChooser();
         botonLista = new javax.swing.JButton();
         botonBuscar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        textMotivoConsulta = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -233,6 +239,12 @@ public class RegistroPaciente extends javax.swing.JFrame {
         });
         jPanel1.add(botonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 430, 90, 30));
 
+        textMotivoConsulta.setColumns(20);
+        textMotivoConsulta.setRows(5);
+        jScrollPane1.setViewportView(textMotivoConsulta);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 340, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -251,7 +263,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_TextFijoActionPerformed
-    
+
     Paciente pac;
 
     private void botonRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistro1ActionPerformed
@@ -266,11 +278,11 @@ public class RegistroPaciente extends javax.swing.JFrame {
         String telCelular = TextCelular.getText().trim();
         String correo = TextCorreo.getText().trim();
         String estadoCivil = TextEstadoCivil.getText().trim();
-        
+
         if (fechaNacimiento != null) {
-             fechaFormateada = dateFormat.format(fechaNacimiento);
-             pac = new Paciente(nombre, apellido, fechaFormateada, domicilio, dni, telFijo, telCelular, correo, personaContacto, estadoCivil);
-        
+            fechaFormateada = dateFormat.format(fechaNacimiento);
+            pac = new Paciente(nombre, apellido, fechaFormateada, domicilio, dni, telFijo, telCelular, correo, personaContacto, estadoCivil);
+
         }
 
         String patronMail = "^[A-Za-z0-9+_.-]+@(.+)$";
@@ -342,22 +354,41 @@ public class RegistroPaciente extends javax.swing.JFrame {
     private void TextApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextApellidoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TextApellidoActionPerformed
-
+    
+    private LocalDate fecha = null;
+    private LocalTime hora = null;
+    String motivoConsulta;
+    CtrlConsulta ctrlConsulta = new CtrlConsulta();
+    
     private void botonListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonListaActionPerformed
 
-        TextNombre.setText("");
-        TextApellido.setText("");
-        textFechaNac.setDate(null);
-        TextDomicilio.setText("");
-        TextDNI.setText("");
-        TextFijo.setText("");
-        TextCelular.setText("");
-        TextEstadoCivil.setText("");
-        TextCorreo.setText("");
-        TextPersonaContacto.setText("");
+        motivoConsulta = textMotivoConsulta.getText().trim();
 
-        botonRegistro1.setVisible(false);
-        botonLista.setVisible(false);
+        if (!motivoConsulta.isEmpty()) {
+            
+            fecha = LocalDate.now();
+            hora = LocalTime.now();
+            
+            String fechaString = fecha.format(FormatosValidos.FORMATO_FECHA);
+            String horaString = hora.format(FormatosValidos.FORMATO_HORA);
+            ctrlConsulta.primeraCarga(TextApellido.getText().trim(), TextDNI.getText().trim(), fechaString, horaString, motivoConsulta);
+            TextNombre.setText("");
+            TextApellido.setText("");
+            textFechaNac.setDate(null);
+            TextDomicilio.setText("");
+            TextDNI.setText("");
+            TextFijo.setText("");
+            TextCelular.setText("");
+            TextEstadoCivil.setText("");
+            TextCorreo.setText("");
+            TextPersonaContacto.setText("");
+
+            botonRegistro1.setVisible(false);
+            botonLista.setVisible(false);
+            
+            
+
+        }
 
 
     }//GEN-LAST:event_botonListaActionPerformed
@@ -365,7 +396,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         // TODO add your handling code here:
         String dni = TextDNI.getText();
-       
+
         String patronDNI = "^[0-9]{7,10}$";
 
         Pattern patternDNI = Pattern.compile(patronDNI);
@@ -448,7 +479,9 @@ public class RegistroPaciente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private com.toedter.calendar.JDateChooser textFechaNac;
+    private javax.swing.JTextArea textMotivoConsulta;
     // End of variables declaration//GEN-END:variables
 
 }

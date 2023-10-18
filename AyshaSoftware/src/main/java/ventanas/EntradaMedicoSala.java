@@ -4,7 +4,8 @@
  */
 package ventanas;
 
-
+import clases.Medico;
+import dbController.CtrlConsulta;
 import dbController.CtrlEntradaMedicoSala;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -12,25 +13,28 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author joaqu
  */
 public class EntradaMedicoSala extends javax.swing.JFrame {
-    
-           
+
+    String dniUser = "888888888";//Login.user
     ArrayList<Object[]> listaPacientes = new ArrayList<>();
     ArrayList<Object[]> listaBoxes = new ArrayList<>();
     DefaultTableModel modelo;
     DefaultTableModel modelo2;
     CtrlEntradaMedicoSala ctrlDB = new CtrlEntradaMedicoSala();
+    CtrlConsulta ctrlConsulta = new CtrlConsulta();
     String nomDB;
     String dniDB;
     String numeroDB;
     String disponibleDB;
-    public static String  dniV = null;
+    public static String dniV = null;
     public String disponibleV = null;
     public static String numeroV = null;
+    private Medico med;
 
     /**
      * Creates new form EntradaMedicoSala
@@ -42,53 +46,51 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
         modelo = new DefaultTableModel();
         modelo.addColumn("Nombre");
         modelo.addColumn("DNI");
-        modelo.addColumn("Color"); 
-        
+        modelo.addColumn("Color");
+
         actualizarTablaPacientesEnEspera();
-        
+
         modelo2 = new DefaultTableModel();
         modelo2.addColumn("Numero");
         modelo2.addColumn("Disponibilidad");
-        
+
         actualizarTablaBoxes();
-        
+
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                System.out.println("Cerrando JFrame");
                 cambiarDisponibilidad(numeroV);
                 dispose();
             }
         });
     }
-    
-    
-    private void actualizarTablaPacientesEnEspera(){
+
+    private void actualizarTablaPacientesEnEspera() {
         modelo.setRowCount(0);
         tablaPacientes = new javax.swing.JTable();
         tablaPacientes.setModel(modelo);
-        listaPacientes=ctrlDB.getTablaTriages(dniDB, nomDB);
-        
+        listaPacientes = ctrlDB.getTablaTriages(dniDB, nomDB);
+
         tablaPacientes = new JTable(modelo);
         jScrollPane1.setViewportView(tablaPacientes);
 
         for (Object[] vector : listaPacientes) {
 
-            dniDB  = vector[1].toString();
+            dniDB = vector[1].toString();
             nomDB = vector[0].toString();
 
             modelo.addRow(vector);
             tablaPacientes.setModel(modelo);
         }
     }
-    
-    public void actualizarTablaBoxes(){
+
+    public void actualizarTablaBoxes() {
         modelo2.setRowCount(0);
         tablaBoxes = new javax.swing.JTable();
         tablaBoxes.setModel(modelo2);
-        listaBoxes=ctrlDB.getTablaBoxes(numeroDB, disponibleDB);
-        
+        listaBoxes = ctrlDB.getTablaBoxes(numeroDB, disponibleDB);
+
         tablaBoxes = new JTable(modelo2);
         jScrollPane2.setViewportView(tablaBoxes);
 
@@ -99,7 +101,7 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
             tablaBoxes.setModel(modelo2);
         }
     }
-    
+
     public void cambiarDisponibilidad(String numeroV) {
         ctrlDB.alternarDisponibilidad(numeroV);
         actualizarTablaBoxes();
@@ -109,7 +111,7 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
         ctrlDB.eliminarPaciente(dniV);
         actualizarTablaPacientesEnEspera();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -254,20 +256,24 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SeleccionPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeleccionPacienteActionPerformed
-            int numFila = tablaPacientes.getSelectedRow();
-            int numFila2 = tablaBoxes.getSelectedRow();
-            if (numFila != -1 && numFila2 != -1) {
-                EntradaMedicoSala.dniV = (String) tablaPacientes.getValueAt(numFila, 1);
-                this.disponibleV = (String) tablaBoxes.getValueAt(numFila2, 1);
-                EntradaMedicoSala.numeroV =(String) tablaBoxes.getValueAt(numFila2, 0);
-                if(disponibleV.equals("Disponible")){
-                    cambiarDisponibilidad(numeroV);
-                    eliminarFilaTriage(EntradaMedicoSala.dniV);
-                     MedicoSala m = new MedicoSala(this);
-                     m.setVisible(true);
-                     EntradaMedicoSala.dniV=null;
-                }
-            }   
+        int numFila = tablaPacientes.getSelectedRow();
+        int numFila2 = tablaBoxes.getSelectedRow();
+        if (numFila != -1 && numFila2 != -1) {
+            EntradaMedicoSala.dniV = (String) tablaPacientes.getValueAt(numFila, 1);
+            
+            this.disponibleV = (String) tablaBoxes.getValueAt(numFila2, 1);
+            
+            EntradaMedicoSala.numeroV = (String) tablaBoxes.getValueAt(numFila2, 0);
+            if (disponibleV.equals("Disponible")) {
+                cambiarDisponibilidad(numeroV);
+                eliminarFilaTriage(EntradaMedicoSala.dniV);
+                MedicoSala m = new MedicoSala(this);
+                m.setVisible(true);
+                med = ctrlDB.recuperarMedico(dniUser);
+                ctrlConsulta.terceraCarga(med.getApellido(), med.getNumMatricula(), dniV);
+                EntradaMedicoSala.dniV = null;
+            }
+        }  
     }//GEN-LAST:event_SeleccionPacienteActionPerformed
 
     private void tablaPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPacientesMouseClicked
@@ -275,7 +281,7 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaPacientesMouseClicked
 
     private void tablaBoxesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaBoxesMouseClicked
-        
+
     }//GEN-LAST:event_tablaBoxesMouseClicked
 
     /**
@@ -326,6 +332,5 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
     private javax.swing.JTable tablaBoxes;
     private javax.swing.JTable tablaPacientes;
     // End of variables declaration//GEN-END:variables
-
 
 }

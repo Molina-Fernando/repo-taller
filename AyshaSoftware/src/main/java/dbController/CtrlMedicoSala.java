@@ -17,24 +17,22 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author joaqu
  */
 public class CtrlMedicoSala {
-    
-     private final String dni;
-     private String numero;
-     
+
+    private final String dni;
+    private String numero;
+
     public CtrlMedicoSala(String dni) {
         this.dni = dni;
-        System.out.println(dni);
     }
-    public CtrlMedicoSala(String dni,String numero) {
+
+    public CtrlMedicoSala(String dni, String numero) {
         this.dni = dni;
         this.numero = numero;
-        System.out.println(dni);
     }
 
     public String getDni() {
@@ -44,10 +42,9 @@ public class CtrlMedicoSala {
     public String getNumero() {
         return numero;
     }
-    
-    
-    public String nombreCompleto(){
-        String nombreC="";
+
+    public String nombreCompleto() {
+        String nombreC = "";
         Connection conex = null;
         try {
             conex = Conexion.conectar();
@@ -58,7 +55,7 @@ public class CtrlMedicoSala {
                 Object ob[] = new Object[2];
                 ob[0] = rs.getString("Nombre");
                 ob[1] = rs.getString("Apellido");
-                nombreC=ob[0]+" "+ob[1];    
+                nombreC = ob[0] + " " + ob[1];
             }
         } catch (SQLException e) {
             System.out.println("EXCEP SQL" + e);
@@ -74,8 +71,7 @@ public class CtrlMedicoSala {
         }
         return nombreC;
     }
-    
-    
+
     public ArrayList<Object[]> getTablaRegistros(String fecha, String hora, String tipo) {
         ArrayList<Object[]> listaRegistros = new ArrayList<>();
         Connection conex = null;
@@ -90,9 +86,6 @@ public class CtrlMedicoSala {
                 ob[0] = rs.getString("Fecha");
                 ob[1] = rs.getString("Hora");
                 ob[2] = rs.getString("Lugar");
-                System.out.println(ob[0]);
-                System.out.println(ob[1]);
-                System.out.println(ob[1]);
                 listaRegistros.add(ob);
             }
         } catch (SQLException e) {
@@ -109,8 +102,8 @@ public class CtrlMedicoSala {
         }
         return listaRegistros;
     }
-    
-        public ArrayList<Object[]> getTablaEstudios(String fecha, String hora, String lugar) {
+
+    public ArrayList<Object[]> getTablaEstudios(String fecha, String hora, String lugar) {
         ArrayList<Object[]> listaEstudios = new ArrayList<>();
         Connection conex = null;
         try {
@@ -124,9 +117,6 @@ public class CtrlMedicoSala {
                 ob[0] = rs.getString("Fecha");
                 ob[1] = rs.getString("Hora");
                 ob[2] = rs.getString("Tipo");
-                System.out.println(ob[0]);
-                System.out.println(ob[1]);
-                System.out.println(ob[2]);
                 listaEstudios.add(ob);
             }
         } catch (SQLException e) {
@@ -144,8 +134,7 @@ public class CtrlMedicoSala {
         return listaEstudios;
     }
 
-
-    public Registro seleccionarRegistro(String fecha,String hora, String lugar) {
+    public Registro seleccionarRegistro(String fecha, String hora, String lugar) {
         Registro resultado = null;
         Connection conex = null;
         try {
@@ -157,11 +146,11 @@ public class CtrlMedicoSala {
             psq.setString(3, lugar);
             ResultSet rs = psq.executeQuery();
             while (rs.next()) {
-                resultado= new Registro(rs.getString("DNI"),
-                                        LocalDate.parse(rs.getString("Fecha"), FormatosValidos.FORMATO_FECHA),
-                                        LocalTime.parse(rs.getString("Hora"), FormatosValidos.FORMATO_HORA),
-                                        rs.getString("Diagnostico"),
-                                        Lugares.valueOf(rs.getString("Lugar"))) ;
+                resultado = new Registro(rs.getString("DNI"),
+                        LocalDate.parse(rs.getString("Fecha"), FormatosValidos.FORMATO_FECHA),
+                        LocalTime.parse(rs.getString("Hora"), FormatosValidos.FORMATO_HORA),
+                        rs.getString("Diagnostico"),
+                        Lugares.valueOf(rs.getString("Lugar")));
             }
         } catch (SQLException e) {
             System.out.println("EXCEP SQL" + e);
@@ -178,7 +167,6 @@ public class CtrlMedicoSala {
         return resultado;
     }
 
-        
     public Estudio seleccionarEstudio(String fecha, String hora, String tipo) {
         Estudio resultado = null;
         Connection conex = null;
@@ -191,11 +179,11 @@ public class CtrlMedicoSala {
             psq.setString(3, tipo);
             ResultSet rs = psq.executeQuery();
             while (rs.next()) {
-                resultado= new Estudio(rs.getString("DNI"),
-                                        LocalDate.parse(rs.getString("Fecha"), FormatosValidos.FORMATO_FECHA),
-                                        LocalTime.parse(rs.getString("Hora"), FormatosValidos.FORMATO_HORA),
-                                        rs.getString("Tipo"),
-                                        rs.getString("Resultado")) ;
+                resultado = new Estudio(rs.getString("DNI"),
+                        LocalDate.parse(rs.getString("Fecha"), FormatosValidos.FORMATO_FECHA),
+                        LocalTime.parse(rs.getString("Hora"), FormatosValidos.FORMATO_HORA),
+                        rs.getString("Tipo"),
+                        rs.getString("Resultado"));
             }
         } catch (SQLException e) {
             System.out.println("EXCEP SQL" + e);
@@ -237,7 +225,7 @@ public class CtrlMedicoSala {
             }
         }
     }
-    
+
     public void cargarEstudio(Estudio estudio) {
         Connection conex = null;
         try {
@@ -264,5 +252,4 @@ public class CtrlMedicoSala {
         }
     }
 
-    
 }

@@ -128,7 +128,9 @@ public class InfoMedico extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 700, 150));
 
+        botonMostrarEspecialidades.setBackground(new java.awt.Color(0, 0, 153));
         botonMostrarEspecialidades.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        botonMostrarEspecialidades.setForeground(new java.awt.Color(255, 255, 255));
         botonMostrarEspecialidades.setText("Visualizar especialidades");
         botonMostrarEspecialidades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -100,7 +100,6 @@ public class RegistroMedicos extends javax.swing.JFrame {
         dcFechaNac = new com.toedter.calendar.JDateChooser();
         textNumMatricula = new javax.swing.JTextField();
         comboBoxEspecialidades = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -232,9 +231,6 @@ public class RegistroMedicos extends javax.swing.JFrame {
         });
         bg.add(comboBoxEspecialidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 460, 170, -1));
 
-        jButton2.setText("Asignar Especialidades");
-        bg.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 520, -1, -1));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -267,7 +263,7 @@ public class RegistroMedicos extends javax.swing.JFrame {
         correoElectronico = textMail.getText().trim();
         numMatricula = textNumMatricula.getText().trim();
 
-        ctrlRegistroMedicos.asignarEspecialidades(arrayEspecialidades, arrayFechas, arrayUniversidades, numMatricula, Integer.parseInt(dni));
+        
 
         String patronMail = "^[A-Za-z0-9+_.-]+@(.+)$";
         String patronDNI = "^[0-9]{7,10}$";
@@ -288,7 +284,8 @@ public class RegistroMedicos extends javax.swing.JFrame {
                 && !estadoCivil.isEmpty()
                 && !correoElectronico.isEmpty()
                 && !numMatricula.isEmpty()) {
-
+            
+            ctrlRegistroMedicos.asignarEspecialidades(arrayEspecialidades, arrayFechas, arrayUniversidades, numMatricula, Integer.parseInt(dni));
             if (matcherMail.matches()) {
 
                 if (matcherDNI.matches()) {
@@ -343,8 +340,7 @@ public class RegistroMedicos extends javax.swing.JFrame {
         // TODO add your handling code here:
         especialidad = (String) comboBoxEspecialidades.getSelectedItem();
         fechaTitulo = dcFechaTitulo.getDate();
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        String fechaTituloFormat = formato.format(fechaTitulo);
+       
         universidad = textUniversidad.getText();
 
         dni = textDNI.getText().trim();
@@ -354,6 +350,9 @@ public class RegistroMedicos extends javax.swing.JFrame {
 
         if (!dni.isEmpty()) {
             if (!numMatricula.isEmpty() && !especialidad.isEmpty() && fechaTitulo != null && !universidad.isEmpty()) {
+                
+                SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                String fechaTituloFormat = formato.format(fechaTitulo);
                 
                 if (!modeloLista.contains(especialidad)) {
 
@@ -425,7 +424,6 @@ public class RegistroMedicos extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser dcFechaNac;
     private com.toedter.calendar.JDateChooser dcFechaTitulo;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -144,6 +144,7 @@ public class CtrlGestionFuncionarios {
             arrayList.clear();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
+            System.out.println(e);
         } finally {
             // Cierra la conexión
             if (conex != null) {
