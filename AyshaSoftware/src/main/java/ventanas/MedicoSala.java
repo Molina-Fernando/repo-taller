@@ -4,6 +4,8 @@ package ventanas;
 
 import dbController.CtrlMedicoSala;
 import java.awt.BorderLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
@@ -29,6 +31,9 @@ public class MedicoSala extends javax.swing.JFrame {
 
     public MedicoSala(EntradaMedicoSala frameDeBase) {
         initComponents();
+        Toolkit miPantalla = Toolkit.getDefaultToolkit();
+        Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
+        setIconImage(miIcono);
         dni = EntradaMedicoSala.dniV;
         numeroSala = EntradaMedicoSala.numeroV;
         ctrlMedSal = new CtrlMedicoSala(dni,numeroSala);
@@ -40,7 +45,7 @@ public class MedicoSala extends javax.swing.JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                System.out.println("Cerrando JFrame");
+               
                 frameDeBase.cambiarDisponibilidad(numeroSala);
                 dispose();
             }

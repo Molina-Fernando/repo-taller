@@ -7,6 +7,8 @@ package ventanas;
 import clases.Medico;
 import dbController.CtrlConsulta;
 import dbController.CtrlEntradaMedicoSala;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -42,6 +44,9 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
     public EntradaMedicoSala() {
         initComponents();
         this.setLocationRelativeTo(null);
+        Toolkit miPantalla = Toolkit.getDefaultToolkit();
+        Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
+        setIconImage(miIcono);
         setResizable(false);
         modelo = new DefaultTableModel();
         modelo.addColumn("Nombre");

@@ -30,7 +30,7 @@ public final class VentanaGenerica extends javax.swing.JFrame {
         SetImageLabel.setImageLabel(jLabel9, "src\\main\\java\\images\\15.png");
         SetImageLabel.setImageLabel(jLabel10, "src\\main\\java\\images\\16.png");
         SetImageLabel.setImageLabel(jLabel11, "src\\main\\java\\images\\17.png");
-        setTitle("Ventana Genérica");
+        setTitle("Menú");
         arrayIds = ctrlVG.rolesParametrizados(Login.user);
 
         visibilidadBotones(arrayIds);
@@ -54,6 +54,11 @@ public final class VentanaGenerica extends javax.swing.JFrame {
             }
             if (id == 5) {
                 botonInformatica.setVisible(true);
+                botonTriage.setVisible(true);
+                botonSala.setVisible(true);
+                botonRRHH.setVisible(true);
+                botonGestion.setVisible(true);
+                botonAdmision.setVisible(true);
             }
             if (id == 6) {
                 botonGestion.setVisible(true);

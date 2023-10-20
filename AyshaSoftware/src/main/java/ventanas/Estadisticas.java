@@ -6,6 +6,8 @@
 package ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.JPanel;
 import ventanas.panelesEstadisticas.PanelEntrada;
 import ventanas.panelesEstadisticas.PanelMedicoMasAtendio;
@@ -28,6 +30,9 @@ public class Estadisticas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setTitle("Estadísticas de emergencias");
         showPanel(new PanelEntrada());
+        Toolkit miPantalla = Toolkit.getDefaultToolkit();
+        Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
+        setIconImage(miIcono);
     }
     
     public void showPanel(JPanel p){
