@@ -46,7 +46,7 @@ public class CtrlRegistroFuncionarios {
         try {
             conex = Conexion.conectar();
 
-            String query = "SELECT * FROM Funcionarios WHERE DNI = ?";
+            String query = "SELECT * FROM Funcionario WHERE DNI = ?";
 
             PreparedStatement psq = conex.prepareStatement(query);
             psq.setString(1, dni);
@@ -55,7 +55,7 @@ public class CtrlRegistroFuncionarios {
 
             if (!rs.next()) {
 
-                String insert = "INSERT INTO Funcionarios(Nombre, Apellido, FechaNacimiento, Domicilio, DNI, TelFijo, telCel, EstadoCivil, Mail, Sector) VALUES(?,?,?,?,?,?,?,?,?,?);";
+                String insert = "INSERT INTO Funcionario(Nombre, Apellido, FechaNacimiento, Domicilio, DNI, TelFijo, telCel, EstadoCivil, Mail, Sector) VALUES(?,?,?,?,?,?,?,?,?,?);";
                 PreparedStatement psi = conex.prepareStatement(insert);
 
                 psi.setString(1, func.getNombre());

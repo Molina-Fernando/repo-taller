@@ -24,7 +24,7 @@ public class CtrlRegistroPaciente {
         try {
             conex = Conexion.conectar();
 
-            String insertPaciente = "INSERT INTO Pacientes(Nombre, Apellido, FechaNacimiento, Domicilio, DNI, TelFijo, telCel, EstadoCivil, Mail, personaContacto) VALUES(?,?,?,?,?,?,?,?,?,?);";
+            String insertPaciente = "INSERT INTO Paciente(Nombre, Apellido, FechaNacimiento, Domicilio, DNI, TelFijo, telCel, EstadoCivil, Mail, personaContacto) VALUES(?,?,?,?,?,?,?,?,?,?);";
             String insertLista = "INSERT INTO ListaTriage(Nombre, Apellido, DNI) VALUES(?,?,?);";
 
             PreparedStatement psi = conex.prepareStatement(insertPaciente);
@@ -73,7 +73,7 @@ public class CtrlRegistroPaciente {
         try {
             conex = Conexion.conectar();
 
-            String query = "SELECT * FROM Pacientes WHERE DNI = ?";
+            String query = "SELECT * FROM Paciente WHERE DNI = ?";
 
             PreparedStatement psq = conex.prepareStatement(query);
             psq.setString(1, dni);
@@ -113,8 +113,7 @@ public class CtrlRegistroPaciente {
             }
 
         } catch (SQLException e) {
-            System.out.println("EXCEP SQL" + e);
-            JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
+            JOptionPane.showMessageDialog(null, "Paciente ya en espera del Triage");
         } catch (ParseException ex) {
             Logger.getLogger(RegistroPaciente.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

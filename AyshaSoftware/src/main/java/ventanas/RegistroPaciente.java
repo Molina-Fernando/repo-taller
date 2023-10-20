@@ -4,7 +4,7 @@
  */
 package ventanas;
 
-import clases.FormatosValidos;
+import Utilidades.FormatosValidos;
 import clases.Paciente;
 import dbController.CtrlConsulta;
 import java.awt.Image;
@@ -78,6 +78,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
         botonBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         textMotivoConsulta = new javax.swing.JTextArea();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,8 +117,8 @@ public class RegistroPaciente extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 153));
-        jLabel7.setText("Estado civil");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, 90, -1));
+        jLabel7.setText("Motivo de la consulta");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 310, 180, -1));
 
         jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 153));
@@ -243,7 +244,12 @@ public class RegistroPaciente extends javax.swing.JFrame {
         textMotivoConsulta.setRows(5);
         jScrollPane1.setViewportView(textMotivoConsulta);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 340, -1, -1));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 330, 200, -1));
+
+        jLabel11.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel11.setText("Estado civil");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, 90, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -382,12 +388,14 @@ public class RegistroPaciente extends javax.swing.JFrame {
             TextEstadoCivil.setText("");
             TextCorreo.setText("");
             TextPersonaContacto.setText("");
-
+            textMotivoConsulta.setText("");
             botonRegistro1.setVisible(false);
             botonLista.setVisible(false);
             
             
 
+        } else{
+            JOptionPane.showMessageDialog(null, "Debe registrar el motivo de la consulta");
         }
 
 
@@ -470,6 +478,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
     private javax.swing.JButton botonRegistro1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

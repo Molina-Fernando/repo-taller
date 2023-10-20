@@ -35,7 +35,7 @@ public class CtrlGestionFuncionarios {
         Connection conex = null;
         try {
             conex = Conexion.conectar();
-            String query = "SELECT DNI, Nombre, Apellido, Sector FROM Funcionarios";
+            String query = "SELECT DNI, Nombre, Apellido, Sector FROM Funcionario";
             PreparedStatement psq = conex.prepareStatement(query);
             ResultSet rs = psq.executeQuery();
 
@@ -70,7 +70,7 @@ public class CtrlGestionFuncionarios {
         Connection conex = null;
         try {
             conex = Conexion.conectar();
-            String query = "SELECT Nombre FROM Rol WHERE id IN (SELECT idRol FROM AsignacionRoles WHERE idFuncionario = ?)";
+            String query = "SELECT Nombre FROM Rol WHERE id IN (SELECT idRol FROM AsignacionRol WHERE idFuncionario = ?)";
             PreparedStatement psq = conex.prepareStatement(query);
             psq.setInt(1, dniDB);
 
@@ -126,7 +126,7 @@ public class CtrlGestionFuncionarios {
         try {
             conex = Conexion.conectar();
             PreparedStatement psq = conex.prepareStatement("SELECT ID FROM Rol WHERE Nombre = ?");
-            PreparedStatement insercionRoles = conex.prepareStatement("INSERT INTO AsignacionRoles (idFuncionario, idRol) VALUES (?, ?)");
+            PreparedStatement insercionRoles = conex.prepareStatement("INSERT INTO AsignacionRol (idFuncionario, idRol) VALUES (?, ?)");
 
             for (String rol : arrayList) {
                 psq.setString(1, rol);
@@ -164,14 +164,14 @@ public class CtrlGestionFuncionarios {
         try {
 
             conex = Conexion.conectar();
-            String deleteQuery = "DELETE FROM FUNCIONARIOS WHERE DNI = ?";
+            String deleteQuery = "DELETE FROM FUNCIONARIO WHERE DNI = ?";
             PreparedStatement psq = conex.prepareStatement(deleteQuery);
             psq.setInt(1, dni);
 
             psq.executeUpdate();
 
             //se elimina el usuario cuando se elimina un Funcionario
-            String deleteUserQuery = "DELETE FROM Usuarios WHERE Usuario = ?";
+            String deleteUserQuery = "DELETE FROM Usuario WHERE Usuario = ?";
             psq = conex.prepareStatement(deleteUserQuery);
             psq.setInt(1, dni);
             psq.executeUpdate();
@@ -268,7 +268,7 @@ public class CtrlGestionFuncionarios {
 
         try {
             conex = Conexion.conectar();
-            String queryInsert = "INSERT INTO Usuarios(Usuario, Contrasenia) VALUES (?, ?);";
+            String queryInsert = "INSERT INTO Usuario(Usuario, Contrasenia) VALUES (?, ?);";
 
             PreparedStatement psq = conex.prepareStatement(queryInsert);
 
@@ -276,7 +276,6 @@ public class CtrlGestionFuncionarios {
             psq.setString(2, contrasenia);
             psq.executeUpdate();
 
-            System.out.println("acá ando");
 
         } catch (SQLException e) {
             System.out.println("EXCEP SQL" + e);

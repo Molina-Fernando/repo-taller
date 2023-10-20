@@ -53,7 +53,7 @@ public class CtrlEntradaMedicoSala {
         Connection conex = null;
         try {
             conex = Conexion.conectar();
-            String query = "SELECT Numero, Disponibilidad FROM Boxes";
+            String query = "SELECT Numero, Disponibilidad FROM Box";
             PreparedStatement psq = conex.prepareStatement(query);
             ResultSet rs = psq.executeQuery();
             while (rs.next()) {
@@ -88,7 +88,7 @@ public class CtrlEntradaMedicoSala {
             conex = Conexion.conectar();
 
             // Consultar el valor actual de Disponibilidad
-            String query = "SELECT Disponibilidad FROM Boxes WHERE Numero = ?";
+            String query = "SELECT Disponibilidad FROM Box WHERE Numero = ?";
             PreparedStatement psq = conex.prepareStatement(query);
             psq.setString(1, numero);
             ResultSet rs = psq.executeQuery();
@@ -98,7 +98,7 @@ public class CtrlEntradaMedicoSala {
                 String nuevaDisponibilidad = "Disponible".equals(disponibilidadActual) ? "No Disponible" : "Disponible";
 
                 // Actualizar el valor de Disponibilidad en la base de datos
-                String update = "UPDATE Boxes SET Disponibilidad = ? WHERE Numero = ?;";
+                String update = "UPDATE Box SET Disponibilidad = ? WHERE Numero = ?;";
                 PreparedStatement psi = conex.prepareStatement(update);
                 psi.setString(1, nuevaDisponibilidad);
                 psi.setString(2, numero);
@@ -148,7 +148,7 @@ public class CtrlEntradaMedicoSala {
 
             conex = Conexion.conectar();
 
-            String query = "SELECT * FROM Medicos WHERE DNI = ?";
+            String query = "SELECT * FROM Medico WHERE DNI = ?";
             PreparedStatement psq = conex.prepareStatement(query);
             psq.setString(1, dni);
             ResultSet rs = psq.executeQuery();

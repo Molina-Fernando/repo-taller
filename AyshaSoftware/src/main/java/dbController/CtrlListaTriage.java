@@ -63,24 +63,15 @@ public class CtrlListaTriage {
 
             conex = Conexion.conectar();
 
-            String query = "SELECT * FROM Pacientes WHERE DNI = ?";
+            String query = "SELECT * FROM Paciente WHERE DNI = ?";
             PreparedStatement psq = conex.prepareStatement(query);
             psq.setString(1, dniInsert);
             ResultSet rs = psq.executeQuery();
 
             if (rs.next()) {
-                String insertTriages = "INSERT INTO Triages(NombrePac, ApellidoPac, DNI) VALUES(?,?,?);";
-                PreparedStatement psi = conex.prepareStatement(insertTriages);
-
-                psi.setString(1, rs.getString("Nombre"));
-                psi.setString(2, rs.getString("Apellido"));
-                psi.setString(3, dniInsert);
-
-                psi.executeUpdate();
-
+                
                 String insertListaEspera = "INSERT INTO ListaEsperaSala(NombrePac, DNI) VALUES(?,?);";
                 PreparedStatement psi1 = conex.prepareStatement(insertListaEspera);
-
                 psi1.setString(1, rs.getString("Nombre"));
                 psi1.setString(2, dniInsert);
 

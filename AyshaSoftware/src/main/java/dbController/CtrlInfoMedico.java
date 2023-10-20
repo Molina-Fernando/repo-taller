@@ -22,7 +22,7 @@ public class CtrlInfoMedico {
         Connection conex = null;
         try {
             conex = Conexion.conectar();
-            String query = "SELECT DNI, Nombre, Apellido, Matricula, TelCel, Mail FROM Medicos";
+            String query = "SELECT DNI, Nombre, Apellido, Matricula, TelCel, Mail FROM Medico";
             PreparedStatement psq = conex.prepareStatement(query);
             ResultSet rs = psq.executeQuery();
 

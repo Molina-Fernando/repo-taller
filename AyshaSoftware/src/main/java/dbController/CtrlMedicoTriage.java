@@ -34,14 +34,14 @@ public class CtrlMedicoTriage {
 
         String colorDefinitivo = null;
         String motivoCambio = null;
-        String dniMedico = "888888888";//Login.user;
+        String dniMedico = Login.user;
         String dniPac = obtenerUltimoDniPac();
         Connection conex = null;
         try {
             conex = Conexion.conectar();
             
-            String query = "SELECT * FROM Medicos WHERE DNI = ?";
-            String query1 = "SELECT * FROM Pacientes WHERE DNI = ?";
+            String query = "SELECT * FROM Medico WHERE DNI = ?";
+            String query1 = "SELECT * FROM Paciente WHERE DNI = ?";
 
             PreparedStatement psq1 = conex.prepareStatement(query1);
             PreparedStatement psq = conex.prepareStatement(query);
@@ -53,14 +53,16 @@ public class CtrlMedicoTriage {
 
             if (rs.next() && rs1.next()) {
 
-                String update = "UPDATE Triages SET ApellidoMed = ?, ColorParcial = ?, ColorDefinitivo = ?, MotivoCambio = ?, NroMatricula = ? WHERE DNI = ?;";
+                String update = "INSERT INTO Triage  (NombrePac, ApellidoPac, ApellidoMed, ColorParcial, ColorDefinitivo, MotivoCambio, NroMatricula, DNI) VALUES (?,?,?,?,?,?,?,?);";
                 PreparedStatement psu = conex.prepareStatement(update);
 
                 String update1 = "UPDATE ListaEsperaSala SET ColorDefinitivo = ? WHERE DNI = ?;";
                 PreparedStatement psu1 = conex.prepareStatement(update1);
-
-                psu.setString(1, rs.getString("Apellido"));
-                psu.setString(2, med.getColorParcial());
+                
+                psu.setString(1, rs1.getString("Nombre"));
+                psu.setString(2, rs1.getString("Apellido"));
+                psu.setString(3, rs.getString("Apellido"));
+                psu.setString(4, med.getColorParcial());
 
                 if (med.getColorDefinitivo() != null) {
                     colorDefinitivo = med.getColorDefinitivo();
@@ -73,10 +75,10 @@ public class CtrlMedicoTriage {
                 
 
                 
-                psu.setString(3, colorDefinitivo);
-                psu.setString(4, motivoCambio);
-                psu.setString(5, rs.getString("Matricula"));
-                psu.setInt(6, Integer.parseInt(dniPac));
+                psu.setString(5, colorDefinitivo);
+                psu.setString(6, motivoCambio);
+                psu.setInt(7, rs.getInt("Matricula"));
+                psu.setInt(8, Integer.parseInt(dniPac));
 
                 psu1.setString(1, colorDefinitivo);
                 psu1.setInt(2, Integer.parseInt(dniPac));

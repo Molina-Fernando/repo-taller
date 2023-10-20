@@ -32,7 +32,7 @@ public class MedicoSala extends javax.swing.JFrame {
         dni = EntradaMedicoSala.dniV;
         numeroSala = EntradaMedicoSala.numeroV;
         ctrlMedSal = new CtrlMedicoSala(dni,numeroSala);
-        setTitle("Paciente "+ nombreCompleto());
+        setTitle("Paciente "+ ctrlMedSal.nombreCompleto(dni));
         this.setLocationRelativeTo(null);
         showPanel(new Panel2(ctrlMedSal.getDni()));
         
@@ -61,9 +61,9 @@ public class MedicoSala extends javax.swing.JFrame {
         content.revalidate();
         content.repaint();
     }
-    public String nombreCompleto(){
-        return ctrlMedSal.nombreCompleto();
-    }
+//    public String nombreCompleto(){
+//        return ctrlMedSal.nombreCompleto();
+//    }
     
 
     /**

@@ -5,7 +5,7 @@
 package dbController;
 
 import clases.Estudio;
-import clases.FormatosValidos;
+import Utilidades.FormatosValidos;
 import clases.Lugares;
 import clases.Registro;
 import java.sql.Connection;
@@ -43,13 +43,14 @@ public class CtrlMedicoSala {
         return numero;
     }
 
-    public String nombreCompleto() {
+    public String nombreCompleto(String dni) {
         String nombreC = "";
         Connection conex = null;
         try {
             conex = Conexion.conectar();
-            String query = "SELECT Nombre, Apellido FROM Pacientes";
+            String query = "SELECT Nombre, Apellido FROM Paciente WHERE DNI = ?";
             PreparedStatement psq = conex.prepareStatement(query);
+            psq.setString(1, dni);
             ResultSet rs = psq.executeQuery();
             while (rs.next()) {
                 Object ob[] = new Object[2];
@@ -77,7 +78,7 @@ public class CtrlMedicoSala {
         Connection conex = null;
         try {
             conex = Conexion.conectar();
-            String query = "SELECT Fecha, Hora, Lugar FROM Registros WHERE DNI = ?";
+            String query = "SELECT Fecha, Hora, Lugar FROM Registro WHERE DNI = ?";
             PreparedStatement psq = conex.prepareStatement(query);
             psq.setString(1, dni);
             ResultSet rs = psq.executeQuery();
@@ -108,7 +109,7 @@ public class CtrlMedicoSala {
         Connection conex = null;
         try {
             conex = Conexion.conectar();
-            String query = "SELECT Fecha, Hora, Tipo FROM Estudios WHERE DNI = ?";
+            String query = "SELECT Fecha, Hora, Tipo FROM Estudio WHERE DNI = ?";
             PreparedStatement psq = conex.prepareStatement(query);
             psq.setString(1, dni);
             ResultSet rs = psq.executeQuery();
@@ -139,7 +140,7 @@ public class CtrlMedicoSala {
         Connection conex = null;
         try {
             conex = Conexion.conectar();
-            String query = "SELECT DNI, Fecha, Hora, Diagnostico, Lugar FROM Registros WHERE Fecha = ? AND Hora = ? AND Lugar = ?";
+            String query = "SELECT DNI, Fecha, Hora, Diagnostico, Lugar FROM Registro WHERE Fecha = ? AND Hora = ? AND Lugar = ?";
             PreparedStatement psq = conex.prepareStatement(query);
             psq.setString(1, fecha);
             psq.setString(2, hora);
@@ -172,7 +173,7 @@ public class CtrlMedicoSala {
         Connection conex = null;
         try {
             conex = Conexion.conectar();
-            String query = "SELECT DNI, Fecha, Hora, Tipo, Resultado FROM Estudios WHERE Fecha = ? AND Hora = ? AND Tipo = ?";
+            String query = "SELECT DNI, Fecha, Hora, Tipo, Resultado FROM Estudio WHERE Fecha = ? AND Hora = ? AND Tipo = ?";
             PreparedStatement psq = conex.prepareStatement(query);
             psq.setString(1, fecha);
             psq.setString(2, hora);
@@ -204,7 +205,7 @@ public class CtrlMedicoSala {
         Connection conex = null;
         try {
             conex = Conexion.conectar();
-            String query = "INSERT INTO Registros(DNI, Fecha, Hora, Diagnostico, Lugar) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO Registro(DNI, Fecha, Hora, Diagnostico, Lugar) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement psq = conex.prepareStatement(query);
             psq.setString(1, registro.getDni());
             psq.setString(2, registro.getFecha().format(FormatosValidos.FORMATO_FECHA));
@@ -230,7 +231,7 @@ public class CtrlMedicoSala {
         Connection conex = null;
         try {
             conex = Conexion.conectar();
-            String query = "INSERT INTO Estudios(DNI, Fecha, Hora, Tipo, Resultado) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO Estudio(DNI, Fecha, Hora, Tipo, Resultado) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement psq = conex.prepareStatement(query);
             psq.setString(1, estudio.getDni());
             psq.setString(2, estudio.getFecha().format(FormatosValidos.FORMATO_FECHA));
