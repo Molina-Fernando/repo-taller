@@ -2,14 +2,14 @@ package ventanas;
 
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.sql.*;
-import dbController.Conexion;
+import dbController.CtrlLogin;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
 
     public static String user = "";
     String pass = "";
+    CtrlLogin ctrlLogin = new CtrlLogin();
 
     public Login() {
         initComponents();
@@ -26,6 +26,7 @@ public class Login extends javax.swing.JFrame {
         setIconImage(miIcono);
 
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -127,65 +128,17 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         user = textUsuario.getText().trim();
         pass = textContrasenia.getText().trim();
-        Conexion cn = new Conexion();
-        //boolean credencialValida = false;
-
-        if (!user.isEmpty() && !pass.isEmpty()) {
-            Connection conex = null;
-            try {
-                conex = cn.conectar();
-                //Statement statement = conex.createStatement();
-                String query = "SELECT * FROM Usuarios WHERE Usuario = ? AND Contrasenia = ?";
-                //define una consulta que busca en la base de datos una fila en la tabla Usuarios, donde el campo Usuario sea igual al valor que se proporcionará más adelante marcado como ?
-                //evitamos inyección SQL, mediante consulta parametrizada
-
-                PreparedStatement preparedStatement = conex.prepareStatement(query);
-                preparedStatement.setString(1, user);
-                preparedStatement.setString(2, pass);
-
-                ResultSet rs = preparedStatement.executeQuery();
-
-                /*
-                    TO DO: Modificar roles, en base a lo último hecho en Alta Funcionarios desde el panel del adminiInformatico. 
-                */
-                if (rs.next()) {
-                    String nivelAcceso = rs.getString("NivelAcceso");
-
-                    // Verificamos el nivel de acceso y abrimos la interfaz correspondiente
-                    if ("AdminInformatico".equals(nivelAcceso)) {
-                        dispose();
-                        new AdminInformatico().setVisible(true);
-                    } else if ("Medico".equals(nivelAcceso)) { //Medico no va, seria MedicoSala, MedicoTriage
-                        dispose();
-                        new ListaTriage().setVisible(true);
-                    } else if ("Funcionario".equals(nivelAcceso)) {
-                        dispose();
-                        new Funcionario().setVisible(true);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Datos de acceso incorrectos");
-                    textUsuario.setText("");
-                    textContrasenia.setText("");
-                }
-
-            } catch (SQLException e) {
-                System.err.println("Error en el botón acceder: " + e);
-                JOptionPane.showMessageDialog(null, "Error al iniciar sesión. Contacte al administrador.");
-            } finally {
-                try {
-
-                    if (conex != null) {
-                        conex.close();
-                    }
-
-                } catch (SQLException excSql) {
-                    System.err.println("ERROR SQL" + excSql);
-                }
-
-            }
+        
+        if(ctrlLogin.validarAcceso(user, pass)){
+            
+            new VentanaGenerica().setVisible(true);
+            
         } else {
-            JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
+        JOptionPane.showMessageDialog(null, "Datos de acceso incorrectos");
         }
+        
+        
+       
     }//GEN-LAST:event_botonAccesoActionPerformed
 
     /**

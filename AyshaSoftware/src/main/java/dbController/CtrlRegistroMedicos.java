@@ -38,7 +38,7 @@ public class CtrlRegistroMedicos {
         try {
             conex = Conexion.conectar();
 
-            String query = "SELECT * FROM Funcionarios WHERE DNI = ?";
+            String query = "SELECT * FROM Funcionario WHERE DNI = ?";
 
             PreparedStatement psq = conex.prepareStatement(query);
             psq.setString(1, dni);
@@ -47,8 +47,8 @@ public class CtrlRegistroMedicos {
 
             if (!rs.next()) {
 
-                String insert = "INSERT INTO Funcionarios(Nombre, Apellido, FechaNacimiento, Domicilio, DNI, TelFijo, telCel, EstadoCivil, Mail) VALUES(?,?,?,?,?,?,?,?,?);";
-                String insertMed = "INSERT INTO Medicos(Nombre, Apellido, DNI, Matricula, telCel, Mail, FechaNac, Domicilio, TelFijo, EstadoCivil) VALUES(?,?,?,?,?, ?, ?, ?, ?, ?);";
+                String insert = "INSERT INTO Funcionario(Nombre, Apellido, FechaNacimiento, Domicilio, DNI, TelFijo, telCel, EstadoCivil, Mail) VALUES(?,?,?,?,?,?,?,?,?);";
+                String insertMed = "INSERT INTO Medico(Nombre, Apellido, DNI, Matricula, telCel, Mail, FechaNacimiento, Domicilio, TelFijo, EstadoCivil) VALUES(?,?,?,?,?, ?, ?, ?, ?, ?);";
                 PreparedStatement psi = conex.prepareStatement(insert);
                 PreparedStatement psi1 = conex.prepareStatement(insertMed);
 

@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class EntradaMedicoSala extends javax.swing.JFrame {
 
-    String dniUser = "888888888";//Login.user
+    String dniUser = Login.user;
     ArrayList<Object[]> listaPacientes = new ArrayList<>();
     ArrayList<Object[]> listaBoxes = new ArrayList<>();
     DefaultTableModel modelo;
@@ -271,6 +271,7 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
                 m.setVisible(true);
                 med = ctrlDB.recuperarMedico(dniUser);
                 ctrlConsulta.terceraCarga(med.getApellido(), med.getNumMatricula(), dniV);
+                
                 EntradaMedicoSala.dniV = null;
             }
         }  
