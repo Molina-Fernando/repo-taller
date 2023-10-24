@@ -5,6 +5,7 @@ import dbController.CtrlVentanaGenerica;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import javax.swing.WindowConstants;
 
 public final class VentanaGenerica extends javax.swing.JFrame {
 
@@ -13,6 +14,7 @@ public final class VentanaGenerica extends javax.swing.JFrame {
 
     public VentanaGenerica() {
         initComponents();
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         botonTriage.setVisible(false);
         botonSala.setVisible(false);
         botonRRHH.setVisible(false);

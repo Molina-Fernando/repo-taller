@@ -6,7 +6,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
+/**
+ * La clase `CtrlLogin` se encarga de validar el acceso de un usuario
+ * en la aplicación mediante la interacción con la base de datos y la
+ * ventana de inicio de sesión.
+ */
 public class CtrlLogin {
+    
+    /**
+     * Valida el acceso de un usuario comparando las credenciales proporcionadas con
+     * los registros de la base de datos.
+     *
+     * @param user El nombre de usuario proporcionado por el usuario.
+     * @param pass La contraseña proporcionada por el usuario.
+     * @return `true` si las credenciales son válidas y el acceso es exitoso, de lo contrario, `false`.
+     */
 
     public boolean validarAcceso(String user, String pass) {
 
@@ -38,6 +52,4 @@ public class CtrlLogin {
         }
         return retorno;
     }
-
-
 }

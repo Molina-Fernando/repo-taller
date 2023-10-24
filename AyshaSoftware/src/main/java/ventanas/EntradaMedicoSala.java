@@ -14,6 +14,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JTable;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
  * @author joaqu
  */
 public class EntradaMedicoSala extends javax.swing.JFrame {
-
+    
     String dniUser = Login.user;
     ArrayList<Object[]> listaPacientes = new ArrayList<>();
     ArrayList<Object[]> listaBoxes = new ArrayList<>();
@@ -42,7 +43,9 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
      * Creates new form EntradaMedicoSala
      */
     public EntradaMedicoSala() {
+        
         initComponents();
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");

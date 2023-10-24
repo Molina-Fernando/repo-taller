@@ -2,6 +2,7 @@ package ventanas;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.WindowConstants;
 
 public class AdminInformatico extends javax.swing.JFrame {
 
@@ -14,7 +15,7 @@ public class AdminInformatico extends javax.swing.JFrame {
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
 
-
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(miIcono);
         SetImageLabel.setImageLabel(jLabelIconito, "src\\main\\java\\images\\icon.png");
         setTitle("Administrador");

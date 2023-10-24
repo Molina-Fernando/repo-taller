@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dbController;
 
 import Utilidades.FormatosValidos;
@@ -17,8 +13,8 @@ import java.util.Iterator;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author joaqu
+ * La clase `CtrlEstadistica` proporciona métodos para obtener estadísticas
+ * relacionadas con médicos y pacientes en la base de datos.
  */
 public class CtrlEstadistica {
 
@@ -120,6 +116,16 @@ public class CtrlEstadistica {
         return vector;
     }
 
+    /**
+     * Este método devuelve un vector de dos posiciones, donde la primera
+     * posición es la matrícula del médico y la segunda posición es la cantidad
+     * de veces que esa matrícula aparece en el ArrayList.
+     *
+     * @param desdeT La fecha de inicio del rango de tiempo.
+     * @param hastaT La fecha de fin del rango de tiempo.
+     * @return Un vector de dos posiciones. La primera posición es la matrícula
+     * que aparece más veces y la segunda posición es cuántas veces aparece.
+     */
     public String obtenerNombreCompletoMedico(int matricula) {
         String nombre = null;
         Connection conex = null;
@@ -147,6 +153,16 @@ public class CtrlEstadistica {
         return nombre;
     }
 
+    /**
+     * Obtiene la cantidad de pacientes atendidos por un médico en un rango de
+     * fechas dado.
+     *
+     * @param m Matrícula del médico.
+     * @param d Fecha de inicio del rango.
+     * @param h Fecha de fin del rango.
+     * @return La cantidad de pacientes atendidos por el médico en el rango de
+     * fechas.
+     */
     public String obtenerCantidadPacientesMedicoFecha(String m, String d, String h) {
         String cantidad;
         Connection conex = null;
@@ -179,6 +195,16 @@ public class CtrlEstadistica {
         return cantidad;
     }
 
+    /**
+     * Obtiene una lista de pacientes que han tenido consultas en un rango de
+     * fechas y cumplan con ciertos criterios de edad.
+     *
+     * @param d Fecha de inicio del rango.
+     * @param h Fecha de fin del rango.
+     * @param b Edad mínima.
+     * @param l Edad máxima.
+     * @return Una lista de pacientes que cumplen con los criterios de edad.
+     */
     public ArrayList<Object[]> obtenerCantidadPacientesMedicoFechaEdad(String d, String h, String b, String l) {
         ArrayList<Object[]> listaPacientes = new ArrayList<>();
         Connection conex = null;
@@ -212,6 +238,18 @@ public class CtrlEstadistica {
         return listaPacientes;
     }
 
+    /**
+     * Realiza una búsqueda en la base de datos para obtener la fecha de
+     * nacimiento de pacientes basándose en su DNI. Luego, calcula la edad de
+     * los pacientes y elimina aquellos que no cumplen con los criterios de edad
+     * especificados.
+     *
+     * @param paciente Un ArrayList de objetos que contienen información de los
+     * pacientes, donde cada objeto es un array con al menos dos elementos: el
+     * DNI del paciente y un espacio de almacenamiento para la edad.
+     * @param b La edad mínima permitida.
+     * @param l La edad máxima permitida.
+     */
     public void busquedaFecNac(ArrayList<Object[]> paciente, String b, String l) {
 
         Connection conex = null;
@@ -250,6 +288,13 @@ public class CtrlEstadistica {
         }
     }
 
+    /**
+     * Calcula la edad en años a partir de la fecha de nacimiento proporcionada.
+     *
+     * @param fechaNac La fecha de nacimiento en formato válido (por ejemplo,
+     * "yyyy-MM-dd").
+     * @return La edad en años.
+     */
     private int calcularEdad(String fechaNac) {
         LocalDate fechaNacimiento = LocalDate.parse(fechaNac, FormatosValidos.FORMATO_FECHA);
         LocalDate fechaActual = LocalDate.now();
@@ -267,6 +312,15 @@ public class CtrlEstadistica {
         this.cantidadDeConsultas = cantidadDeConsultas;
     }
 
+    /**
+     * Obtiene una lista de pacientes que han tenido la mayor cantidad de
+     * consultas en un rango de fechas especificado.
+     *
+     * @param d Fecha de inicio del rango.
+     * @param h Fecha de fin del rango.
+     * @return Una lista de nombres de pacientes que han tenido la mayor
+     * cantidad de consultas en el rango de fechas.
+     */
     public ArrayList<String> pacienteConMasConsultas(String d, String h) {
         ArrayList<String> pacientesMasConsultados = new ArrayList<>();
         Connection conex = null;
@@ -310,6 +364,13 @@ public class CtrlEstadistica {
         return pacientesMasConsultados;
     }
 
+    /**
+     * Obtiene la cantidad de consultas realizadas por un paciente con base en
+     * su DNI.
+     *
+     * @param dni El DNI del paciente.
+     * @return La cantidad de consultas realizadas por el paciente.
+     */
     public int contarConsultas(String dni) {
         int cantidadRepeticiones = 0;
         Connection conex = null;
@@ -345,6 +406,15 @@ public class CtrlEstadistica {
 
     int cantidadColor = 0;
 
+    /**
+     * Busca la cantidad de consultas que tienen un resultado de triage
+     * específico (un color) en la base de datos.
+     *
+     * @param color El color del triage a buscar (por ejemplo, "Rojo",
+     * "Amarillo", "Verde").
+     * @return La cantidad de consultas que tienen el resultado de triage del
+     * color especificado.
+     */
     public int buscarTriage(String color) {
 
         Connection conex = null;
@@ -377,6 +447,15 @@ public class CtrlEstadistica {
         return cantidadColor;
     }
 
+    /**
+     * Busca y devuelve la cantidad de cada color de triaje en un rango de
+     * fechas.
+     *
+     * @param d Fecha de inicio del rango.
+     * @param h Fecha de fin del rango.
+     * @return El color de triaje que más se repite y la cantidad de veces que
+     * se repite.
+     */
     public ArrayList<Object[]> triagesPorFecha(String d, String h) {
         ArrayList<Object[]> listaTriages = new ArrayList<>();
         Connection conex = null;
@@ -394,7 +473,6 @@ public class CtrlEstadistica {
             while (rs.next()) {
 
                 String color = rs.getString("ResultadoDefinitivo");
-                System.out.println("as");
                 if (!coloresProcesados.contains(color)) {
                     Object ob[] = new Object[2];
                     ob[0] = rs.getString("ResultadoDefinitivo");
@@ -420,6 +498,12 @@ public class CtrlEstadistica {
         return listaTriages;
     }
 
+    /**
+     * Obtiene una lista de triajes que han cambiado de color parcial a color
+     * definitivo.
+     *
+     * @return Una lista de triajes que han cambiado de color.
+     */
     public ArrayList<Object[]> triagesCambiados() {
 
         ArrayList<Object[]> listaTriages = new ArrayList<>();

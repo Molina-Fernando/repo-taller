@@ -110,7 +110,6 @@ public class GestionFuncionarios extends javax.swing.JFrame {
         lista = new javax.swing.JList<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaRoles = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
         botonActualizar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         botonAlta1 = new javax.swing.JButton();
@@ -143,18 +142,18 @@ public class GestionFuncionarios extends javax.swing.JFrame {
         tablaFuncionarios.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaFuncionarios);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 730, 190));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 730, 190));
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 153));
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 153));
         jLabel1.setText("Roles a asignar");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 260, 120, 40));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 120, 40));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 153));
-        jLabel3.setText("Rol(es)");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 50, 20));
+        jLabel3.setText("Seleccione Rol(es)");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 140, 20));
 
         botonEliminar.setBackground(new java.awt.Color(0, 0, 153));
         botonEliminar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -165,7 +164,7 @@ public class GestionFuncionarios extends javax.swing.JFrame {
                 botonEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(botonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 380, 120, 30));
+        jPanel1.add(botonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 290, 120, 30));
 
         botonAlta.setBackground(new java.awt.Color(0, 0, 153));
         botonAlta.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -176,11 +175,11 @@ public class GestionFuncionarios extends javax.swing.JFrame {
                 botonAltaActionPerformed(evt);
             }
         });
-        jPanel1.add(botonAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 340, 120, 30));
+        jPanel1.add(botonAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 250, 120, 30));
 
         jScrollPane2.setViewportView(lista);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 290, 220, 120));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 250, 210, 100));
 
         tablaRoles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -195,48 +194,42 @@ public class GestionFuncionarios extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tablaRoles);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 530, 470, 160));
-
-        jLabel2.setBackground(new java.awt.Color(0, 0, 153));
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 153));
-        jLabel2.setText("  PENDIENTES DE ALTA (quienes no tienen rol y sector)");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, 390, 40));
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 410, 470, 160));
 
         botonActualizar.setBackground(new java.awt.Color(0, 0, 153));
         botonActualizar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         botonActualizar.setForeground(new java.awt.Color(255, 255, 255));
-        botonActualizar.setText("ACTUALIZAR");
+        botonActualizar.setText("VER ROLES");
         botonActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonActualizarActionPerformed(evt);
             }
         });
-        jPanel1.add(botonActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 420, 120, 30));
+        jPanel1.add(botonActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 330, 120, 30));
 
         jLabel4.setBackground(new java.awt.Color(0, 0, 153));
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 153));
         jLabel4.setText("Roles asociados");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 500, 120, 40));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, 120, 40));
 
         botonAlta1.setBackground(new java.awt.Color(0, 0, 153));
         botonAlta1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         botonAlta1.setForeground(new java.awt.Color(255, 255, 255));
-        botonAlta1.setText("Agregar a la Lista");
+        botonAlta1.setText("Agregar rol a la Lista");
         botonAlta1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAlta1ActionPerformed(evt);
             }
         });
-        jPanel1.add(botonAlta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 430, 160, 30));
+        jPanel1.add(botonAlta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 240, 30));
 
         comboBoxRoles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxRolesActionPerformed(evt);
             }
         });
-        jPanel1.add(comboBoxRoles, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, -1, -1));
+        jPanel1.add(comboBoxRoles, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, 90, -1));
 
         botonAlta2.setBackground(new java.awt.Color(0, 0, 153));
         botonAlta2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -247,18 +240,18 @@ public class GestionFuncionarios extends javax.swing.JFrame {
                 botonAlta2ActionPerformed(evt);
             }
         });
-        jPanel1.add(botonAlta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 430, 140, 30));
+        jPanel1.add(botonAlta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 250, 140, 30));
 
         botonLimpiar.setBackground(new java.awt.Color(0, 0, 153));
         botonLimpiar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         botonLimpiar.setForeground(new java.awt.Color(255, 255, 255));
-        botonLimpiar.setText("Limpiar");
+        botonLimpiar.setText("Limpiar tabla");
         botonLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonLimpiarActionPerformed(evt);
             }
         });
-        jPanel1.add(botonLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 530, -1, -1));
+        jPanel1.add(botonLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 590, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -270,9 +263,9 @@ public class GestionFuncionarios extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 694, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -430,7 +423,6 @@ public class GestionFuncionarios extends javax.swing.JFrame {
     private javax.swing.JButton botonLimpiar;
     private javax.swing.JComboBox<String> comboBoxRoles;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;

@@ -3,6 +3,7 @@ package ventanas;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.WindowConstants;
 
 
 
@@ -12,6 +13,7 @@ public class RRHH extends javax.swing.JFrame {
     public RRHH() {
         initComponents();
         this.setLocationRelativeTo(this);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setVisible(true);
         setLocationRelativeTo(null);
         setResizable(false);
