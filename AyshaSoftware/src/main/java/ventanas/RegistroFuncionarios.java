@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import clases.Funcionario;
 
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -12,10 +13,10 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 public class RegistroFuncionarios extends javax.swing.JFrame {
-    
+
     CtrlRegistroFuncionarios ctrlRegistroFuncionarios = new CtrlRegistroFuncionarios();
     private String[] elementosBox = new String[5];
-    
+
     public RegistroFuncionarios() {
         initComponents();
         setVisible(true);
@@ -27,16 +28,15 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
         SetImageLabel.setImageLabel(jLabel12, "src\\main\\java\\images\\regFunc.png");
         setIconImage(miIcono);
-        
+
         cargarBoxSectores(ctrlRegistroFuncionarios.cargaComboBoxSectores());
     }
-    
-   private void cargarBoxSectores(ArrayList<String> arrayList){
-        for(String elemento : arrayList){
+
+    private void cargarBoxSectores(ArrayList<String> arrayList) {
+        for (String elemento : arrayList) {
             boxSector.addItem(elemento);
         }
     }
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -239,7 +239,6 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
                 && !estadoCivil.isEmpty()
                 && !correoElectronico.isEmpty()
                 && !sector.isEmpty()) {
-            
 
             if (matcherMail.matches()) {
 
@@ -247,9 +246,8 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
 
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                     String fechaFormateada = formato.format(fechaNacimiento);
-
-                    ctrlRegistroFuncionarios.registrarFuncionario(nombre, apellido, fechaFormateada, domicilio, dni, telFijo, telCelular, estadoCivil, correoElectronico, sector);
-                    
+                    Funcionario funcionario = new Funcionario(nombre, apellido, fechaFormateada, domicilio, dni, telFijo, telCelular, correoElectronico, estadoCivil);
+                    ctrlRegistroFuncionarios.registrarFuncionario(funcionario, sector);
 
                     textNombre.setText("");
                     textApellido.setText("");

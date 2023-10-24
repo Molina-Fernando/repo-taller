@@ -20,27 +20,9 @@ public class CtrlRegistroFuncionarios {
     }
 
     public void registrarFuncionario(
-            String nombre,
-            String apellido,
-            String fechaFormateada,
-            String domicilio,
-            String dni,
-            String telFijo,
-            String telCelular,
-            String estadoCivil,
-            String correoElectronico,
-            String sector
+           Funcionario func, String sector
     ) {
-        Funcionario func = new Funcionario();
-        func.setNombre(nombre);
-        func.setApellido(apellido);
-        func.setFecNacimiento(fechaFormateada);
-        func.setDomicilio(domicilio);
-        func.setDni(dni);
-        func.setTelFijo(telFijo);
-        func.setTelCelular(telCelular);
-        func.setEstadoCivil(estadoCivil);
-        func.setCorreoElectronico(correoElectronico);
+ 
 
         Connection conex = null;
         try {
@@ -49,7 +31,7 @@ public class CtrlRegistroFuncionarios {
             String query = "SELECT * FROM Funcionario WHERE DNI = ?";
 
             PreparedStatement psq = conex.prepareStatement(query);
-            psq.setString(1, dni);
+            psq.setString(1, func.getDni());
 
             ResultSet rs = psq.executeQuery();
 

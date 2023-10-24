@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dbController;
 
 import java.sql.Connection;
@@ -12,11 +8,20 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Jeremías Simian
+ * La clase ´CtrlnfoMedico´ se encarga de recuperar los datos de los médicos
+ * desde la base de datos, para luego pasarlos a la ventana ´InfoMedico´.
  */
 public class CtrlInfoMedico {
 
+    /**
+     * Completa un ArrayList de vectores de tipo Object, con los datos de cada
+     * médico, obteniendolos desde la base de datos.
+     *
+     * @return una lista de vectores con los médicos que esten presentes en la
+     * base de datos.
+     * @throws SQLExeption Si ocurre un error en la interacción con la base de
+     * datos.
+     */
     public ArrayList<Object[]> getTablaMedicos() {
         ArrayList<Object[]> arrayListDeVectores = new ArrayList<>();
         Connection conex = null;
@@ -54,8 +59,18 @@ public class CtrlInfoMedico {
         return arrayListDeVectores;
     }
 
+    /**
+     * Completa un ArrayList de vectores de tipo Object, con los datos de cada
+     * especialidad de cada médico, obteniendolos desde la base de datos.
+     *
+     * @param dniDB : dni del paciente recuperado de la selección.
+     * @return una lista de vectores con los datos de cada especialidad del
+     * médico.
+     * @throws SQLExeption Si ocurre un error en la interacción con la base de
+     * datos.
+     */
     public ArrayList<Object[]> getTablaEspecialidades(int dniDB) {
-        ArrayList<Object[]> arrayListDeRoles = new ArrayList<>();
+        ArrayList<Object[]> arrayListDeEspecialidades = new ArrayList<>();
         Connection conex = null;
         try {
             conex = Conexion.conectar();
@@ -76,7 +91,7 @@ public class CtrlInfoMedico {
                 ob[1] = rsc.getString("Nombre");
                 ob[2] = rs.getString(4);
                 ob[3] = rs.getString(3);
-                arrayListDeRoles.add(ob);
+                arrayListDeEspecialidades.add(ob);
             }
 
         } catch (SQLException e) {
@@ -91,7 +106,7 @@ public class CtrlInfoMedico {
                 System.err.println("ERROR SQL" + excSql);
             }
         }
-        return arrayListDeRoles;
+        return arrayListDeEspecialidades;
 
     }
 }

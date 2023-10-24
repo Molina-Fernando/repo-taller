@@ -3,20 +3,11 @@ package dbController;
 //import Builder.ConsultaBuilder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class CtrlConsulta {
 
-//    static ConsultaBuilder cBuilder = new ConsultaBuilder();
-//
-//    public CtrlConsulta() { 
-//    }
-//    
-//    public static void completarConsulta() {
-//       
-//    }
     public void primeraCarga(String apellidoPaciente, String dniPaciente, String fecha, String hora, String motivo) {
         Connection conex = null;
         try {

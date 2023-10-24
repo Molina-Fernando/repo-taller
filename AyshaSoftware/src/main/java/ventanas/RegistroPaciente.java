@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ventanas;
 
 import Utilidades.FormatosValidos;
@@ -19,6 +15,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.WindowConstants;
 
+/**
+ * La ventana ´RegistroPaciente´ registra a los pacientes que son atendidos en
+ * Admisión, relacionandose con el controlador ´CtrlRegistroPaciente´.
+ */
 public class RegistroPaciente extends javax.swing.JFrame {
 
     /**
@@ -272,6 +272,14 @@ public class RegistroPaciente extends javax.swing.JFrame {
 
     Paciente pac;
 
+    /**
+     * Registra el paciente, pasando por una validación de los datos cargados,
+     * luego llama al método del controller ´registrarPacientes()´, pasandole
+     * por parámetro un objeto Paciente, objetos que ya han sido instanciados
+     * con sus respectivos valores.
+     *
+     * @param evt
+     */
     private void botonRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistro1ActionPerformed
         String fechaFormateada = null;
         String nombre = TextNombre.getText().trim();
@@ -360,21 +368,26 @@ public class RegistroPaciente extends javax.swing.JFrame {
     private void TextApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextApellidoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TextApellidoActionPerformed
-    
+
     private LocalDate fecha = null;
     private LocalTime hora = null;
     String motivoConsulta;
     CtrlConsulta ctrlConsulta = new CtrlConsulta();
-    
+
+    /**
+     * Botón que completa la primer parte de la Consulta y vacía los campos.
+     *
+     * @param evt
+     */
     private void botonListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonListaActionPerformed
 
         motivoConsulta = textMotivoConsulta.getText().trim();
 
         if (!motivoConsulta.isEmpty()) {
-            
+
             fecha = LocalDate.now();
             hora = LocalTime.now();
-            
+
             String fechaString = fecha.format(FormatosValidos.FORMATO_FECHA);
             String horaString = hora.format(FormatosValidos.FORMATO_HORA);
             ctrlConsulta.primeraCarga(TextApellido.getText().trim(), TextDNI.getText().trim(), fechaString, horaString, motivoConsulta);
@@ -391,16 +404,20 @@ public class RegistroPaciente extends javax.swing.JFrame {
             textMotivoConsulta.setText("");
             botonRegistro1.setVisible(false);
             botonLista.setVisible(false);
-            
-            
 
-        } else{
+        } else {
             JOptionPane.showMessageDialog(null, "Debe registrar el motivo de la consulta");
         }
 
 
     }//GEN-LAST:event_botonListaActionPerformed
 
+    /**
+     * Botón que valida el DNI y llama al metodo del controller
+     * ´buscarPaciente´.
+     *
+     * @param evt
+     */
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         // TODO add your handling code here:
         String dni = TextDNI.getText();
