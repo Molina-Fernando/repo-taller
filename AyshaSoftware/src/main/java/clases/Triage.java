@@ -1,7 +1,5 @@
 package clases;
 
-
-
 public class Triage {
 
     private int respiracion;
@@ -21,24 +19,7 @@ public class Triage {
     private String colorFinal;
     private String motivoCambio;
 
-
     public Triage() {
-    }
-
-    public Triage(int respiracion, int pulso, int estadoMental, int conciencia, int dolorPecho, int lesionGrave, int edad, int fiebre, int vomitos, int dolorAbdominal, int signosDeShock, int doloresLeves, int sangrado) {
-        this.respiracion = respiracion;
-        this.pulso = pulso;
-        this.estadoMental = estadoMental;
-        this.conciencia = conciencia;
-        this.dolorPecho = dolorPecho;
-        this.lesionGrave = lesionGrave;
-        this.edad = edad;
-        this.fiebre = fiebre;
-        this.vomitos = vomitos;
-        this.dolorAbdominal = dolorAbdominal;
-        this.signosDeShock = signosDeShock;
-        this.doloresLeves = doloresLeves;
-        this.sangrado = sangrado;
     }
 
     public String getColorTriage() {
@@ -65,6 +46,12 @@ public class Triage {
         this.motivoCambio = motivoCambio;
     }
 
+    /**
+     * Mediante el método ´calcularPuntuacion()´ obtiende la cantidad de puntos
+     * total, definiendo asi el color parcial.
+     *
+     * @return resultadoTriage : color parcial del triage.
+     */
     public String obtenerColor() {
         //medicoTriage.instanciarTriage();
 
@@ -87,6 +74,12 @@ public class Triage {
         //Este llama a calcularPuntuacion
     }
 
+    /**
+     * Suma todos los respectivos puntos de los signos vitales y retorna el
+     * resultado.
+     *
+     * @return puntaje total.
+     */
     private int calcularPuntuacion() {
         return respiracion + pulso + estadoMental + conciencia + dolorPecho + lesionGrave + edad + fiebre + vomitos + dolorAbdominal + signosDeShock + doloresLeves + sangrado;
         // Método a resolver...
@@ -143,7 +136,5 @@ public class Triage {
     public void setSangrado(int sangrado) {
         this.sangrado = sangrado;
     }
-    
-    
 
 }

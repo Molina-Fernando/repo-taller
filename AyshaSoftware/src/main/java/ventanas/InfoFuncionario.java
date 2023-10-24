@@ -1,8 +1,8 @@
-
 package ventanas;
 
+import Utilidades.SetImageLabel;
 import dbController.CtrlInfoFuncionario;
-import dbController.CtrlInfoMedico;
+
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.ArrayList;
@@ -10,7 +10,10 @@ import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
-
+/**
+ * La ventana ´InfoFuncionario´, es la encargada de que el gestor pueda
+ * visualizar todos los datos de los funcionarios registrados en el sistema.
+ */
 public class InfoFuncionario extends javax.swing.JFrame {
 
     DefaultTableModel modelo;
@@ -20,9 +23,17 @@ public class InfoFuncionario extends javax.swing.JFrame {
     ArrayList<Object[]> arrayListRoles;
     CtrlInfoFuncionario ctrlDb = new CtrlInfoFuncionario();
 
+    /**
+     * Constructor de la ventana de Información de Funcionarios. Inicializa la
+     * interfaz de usuario de la ventana, establece el título de la ventana, su
+     * ubicación, y propiedades como su capacidad de redimensionamiento y
+     * comportamiento de cierre. También carga y establece el ícono de la
+     * ventana, así como los modelos de tabla para mostrar información de
+     * funcionarios y roles asociados. Llama a los métodos de actualización de
+     * tablas para cargar datos iniciales en la ventana.
+     */
     public InfoFuncionario() {
-               initComponents();
-        
+        initComponents();
         setTitle("Información de Funcionarios");
         setLocationRelativeTo(null);
         setResizable(false);
@@ -38,18 +49,22 @@ public class InfoFuncionario extends javax.swing.JFrame {
         modelo.addColumn("telCel");
         modelo.addColumn("Mail");
         modelo.addColumn("Sector");
-        
+
         modeloR = new DefaultTableModel();
         modeloR.addColumn("DNI");
         modeloR.addColumn("Rol");
 
- 
         actualizarTabla();
         actualizarTablaRoles();
 
     }
-    
-        private void actualizarTabla() {
+
+    /**
+     * Actualiza la tabla de funcionarios en la ventana.Obtiene datos de la base
+     * de datos a través del controlador de gestión de funcionarios (`dbCtrl`),
+     * y llena la tabla con los datos.
+     */
+    private void actualizarTabla() {
         modelo.setRowCount(0);
         tablaFuncionarios = new javax.swing.JTable();
         tablaFuncionarios.setModel(modelo);
@@ -65,7 +80,12 @@ public class InfoFuncionario extends javax.swing.JFrame {
         }
     }
 
-        private void actualizarTablaRoles() {
+    /**
+     * Actualiza la tabla de roles asociados en la ventana. Borra todos los
+     * datos existentes en la tabla de roles y la reconstruye con los nuevos
+     * datos de acuerdo al estado actual de `modeloR`.
+     */
+    private void actualizarTablaRoles() {
         modeloR.setRowCount(0);
         tablaEspecialidades = new javax.swing.JTable();
         tablaEspecialidades.setModel(modeloR);
@@ -73,7 +93,6 @@ public class InfoFuncionario extends javax.swing.JFrame {
         tablaEspecialidades = new JTable(modeloR);
         jScrollPane1.setViewportView(tablaEspecialidades);
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -84,7 +103,7 @@ public class InfoFuncionario extends javax.swing.JFrame {
         tablaFuncionarios = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         LabelIconito = new javax.swing.JLabel();
-        botonMostrarEspecialidades = new javax.swing.JButton();
+        botonMostrarRoles = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaEspecialidades = new javax.swing.JTable();
 
@@ -124,16 +143,16 @@ public class InfoFuncionario extends javax.swing.JFrame {
         LabelIconito.setText("jLabel8");
         jPanel1.add(LabelIconito, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 40));
 
-        botonMostrarEspecialidades.setBackground(new java.awt.Color(0, 0, 153));
-        botonMostrarEspecialidades.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        botonMostrarEspecialidades.setForeground(new java.awt.Color(255, 255, 255));
-        botonMostrarEspecialidades.setText("Visualizar roles");
-        botonMostrarEspecialidades.addActionListener(new java.awt.event.ActionListener() {
+        botonMostrarRoles.setBackground(new java.awt.Color(0, 0, 153));
+        botonMostrarRoles.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        botonMostrarRoles.setForeground(new java.awt.Color(255, 255, 255));
+        botonMostrarRoles.setText("Visualizar roles");
+        botonMostrarRoles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonMostrarEspecialidadesActionPerformed(evt);
+                botonMostrarRolesActionPerformed(evt);
             }
         });
-        jPanel1.add(botonMostrarEspecialidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 190, 30));
+        jPanel1.add(botonMostrarRoles, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 190, 30));
 
         tablaEspecialidades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -166,7 +185,21 @@ public class InfoFuncionario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonMostrarEspecialidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMostrarEspecialidadesActionPerformed
+    /**
+     * Maneja el evento de clic en el botón "Mostrar Roles" para un funcionario
+     * seleccionado. Este método actualiza la tabla de roles, eliminando todas
+     * las filas existentes y cargando los roles asociados al funcionario
+     * seleccionado. Primero verifica si se ha seleccionado un funcionario en la
+     * tabla principal. Luego, obtiene el DNI del funcionario seleccionado y
+     * utiliza ese valor para recuperar los roles asociados a ese funcionario
+     * desde la base de datos. Luego, agrega estos roles a la tabla de roles y
+     * la muestra en la interfaz gráfica.
+     *
+     * @param evt El evento de acción que desencadena este método (clic en el
+     * botón "Mostrar roles").
+     */
+
+    private void botonMostrarRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMostrarRolesActionPerformed
         modeloR.setRowCount(0);
         int numFila = tablaFuncionarios.getSelectedRow();
 
@@ -182,7 +215,7 @@ public class InfoFuncionario extends javax.swing.JFrame {
             }
 
         }
-    }//GEN-LAST:event_botonMostrarEspecialidadesActionPerformed
+    }//GEN-LAST:event_botonMostrarRolesActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -218,7 +251,7 @@ public class InfoFuncionario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelIconito;
-    private javax.swing.JButton botonMostrarEspecialidades;
+    private javax.swing.JButton botonMostrarRoles;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

@@ -1,9 +1,16 @@
 package ventanas;
 
+import Utilidades.SetImageLabel;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.WindowConstants;
 
+/**
+ * La ventana ´Admision´ la pueden acceder los encargados del sector de Admisión
+ * y puede acceder a la ventana donde se registran los pacientes que van
+ * entrando al hospital.
+ *
+ */
 public class Admision extends javax.swing.JFrame {
 
     public Admision() {
@@ -73,6 +80,11 @@ public class Admision extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Botón que abre la ventana ´RegistroPaciente´.
+     *
+     * @param evt
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         new RegistroPaciente().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed

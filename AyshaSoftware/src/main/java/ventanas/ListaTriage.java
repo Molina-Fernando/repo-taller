@@ -1,6 +1,7 @@
 
 package ventanas;
 
+import Utilidades.SetImageLabel;
 import javax.swing.table.DefaultTableModel;
 import dbController.CtrlListaTriage;
 import java.awt.Image;
@@ -9,6 +10,11 @@ import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
 
+/**
+ * La ventana ´ListaTriage´ contiene la lista con todos los pacientes que han
+ * sido atendidos por admisión, pudiendo seleccionar alguno y realizarle el
+ * triage abriendo la ventana ´MedicoTriage´.
+ */
 public class ListaTriage extends javax.swing.JFrame {
 
     public static String nombreUpdate = "";
@@ -34,8 +40,11 @@ public class ListaTriage extends javax.swing.JFrame {
         arrayListEspera = new ArrayList<>();
         actualizarTabla();
     }
- 
 
+    /**
+     * Actualiza la tabla que se ve en la lista de pacientes atendidos en
+     * admisión.
+     */
     private void actualizarTabla() {
         modelo.setRowCount(0);
 
@@ -46,7 +55,6 @@ public class ListaTriage extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tablaUsuarios);
 
         for (Object[] vector : arrayListEspera) {
-
 
             modelo.addRow(vector);
             tablaUsuarios.setModel(modelo);
@@ -120,7 +128,12 @@ public class ListaTriage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
+    /**
+     * Botón que te lleva a la ventana para realizar el triage, y a su vez
+     * elimina el paciente de la lista.
+     *
+     * @param evt
+     */
     private void botonTriageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonTriageActionPerformed
 
         int numFila = tablaUsuarios.getSelectedRow();
@@ -133,7 +146,7 @@ public class ListaTriage extends javax.swing.JFrame {
             DefaultTableModel model = (DefaultTableModel) tablaUsuarios.getModel();
             model.removeRow(numFila);
             new MedicoTriage().setVisible(true);
-            
+
         }
     }//GEN-LAST:event_botonTriageActionPerformed
 

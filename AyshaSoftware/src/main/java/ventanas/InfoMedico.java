@@ -1,6 +1,7 @@
 
 package ventanas;
 
+import Utilidades.SetImageLabel;
 import dbController.CtrlInfoMedico;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -9,6 +10,11 @@ import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
+
+/**
+ * La ventana ´InfoMedico´, es la encargada de que el gestor pueda visualizar todos
+ * los datos de los médicos registrados en el sistema.
+ */
 
 public class InfoMedico extends javax.swing.JFrame {
 
@@ -47,8 +53,9 @@ public class InfoMedico extends javax.swing.JFrame {
         actualizarTablaEspecialidades();
     }
 
-  
-
+    /**
+     * Actualiza la tabla donde se muestran los médicos.
+     */
     private void actualizarTabla() {
         modelo.setRowCount(0);
         tablaMedicos = new javax.swing.JTable();
@@ -65,6 +72,9 @@ public class InfoMedico extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Actualiza la tabla donde se visualizan las especialidades de cada médico.
+     */
     private void actualizarTablaEspecialidades() {
         modeloR.setRowCount(0);
         tablaEspecialidades = new javax.swing.JTable();
@@ -164,6 +174,12 @@ public class InfoMedico extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Botón que carga la tabla de especialidades de un médico que se haya
+     * seleccionado.
+     *
+     * @param evt
+     */
     private void botonMostrarEspecialidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMostrarEspecialidadesActionPerformed
         modeloR.setRowCount(0);
         int numFila = tablaMedicos.getSelectedRow();

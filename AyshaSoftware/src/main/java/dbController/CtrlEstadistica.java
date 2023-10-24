@@ -401,49 +401,6 @@ public class CtrlEstadistica {
         return cantidadRepeticiones;
     }
 
-    int cantidadColor = 0;
-
-    /**
-     * Busca la cantidad de consultas que tienen un resultado de triage
-     * específico (un color) en la base de datos.
-     *
-     * @param color El color del triage a buscar (por ejemplo, "Rojo",
-     * "Amarillo", "Verde").
-     * @return La cantidad de consultas que tienen el resultado de triage del
-     * color especificado.
-     */
-    public int buscarTriage(String color) {
-
-        Connection conex = null;
-        try {
-            conex = Conexion.conectar();
-            String query = "SELECT COUNT(*) FROM Consulta WHERE ResultadoDefinitivo = ?";
-
-            PreparedStatement psq = conex.prepareStatement(query);
-
-            psq.setString(1, color);
-
-            ResultSet rs = psq.executeQuery();
-
-            while (rs.next()) {
-                cantidadColor = rs.getInt(1);
-            }
-
-        } catch (SQLException e) {
-            System.out.println("EXCEP SQL" + e);
-            JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
-        } finally {
-            try {
-                if (conex != null) {
-                    conex.close();
-                }
-            } catch (SQLException excSql) {
-                System.err.println("ERROR SQL" + excSql);
-            }
-        }
-        return cantidadColor;
-    }
-
     /**
      * Busca y devuelve la cantidad de cada color de triaje en un rango de
      * fechas.
@@ -457,28 +414,24 @@ public class CtrlEstadistica {
         ArrayList<Object[]> listaTriages = new ArrayList<>();
         Connection conex = null;
         int cantidadColores;
-        HashSet<Object> coloresProcesados = new HashSet<>();
 
         try {
             conex = Conexion.conectar();
-            String query = "SELECT * FROM Consulta WHERE Fecha BETWEEN ? AND ? ";
+            String query = "SELECT COUNT(*) as cantidad, ResultadoDefinitivo FROM Consulta WHERE Fecha BETWEEN ? AND ? GROUP BY ResultadoDefinitivo";
             PreparedStatement psq = conex.prepareStatement(query);
             psq.setString(1, d);
             psq.setString(2, h);
 
             ResultSet rs = psq.executeQuery();
             while (rs.next()) {
-
                 String color = rs.getString("ResultadoDefinitivo");
-                if (!coloresProcesados.contains(color)) {
-                    Object ob[] = new Object[2];
-                    ob[0] = rs.getString("ResultadoDefinitivo");
-                    cantidadColores = buscarTriage(color);
-                    ob[1] = cantidadColores;
-                    listaTriages.add(ob);
-                    coloresProcesados.add(color);
-                }
+                cantidadColores = rs.getInt("cantidad");
 
+                Object ob[] = new Object[2];
+                ob[0] = color;
+                ob[1] = cantidadColores;
+
+                listaTriages.add(ob);
             }
         } catch (SQLException e) {
             System.out.println("EXCEP SQL" + e);

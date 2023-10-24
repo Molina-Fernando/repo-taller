@@ -13,6 +13,10 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 
+/**
+ * La clase `GestionFuncionarios` representa la ventana de gestión de
+ * funcionarios.
+ */
 public class GestionFuncionarios extends javax.swing.JFrame {
 
     DefaultTableModel modelo;
@@ -23,6 +27,10 @@ public class GestionFuncionarios extends javax.swing.JFrame {
     private DefaultListModel<String> modeloLista;
     private String rol;
 
+    /**
+     * Constructor de la clase `GestionFuncionarios`. Inicializa la ventana y
+     * configura su apariencia, así como los modelos de tabla y listas.
+     */
     public GestionFuncionarios() {
         initComponents();
         setTitle("Gestión de Funcionarios");
@@ -48,13 +56,18 @@ public class GestionFuncionarios extends javax.swing.JFrame {
         modeloR.addColumn("DNI");
         modeloR.addColumn("Rol");
 
-        //modelo.addColumn("Rol");
         actualizarTabla();
         actualizarTablaRoles();
 
         cargarBoxRoles(dbCtrl.cargaComboBoxRoles());
     }
 
+    /**
+     * Método que carga el comboBox con los nombres de roles obtenidos de la
+     * base de datos
+     *
+     * @param arrayList lista de nombre de roles
+     */
     private void cargarBoxRoles(ArrayList<String> arrayList) {
         for (String elemento : arrayList) {
             comboBoxRoles.addItem(elemento);
@@ -64,6 +77,12 @@ public class GestionFuncionarios extends javax.swing.JFrame {
     String nomDB;
     int dniDB;
 
+    /**
+     * Actualiza la tabla de funcionarios en la ventana. Elimina todos los datos
+     * existentes en la tabla de funcionarios, obtiene nuevos datos de la base
+     * de datos a través del controlador de gestión de funcionarios (`dbCtrl`),
+     * y llena la tabla con los nuevos datos.
+     */
     private void actualizarTabla() {
         modelo.setRowCount(0);
         tablaFuncionarios = new javax.swing.JTable();
@@ -85,6 +104,11 @@ public class GestionFuncionarios extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Actualiza la tabla de roles en la ventana. Borra todos los datos
+     * existentes en la tabla de roles y la reconstruye con los nuevos datos de
+     * acuerdo al estado actual de `modeloR`.
+     */
     private void actualizarTablaRoles() {
         modeloR.setRowCount(0);
         tablaRoles = new javax.swing.JTable();
@@ -95,7 +119,7 @@ public class GestionFuncionarios extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -112,10 +136,9 @@ public class GestionFuncionarios extends javax.swing.JFrame {
         tablaRoles = new javax.swing.JTable();
         botonActualizar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        botonAlta1 = new javax.swing.JButton();
+        botonAgrearLista = new javax.swing.JButton();
         comboBoxRoles = new javax.swing.JComboBox<>();
-        botonAlta2 = new javax.swing.JButton();
-        botonLimpiar = new javax.swing.JButton();
+        botonAsignarRoles = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -153,7 +176,7 @@ public class GestionFuncionarios extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 153));
         jLabel3.setText("Seleccione Rol(es)");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 140, 20));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 140, 20));
 
         botonEliminar.setBackground(new java.awt.Color(0, 0, 153));
         botonEliminar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -213,45 +236,34 @@ public class GestionFuncionarios extends javax.swing.JFrame {
         jLabel4.setText("Roles asociados");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, 120, 40));
 
-        botonAlta1.setBackground(new java.awt.Color(0, 0, 153));
-        botonAlta1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        botonAlta1.setForeground(new java.awt.Color(255, 255, 255));
-        botonAlta1.setText("Agregar rol a la Lista");
-        botonAlta1.addActionListener(new java.awt.event.ActionListener() {
+        botonAgrearLista.setBackground(new java.awt.Color(0, 0, 153));
+        botonAgrearLista.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        botonAgrearLista.setForeground(new java.awt.Color(255, 255, 255));
+        botonAgrearLista.setText("Agregar rol a la Lista");
+        botonAgrearLista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonAlta1ActionPerformed(evt);
+                botonAgrearListaActionPerformed(evt);
             }
         });
-        jPanel1.add(botonAlta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 240, 30));
+        jPanel1.add(botonAgrearLista, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 240, 30));
 
         comboBoxRoles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxRolesActionPerformed(evt);
             }
         });
-        jPanel1.add(comboBoxRoles, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, 90, -1));
+        jPanel1.add(comboBoxRoles, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 170, -1));
 
-        botonAlta2.setBackground(new java.awt.Color(0, 0, 153));
-        botonAlta2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        botonAlta2.setForeground(new java.awt.Color(255, 255, 255));
-        botonAlta2.setText("Asignar Roles");
-        botonAlta2.addActionListener(new java.awt.event.ActionListener() {
+        botonAsignarRoles.setBackground(new java.awt.Color(0, 0, 153));
+        botonAsignarRoles.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        botonAsignarRoles.setForeground(new java.awt.Color(255, 255, 255));
+        botonAsignarRoles.setText("Asignar Roles");
+        botonAsignarRoles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonAlta2ActionPerformed(evt);
+                botonAsignarRolesActionPerformed(evt);
             }
         });
-        jPanel1.add(botonAlta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 250, 140, 30));
-
-        botonLimpiar.setBackground(new java.awt.Color(0, 0, 153));
-        botonLimpiar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        botonLimpiar.setForeground(new java.awt.Color(255, 255, 255));
-        botonLimpiar.setText("Limpiar tabla");
-        botonLimpiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonLimpiarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(botonLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 590, -1, -1));
+        jPanel1.add(botonAsignarRoles, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 250, 140, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -271,9 +283,18 @@ public class GestionFuncionarios extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Maneja el evento de actualización de la tabla de roles asociados. Borra
+     * todos los datos existentes en la tabla de roles y obtiene nuevos datos de
+     * roles asociados a un funcionario seleccionado en la tabla de
+     * funcionarios. Luego llena la tabla de roles con los nuevos datos.
+     *
+     * @param evt El evento de acción que desencadena la actualización.
+     */
+
     private void botonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarActionPerformed
         // TODO add your handling code here:
-
+        modeloR.setRowCount(0);
         int numFila = tablaFuncionarios.getSelectedRow();
         if (numFila != -1) {
 
@@ -282,23 +303,29 @@ public class GestionFuncionarios extends javax.swing.JFrame {
             arrayListRoles = dbCtrl.getTablaRolesAsociados(Integer.parseInt(dnistr));
 
             for (Object[] vector : arrayListRoles) {
-                // String dniParcialString = vector[0].toString();
-                // dniDB = Integer.parseInt(dniParcialString);
-                //nomDB = vector[1].toString();
                 modeloR.addRow(vector);
                 tablaRoles.setModel(modeloR);
             }
 
         }
 
-
     }//GEN-LAST:event_botonActualizarActionPerformed
 
     ArrayList<String> arrayRolesInputDB = new ArrayList<>();
 
-    private void botonAlta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAlta1ActionPerformed
-        // TODO add your handling code here:
-        //modeloLista.clear();
+    /**
+     * Maneja el evento de agregar un rol a la lista de roles seleccionados.
+     * Obtiene el rol seleccionado en el ComboBox de roles, verifica si ya se
+     * encuentra en la lista de roles seleccionados (`modeloLista`), y lo agrega
+     * a la lista si no está presente. Si el rol ya está en la lista, muestra un
+     * mensaje de advertencia.
+     *
+     * @param evt El evento de acción que desencadena la acción de agregar un
+     * rol a la lista.
+     */
+
+    private void botonAgrearListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgrearListaActionPerformed
+
         rol = (String) comboBoxRoles.getSelectedItem();
         System.out.println(rol);
         if (!modeloLista.contains(rol)) {
@@ -308,17 +335,28 @@ public class GestionFuncionarios extends javax.swing.JFrame {
 
             arrayRolesInputDB.add(rol);
 
-            //dbCtrl.agregarRoles(rol,dniDB);
-            //System.out.println(dniDB);
         } else {
             JOptionPane.showMessageDialog(null, "Ya asignó el rol " + rol);
 
         }
-        //modeloLista.clear();
-    }//GEN-LAST:event_botonAlta1ActionPerformed
 
-    private void botonAlta2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAlta2ActionPerformed
-        // TODO add your handling code here:
+    }//GEN-LAST:event_botonAgrearListaActionPerformed
+
+    /**
+     * Maneja el evento de asignar roles a un funcionario seleccionado. Obtiene
+     * la fila seleccionada en la tabla de funcionarios, recupera el DNI del
+     * funcionario seleccionado, y asigna los roles de la lista
+     * `arrayRolesInputDB` al funcionario a través del controlador de gestión de
+     * funcionarios (`dbCtrl`). Finalmente, limpia la lista de roles
+     * seleccionados en la interfaz de usuario. Muestra una advertencia si no se
+     * selecciona ningún funcionario.
+     *
+     * @param evt El evento de acción que desencadena la acción de asignar
+     * roles.
+     */
+
+    private void botonAsignarRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAsignarRolesActionPerformed
+
         int numFila = tablaFuncionarios.getSelectedRow();
         if (numFila != -1) {
             String dnistr = (String) tablaFuncionarios.getValueAt(numFila, 0);
@@ -326,25 +364,31 @@ public class GestionFuncionarios extends javax.swing.JFrame {
             System.out.println(dniDBA);
             dbCtrl.asignarRoles(arrayRolesInputDB, dniDBA);
             modeloLista.clear();
-            //dbCtrl.agregarRoles(rol,dniDB);
+
         } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un funcionario de la tabla");
         }
 
-    }//GEN-LAST:event_botonAlta2ActionPerformed
+    }//GEN-LAST:event_botonAsignarRolesActionPerformed
 
-
-    private void botonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLimpiarActionPerformed
-        // TODO add your handling code here:
-        DefaultTableModel modeloTabla = (DefaultTableModel) tablaRoles.getModel();
-        modeloTabla.setRowCount(0);
-    }//GEN-LAST:event_botonLimpiarActionPerformed
 
     private void comboBoxRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxRolesActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_comboBoxRolesActionPerformed
 
-    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_botonEliminarActionPerformed
+    /**
+     * Maneja el evento de eliminar un funcionario seleccionado de la tabla.
+     * Obtiene la fila seleccionada en la tabla de funcionarios, recupera el DNI
+     * del funcionario seleccionado y utiliza el controlador de gestión de
+     * funcionarios (`dbCtrl`) para eliminar el funcionario de la base de datos.
+     * Luego, elimina la fila correspondiente de la tabla de funcionarios en la
+     * interfaz de usuario. Muestra una advertencia si no se selecciona ningún
+     * funcionario.
+     *
+     * @param evt El evento de acción que desencadena la acción de eliminar un
+     * funcionario.
+     */
+    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {
 
         int numFila = tablaFuncionarios.getSelectedRow();
         if (numFila != -1) {
@@ -358,8 +402,20 @@ public class GestionFuncionarios extends javax.swing.JFrame {
         }
     }
 
-    private void botonAltaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_botonAltaActionPerformed
-        // TODO add your handling code here:
+    /**
+     * Maneja el evento de dar de alta a un nuevo funcionario. Obtiene la fila
+     * seleccionada en la tabla de funcionarios, recupera el DNI y el nombre del
+     * funcionario seleccionado, y utiliza el controlador de gestión de
+     * funcionarios (`dbCtrl`) para agregar un nuevo funcionario a la base de
+     * datos con los datos proporcionados. Luego, actualiza la tabla de
+     * funcionarios en la interfaz de usuario con los cambios. Muestra una
+     * advertencia si no se selecciona ningún funcionario.
+     *
+     * @param evt El evento de acción que desencadena la acción de dar de alta a
+     * un funcionario.
+     */
+    private void botonAltaActionPerformed(java.awt.event.ActionEvent evt) {
+
         int numFila = tablaFuncionarios.getSelectedRow();
         if (numFila != -1) {
 
@@ -416,11 +472,10 @@ public class GestionFuncionarios extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonActualizar;
+    private javax.swing.JButton botonAgrearLista;
     private javax.swing.JButton botonAlta;
-    private javax.swing.JButton botonAlta1;
-    private javax.swing.JButton botonAlta2;
+    private javax.swing.JButton botonAsignarRoles;
     private javax.swing.JButton botonEliminar;
-    private javax.swing.JButton botonLimpiar;
     private javax.swing.JComboBox<String> comboBoxRoles;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

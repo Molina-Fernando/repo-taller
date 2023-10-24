@@ -1,17 +1,29 @@
 package ventanas;
 
+import Utilidades.SetImageLabel;
 import java.awt.Image;
 import java.awt.Toolkit;
 import dbController.CtrlLogin;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
+/**
+ * Ventana de inicio de sesión que permite a los usuarios autenticarse en el
+ * sistema. Los usuarios deben proporcionar un nombre de usuario y una
+ * contraseña válidos para acceder al sistema. En caso de una autenticación
+ * exitosa, se les redirige a la VentanaGenerica del sistema. De lo contrario,
+ * se muestra un mensaje de error.
+ */
 public class Login extends javax.swing.JFrame {
 
     public static String user = "";
     String pass = "";
     CtrlLogin ctrlLogin = new CtrlLogin();
 
+    /**
+     * Constructor de la ventana de inicio de sesión. Inicializa la interfaz de
+     * usuario y configura la apariencia de la ventana.
+     */
     public Login() {
         initComponents();
         this.setLocationRelativeTo(this);
@@ -25,10 +37,9 @@ public class Login extends javax.swing.JFrame {
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
         setIconImage(miIcono);
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -121,26 +132,37 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textContraseniaActionPerformed
 
+    /**
+     * Maneja el evento de clic en el botón de "Ingresar". Este método se llama
+     * cuando el usuario presiona el botón de inicio de sesión. Recopila el
+     * nombre de usuario y la contraseña ingresados por el usuario y los valida
+     * utilizando el controlador de inicio de sesión. Si las credenciales son
+     * válidas, se abre la VentanaGenerica y se cierra la ventana actual. En
+     * caso de credenciales incorrectas, se muestra un mensaje de error al
+     * usuario.
+     *
+     * @param evt El evento de acción que desencadena esta función, generalmente
+     * un clic en el botón de inicio de sesión.
+     */
+
     private void botonAccesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAccesoActionPerformed
         // TODO add your handling code here:
         user = textUsuario.getText().trim();
         pass = textContrasenia.getText().trim();
-        
-        if(ctrlLogin.validarAcceso(user, pass)){
-            
+
+        if (ctrlLogin.validarAcceso(user, pass)) {
+
             new VentanaGenerica().setVisible(true);
-            
+            dispose();
+
         } else {
-        JOptionPane.showMessageDialog(null, "Datos de acceso incorrectos");
+            JOptionPane.showMessageDialog(null, "Datos de acceso incorrectos");
         }
-        
-        
-       
+
+
     }//GEN-LAST:event_botonAccesoActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

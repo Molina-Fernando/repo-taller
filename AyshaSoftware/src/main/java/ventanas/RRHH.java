@@ -1,6 +1,7 @@
 
 package ventanas;
 
+import Utilidades.SetImageLabel;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.WindowConstants;
@@ -64,13 +65,13 @@ public class RRHH extends javax.swing.JFrame {
         jButtonRegistrar.setBackground(new java.awt.Color(0, 0, 153));
         jButtonRegistrar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButtonRegistrar.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonRegistrar.setText("Registrar administrativo");
+        jButtonRegistrar.setText("Registrar");
         jButtonRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonRegistrarActionPerformed(evt);
             }
         });
-        bg.add(jButtonRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, 200, 40));
+        bg.add(jButtonRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, 190, 40));
 
         labelFuncMen.setText("jLabel1");
         bg.add(labelFuncMen, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 110, 100));
@@ -99,13 +100,13 @@ public class RRHH extends javax.swing.JFrame {
         jButtonRegistrar1.setBackground(new java.awt.Color(0, 0, 153));
         jButtonRegistrar1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButtonRegistrar1.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonRegistrar1.setText("Registrar médico");
+        jButtonRegistrar1.setText("Registrar");
         jButtonRegistrar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonRegistrar1ActionPerformed(evt);
             }
         });
-        bg.add(jButtonRegistrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 450, 160, 40));
+        bg.add(jButtonRegistrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 450, 190, 40));
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 153));

@@ -1,8 +1,10 @@
 
 package ventanas;
 
+import Utilidades.SetImageLabel;
 import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.WindowConstants;
 
 /**
  * Ventana intermedia entre ´VentanaGenerica´ y las ventanas las cuales tiene acceso el gestor.
@@ -21,6 +23,7 @@ public class Gestor extends javax.swing.JFrame {
         SetImageLabel.setImageLabel(labelFuncionario, "src\\main\\java\\images\\2.png");
         SetImageLabel.setImageLabel(labelEstadistica, "src\\main\\java\\images\\3.png");
         setTitle("Ventana Genérica de Gestores");
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
 

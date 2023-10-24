@@ -23,12 +23,11 @@ import ventanas.RegistroPaciente;
 
 public class CtrlRegistroPaciente {
     /**
-     * Registra un paciente en la base de datos.
+     * Carga en la base de datos a los pacientes y los manda tambien a la lista
+     * para realizar el triage.
      *
-     * @param pac Un objeto `Paciente` con la información del paciente a registrar.
-     * @throws SQLException Si ocurre un error en la interacción con la base de datos.
+     * @param pac : Objeto de tipo Paciente.
      */
-
     public static void registrarPacientes(Paciente pac) {
 
         Connection conex = null;
@@ -77,7 +76,7 @@ public class CtrlRegistroPaciente {
     private static final Paciente paciente = new Paciente();
     /**
      * Busca un paciente en la base de datos por su DNI y actualiza los campos de la ventana
-     * con la información del paciente si existe.
+     * con la información del paciente si este existe.
      *
      * @param dni             DNI del paciente a buscar.
      * @param botonRegistro   Botón para registro del paciente si no existe.
