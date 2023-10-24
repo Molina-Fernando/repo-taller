@@ -100,7 +100,6 @@ public class CtrlGestionFuncionarios {
             }
         }
         return arrayListDeRoles;
-
     }
 
     /**
