@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 
+
 public final class VentanaGenerica extends javax.swing.JFrame {
 
     CtrlVentanaGenerica ctrlVG = new CtrlVentanaGenerica();
@@ -36,7 +37,7 @@ public final class VentanaGenerica extends javax.swing.JFrame {
         visibilidadBotones(arrayIds);
 
     }
-
+    
     private void visibilidadBotones(ArrayList<Integer> arrayIds) {
 
         for (int id : arrayIds) {
@@ -210,7 +211,7 @@ public final class VentanaGenerica extends javax.swing.JFrame {
 
     private void botonGestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGestionActionPerformed
         // TODO add your handling code here:
-        new Gestor().setVisible(true);
+        new GenericaGestor().setVisible(true);
     }//GEN-LAST:event_botonGestionActionPerformed
 
     private void botonInformaticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonInformaticaActionPerformed

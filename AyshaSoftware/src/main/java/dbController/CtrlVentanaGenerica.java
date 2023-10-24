@@ -8,7 +8,13 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class CtrlVentanaGenerica {
-
+    
+    /**
+     * Completa una lista con todos los Ids de Rol de cada funcionario.
+     * 
+     * @param dni : DNI del funcionario.
+     * @return lista de Ids.
+     */
     public ArrayList<Integer> rolesParametrizados(String dni) {
 
         ArrayList<Integer> arrayIds = new ArrayList<>();

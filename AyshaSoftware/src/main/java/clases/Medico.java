@@ -3,21 +3,27 @@ package clases;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * La clase ´Medico´ implementa una interfaz ´ProfesionalSanitario´, también se
+ * relaciona con la clase ´Triage´, debido a que el médico realiza el triage,
+ * pasandole datos y obteniendo la información necesaria.
+ *
+ * @author Jeremías Simian
+ */
 public class Medico extends Funcionario implements ProfesionalSanitario {
 
-   
     private int numMatricula;
     private ArrayList<Especialidad> especialidad;
-    
+
     public Medico() {
     }
-    
-    public Medico(Medico med, String rol, String sector){
-        
+
+    public Medico(Medico med, String rol, String sector) {
+
     }
-    
+
     Triage triage = new Triage();
-    
+
     public Medico(String nombre, String apellido, String fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, String user, String password, int matricula, String estadoCivil) {
         super(nombre, apellido, fecNacimiento, domicilio, dni, telFijo, telCelular, correoElectronico, user, password, estadoCivil);
         this.numMatricula = matricula;
@@ -29,12 +35,32 @@ public class Medico extends Funcionario implements ProfesionalSanitario {
         setEspecialidad(especialidad);
 
     }
-    
+
     public Medico(String nombre, String apellido, String fecNacimiento, String domicilio, String dni, String telFijo, String telCelular, String correoElectronico, int matricula, String estadoCivil) {
         super(nombre, apellido, fecNacimiento, domicilio, dni, telFijo, telCelular, correoElectronico, estadoCivil);
         this.numMatricula = matricula;
     }
 
+    /**
+     * Setea los puntos de cada signo vital a la clase ´Triage´, para luego
+     * llamar al método´obtenerColor()´ de dicha clase y conseguir el nombre del
+     * color parcial, para posteriormente setearselo a la clase ´Triage´.
+     *
+     * @param i1 puntos correspondientes a la respiraión del paciente.
+     * @param i2 puntos correspondientes al pulso del paciente.
+     * @param i3 puntos correspondientes al estado mental del paciente.
+     * @param i4 puntos correspondientes a la conciencia del paciente.
+     * @param i5 puntos correspondientes al dolor en el pecho del paciente.
+     * @param i6 puntos correspondientes a las lesiones graves del paciente.
+     * @param i7 puntos correspondientes a la edad del paciente.
+     * @param i8 puntos correspondientes a la fiebre del paciente.
+     * @param i9 puntos correspondientes a los vomitos del paciente.
+     * @param i10 puntos correspondientes al dolor abdominal del paciente.
+     * @param i11 puntos correspondientes a los signos de shock del paciente.
+     * @param i12 puntos correspondientes a los dolores leves del paciente.
+     * @param i13 puntos correspondientes al sangrado del paciente.
+     * @return color: color parcial del triage.
+     */
     @Override
     public String realizarTriage(int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, int i11, int i12, int i13) {
         triage.setRespiracion(i1);
@@ -50,37 +76,51 @@ public class Medico extends Funcionario implements ProfesionalSanitario {
         triage.setSignosDeShock(i11);
         triage.setDoloresLeves(i12);
         triage.setSangrado(i13);
-        
+
         String color = triage.obtenerColor();
         triage.setColorTriage(color);
         return color;
     }
-    
-    
-           
 
+    /**
+     * Metodo que no cumple ninguna función.
+     *
+     * @param paciente1
+     */
     public void asignarBox(Paciente paciente1) {
         // Método a resolver...
     }
 
+    /**
+     * Toma por parámetro el color final y el motivo de cambio para setearselos
+     * a la clase ´Triage´.
+     *
+     * @param colorFinal : color definitivo del triage.
+     * @param motivoCambio : motivo del cambio del color del triage.
+     */
     @Override
     public void cambiarTriage(String colorFinal, String motivoCambio) {
         triage.setColorFinal(colorFinal);
         triage.setMotivoCambio(motivoCambio);
     }
-    
-    public String getColorParcial(){
+
+    public String getColorParcial() {
         return triage.getColorTriage();
     }
-    
-    public String getColorDefinitivo(){
+
+    public String getColorDefinitivo() {
         return triage.getColorFinal();
     }
-    
-    public String getMotivoCambio(){
+
+    public String getMotivoCambio() {
         return triage.getMotivoCambio();
     }
-
+    
+    /**
+     * Metodo que no cumple ninguna función.
+     * 
+     * @param paciente 
+     */
     @Override
     public void verListaEsperaTriage(ArrayList<Paciente> paciente) {
         // Método a resolver...

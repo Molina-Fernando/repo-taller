@@ -16,8 +16,19 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import ventanas.RegistroPaciente;
 
+/**
+ * La clase ´CtrRegistroPaciente´ se encarga de cargar los datos de cada
+ * paciente a la base de datos, que dicha información se recupera mediante la
+ * ventana llamada ´RegistroPaciente´.
+ */
 public class CtrlRegistroPaciente {
 
+    /**
+     * Carga en la base de datos a los pacientes y los manda tambien a la lista
+     * para realizar el triage.
+     *
+     * @param pac : Objeto de tipo Paciente.
+     */
     public static void registrarPacientes(Paciente pac) {
 
         Connection conex = null;
@@ -65,6 +76,23 @@ public class CtrlRegistroPaciente {
 
     private static final Paciente paciente = new Paciente();
 
+    /**
+     * Si el paciente ya se encuentra registrado, lleva los datos a la lista
+     * para realizar el triage y completa los campos con los datos cargados.
+     *
+     * @param dni : DNI del paciente.
+     * @param botonRegistro
+     * @param botonLista
+     * @param Textnombre
+     * @param Textapellido
+     * @param Textdomicilio
+     * @param TexttelFijo
+     * @param TexttelCel
+     * @param TextestadoCivil
+     * @param Textmail
+     * @param TextpersonaContacto
+     * @param TextfecNac
+     */
     public static void buscarPaciente(String dni, JButton botonRegistro, JButton botonLista, JTextField Textnombre, JTextField Textapellido, JTextField Textdomicilio, JTextField TexttelFijo, JTextField TexttelCel, JTextField TextestadoCivil, JTextField Textmail, JTextField TextpersonaContacto, JDateChooser TextfecNac) {
 
         paciente.setDni(dni);
