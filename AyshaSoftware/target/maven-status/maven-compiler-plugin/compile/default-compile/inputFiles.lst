@@ -2,9 +2,11 @@ D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Registro.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Medico.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Especialidad.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\dbController\CtrlRegistroFuncionarios.java
+D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\panelesEstadisticas\PanelTriageCambiado.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Estadistica.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\SetImageLabel.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\InfoEspecialidad.java
+D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\Estadisticas.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\AdminInformatico.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\dbController\CtrlMedicoSala.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\RegistroPaciente.java
@@ -19,17 +21,35 @@ D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\EntradaMedicoSala.ja
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\ListaTriage.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\AdminSistemas.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Triage.java
+D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\panelesEstadisticas\PanelTriageFecha.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\ProfesionalSanitario.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Sector.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\dbController\CtrlMedicoTriage.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\GestionFuncionarios.java
+<<<<<<< HEAD
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\FormatosValidos.java
+=======
+D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\dbController\CtrlLogin.java
+>>>>>>> 6611f9a28fab0838bd8e751c337c9f8c35a6bd5a
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\panelesmedicos\Panel2.java
+D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\dbController\CtrlEstadistica.java
+D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\panelesEstadisticas\PanelPacienteEdadFecha.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Box.java
+<<<<<<< HEAD
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\dbController\CtrlInfoMedico.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Funcionario.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Lugares.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Consulta.java
+=======
+D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\panelesEstadisticas\DescripcionMedico.java
+D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\dbController\CtrlInfoMedico.java
+D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\Gestor.java
+D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Funcionario.java
+D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Lugares.java
+D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Consulta.java
+D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\panelesEstadisticas\DescripcionMedicoConsultas.java
+D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\panelesEstadisticas\PanelPacientesQueMasConsultaron.java
+>>>>>>> 6611f9a28fab0838bd8e751c337c9f8c35a6bd5a
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\dbController\CtrlConsulta.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Paciente.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\VentanaGenerica.java
@@ -37,8 +57,10 @@ D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Administrativo.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Estudio.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\panelesmedicos\Panel3.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\Admision.java
+D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\panelesEstadisticas\PanelEntrada.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Enfermero.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\panelesmedicos\Panel4.java
+D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\panelesEstadisticas\PanelMedicoMasAtendio.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\MedicoTriage.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Persona.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\dbController\CtrlRegistroMedicos.java
@@ -51,6 +73,11 @@ D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\dbController\CtrlEntradaMedic
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\dbController\CtrlListaTriage.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\RRHH.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\CrudUsuarios.java
+D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\dbController\CtrlVentanaGenerica.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\MedicoSala.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\Funcionario.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\RegistroMedicos.java
+<<<<<<< HEAD
+=======
+D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\Utilidades\FormatosValidos.java
+>>>>>>> 6611f9a28fab0838bd8e751c337c9f8c35a6bd5a

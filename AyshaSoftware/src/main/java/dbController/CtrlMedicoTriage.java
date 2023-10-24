@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package dbController;
 
 import clases.Medico;
@@ -12,10 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import ventanas.Login;
 
-/**
- *
- * @author Jeremías Simian
- */
+
 public class CtrlMedicoTriage {
     CtrlConsulta ctrlConsulta = new CtrlConsulta();
     private final Medico med = new Medico();
@@ -34,7 +28,9 @@ public class CtrlMedicoTriage {
 
         String colorDefinitivo = null;
         String motivoCambio = null;
-        String dniMedico = "26123985";//Login.user;
+
+        String dniMedico = Login.user;
+
         String dniPac = obtenerUltimoDniPac();
         Connection conex = null;
         try {
@@ -53,14 +49,18 @@ public class CtrlMedicoTriage {
 
             if (rs.next() && rs1.next()) {
 
-                String update = "UPDATE Triage SET ApellidoMed = ?, ColorParcial = ?, ColorDefinitivo = ?, MotivoCambio = ?, NroMatricula = ? WHERE DNI = ?;";
+
+                String update = "INSERT INTO Triage  (NombrePac, ApellidoPac, ApellidoMed, ColorParcial, ColorDefinitivo, MotivoCambio, NroMatricula, DNI) VALUES (?,?,?,?,?,?,?,?);";
+
                 PreparedStatement psu = conex.prepareStatement(update);
 
                 String update1 = "UPDATE ListaEsperaSala SET ColorDefinitivo = ? WHERE DNI = ?;";
                 PreparedStatement psu1 = conex.prepareStatement(update1);
-
-                psu.setString(1, rs.getString("Apellido"));
-                psu.setString(2, med.getColorParcial());
+                
+                psu.setString(1, rs1.getString("Nombre"));
+                psu.setString(2, rs1.getString("Apellido"));
+                psu.setString(3, rs.getString("Apellido"));
+                psu.setString(4, med.getColorParcial());
 
                 if (med.getColorDefinitivo() != null) {
                     colorDefinitivo = med.getColorDefinitivo();
@@ -73,10 +73,10 @@ public class CtrlMedicoTriage {
                 
 
                 
-                psu.setString(3, colorDefinitivo);
-                psu.setString(4, motivoCambio);
-                psu.setString(5, rs.getString("Matricula"));
-                psu.setInt(6, Integer.parseInt(dniPac));
+                psu.setString(5, colorDefinitivo);
+                psu.setString(6, motivoCambio);
+                psu.setInt(7, rs.getInt("Matricula"));
+                psu.setInt(8, Integer.parseInt(dniPac));
 
                 psu1.setString(1, colorDefinitivo);
                 psu1.setInt(2, Integer.parseInt(dniPac));

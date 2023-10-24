@@ -2,6 +2,7 @@ package ventanas;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.WindowConstants;
 
 public class Admision extends javax.swing.JFrame {
 
@@ -10,6 +11,7 @@ public class Admision extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
         setIconImage(miIcono);
         SetImageLabel.setImageLabel(LabelIconito, "src\\main\\java\\images\\icon.png");

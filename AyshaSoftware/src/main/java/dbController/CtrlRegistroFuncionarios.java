@@ -5,13 +5,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-//import clases.AdminSistemas;
-//import clases.Administrativo;
-//import clases.Medico;
+
 import clases.Funcionario;
 import java.util.ArrayList;
 
+/**
+ * La clase `CtrlRegistroFuncionarios` se encarga de gestionar el registro de funcionarios
+ * en la base de datos, así como de proporcionar opciones para cargar datos relacionados con
+ * sectores de la organización.
+ */
+
 public class CtrlRegistroFuncionarios {
+    
 
     private String matricula;
 
@@ -19,6 +24,22 @@ public class CtrlRegistroFuncionarios {
         this.matricula = matricula;
     }
 
+    /**
+     * Registra un nuevo funcionario en la base de datos.
+     *
+     * @param nombre El nombre del funcionario.
+     * @param apellido El apellido del funcionario.
+     * @param fechaFormateada La fecha de nacimiento del funcionario formateada.
+     * @param domicilio El domicilio del funcionario.
+     * @param dni El número de DNI del funcionario.
+     * @param telFijo El número de teléfono fijo del funcionario.
+     * @param telCelular El número de teléfono celular del funcionario.
+     * @param estadoCivil El estado civil del funcionario.
+     * @param correoElectronico El correo electrónico del funcionario.
+     * @param sector El sector al que el funcionario pertenece.
+     * @throws SQLException Si ocurre un error en la interacción con la base de datos.
+     */
+    
     public void registrarFuncionario(
             String nombre,
             String apellido,
@@ -90,7 +111,13 @@ public class CtrlRegistroFuncionarios {
             }
         }
     }
-
+    
+     /**
+     * Obtiene una lista de opciones de sectores desde la base de datos.
+     *
+     * @return Una lista de nombres de sectores.
+     */
+    
       public ArrayList cargaComboBoxSectores() {
         
         ArrayList<String> arrayOpciones = new ArrayList<>();

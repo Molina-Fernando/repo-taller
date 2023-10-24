@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package dbController;
 
 import java.sql.Connection;
@@ -11,10 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Jeremías Simian
- */
+
 public class CtrlListaTriage {
 
     public ArrayList<Object[]> tablaLista() {
@@ -69,6 +63,7 @@ public class CtrlListaTriage {
             ResultSet rs = psq.executeQuery();
 
             if (rs.next()) {
+
                 String insertTriages = "INSERT INTO Triage(NombrePac, ApellidoPac, DNI) VALUES(?,?,?);";
                 PreparedStatement psi = conex.prepareStatement(insertTriages);
 
@@ -78,9 +73,9 @@ public class CtrlListaTriage {
 
                 psi.executeUpdate();
 
+
                 String insertListaEspera = "INSERT INTO ListaEsperaSala(NombrePac, DNI) VALUES(?,?);";
                 PreparedStatement psi1 = conex.prepareStatement(insertListaEspera);
-
                 psi1.setString(1, rs.getString("Nombre"));
                 psi1.setString(2, dniInsert);
 

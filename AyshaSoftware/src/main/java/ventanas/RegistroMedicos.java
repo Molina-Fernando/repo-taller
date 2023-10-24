@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
 public class RegistroMedicos extends javax.swing.JFrame {
 
@@ -36,7 +37,9 @@ public class RegistroMedicos extends javax.swing.JFrame {
     CtrlRegistroMedicos ctrlRegistroMedicos = new CtrlRegistroMedicos();
 
     public RegistroMedicos() {
+        
         initComponents();
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setVisible(true);
         setLocationRelativeTo(null);
         setResizable(false);

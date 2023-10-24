@@ -1,22 +1,29 @@
 package dbController;
 
-//import Builder.ConsultaBuilder;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-public class CtrlConsulta {
+/**
+ * La clase `CtrlConsulta` proporciona métodos para insertar datos relacionados
+ * con consultas en la base de datos desde diferentes ventanas en momentos
+ * específicos del programa.
+ */
 
-//    static ConsultaBuilder cBuilder = new ConsultaBuilder();
-//
-//    public CtrlConsulta() { 
-//    }
-//    
-//    public static void completarConsulta() {
-//       
-//    }
+public class CtrlConsulta {
+    
+    /**
+     * Realiza la primera carga de información de una consulta en la base de datos.
+     *
+     * @param apellidoPaciente El apellido del paciente.
+     * @param dniPaciente El DNI del paciente.
+     * @param fecha La fecha de la consulta.
+     * @param hora La hora de la consulta.
+     * @param motivo El motivo de la consulta.
+     */
+    
     public void primeraCarga(String apellidoPaciente, String dniPaciente, String fecha, String hora, String motivo) {
         Connection conex = null;
         try {
@@ -48,6 +55,14 @@ public class CtrlConsulta {
         }
 
     }
+    
+    /**
+     * Realiza la segunda carga de información de una consulta en la base de datos.
+     *
+     * @param resultadoParcial El resultado parcial de la consulta.
+     * @param resultadoDefinitivo El resultado definitivo de la consulta.
+     * @param dni El DNI del paciente relacionado con la consulta.
+     */
 
     public void segundaCarga(String resultadoParcial, String resultadoDefinitivo, String dni) {
         Connection conex = null;
@@ -77,6 +92,14 @@ public class CtrlConsulta {
         }
 
     }
+    
+    /**
+     * Realiza la tercera carga de información de una consulta en la base de datos.
+     *
+     * @param apellidoMedico El apellido del médico asociado a la consulta.
+     * @param matricula La matrícula del médico.
+     * @param dni El DNI del paciente relacionado con la consulta.
+     */
 
     public void terceraCarga(String apellidoMedico, int matricula, String dni) {
         Connection conex = null;

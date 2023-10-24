@@ -6,30 +6,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
-//import clases.AdminSistemas;
-//import clases.Administrativo;
-//import clases.Medico;
-//import clases.Rol;
-//import clases.Sector;
+
+/**
+ * La clase `CtrlGestionFuncionarios` se encarga de gestionar la información de funcionarios,
+ * interactuando con la base de datos, dar de alta funcionarios generando usuario y contraseña para el acceso al sistema,
+ * asignación de roles en la base de datos y ver roles asociados.
+ */
+
 
 public class CtrlGestionFuncionarios {
+    
+    /**
+     * Obtiene una tabla de funcionarios desde la base de datos.
+     * @param dniDB DNI de la base de datos.
+     * @param nomDB Nombre de la base de datos.
+     * @return Una lista de arrays de objetos con información de funcionarios.
+     * Cada array contiene [DNI, Nombre, Apellido, Sector].
+     * @throws SQLException Si ocurre un error en la interacción con la base de datos.
+     */
 
-    /*public void instanciarFuncionario(int dni, String selectedOption, String selectedOption2, String nomDB, int dniDB){
-        switch(selectedOption){
-            case "MedicoTriage" :
-                //Instancia de Medico 
-                Medico medicoTriage = new Medico();
-                break;
-            case "MedicoSala" :
-                //Instancia de Medico
-                Medico medicoSala = new Medico();
-                break;
-            case "Administrativo" :
-                //Instancia de Administrativo
-                Administrativo administrativo = new Administrativo();
-                break;
-        }
-    }*/
     public ArrayList<Object[]> getTablaFuncionarios(int dniDB, String nomDB) {
         ArrayList<Object[]> arrayListDeVectores = new ArrayList<>();
         Connection conex = null;
@@ -64,6 +59,15 @@ public class CtrlGestionFuncionarios {
 
         return arrayListDeVectores;
     }
+    
+     /**
+     * Obtiene una tabla de roles asociados a un funcionario desde la base de datos.
+     *
+     * @param dniDB DNI de la base de datos.
+     * @return Una lista de arrays de objetos con información de roles asociados.
+     * Cada array contiene [DNI, Nombre].
+     * @throws SQLException Si ocurre un error en la interacción con la base de datos.
+     */
 
     public ArrayList<Object[]> getTablaRolesAsociados(int dniDB) {
         ArrayList<Object[]> arrayListDeRoles = new ArrayList<>();
@@ -99,6 +103,11 @@ public class CtrlGestionFuncionarios {
 
     }
 
+    /**
+     * Carga una lista de opciones de roles desde la base de datos.
+     *
+     * @return Una lista de nombres de roles.
+     */
     public ArrayList cargaComboBoxRoles() {
 
         ArrayList<String> arrayOpciones = new ArrayList<>();
@@ -108,18 +117,23 @@ public class CtrlGestionFuncionarios {
             conex = Conexion.conectar();
             PreparedStatement psq = conex.prepareStatement("SELECT Nombre FROM Rol");
             ResultSet rs = psq.executeQuery();
-
             while (rs.next()) {
                 arrayOpciones.add(rs.getString("Nombre"));
-
             }
-
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
         }
         return arrayOpciones;
     }
 
+    /**
+     * Asigna roles a un funcionario en la base de datos.
+     *
+     * @param arrayList Una lista de nombres de roles a asignar.
+     * @param dni El DNI del funcionario al que se asignan los roles.
+     * @throws SQLException Si ocurre un error en la interacción con la base de datos.
+     */
+    
     public void asignarRoles(ArrayList<String> arrayList, int dni) {
         Connection conex = null;
 
@@ -137,8 +151,6 @@ public class CtrlGestionFuncionarios {
                     insercionRoles.setInt(1, dni);
                     insercionRoles.setInt(2, idRol);
                     insercionRoles.executeUpdate();
-
-                    //arrayIDS.add(idRol);
                 }
             }
             arrayList.clear();
@@ -155,10 +167,13 @@ public class CtrlGestionFuncionarios {
                 }
             }
         }
-
-        //return arrayIDS;
     }
 
+    /**
+     * Elimina un funcionario de la base de datos y su correspondiente usuario.
+     *
+     * @param dni El DNI del funcionario a eliminar.
+     */
     public void eliminarFuncionario(int dni) {
         Connection conex = null;
         try {
@@ -191,64 +206,14 @@ public class CtrlGestionFuncionarios {
     }
 
     public void altaFuncionario(String nomDB, int dniDB) {
-
         generarUsuario(nomDB, dniDB);
     }
 
-    /*public void altaMedico(int dni, String selectedOption, String selectedOption2, String nomDB, int dniDB, Funcionario func){
-        
-        
-        Connection conex = null;
-            try {
-                conex = Conexion.conectar();
-                String query = "SELECT * FROM Funcionarios WHERE DNI = ?";
-                PreparedStatement psq = conex.prepareStatement(query);
-                psq.setInt(1, dni);
-                ResultSet rs = psq.executeQuery();
-
-                if (rs.next()) {
-                    String update = "UPDATE Funcionarios SET Rol = ?, Sector = ? WHERE DNI = ?;";
-                    PreparedStatement psi = conex.prepareStatement(update);
-                   // 
-                    Rol rol = new Rol(selectedOption);
-                    String rolDB = rol.getNombreRol();
-                    psi.setString(1, rolDB);
-                    Sector sector = new Sector(selectedOption2);
-                    String sectorDB = sector.getSector();
-                    psi.setString(2, sectorDB);
-                    psi.setInt(3, dni);
-                    psi.executeUpdate();
-                    //actualizarTabla();
-                }
-            } catch (SQLException e) {
-                System.out.println("EXCEP SQL" + e);
-                JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
-            } finally {
-                try {
-                    if (conex != null) {
-                        conex.close();
-                    }
-                } catch (SQLException excSql) {
-                    System.err.println("ERROR SQL" + excSql);
-                }
-            }
-            
-            generarUsuario(selectedOption, selectedOption2, nomDB, dniDB);
-        
-    }*/
- /*public void altaAdministrativo(){
-        
-    }
-    
-    public void altaAdminInformatica(){
-        
-    }*/
     private String generarContrasenia(String nombre, int dni) {
 
         int tresUltimosDigitosDni = dni % 1000;
         String tresPrimerasLetrasNombre = obtenerTresPrimerasLetras(nombre);
         String contrasenia = tresPrimerasLetrasNombre + String.valueOf(tresUltimosDigitosDni);
-        //System.out.println(contrasenia);
         return contrasenia;
     }
 
@@ -276,7 +241,6 @@ public class CtrlGestionFuncionarios {
             psq.setString(2, contrasenia);
             psq.executeUpdate();
 
-
         } catch (SQLException e) {
             System.out.println("EXCEP SQL" + e);
         } finally {
@@ -289,19 +253,4 @@ public class CtrlGestionFuncionarios {
             }
         }
     }
-
-    /* switch(SelectOpt1){
-            case "MedicoTriage" :
-                //Instancia de Medico
-                break;
-            case "MedicoSala" :
-                //Instancia de Medico
-                break;
-            case "AdminInformatico":
-                //Instancia de AdminSistemas
-                break;
-            case "Administrativo" :
-                //Instancia de Administrativo
-                break;
-        }*/
 }

@@ -1,35 +1,71 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package ventanas;
 
+import dbController.CtrlVentanaGenerica;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import javax.swing.WindowConstants;
 
-/**
- *
- * @author Fernando
- */
-public class VentanaGenerica extends javax.swing.JFrame {
+public final class VentanaGenerica extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VentanaGenerica
-     */
+    CtrlVentanaGenerica ctrlVG = new CtrlVentanaGenerica();
+    ArrayList<Integer> arrayIds = new ArrayList<>();
+
     public VentanaGenerica() {
         initComponents();
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        botonTriage.setVisible(false);
+        botonSala.setVisible(false);
+        botonRRHH.setVisible(false);
+        botonAdmision.setVisible(false);
+        botonInformatica.setVisible(false);
+        botonGestion.setVisible(false);
         setLocationRelativeTo(null);
         setResizable(false);
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
         setIconImage(miIcono);
-        SetImageLabel.setImageLabel(jLabel6,"src\\main\\java\\images\\12.png");
-        SetImageLabel.setImageLabel(jLabel7,"src\\main\\java\\images\\13.png");
-        SetImageLabel.setImageLabel(jLabel8,"src\\main\\java\\images\\14.png");
-        SetImageLabel.setImageLabel(jLabel9,"src\\main\\java\\images\\15.png");
-        SetImageLabel.setImageLabel(jLabel10,"src\\main\\java\\images\\16.png");
-        SetImageLabel.setImageLabel(jLabel11,"src\\main\\java\\images\\17.png");
-        setTitle("Ventana Genérica");
+        SetImageLabel.setImageLabel(jLabel6, "src\\main\\java\\images\\12.png");
+        SetImageLabel.setImageLabel(jLabel7, "src\\main\\java\\images\\13.png");
+        SetImageLabel.setImageLabel(jLabel8, "src\\main\\java\\images\\14.png");
+        SetImageLabel.setImageLabel(jLabel9, "src\\main\\java\\images\\15.png");
+        SetImageLabel.setImageLabel(jLabel10, "src\\main\\java\\images\\16.png");
+        SetImageLabel.setImageLabel(jLabel11, "src\\main\\java\\images\\17.png");
+        setTitle("Menú");
+        arrayIds = ctrlVG.rolesParametrizados(Login.user);
+
+        visibilidadBotones(arrayIds);
+
+    }
+
+    private void visibilidadBotones(ArrayList<Integer> arrayIds) {
+
+        for (int id : arrayIds) {
+            if (id == 1) {
+                botonTriage.setVisible(true);
+            }
+            if (id == 2) {
+                botonSala.setVisible(true);
+            }
+            if (id == 3) {
+                botonRRHH.setVisible(true);
+            }
+            if (id == 4) {
+                botonAdmision.setVisible(true);
+            }
+            if (id == 5) {
+                botonInformatica.setVisible(true);
+                botonTriage.setVisible(true);
+                botonSala.setVisible(true);
+                botonRRHH.setVisible(true);
+                botonGestion.setVisible(true);
+                botonAdmision.setVisible(true);
+            }
+            if (id == 6) {
+                botonGestion.setVisible(true);
+            }
+        }
     }
 
     /**
@@ -45,7 +81,7 @@ public class VentanaGenerica extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         botonTriage = new javax.swing.JButton();
         botonAdmision = new javax.swing.JButton();
-        botonRrhh = new javax.swing.JButton();
+        botonRRHH = new javax.swing.JButton();
         botonGestion = new javax.swing.JButton();
         botonInformatica = new javax.swing.JButton();
         botonSala = new javax.swing.JButton();
@@ -64,22 +100,70 @@ public class VentanaGenerica extends javax.swing.JFrame {
         jLabel6.setText("jLabel1");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, 200, 200));
 
-        botonTriage.setText("jButton1");
+        botonTriage.setBackground(new java.awt.Color(0, 0, 153));
+        botonTriage.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        botonTriage.setForeground(new java.awt.Color(255, 255, 255));
+        botonTriage.setText("INGRESAR");
+        botonTriage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonTriageActionPerformed(evt);
+            }
+        });
         jPanel1.add(botonTriage, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 250, -1, -1));
 
-        botonAdmision.setText("jButton1");
+        botonAdmision.setBackground(new java.awt.Color(0, 0, 153));
+        botonAdmision.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        botonAdmision.setForeground(new java.awt.Color(255, 255, 255));
+        botonAdmision.setText("INGRESAR");
+        botonAdmision.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAdmisionActionPerformed(evt);
+            }
+        });
         jPanel1.add(botonAdmision, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 250, -1, -1));
 
-        botonRrhh.setText("jButton1");
-        jPanel1.add(botonRrhh, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 500, -1, -1));
+        botonRRHH.setBackground(new java.awt.Color(0, 0, 153));
+        botonRRHH.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        botonRRHH.setForeground(new java.awt.Color(255, 255, 255));
+        botonRRHH.setText("INGRESAR");
+        botonRRHH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonRRHHActionPerformed(evt);
+            }
+        });
+        jPanel1.add(botonRRHH, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 500, -1, -1));
 
-        botonGestion.setText("jButton1");
+        botonGestion.setBackground(new java.awt.Color(0, 0, 153));
+        botonGestion.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        botonGestion.setForeground(new java.awt.Color(255, 255, 255));
+        botonGestion.setText("INGRESAR");
+        botonGestion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGestionActionPerformed(evt);
+            }
+        });
         jPanel1.add(botonGestion, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 500, -1, -1));
 
-        botonInformatica.setText("jButton1");
+        botonInformatica.setBackground(new java.awt.Color(0, 0, 153));
+        botonInformatica.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        botonInformatica.setForeground(new java.awt.Color(255, 255, 255));
+        botonInformatica.setText("INGRESAR");
+        botonInformatica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonInformaticaActionPerformed(evt);
+            }
+        });
         jPanel1.add(botonInformatica, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 500, -1, -1));
 
-        botonSala.setText("jButton1");
+        botonSala.setBackground(new java.awt.Color(0, 0, 153));
+        botonSala.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        botonSala.setForeground(new java.awt.Color(255, 255, 255));
+        botonSala.setText("INGRESAR");
+        botonSala.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSalaActionPerformed(evt);
+            }
+        });
         jPanel1.add(botonSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, -1, -1));
 
         jLabel7.setText("jLabel1");
@@ -110,6 +194,36 @@ public class VentanaGenerica extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalaActionPerformed
+        // TODO add your handling code here:
+        new EntradaMedicoSala().setVisible(true);
+    }//GEN-LAST:event_botonSalaActionPerformed
+
+    private void botonTriageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonTriageActionPerformed
+        // TODO add your handling code here:
+        new ListaTriage().setVisible(true);
+    }//GEN-LAST:event_botonTriageActionPerformed
+
+    private void botonAdmisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAdmisionActionPerformed
+        // TODO add your handling code here:
+        new Admision().setVisible(true);
+    }//GEN-LAST:event_botonAdmisionActionPerformed
+
+    private void botonRRHHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRRHHActionPerformed
+        // TODO add your handling code here:
+        new RRHH().setVisible(true);
+    }//GEN-LAST:event_botonRRHHActionPerformed
+
+    private void botonGestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGestionActionPerformed
+        // TODO add your handling code here:
+        new Gestor().setVisible(true);
+    }//GEN-LAST:event_botonGestionActionPerformed
+
+    private void botonInformaticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonInformaticaActionPerformed
+        // TODO add your handling code here:
+        new AdminInformatico().setVisible(true);
+    }//GEN-LAST:event_botonInformaticaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,7 +264,7 @@ public class VentanaGenerica extends javax.swing.JFrame {
     private javax.swing.JButton botonAdmision;
     private javax.swing.JButton botonGestion;
     private javax.swing.JButton botonInformatica;
-    private javax.swing.JButton botonRrhh;
+    private javax.swing.JButton botonRRHH;
     private javax.swing.JButton botonSala;
     private javax.swing.JButton botonTriage;
     private javax.swing.JLabel jLabel10;
