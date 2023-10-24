@@ -7,6 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
+/**
+ * Controlador para operaciones relacionadas con ventanas genéricas y roles.
+ * Esta clase proporciona métodos para obtener información sobre roles asignados a un funcionario.
+ */
+
 public class CtrlVentanaGenerica {
     
     /**

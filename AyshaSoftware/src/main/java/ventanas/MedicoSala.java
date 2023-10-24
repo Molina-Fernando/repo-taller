@@ -4,10 +4,13 @@ package ventanas;
 
 import dbController.CtrlMedicoSala;
 import java.awt.BorderLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 import ventanas.panelesmedicos.Panel2;
 import ventanas.panelesmedicos.Panel3;
 import ventanas.panelesmedicos.Panel4;
@@ -29,6 +32,10 @@ public class MedicoSala extends javax.swing.JFrame {
 
     public MedicoSala(EntradaMedicoSala frameDeBase) {
         initComponents();
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        Toolkit miPantalla = Toolkit.getDefaultToolkit();
+        Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
+        setIconImage(miIcono);
         dni = EntradaMedicoSala.dniV;
         numeroSala = EntradaMedicoSala.numeroV;
         ctrlMedSal = new CtrlMedicoSala(dni,numeroSala);
@@ -40,7 +47,7 @@ public class MedicoSala extends javax.swing.JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                System.out.println("Cerrando JFrame");
+               
                 frameDeBase.cambiarDisponibilidad(numeroSala);
                 dispose();
             }

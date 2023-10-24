@@ -22,6 +22,7 @@ public class InfoMedico extends javax.swing.JFrame {
 
     public InfoMedico() {
         initComponents();
+        
         setTitle("Información de Médicos");
         setLocationRelativeTo(null);
         setResizable(false);

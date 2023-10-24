@@ -25,8 +25,10 @@ public class RegistroPaciente extends javax.swing.JFrame {
      * Creates new form RegistroPaciente
      */
     public RegistroPaciente() {
+        
         initComponents();
         setLocationRelativeTo(null);
+        
         setResizable(false);
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");

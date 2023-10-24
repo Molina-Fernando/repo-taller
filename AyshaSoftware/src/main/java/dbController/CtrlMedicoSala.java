@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package dbController;
 
 import clases.Estudio;
@@ -17,10 +14,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author joaqu
- */
 public class CtrlMedicoSala {
 
     private final String dni;

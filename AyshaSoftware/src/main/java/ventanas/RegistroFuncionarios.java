@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
 public class RegistroFuncionarios extends javax.swing.JFrame {
 
@@ -19,6 +20,7 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
 
     public RegistroFuncionarios() {
         initComponents();
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setVisible(true);
         setLocationRelativeTo(null);
         setResizable(false);

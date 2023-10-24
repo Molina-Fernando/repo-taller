@@ -2,6 +2,7 @@ package ventanas;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.WindowConstants;
 
 /**
  * La ventana ´Admision´ la pueden acceder los encargados del sector de Admisión
@@ -17,6 +18,7 @@ public class Admision extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
         setIconImage(miIcono);
         SetImageLabel.setImageLabel(LabelIconito, "src\\main\\java\\images\\icon.png");

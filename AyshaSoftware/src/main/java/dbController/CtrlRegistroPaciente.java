@@ -17,12 +17,11 @@ import javax.swing.JTextField;
 import ventanas.RegistroPaciente;
 
 /**
- * La clase ´CtrRegistroPaciente´ se encarga de cargar los datos de cada
- * paciente a la base de datos, que dicha información se recupera mediante la
- * ventana llamada ´RegistroPaciente´.
+ * La clase `CtrlRegistroPaciente` se encarga de registrar pacientes en la base de datos,
+ * buscar pacientes y gestionar su información.
  */
-public class CtrlRegistroPaciente {
 
+public class CtrlRegistroPaciente {
     /**
      * Carga en la base de datos a los pacientes y los manda tambien a la lista
      * para realizar el triage.
@@ -75,24 +74,24 @@ public class CtrlRegistroPaciente {
     }
 
     private static final Paciente paciente = new Paciente();
-
     /**
-     * Si el paciente ya se encuentra registrado, lleva los datos a la lista
-     * para realizar el triage y completa los campos con los datos cargados.
+     * Busca un paciente en la base de datos por su DNI y actualiza los campos de la ventana
+     * con la información del paciente si este existe.
      *
-     * @param dni : DNI del paciente.
-     * @param botonRegistro
-     * @param botonLista
-     * @param Textnombre
-     * @param Textapellido
-     * @param Textdomicilio
-     * @param TexttelFijo
-     * @param TexttelCel
-     * @param TextestadoCivil
-     * @param Textmail
-     * @param TextpersonaContacto
-     * @param TextfecNac
+     * @param dni             DNI del paciente a buscar.
+     * @param botonRegistro   Botón para registro del paciente si no existe.
+     * @param botonLista      Botón para mostrar la lista de espera si existe.
+     * @param Textnombre      Campo de texto para el nombre del paciente.
+     * @param Textapellido     Campo de texto para el apellido del paciente.
+     * @param Textdomicilio    Campo de texto para el domicilio del paciente.
+     * @param TexttelFijo      Campo de texto para el número de teléfono fijo del paciente.
+     * @param TexttelCel       Campo de texto para el número de teléfono celular del paciente.
+     * @param TextestadoCivil  Campo de texto para el estado civil del paciente.
+     * @param Textmail        Campo de texto para el correo electrónico del paciente.
+     * @param TextpersonaContacto Campo de texto para la persona de contacto del paciente.
+     * @param TextfecNac      Campo de fecha de nacimiento del paciente.
      */
+
     public static void buscarPaciente(String dni, JButton botonRegistro, JButton botonLista, JTextField Textnombre, JTextField Textapellido, JTextField Textdomicilio, JTextField TexttelFijo, JTextField TexttelCel, JTextField TextestadoCivil, JTextField Textmail, JTextField TextpersonaContacto, JDateChooser TextfecNac) {
 
         paciente.setDni(dni);

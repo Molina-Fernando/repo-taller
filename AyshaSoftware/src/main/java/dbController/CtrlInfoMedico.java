@@ -1,3 +1,4 @@
+
 package dbController;
 
 import java.sql.Connection;
@@ -7,10 +8,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
+
 /**
  * La clase ´CtrlnfoMedico´ se encarga de recuperar los datos de los médicos
  * desde la base de datos, para luego pasarlos a la ventana ´InfoMedico´.
  */
+
 public class CtrlInfoMedico {
 
     /**

@@ -1,4 +1,4 @@
-package ventanas;
+package Utilidades;
 
 import java.awt.Image;
 import javax.swing.Icon;

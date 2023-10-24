@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JTable;
+import javax.swing.WindowConstants;
 
 /**
  * La ventana ´ListaTriage´ contiene la lista con todos los pacientes que han
@@ -20,7 +21,9 @@ public class ListaTriage extends javax.swing.JFrame {
     CtrlListaTriage dbCtrl = new CtrlListaTriage();
 
     public ListaTriage() {
+
         initComponents();
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
         Toolkit miPantalla = Toolkit.getDefaultToolkit();

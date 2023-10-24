@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import dbController.CtrlLogin;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
 public class Login extends javax.swing.JFrame {
 
@@ -24,6 +25,7 @@ public class Login extends javax.swing.JFrame {
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
         setIconImage(miIcono);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
     }
 
@@ -59,8 +61,8 @@ public class Login extends javax.swing.JFrame {
         labelUsuario.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         labelUsuario.setForeground(new java.awt.Color(0, 0, 153));
         labelUsuario.setText("Sistema de Gestión Hospitalaria");
-        bg.add(labelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 320, 20));
-        bg.add(labelImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 370));
+        bg.add(labelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 290, 20));
+        bg.add(labelImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 330));
 
         textUsuario.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         textUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -68,12 +70,12 @@ public class Login extends javax.swing.JFrame {
                 textUsuarioActionPerformed(evt);
             }
         });
-        bg.add(textUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 400, 340, 40));
+        bg.add(textUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 380, 340, 40));
 
         labelContrasenia.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         labelContrasenia.setForeground(new java.awt.Color(0, 0, 153));
         labelContrasenia.setText("CONTRASEÑA");
-        bg.add(labelContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 470, 100, 20));
+        bg.add(labelContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 440, 100, 20));
 
         textContrasenia.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         textContrasenia.addActionListener(new java.awt.event.ActionListener() {
@@ -81,9 +83,9 @@ public class Login extends javax.swing.JFrame {
                 textContraseniaActionPerformed(evt);
             }
         });
-        bg.add(textContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 490, 340, 40));
-        bg.add(labelUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 40, 40));
-        bg.add(labelPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 490, 40, 40));
+        bg.add(textContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 460, 340, 40));
+        bg.add(labelUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 390, 25, 25));
+        bg.add(labelPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 470, 25, 25));
 
         botonAcceso.setBackground(new java.awt.Color(0, 0, 153));
         botonAcceso.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
@@ -94,23 +96,23 @@ public class Login extends javax.swing.JFrame {
                 botonAccesoActionPerformed(evt);
             }
         });
-        bg.add(botonAcceso, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 580, 160, 40));
+        bg.add(botonAcceso, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 540, 160, 40));
 
         labelUsuario1.setBackground(new java.awt.Color(102, 102, 102));
         labelUsuario1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         labelUsuario1.setForeground(new java.awt.Color(0, 0, 153));
         labelUsuario1.setText("USUARIO");
-        bg.add(labelUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 80, 20));
+        bg.add(labelUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, 80, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 712, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();

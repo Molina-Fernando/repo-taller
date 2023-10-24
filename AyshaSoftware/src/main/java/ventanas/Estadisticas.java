@@ -6,7 +6,10 @@
 package ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 import ventanas.panelesEstadisticas.PanelEntrada;
 import ventanas.panelesEstadisticas.PanelMedicoMasAtendio;
 import ventanas.panelesEstadisticas.PanelPacienteEdadFecha;
@@ -22,12 +25,17 @@ public class Estadisticas extends javax.swing.JFrame {
 
     /** Creates new form Estadisticas */
     public Estadisticas() {
+        
         initComponents();
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setSize(800, 500);
         setResizable(false);
         setLocationRelativeTo(null);
         setTitle("Estadísticas de emergencias");
         showPanel(new PanelEntrada());
+        Toolkit miPantalla = Toolkit.getDefaultToolkit();
+        Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
+        setIconImage(miIcono);
     }
     
     public void showPanel(JPanel p){

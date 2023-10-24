@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package dbController;
 
 import java.sql.Connection;
@@ -12,10 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import clases.Medico;
 
-/**
- *
- * @author joaqu
- */
+
 public class CtrlEntradaMedicoSala {
 
     public ArrayList<Object[]> getTablaTriages(String dniDB, String nomDB) {

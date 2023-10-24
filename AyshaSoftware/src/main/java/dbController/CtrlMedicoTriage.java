@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dbController;
 
 import clases.Medico;
@@ -13,8 +9,8 @@ import java.sql.ResultSet;
 import ventanas.Login;
 
 /**
- * El controlador ´CtrlMedicoTriage´ se encarga de ser el intermediario entre la clase
- * Médico y la ventana MedicoTriage, completando los datos del triage del
+ * El controlador ´CtrlMedicoTriage´ se encarga de ser el intermediario entre la
+ * clase Médico y la ventana MedicoTriage, completando los datos del triage del
  * paciente en la base de datos.
  *
  */
@@ -71,7 +67,9 @@ public class CtrlMedicoTriage {
 
         String colorDefinitivo = null;
         String motivoCambio = null;
+
         String dniMedico = Login.user;
+
         String dniPac = obtenerUltimoDniPac();
         Connection conex = null;
         try {
@@ -87,11 +85,10 @@ public class CtrlMedicoTriage {
             psq2.setString(1, dniPac);
             psq1.setString(1, dniPac);
             psq.setString(1, dniMedico);
-            
+
             ResultSet rs2 = psq2.executeQuery();
             ResultSet rs1 = psq1.executeQuery();
             ResultSet rs = psq.executeQuery();
-            
 
             if (rs.next() && rs1.next() && rs2.next()) {
 
@@ -99,8 +96,9 @@ public class CtrlMedicoTriage {
                 PreparedStatement psi = conex.prepareStatement(insert);
 
                 String update = "UPDATE ListaEsperaSala SET ColorDefinitivo = ?, Fecha =?, Hora =? WHERE DNI = ?;";
+
                 PreparedStatement psu = conex.prepareStatement(update);
-                
+
                 if (med.getColorDefinitivo() != null) {
                     colorDefinitivo = med.getColorDefinitivo();
                     motivoCambio = med.getMotivoCambio();
@@ -144,8 +142,9 @@ public class CtrlMedicoTriage {
     }
 
     /**
-     * Obtiene el dni del último paciente que fue ingresado en la tabla ´ListaEsperaSala´, para ser llamado en el método ´finalizarTriage´.
-     * 
+     * Obtiene el dni del último paciente que fue ingresado en la tabla
+     * ´ListaEsperaSala´, para ser llamado en el método ´finalizarTriage´.
+     *
      * @return dniPac
      * @throws SQLExeption Si ocurre un error en la interacción con la base de
      * datos.
