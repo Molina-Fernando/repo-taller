@@ -9,6 +9,7 @@ ventanas\MedicoTriage$1.class
 ventanas\panelesEstadisticas\PanelPacientesQueMasConsultaron$2.class
 ventanas\InfoFuncionario$2.class
 ventanas\EntradaMedicoSala$2.class
+ventanas\Gestor$4.class
 ventanas\MedicoTriage$18.class
 ventanas\Login$2.class
 ventanas\panelesEstadisticas\PanelPacienteEdadFecha$1.class
@@ -145,6 +146,7 @@ ventanas\panelesEstadisticas\PanelEntrada$3.class
 ventanas\panelesmedicos\Panel2.class
 ventanas\panelesEstadisticas\DescripcionMedico.class
 ventanas\Admision$1.class
+ventanas\Gestor$3.class
 ventanas\panelesmedicos\Panel2$2.class
 ventanas\MedicoTriage$17.class
 ventanas\panelesEstadisticas\PanelPacienteEdadFecha$3.class
@@ -156,6 +158,7 @@ ventanas\MedicoTriage$8.class
 dbController\CtrlMedicoSala.class
 ventanas\panelesmedicos\Panel2$1.class
 ventanas\RegistroFuncionarios$6.class
+ventanas\Gestor$2.class
 clases\Persona.class
 Utilidades\FormatosValidos.class
 clases\Box.class
