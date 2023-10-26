@@ -55,12 +55,13 @@ public class CtrlMedicoTriage {
     }
 
     /**
-     * Carga los datos del triage en la base de datos, utilizando otras tablas y
-     * los metodos de la clase Medico para devolver el color definitivo, el
-     * color parcial y el motivo del cambio, a su vez completa la tabla
-     * ´ListaEsperaSala´ con el color definitivo.
+     * Este método obtiene el color definitivo y el motivo de cambio si están
+     * disponibles o usa el color parcial en su lugar, registra información del
+     * paciente en la tabla 'Triage' con su nombre, apellido, colores de triage
+     * y motivo de cambio, y actualiza la lista de espera para reflejar el color
+     * definitivo y otros detalles.
      *
-     * @throws SQLExeption Si ocurre un error en la interacción con la base de
+     * @throws SQLException si ocurre un error al interactuar con la base de
      * datos.
      */
     public void finalizarTriage() {
@@ -95,7 +96,7 @@ public class CtrlMedicoTriage {
                 String insert = "INSERT INTO Triage  (NombrePac, ApellidoPac, ApellidoMed, ColorParcial, ColorDefinitivo, MotivoCambio, NroMatricula, DNI) VALUES (?,?,?,?,?,?,?,?);";
                 PreparedStatement psi = conex.prepareStatement(insert);
 
-                String update = "UPDATE ListaEsperaSala SET ColorDefinitivo = ?, Fecha =?, Hora =? WHERE DNI = ?;";
+                String update = "UPDATE ListaEsperaSala SET ColorDefinitivo = ?, Fecha =?, Hora =?, Motivo = ? WHERE DNI = ?;";
 
                 PreparedStatement psu = conex.prepareStatement(update);
 
@@ -119,7 +120,8 @@ public class CtrlMedicoTriage {
                 psu.setString(1, colorDefinitivo);
                 psu.setString(2, rs2.getString("Fecha"));
                 psu.setString(3, rs2.getString("Hora"));
-                psu.setInt(4, Integer.parseInt(dniPac));
+                psu.setString(4, rs2.getString("Motivo"));
+                psu.setInt(5, Integer.parseInt(dniPac));
 
                 psi.executeUpdate();
                 psu.executeUpdate();
