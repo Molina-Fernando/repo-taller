@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import ventanas.Login;
 
+
 /**
  * El controlador ´CtrlMedicoTriage´ se encarga de ser el intermediario entre la
  * clase Médico y la ventana MedicoTriage, completando los datos del triage del
@@ -55,13 +56,13 @@ public class CtrlMedicoTriage {
     }
 
     /**
-     * Carga los datos del triage en la base de datos, utilizando otras tablas y
-     * los metodos de la clase Medico para devolver el color definitivo, el
-     * color parcial y el motivo del cambio, a su vez completa la tabla
-     * ´ListaEsperaSala´ con el color definitivo.
      *
-     * @throws SQLExeption Si ocurre un error en la interacción con la base de
-     * datos.
+     * Este método obtiene el color definitivo y el motivo de cambio si están
+     * disponibles o usa el color parcial en su lugar, registra información del
+     * paciente en la tabla 'Triage' con su nombre, apellido, colores de triage
+     * y motivo de cambio, y actualiza la lista de espera para reflejar el color
+     * definitivo y otros detalles.
+     *
      */
     public void finalizarTriage() {
 
@@ -77,11 +78,13 @@ public class CtrlMedicoTriage {
 
             String query = "SELECT * FROM Medico WHERE DNI = ?";
             String query1 = "SELECT * FROM Paciente WHERE DNI = ?";
-            String query2 = "SELECT * FROM Consulta WHERE DNIPaciente = ?";
+            String query2 = "SELECT * FROM Consulta WHERE DNIPaciente = ? AND Matricula IS NULL";
+            //String query3 = "SELECT * FROM ListaEsperaSala WHERE DNI = ?";
 
             PreparedStatement psq2 = conex.prepareStatement(query2);
             PreparedStatement psq1 = conex.prepareStatement(query1);
             PreparedStatement psq = conex.prepareStatement(query);
+
             psq2.setString(1, dniPac);
             psq1.setString(1, dniPac);
             psq.setString(1, dniMedico);
@@ -95,7 +98,7 @@ public class CtrlMedicoTriage {
                 String insert = "INSERT INTO Triage  (NombrePac, ApellidoPac, ApellidoMed, ColorParcial, ColorDefinitivo, MotivoCambio, NroMatricula, DNI) VALUES (?,?,?,?,?,?,?,?);";
                 PreparedStatement psi = conex.prepareStatement(insert);
 
-                String update = "UPDATE ListaEsperaSala SET ColorDefinitivo = ?, Fecha =?, Hora =? WHERE DNI = ?;";
+                String update = "UPDATE ListaEsperaSala SET ColorDefinitivo = ?, Fecha =?, Hora =?, Motivo = ? WHERE DNI = ?;";
 
                 PreparedStatement psu = conex.prepareStatement(update);
 
@@ -115,14 +118,17 @@ public class CtrlMedicoTriage {
                 psi.setString(6, motivoCambio);
                 psi.setInt(7, rs.getInt("Matricula"));
                 psi.setInt(8, Integer.parseInt(dniPac));
-
+                
                 psu.setString(1, colorDefinitivo);
                 psu.setString(2, rs2.getString("Fecha"));
                 psu.setString(3, rs2.getString("Hora"));
-                psu.setInt(4, Integer.parseInt(dniPac));
+                psu.setString(4, rs2.getString("Motivo"));
+
+                psu.setInt(5, Integer.parseInt(dniPac));
+
+                psu.executeUpdate();
 
                 psi.executeUpdate();
-                psu.executeUpdate();
 
             }
 
@@ -146,8 +152,6 @@ public class CtrlMedicoTriage {
      * ´ListaEsperaSala´, para ser llamado en el método ´finalizarTriage´.
      *
      * @return dniPac
-     * @throws SQLExeption Si ocurre un error en la interacción con la base de
-     * datos.
      */
     public String obtenerUltimoDniPac() {
         String dniPac = null;

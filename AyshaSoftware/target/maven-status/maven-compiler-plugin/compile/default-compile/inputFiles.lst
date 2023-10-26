@@ -4,7 +4,6 @@ D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Especialidad.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\dbController\CtrlRegistroFuncionarios.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\panelesEstadisticas\PanelTriageCambiado.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Estadistica.java
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\SetImageLabel.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\InfoEspecialidad.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\Estadisticas.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\AdminInformatico.java
@@ -38,6 +37,7 @@ D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Funcionario.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Lugares.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Consulta.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\panelesEstadisticas\DescripcionMedicoConsultas.java
+D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\Utilidades\ManejoFecha.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\panelesEstadisticas\PanelPacientesQueMasConsultaron.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\dbController\CtrlConsulta.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\clases\Paciente.java
@@ -66,6 +66,5 @@ D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\dbController\CtrlListaTriage.
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\RRHH.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\dbController\CtrlVentanaGenerica.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\MedicoSala.java
-D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\Funcionario.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\ventanas\RegistroMedicos.java
 D:\AyshaSoftwareTaller\AyshaSoftware\src\main\java\Utilidades\FormatosValidos.java

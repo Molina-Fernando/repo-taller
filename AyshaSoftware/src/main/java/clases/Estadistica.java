@@ -3,6 +3,10 @@ package clases;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * La clase Estadistica proporciona métodos para realizar cálculos y análisis
+ * estadísticos relacionados con las consultas médicas y pacientes.
+ */
 public class Estadistica {
 
     private ArrayList<Consulta> consultas;

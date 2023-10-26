@@ -1,21 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package ventanas.panelesEstadisticas;
 
 import Utilidades.FormatosValidos;
+import Utilidades.ManejoFecha;
 import dbController.CtrlEstadistica;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author joaqu
+ * La clase PanelTriageFecha es un panel de Swing que extiende de javax.swing.JPanel.
+ * Proporciona una interfaz para visualizar los triages por fecha.
  */
 public class PanelTriageFecha extends javax.swing.JPanel {
     String desdeT;
@@ -25,7 +22,8 @@ public class PanelTriageFecha extends javax.swing.JPanel {
     CtrlEstadistica ctrlEst = new CtrlEstadistica();
 
     /**
-     * Creates new form PanelTriageFecha
+     * Constructor para la clase PanelTriageFecha.
+     * Inicializa los componentes y agrega columnas al modelo.
      */
     public PanelTriageFecha() {
         initComponents();
@@ -33,28 +31,12 @@ public class PanelTriageFecha extends javax.swing.JPanel {
         modelo.addColumn("Cantidad");
     }
     
-        public boolean esFechaValida(String fecha) {
-        try {
-            LocalDate localDate = LocalDate.parse(fecha, FormatosValidos.FORMATO_FECHA);
-            return true;
-        } catch (DateTimeParseException e) {
-            return false;
-        }
-    }
-
-    public boolean esFechaEnRango(String fechaStr) {
-        try {
-            LocalDate fecha = LocalDate.parse(fechaStr, FormatosValidos.FORMATO_FECHA);
-
-            LocalDate hoy = LocalDate.now();
-            LocalDate fechaMinima = LocalDate.of(2000, 1, 1);
-
-            return !fecha.isAfter(hoy) && !fecha.isBefore(fechaMinima);
-        } catch (DateTimeParseException e) {
-            return false;
-        }
-    }
-    
+    /**
+     * Este método actualiza la tabla de triages basándose en un rango de fechas dado.
+     * Limpia la tabla existente, obtiene los triages del controlador para el rango de fechas dado y los agrega a la tabla.
+     * @param desdeT La fecha de inicio del rango.
+     * @param hastaT La fecha de fin del rango.
+     */
     private void actualizarTablaTriages(String desdeT, String hastaT) {
         modelo.setRowCount(0);
         tablaTriages = new javax.swing.JTable();
@@ -67,9 +49,6 @@ public class PanelTriageFecha extends javax.swing.JPanel {
             modelo.addRow(vector);
             tablaTriages.setModel(modelo);
         }
-    
-        
-        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -223,38 +202,39 @@ public class PanelTriageFecha extends javax.swing.JPanel {
     private void desdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desdeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_desdeActionPerformed
-
+    
+    /**
+     * Este método se ejecuta cuando se hace clic en el botón de carga del médico por fecha.
+     * Verifica si las fechas ingresadas son válidas y están en el rango permitido, y luego actualiza la tabla de triages.
+     * Si las fechas no son válidas o no están en el rango permitido, muestra un mensaje de error.
+     * @param evt El evento de acción que ocurrió (en este caso, hacer clic en el botón).
+     */
     private void botonCargaMedicoFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCargaMedicoFechaActionPerformed
-
             desdeT = desde.getText().trim();
             hastaT = hasta.getText().trim();
             if (desdeT.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "¡Error! El campo 'desde' está vacío");
-            } else if (!esFechaValida(desdeT)) {
+            } else if (!ManejoFecha.esFechaValida(desdeT)) {
                 JOptionPane.showMessageDialog(null, "¡Error! La fecha en el campo 'desde' no es válida");
-            } else if (!esFechaEnRango(desdeT)) {
+            } else if (!ManejoFecha.esFechaEnRango(desdeT)) {
                 JOptionPane.showMessageDialog(null, "¡Error! La fecha en el campo 'desde' no está en el rango permitido");
             }
-
             if (hastaT.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "¡Error! El campo 'hasta' está vacío");
-            } else if (!esFechaValida(hastaT)) {
+            } else if (!ManejoFecha.esFechaValida(hastaT)) {
                 JOptionPane.showMessageDialog(null, "¡Error! La fecha en el campo 'hasta' no es válida");
-            } else if (!esFechaEnRango(hastaT)) {
+            } else if (!ManejoFecha.esFechaEnRango(hastaT)) {
                 JOptionPane.showMessageDialog(null, "¡Error! La fecha en el campo 'hasta' no está en el rango permitido");
             }
 
-            if (!desdeT.isEmpty() && !hastaT.isEmpty() && esFechaValida(desdeT) && esFechaValida(hastaT) && esFechaEnRango(desdeT) && esFechaEnRango(hastaT)) {
+            if (!desdeT.isEmpty() && !hastaT.isEmpty() && ManejoFecha.esFechaValida(desdeT) && ManejoFecha.esFechaValida(hastaT) && ManejoFecha.esFechaEnRango(desdeT) && ManejoFecha.esFechaEnRango(hastaT)) {
                 LocalDate desdeFecha = LocalDate.parse(desdeT, FormatosValidos.FORMATO_FECHA);
                 LocalDate hastaFecha = LocalDate.parse(hastaT, FormatosValidos.FORMATO_FECHA);
                 if (desdeFecha.isAfter(hastaFecha)) {
                     JOptionPane.showMessageDialog(null, "¡Error! La fecha 'desde' es posterior a la fecha 'hasta'");
                 }
                 actualizarTablaTriages(desdeT,hastaT);
-                
-                
             }
-
     }//GEN-LAST:event_botonCargaMedicoFechaActionPerformed
 
 

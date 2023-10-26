@@ -301,7 +301,12 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
     private void textNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textNombreActionPerformed
-
+    /**
+     * Método principal que inicia la ventana Swing.
+     *
+     * @param args Los argumentos de la línea de comandos (no se utilizan en
+     * este caso).
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -41,7 +41,7 @@ public interface ProfesionalSanitario {
     /**
      * Visualiza la lista de espera de pacientes que han sido triados.
      *
-     * @param pacientes La lista de pacientes en espera de triaje.
+     * @param paciente La lista de pacientes en espera de triaje.
      */
     public void verListaEsperaTriage(ArrayList<Paciente> paciente);
 }

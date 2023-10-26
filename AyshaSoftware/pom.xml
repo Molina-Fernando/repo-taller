@@ -36,4 +36,20 @@
         <maven.compiler.target>20</maven.compiler.target>
         <exec.mainClass>com.fcad.uner.poo.ayshasoftware.AyshaSoftware</exec.mainClass>
     </properties>
+    
+    <build>
+        <plugins>
+            
+            <plugin>
+                <groupId>com.fcad.uner.poo</groupId>
+                <artifactId>AyshaSoftware</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <reportOutputDirectory>${project.build.directory}/javadoc</reportOutputDirectory>
+                </configuration>
+            </plugin>
+          
+        </plugins>
+    </build>
+    
 </project>

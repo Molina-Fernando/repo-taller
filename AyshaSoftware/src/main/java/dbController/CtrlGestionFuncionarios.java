@@ -22,7 +22,6 @@ public class CtrlGestionFuncionarios {
      * @param nomDB Nombre de la base de datos.
      * @return Una lista de arrays de objetos con información de funcionarios.
      * Cada array contiene [DNI, Nombre, Apellido, Sector].
-     * @throws SQLException Si ocurre un error en la interacción con la base de datos.
      */
 
     public ArrayList<Object[]> getTablaFuncionarios(int dniDB, String nomDB) {
@@ -66,7 +65,6 @@ public class CtrlGestionFuncionarios {
      * @param dniDB DNI de la base de datos.
      * @return Una lista de arrays de objetos con información de roles asociados.
      * Cada array contiene [DNI, Nombre].
-     * @throws SQLException Si ocurre un error en la interacción con la base de datos.
      */
 
     public ArrayList<Object[]> getTablaRolesAsociados(int dniDB) {
@@ -130,7 +128,6 @@ public class CtrlGestionFuncionarios {
      *
      * @param arrayList Una lista de nombres de roles a asignar.
      * @param dni El DNI del funcionario al que se asignan los roles.
-     * @throws SQLException Si ocurre un error en la interacción con la base de datos.
      */
     
     public void asignarRoles(ArrayList<String> arrayList, int dni) {

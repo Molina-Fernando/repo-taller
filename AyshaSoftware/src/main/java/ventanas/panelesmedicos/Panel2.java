@@ -1,11 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package ventanas.panelesmedicos;
 
 
 import clases.Estudio;
+import clases.Medico;
 import clases.Registro;
 import dbController.CtrlMedicoSala;
 import java.awt.BorderLayout;
@@ -16,8 +13,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author joaqu
+ * La clase Panel2 es un panel de Swing que extiende de javax.swing.JPanel.
+ * Proporciona una interfaz para una funcionalidad específica en tu aplicación.
  */
 public class Panel2 extends javax.swing.JPanel {
     
@@ -26,14 +23,7 @@ public class Panel2 extends javax.swing.JPanel {
     ArrayList<Object[]>listaRegistros=new ArrayList<>();
     ArrayList<Object[]>listaEstudios=new ArrayList<>();
     CtrlMedicoSala ctrlMedSal;
-    
-    String fechaDB;
-    String tipoDB;
-    String horaDB;
-
-    String fechaDB2;
-    String lugarDB;
-    String horaDB2;
+    Medico med;
     
     String fechaV;
     String lugarV;
@@ -49,9 +39,9 @@ public class Panel2 extends javax.swing.JPanel {
      * Creates new form Panel2
      * @param dni 
      */
-    public Panel2(String dni) {
+    public Panel2(String dni,Medico med) {
         initComponents();
-        
+        this.med=med;
         ctrlMedSal=new CtrlMedicoSala(dni);
         
         modelo2.addColumn("Fecha");
@@ -69,46 +59,50 @@ public class Panel2 extends javax.swing.JPanel {
 
     }
     
+    /**
+     * Este método actualiza los registros en la tabla de registros.
+     * Limpia la tabla existente, obtiene los registros del controlador y los agrega a la tabla.
+     */
     private void actualizarRegistros(){
         modelo.setRowCount(0);
         tablaRegistros = new javax.swing.JTable();
         tablaRegistros.setModel(modelo);
-        listaRegistros=ctrlMedSal.getTablaRegistros(fechaDB,horaDB,tipoDB);
+        listaRegistros=ctrlMedSal.getTablaRegistros(ctrlMedSal.getDni());
         tablaRegistros = new JTable(modelo);
         jScrollPane1.setViewportView(tablaRegistros);
 
         for (Object[] vector : listaRegistros) {
-
-            fechaDB  = vector[0].toString();
-            horaDB = vector[1].toString();
-            tipoDB = vector[2].toString();
 
             modelo.addRow(vector);
             tablaRegistros.setModel(modelo);
         }
     }
     
+    /**
+     * Este método actualiza los registros en la tabla de registros.
+     * Limpia la tabla existente, obtiene los registros del controlador y los agrega a la tabla.
+     */
     private void actualizarEstudios(){
         modelo2.setRowCount(0);
         tablaEstudios = new javax.swing.JTable();
         tablaEstudios.setModel(modelo2);
-        listaEstudios=ctrlMedSal.getTablaEstudios(fechaDB2, horaDB2,lugarDB);
+        listaEstudios=ctrlMedSal.getTablaEstudios(ctrlMedSal.getDni());
         tablaEstudios = new JTable(modelo2);
         jScrollPane2.setViewportView(tablaEstudios);
 
         for (Object[] vector : listaEstudios) {
-
-            fechaDB2  = vector[0].toString();
-            horaDB2 = vector[1].toString();
-            lugarDB = vector[2].toString();
 
             modelo2.addRow(vector);
             tablaEstudios.setModel(modelo2);
         }
     }
     
+    /**
+     * Este método muestra un panel dado en el panel de contenido.
+     * @param p El panel que se va a mostrar.
+     */
     public void showPanelInPanel(JPanel p){
-        p.setSize(460,185);
+        p.setSize(1000,185);
         p.setLocation(0,0);
         
         contentContent.removeAll();
@@ -117,10 +111,24 @@ public class Panel2 extends javax.swing.JPanel {
         contentContent.repaint();
     }
     
+    /**
+     * Este método selecciona un registro basado en la fecha, hora y lugar proporcionados.
+     * @param fechaV La fecha del registro.
+     * @param horaV La hora del registro.
+     * @param lugarV El lugar del registro.
+     * @return El registro seleccionado.
+     */
     private Registro seleccionarRegistro(String fechaV, String horaV, String lugarV) {
-        return ctrlMedSal.seleccionarRegistro(fechaV,horaV, lugarV);
+        return ctrlMedSal.seleccionarRegistroTerminado(fechaV,horaV, lugarV);
     }
     
+    /**
+     * Este método selecciona un registro basado en la fecha, hora y lugar proporcionados.
+     * @param fechaV La fecha del registro.
+     * @param horaV La hora del registro.
+     * @param lugarV El lugar del registro.
+     * @return El registro seleccionado.
+     */
     private Estudio seleccionarEstudio(String fechaV, String horaV, String tipoV) {
         return ctrlMedSal.seleccionarEstudio(fechaV, horaV, tipoV);
     }
@@ -147,8 +155,9 @@ public class Panel2 extends javax.swing.JPanel {
         contentContent = new javax.swing.JPanel();
         BotonEstudio = new javax.swing.JButton();
         BotonRegistro = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
 
-        setPreferredSize(new java.awt.Dimension(460, 510));
+        setPreferredSize(new java.awt.Dimension(550, 650));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -191,7 +200,7 @@ public class Panel2 extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("Historia Clínica");
 
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel4.setText("Descripción");
 
         contentContent.setBackground(new java.awt.Color(255, 255, 255));
@@ -225,37 +234,42 @@ public class Panel2 extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(102, 102, 102)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(85, 85, 85))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jSeparator1)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(12, 12, 12))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(198, 198, 198))))
             .addComponent(contentContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(188, 188, 188)
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(80, 80, 80)
+                .addGap(206, 206, 206)
                 .addComponent(BotonEstudio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BotonRegistro)
-                .addGap(79, 79, 79))
+                .addGap(173, 173, 173))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSeparator1)
+                .addGap(12, 12, 12))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(233, 233, 233)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(209, 209, 209))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSeparator2)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(433, 433, 433))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(442, 442, 442))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,17 +282,21 @@ public class Panel2 extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BotonEstudio)
-                    .addComponent(BotonRegistro))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BotonRegistro))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BotonEstudio)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
                 .addComponent(contentContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -302,6 +320,12 @@ public class Panel2 extends javax.swing.JPanel {
         
     }//GEN-LAST:event_tablaEstudiosMouseClicked
 
+    /**
+     * Este método se ejecuta cuando se hace clic en el botón de registro.
+     * Selecciona un registro de la tabla y muestra su descripción en un nuevo panel.
+     * Si no se selecciona ningún registro, muestra un mensaje de error.
+     * @param evt El evento de acción que ocurrió (en este caso, hacer clic en el botón).
+     */
     private void BotonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegistroActionPerformed
         try{
             int numFila = tablaRegistros.getSelectedRow();
@@ -318,6 +342,12 @@ public class Panel2 extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_BotonRegistroActionPerformed
 
+    /**
+     * Este método se ejecuta cuando se hace clic en el botón de estudio.
+     * Selecciona un estudio de la tabla y muestra su descripción en un nuevo panel.
+     * Si no se selecciona ningún estudio, muestra un mensaje de error.
+     * @param evt El evento de acción que ocurrió (en este caso, hacer clic en el botón).
+     */
     private void BotonEstudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEstudioActionPerformed
         try{
             int numFila2 = tablaEstudios.getSelectedRow();
@@ -347,6 +377,7 @@ public class Panel2 extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable tablaEstudios;
     private javax.swing.JTable tablaRegistros;
     // End of variables declaration//GEN-END:variables

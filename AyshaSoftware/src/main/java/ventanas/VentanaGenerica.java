@@ -72,7 +72,6 @@ public final class VentanaGenerica extends javax.swing.JFrame {
             if (id == 5) {
                 botonInformatica.setVisible(true);
                 botonTriage.setVisible(true);
-                botonSala.setVisible(true);
                 botonRRHH.setVisible(true);
                 botonGestion.setVisible(true);
                 botonAdmision.setVisible(true);
@@ -241,7 +240,7 @@ public final class VentanaGenerica extends javax.swing.JFrame {
         // TODO add your handling code here:
         new RRHH().setVisible(true);
     }//GEN-LAST:event_botonRRHHActionPerformed
-/**
+    /**
      * Acción realizada al presionar el botón "Ingresar" correspondiente al rol
      * de "AdministrativoGestion". Abre la ventana de Gestor.
      */
@@ -249,7 +248,7 @@ public final class VentanaGenerica extends javax.swing.JFrame {
         // TODO add your handling code here:
         new Gestor().setVisible(true);
     }//GEN-LAST:event_botonGestionActionPerformed
-/**
+    /**
      * Acción realizada al presionar el botón "Ingresar" correspondiente al rol
      * de "AdminInformatico". Abre la ventana de AdminInformatico.
      */
@@ -258,7 +257,12 @@ public final class VentanaGenerica extends javax.swing.JFrame {
         new AdminInformatico().setVisible(true);
     }//GEN-LAST:event_botonInformaticaActionPerformed
 
-
+    /**
+     * Método principal que inicia la ventana Swing.
+     *
+     * @param args Los argumentos de la línea de comandos (no se utilizan en
+     * este caso).
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

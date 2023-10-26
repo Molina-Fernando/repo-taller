@@ -216,7 +216,12 @@ public class InfoFuncionario extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_botonMostrarRolesActionPerformed
-
+    /**
+     * Método principal que inicia la ventana Swing.
+     *
+     * @param args Los argumentos de la línea de comandos (no se utilizan en
+     * este caso).
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

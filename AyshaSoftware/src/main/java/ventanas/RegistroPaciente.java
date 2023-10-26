@@ -23,13 +23,13 @@ import javax.swing.WindowConstants;
 public class RegistroPaciente extends javax.swing.JFrame {
 
     /**
-     * Creates new form RegistroPaciente
+     * Constructor que inicializa los componentes de la ventana
      */
     public RegistroPaciente() {
-        
+
         initComponents();
         setLocationRelativeTo(null);
-        
+
         setResizable(false);
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
@@ -44,7 +44,6 @@ public class RegistroPaciente extends javax.swing.JFrame {
     }
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -237,7 +236,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
                 botonBuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(botonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 430, 90, 30));
+        jPanel1.add(botonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 430, 130, 30));
 
         textMotivoConsulta.setColumns(20);
         textMotivoConsulta.setRows(5);
@@ -370,7 +369,7 @@ public class RegistroPaciente extends javax.swing.JFrame {
 
     private LocalDate fecha = null;
     private LocalTime hora = null;
-    String motivoConsulta;
+    public static String motivoConsulta;
     CtrlConsulta ctrlConsulta = new CtrlConsulta();
 
     /**
@@ -435,7 +434,10 @@ public class RegistroPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_botonBuscarActionPerformed
 
     /**
-     * @param args the command line arguments
+     * Método principal que inicia la ventana Swing.
+     *
+     * @param args Los argumentos de la línea de comandos (no se utilizan en
+     * este caso).
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

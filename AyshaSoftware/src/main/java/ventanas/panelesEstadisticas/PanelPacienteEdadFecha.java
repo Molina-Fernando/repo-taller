@@ -1,28 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package ventanas.panelesEstadisticas;
 
 import Utilidades.FormatosValidos;
+import Utilidades.ManejoFecha;
 import dbController.CtrlEstadistica;
 import java.awt.BorderLayout;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author joaqu
+ * La clase PanelPacienteEdadFecha es un panel de Swing que extiende de javax.swing.JPanel.
+ * Proporciona una interfaz para visualizar la edad y la fecha de los pacientes.
  */
 public class PanelPacienteEdadFecha extends javax.swing.JPanel {
-    
-    DefaultTableModel modelo= new DefaultTableModel();
-    ArrayList<Object[]>listaMedicos=new ArrayList<>();
     CtrlEstadistica ctrlEst = new CtrlEstadistica();
     String nombre;
     String apellido;
@@ -31,28 +21,19 @@ public class PanelPacienteEdadFecha extends javax.swing.JPanel {
     String hastaT;
     String edadBase;
     String edadLimite;
-    /**
-     * Creates new form PanelPacienteEdadFecha
-     */
 
+    /**
+     * Constructor para la clase PanelPacienteEdadFecha.
+     * Inicializa los componentes.
+     */
     public PanelPacienteEdadFecha() {
         initComponents();
-//        actualizarMedicos();
     }
     
-//        private void actualizarMedicos(){
-//        modelo.setRowCount(0);
-//        tablaPacientes = new javax.swing.JTable();
-//        tablaPacientes.setModel(modelo);
-//        listaMedicos=ctrlEst.getTablaMedicos();
-//        tablaPacientes = new JTable(modelo);
-//        jScrollPane1.setViewportView(tablaPacientes);
-//        for (Object[] vector : listaMedicos) {
-//            modelo.addRow(vector);
-//            tablaPacientes.setModel(modelo);
-//        }
-//    }
-        
+    /**
+     * Este método muestra un panel dado en el panel de contenido.
+     * @param p El panel que se va a mostrar.
+     */
     public void showPanelInPanel(JPanel p){
         p.setSize(500,60);
         p.setLocation(0,0);
@@ -62,32 +43,15 @@ public class PanelPacienteEdadFecha extends javax.swing.JPanel {
         contentContent.repaint();
     }
     
-    public boolean esFechaValida(String fecha) {
-        try {
-            LocalDate localDate = LocalDate.parse(fecha, FormatosValidos.FORMATO_FECHA);
-            return true;
-        } catch (DateTimeParseException e) {
-            return false;
-        }
-    }
-
-    public boolean esFechaEnRango(String fechaStr) {
-        try {
-            LocalDate fecha = LocalDate.parse(fechaStr, FormatosValidos.FORMATO_FECHA);
-
-            LocalDate hoy = LocalDate.now();
-            LocalDate fechaMinima = LocalDate.of(2000, 1, 1);
-
-            return !fecha.isAfter(hoy) && !fecha.isBefore(fechaMinima);
-        } catch (DateTimeParseException e) {
-            return false;
-        }
-    }
     
+    /**
+     * Este método verifica si una cadena dada es un número natural entre 0 y 130.
+     * @param texto La cadena que se va a verificar.
+     * @return Verdadero si la cadena es un número natural entre 0 y 130, falso en caso contrario.
+     */
     public boolean esNumeroNaturalEntre0y130(String texto) {
         return texto.matches("^([0-9]{1,2}|1[01][0-9]|130)$");
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -300,7 +264,13 @@ public class PanelPacienteEdadFecha extends javax.swing.JPanel {
     private void eBaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eBaseActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_eBaseActionPerformed
-
+    
+    /**
+     * Este método se ejecuta cuando se hace clic en el botón de carga del médico por fecha.
+     * Verifica si las fechas y las edades ingresadas son válidas y están en el rango permitido, y luego muestra un panel con la descripción de las consultas del médico.
+     * Si las fechas o las edades no son válidas o no están en el rango permitido, muestra un mensaje de error.
+     * @param evt El evento de acción que ocurrió (en este caso, hacer clic en el botón).
+     */
     private void botonCargaMedicoFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCargaMedicoFechaActionPerformed
 
         String desdeT = desde.getText().trim();
@@ -309,16 +279,16 @@ public class PanelPacienteEdadFecha extends javax.swing.JPanel {
         String edadLimite = eLimite.getText().trim();
         if (desdeT.isEmpty()) {
             JOptionPane.showMessageDialog(null, "¡Error! El campo 'desde' está vacío");
-        } else if (!esFechaValida(desdeT)) {
+        } else if (!ManejoFecha.esFechaValida(desdeT)) {
             JOptionPane.showMessageDialog(null, "¡Error! La fecha en el campo 'desde' no es válida");
-        } else if (!esFechaEnRango(desdeT)) {
+        } else if (!ManejoFecha.esFechaEnRango(desdeT)) {
             JOptionPane.showMessageDialog(null, "¡Error! La fecha en el campo 'desde' no está en el rango permitido");
         }
         if (hastaT.isEmpty()) {
             JOptionPane.showMessageDialog(null, "¡Error! El campo 'hasta' está vacío");
-        } else if (!esFechaValida(hastaT)) {
+        } else if (!ManejoFecha.esFechaValida(hastaT)) {
             JOptionPane.showMessageDialog(null, "¡Error! La fecha en el campo 'hasta' no es válida");
-        } else if (!esFechaEnRango(hastaT)) {
+        } else if (!ManejoFecha.esFechaEnRango(hastaT)) {
             JOptionPane.showMessageDialog(null, "¡Error! La fecha en el campo 'hasta' no está en el rango permitido");
         }
         if (edadBase.isEmpty() || !esNumeroNaturalEntre0y130(edadBase)) {
@@ -334,7 +304,11 @@ public class PanelPacienteEdadFecha extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "¡Error! La 'edad base' es mayor que la 'edad límite'");
             }
         }
-        if (!desdeT.isEmpty() && !hastaT.isEmpty() && esFechaValida(desdeT) && esFechaValida(hastaT) && esFechaEnRango(desdeT) && esFechaEnRango(hastaT) && !edadBase.isEmpty() && esNumeroNaturalEntre0y130(edadBase) && !edadLimite.isEmpty() && esNumeroNaturalEntre0y130(edadLimite)) {
+        if (!desdeT.isEmpty() && !hastaT.isEmpty() && ManejoFecha.esFechaValida(desdeT) &&
+            ManejoFecha.esFechaValida(hastaT) && ManejoFecha.esFechaEnRango(desdeT) &&
+            ManejoFecha.esFechaEnRango(hastaT) && !edadBase.isEmpty() && esNumeroNaturalEntre0y130(edadBase) &&
+            !edadLimite.isEmpty() && esNumeroNaturalEntre0y130(edadLimite)) {
+            
             LocalDate desdeFecha = LocalDate.parse(desdeT, FormatosValidos.FORMATO_FECHA);
             LocalDate hastaFecha = LocalDate.parse(hastaT, FormatosValidos.FORMATO_FECHA);
             if (desdeFecha.isAfter(hastaFecha)) {

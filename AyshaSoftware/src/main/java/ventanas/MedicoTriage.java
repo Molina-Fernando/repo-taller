@@ -22,6 +22,9 @@ public class MedicoTriage extends javax.swing.JFrame {
     Map<String, Color> colores = new HashMap<>();
     CtrlMedicoTriage ctrl = new CtrlMedicoTriage();
 
+    /**
+     * Constructor que inicializa los componentes de la ventana
+     */
     public MedicoTriage() {
 
         initComponents();
@@ -38,7 +41,6 @@ public class MedicoTriage extends javax.swing.JFrame {
         setTitle("Triage");
 
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -759,7 +761,12 @@ public class MedicoTriage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Debe aclarar el motivo de cambio");
         }
     }//GEN-LAST:event_botonAceptarActionPerformed
-
+    /**
+     * Método principal que inicia la ventana Swing.
+     *
+     * @param args Los argumentos de la línea de comandos (no se utilizan en
+     * este caso).
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -1,4 +1,3 @@
-
 package dbController;
 
 import java.sql.Connection;
@@ -8,8 +7,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
+/**
+ * Esta clase controla la obtención de información relacionada con los
+ * funcionarios y sus roles en la base de datos.
+ */
 public class CtrlInfoFuncionario {
 
+    /**
+     * Obtiene una tabla de funcionarios desde la base de datos.
+     *
+     * @return Una lista de arreglos de objetos que representan los datos de los
+     * funcionarios.
+     */
     public ArrayList<Object[]> getTablaFuncionario() {
         ArrayList<Object[]> arrayListDeVectores = new ArrayList<>();
         Connection conex = null;
@@ -46,7 +55,15 @@ public class CtrlInfoFuncionario {
 
         return arrayListDeVectores;
     }
-    
+
+    /**
+     * Obtiene los roles de un funcionario específico desde la base de datos.
+     *
+     * @param dniDB El número de identificación del funcionario en la base de
+     * datos.
+     * @return Una lista de arreglos de objetos que representan los roles del
+     * funcionario.
+     */
     public ArrayList<Object[]> getTablaRoles(int dniDB) {
         ArrayList<Object[]> arrayListDeRoles = new ArrayList<>();
         Connection conex = null;

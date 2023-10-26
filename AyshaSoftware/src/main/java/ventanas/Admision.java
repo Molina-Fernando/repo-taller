@@ -13,6 +13,9 @@ import javax.swing.WindowConstants;
  */
 public class Admision extends javax.swing.JFrame {
 
+    /**
+     * Constructor que inicializa los componentes de la ventana
+     */
     public Admision() {
         initComponents();
         setLocationRelativeTo(null);
@@ -89,6 +92,12 @@ public class Admision extends javax.swing.JFrame {
         new RegistroPaciente().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * Método principal que inicia la ventana Swing.
+     *
+     * @param args Los argumentos de la línea de comandos (no se utilizan en
+     * este caso).
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

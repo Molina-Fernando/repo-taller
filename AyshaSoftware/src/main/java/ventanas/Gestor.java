@@ -1,4 +1,3 @@
-
 package ventanas;
 
 import Utilidades.SetImageLabel;
@@ -7,10 +6,14 @@ import java.awt.Toolkit;
 import javax.swing.WindowConstants;
 
 /**
- * Ventana intermedia entre ´VentanaGenerica´ y las ventanas las cuales tiene acceso el gestor.
+ * Ventana intermedia entre ´VentanaGenerica´ y las ventanas las cuales tiene
+ * acceso el gestor.
  */
 public class Gestor extends javax.swing.JFrame {
 
+    /**
+     * Constructor que inicializa los componentes de la ventana
+     */
     public Gestor() {
         initComponents();
         setLocationRelativeTo(null);
@@ -25,7 +28,6 @@ public class Gestor extends javax.swing.JFrame {
         setTitle("Ventana Genérica de Gestores");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -144,21 +146,21 @@ public class Gestor extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     /**
      * Botón que abre la ventana ´InfoMedico´.
-     * 
-     * @param evt 
+     *
+     * @param evt
      */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         new InfoMedico().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
-    
-     /**
+
+    /**
      * Botón que abre la ventana ´Estadisticas´.
-     * 
-     * @param evt 
+     *
+     * @param evt
      */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -167,8 +169,8 @@ public class Gestor extends javax.swing.JFrame {
 
     /**
      * Botón que abre la ventana ´InfoFuncionario´.
-     * 
-     * @param evt 
+     *
+     * @param evt
      */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
@@ -176,7 +178,10 @@ public class Gestor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
-     * @param args the command line arguments
+     * Método principal que inicia la ventana Swing.
+     *
+     * @param args Los argumentos de la línea de comandos (no se utilizan en
+     * este caso).
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

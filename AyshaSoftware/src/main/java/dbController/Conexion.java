@@ -16,8 +16,6 @@ public class Conexion {
      * Conecta a la base de datos SQLite especificada.
      *
      * @return Un objeto `Connection` que representa la conexión a la base de datos.
-     * @throws ClassNotFoundException Si no se encuentra la clase del controlador JDBC.
-     * @throws SQLException Si ocurre un error al intentar conectarse a la base de datos.
      */
     
     public static Connection conectar() {

@@ -1,15 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package ventanas.panelesEstadisticas;
 
 import dbController.CtrlEstadistica;
 import java.util.ArrayList;
 
 /**
- *
- * @author joaqu
+ * La clase DescripcionMedicoConsultas es un panel de Swing que extiende de javax.swing.JPanel.
+ * Proporciona una descripción de las consultas realizadas por el médico.
  */
 public class DescripcionMedicoConsultas extends javax.swing.JPanel {
 
@@ -28,7 +25,7 @@ public class DescripcionMedicoConsultas extends javax.swing.JPanel {
         initComponents();
         setDatosVariables(n, a, m, d, h);
     }
-
+    
     public DescripcionMedicoConsultas(String d, String h, String b, String l) {
         initComponents();
         setDatosVariables(d, h, b, l);
@@ -80,10 +77,10 @@ public class DescripcionMedicoConsultas extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         primerRenglon.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        primerRenglon.setText("Muchotxtojdhjdfshjsdkjkjsdkjfdsjkfdjfsdjksfdjksfdjkl");
+        primerRenglon.setText("Texto que va a ser reescrito por los metodos que se invocan en el constructor");
 
         segundoRenglon.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        segundoRenglon.setText("Muchotewengfdfifdjdfidfiocjkidsfkodsodsodsfoddofdosf");
+        segundoRenglon.setText("Texto que va a ser reescrito por los metodos que se invocan en el constructor");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -92,9 +89,9 @@ public class DescripcionMedicoConsultas extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(primerRenglon, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+                    .addComponent(primerRenglon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(segundoRenglon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

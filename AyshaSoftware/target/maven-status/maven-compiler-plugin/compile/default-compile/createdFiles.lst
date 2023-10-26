@@ -27,6 +27,7 @@ ventanas\RegistroMedicos$3.class
 ventanas\ListaTriage.class
 clases\Funcionario.class
 ventanas\panelesEstadisticas\PanelPacienteEdadFecha$2.class
+ventanas\MedicoSala$6.class
 ventanas\panelesEstadisticas\PanelMedicoMasAtendio$2.class
 ventanas\panelesEstadisticas\PanelTriageCambiado.class
 ventanas\RegistroFuncionarios.class
@@ -75,7 +76,6 @@ ventanas\panelesEstadisticas\PanelTriageFecha.class
 ventanas\RegistroPaciente$2.class
 ventanas\Estadisticas$5.class
 Utilidades\SetImageLabel.class
-ventanas\SetImageLabel.class
 ventanas\RegistroMedicos$4.class
 clases\InfoEspecialidad.class
 ventanas\AdminInformatico$1.class
@@ -91,7 +91,6 @@ ventanas\RegistroPaciente$13.class
 ventanas\GestionFuncionarios$1.class
 ventanas\MedicoSala$2.class
 ventanas\RegistroPaciente$3.class
-ventanas\Funcionario$1.class
 dbController\CtrlGestionFuncionarios.class
 ventanas\EntradaMedicoSala.class
 ventanas\panelesmedicos\Panel3$1.class
@@ -102,7 +101,6 @@ ventanas\MedicoTriage$15.class
 ventanas\MedicoTriage$4.class
 ventanas\VentanaGenerica$3.class
 ventanas\GestionFuncionarios.class
-ventanas\Funcionario.class
 ventanas\Gestor$1.class
 ventanas\RegistroPaciente$4.class
 ventanas\RegistroMedicos$6.class
@@ -141,6 +139,7 @@ ventanas\VentanaGenerica$7.class
 clases\Administrativo.class
 ventanas\panelesEstadisticas\PanelTriageFecha$1.class
 ventanas\MedicoTriage$5.class
+Utilidades\ManejoFecha.class
 ventanas\GestionFuncionarios$7.class
 ventanas\panelesEstadisticas\PanelEntrada$3.class
 ventanas\panelesmedicos\Panel2.class

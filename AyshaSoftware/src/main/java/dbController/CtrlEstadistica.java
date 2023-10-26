@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
 
@@ -22,7 +21,7 @@ public class CtrlEstadistica {
      * Este método se utiliza para obtener una lista de médicos de una base de
      * datos.
      *
-     * @return ArrayList<Object[]> - Devuelve una lista de objetos, donde cada
+     * @return ArrayList(Object[]) - Devuelve una lista de objetos, donde cada
      * objeto es un array que contiene el nombre, apellido y matrícula de un
      * médico.
      */

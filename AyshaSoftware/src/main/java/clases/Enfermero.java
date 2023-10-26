@@ -6,8 +6,6 @@ import java.util.ArrayList;
  * La clase ´Enfermero´ implementa una interfaz ´ProfesionalSanitario´, también
  * se relaciona con la clase ´Triage´, debido a que el médico realiza el triage,
  * pasandole datos y obteniendo la información necesaria.
- *
- * @author Jeremías Simian
  */
 public class Enfermero extends Funcionario implements ProfesionalSanitario {
 

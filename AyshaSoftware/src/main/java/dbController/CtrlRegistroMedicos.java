@@ -22,8 +22,6 @@ public class CtrlRegistroMedicos {
      *
      * @param func : objeto Funcionario.
      * @param med : objeto Medico.
-     * @throws SQLExeption Si ocurre un error en la interacción con la base de
-     * datos.
      */
     public void registrarMedico(Funcionario func, Medico med) {
 

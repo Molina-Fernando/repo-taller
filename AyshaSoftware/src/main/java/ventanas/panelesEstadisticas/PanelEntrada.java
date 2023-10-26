@@ -1,14 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package ventanas.panelesEstadisticas;
 
 import Utilidades.FormatosValidos;
+import Utilidades.ManejoFecha;
 import dbController.CtrlEstadistica;
 import java.awt.BorderLayout;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -16,8 +12,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author joaqu
+ * La clase PanelEntrada es un panel de Swing que extiende de
+ * javax.swing.JPanel. Proporciona una interfaz para la entrada de datos.
  */
 public class PanelEntrada extends javax.swing.JPanel {
 
@@ -31,7 +27,7 @@ public class PanelEntrada extends javax.swing.JPanel {
     String hastaT;
 
     /**
-     * Creates new form PanelEntrada
+     * Constructor que inicializa los componentes de la ventana
      */
     public PanelEntrada() {
         initComponents();
@@ -42,6 +38,11 @@ public class PanelEntrada extends javax.swing.JPanel {
 
     }
 
+    /**
+     * Actualiza la tabla de médicos en la interfaz gráfica. Llena la tabla con
+     * datos de médicos obtenidos desde la base de datos y la muestra en la
+     * interfaz.
+     */
     private void actualizarMedicos() {
         modelo.setRowCount(0);
         tablaMedicos = new javax.swing.JTable();
@@ -55,6 +56,11 @@ public class PanelEntrada extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Muestra un panel en un contenedor principal.
+     *
+     * @param p El panel que se va a mostrar en el contenedor principal.
+     */
     public void showPanelInPanel(JPanel p) {
         p.setSize(500, 60);
         p.setLocation(0, 0);
@@ -62,28 +68,6 @@ public class PanelEntrada extends javax.swing.JPanel {
         contentContent.add(p, BorderLayout.CENTER);
         contentContent.revalidate();
         contentContent.repaint();
-    }
-
-    public boolean esFechaValida(String fecha) {
-        try {
-            LocalDate localDate = LocalDate.parse(fecha, FormatosValidos.FORMATO_FECHA);
-            return true;
-        } catch (DateTimeParseException e) {
-            return false;
-        }
-    }
-
-    public boolean esFechaEnRango(String fechaStr) {
-        try {
-            LocalDate fecha = LocalDate.parse(fechaStr, FormatosValidos.FORMATO_FECHA);
-
-            LocalDate hoy = LocalDate.now();
-            LocalDate fechaMinima = LocalDate.of(2000, 1, 1);
-
-            return !fecha.isAfter(hoy) && !fecha.isBefore(fechaMinima);
-        } catch (DateTimeParseException e) {
-            return false;
-        }
     }
 
     /**
@@ -286,7 +270,12 @@ public class PanelEntrada extends javax.swing.JPanel {
     private void desdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desdeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_desdeActionPerformed
-
+    /**
+     * Este método se ejecuta cuando se hace clic en el botón para cargar
+     * información de un médico en un rango de fechas.
+     *
+     * @param evt El evento de acción que desencadenó este método.
+     */
     private void botonCargaMedicoFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCargaMedicoFechaActionPerformed
 
         int numFila = tablaMedicos.getSelectedRow();
@@ -300,21 +289,21 @@ public class PanelEntrada extends javax.swing.JPanel {
             hastaT = hasta.getText().trim();
             if (desdeT.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "¡Error! El campo 'desde' está vacío");
-            } else if (!esFechaValida(desdeT)) {
+            } else if (!ManejoFecha.esFechaValida(desdeT)) {
                 JOptionPane.showMessageDialog(null, "¡Error! La fecha en el campo 'desde' no es válida");
-            } else if (!esFechaEnRango(desdeT)) {
+            } else if (!ManejoFecha.esFechaEnRango(desdeT)) {
                 JOptionPane.showMessageDialog(null, "¡Error! La fecha en el campo 'desde' no está en el rango permitido");
             }
 
             if (hastaT.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "¡Error! El campo 'hasta' está vacío");
-            } else if (!esFechaValida(hastaT)) {
+            } else if (!ManejoFecha.esFechaValida(hastaT)) {
                 JOptionPane.showMessageDialog(null, "¡Error! La fecha en el campo 'hasta' no es válida");
-            } else if (!esFechaEnRango(hastaT)) {
+            } else if (!ManejoFecha.esFechaEnRango(hastaT)) {
                 JOptionPane.showMessageDialog(null, "¡Error! La fecha en el campo 'hasta' no está en el rango permitido");
             }
 
-            if (!desdeT.isEmpty() && !hastaT.isEmpty() && esFechaValida(desdeT) && esFechaValida(hastaT) && esFechaEnRango(desdeT) && esFechaEnRango(hastaT)) {
+            if (!desdeT.isEmpty() && !hastaT.isEmpty() && ManejoFecha.esFechaValida(desdeT) && ManejoFecha.esFechaValida(hastaT) && ManejoFecha.esFechaEnRango(desdeT) && ManejoFecha.esFechaEnRango(hastaT)) {
                 LocalDate desdeFecha = LocalDate.parse(desdeT, FormatosValidos.FORMATO_FECHA);
                 LocalDate hastaFecha = LocalDate.parse(hastaT, FormatosValidos.FORMATO_FECHA);
                 if (desdeFecha.isAfter(hastaFecha)) {

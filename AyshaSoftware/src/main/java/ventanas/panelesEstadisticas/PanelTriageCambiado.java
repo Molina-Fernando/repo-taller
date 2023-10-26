@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package ventanas.panelesEstadisticas;
 
 import dbController.CtrlEstadistica;
@@ -10,19 +7,20 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author joaqu
+ * La clase PanelTriageCambiado es un panel de Swing que extiende de javax.swing.JPanel.
+ * Proporciona una interfaz para visualizar los triages que han sido cambiados.
  */
 public class PanelTriageCambiado extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PanelTriageCambiado
-     */
-    
+
     DefaultTableModel modelo = new DefaultTableModel();
     CtrlEstadistica ctrlEst = new CtrlEstadistica();
     ArrayList<Object[]> lista = new ArrayList<>();
     
+    /**
+     * Constructor para la clase PanelTriageCambiado.
+     * Inicializa los componentes y actualiza la tabla de triages cambiados.
+     */
     public PanelTriageCambiado() {
         initComponents();
         modelo.addColumn("Medico");
@@ -34,7 +32,10 @@ public class PanelTriageCambiado extends javax.swing.JPanel {
         actualizarTablaTriagesCambiados();
     }
     
-    
+    /**
+     * Este método actualiza los triages cambiados en la tabla de triages.
+     * Limpia la tabla existente, obtiene los triages cambiados del controlador y los agrega a la tabla.
+     */
      private void actualizarTablaTriagesCambiados() {
         modelo.setRowCount(0);
         tablaTriages = new javax.swing.JTable();
@@ -47,9 +48,6 @@ public class PanelTriageCambiado extends javax.swing.JPanel {
             modelo.addRow(vector);
             tablaTriages.setModel(modelo);
         }
-    
-        
-        
     }
 
     /**
@@ -84,7 +82,7 @@ public class PanelTriageCambiado extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(212, 212, 212)
                 .addComponent(jLabel1)
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addContainerGap(225, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,8 +125,8 @@ public class PanelTriageCambiado extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(87, 87, 87)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 271, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

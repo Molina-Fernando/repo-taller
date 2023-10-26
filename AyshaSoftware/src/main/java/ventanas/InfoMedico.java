@@ -1,4 +1,3 @@
-
 package ventanas;
 
 import Utilidades.SetImageLabel;
@@ -10,12 +9,10 @@ import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
- * La ventana ´InfoMedico´, es la encargada de que el gestor pueda visualizar todos
- * los datos de los médicos registrados en el sistema.
+ * La ventana ´InfoMedico´, es la encargada de que el gestor pueda visualizar
+ * todos los datos de los médicos registrados en el sistema.
  */
-
 public class InfoMedico extends javax.swing.JFrame {
 
     DefaultTableModel modelo;
@@ -24,9 +21,12 @@ public class InfoMedico extends javax.swing.JFrame {
     CtrlInfoMedico ctrlDb = new CtrlInfoMedico();
     ArrayList<Object[]> arrayListEspecialidades;
 
+    /**
+     * Constructor que inicializa los componentes de la ventana
+     */
     public InfoMedico() {
         initComponents();
-        
+
         setTitle("Información de Médicos");
         setLocationRelativeTo(null);
         setResizable(false);
@@ -197,7 +197,12 @@ public class InfoMedico extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_botonMostrarEspecialidadesActionPerformed
-
+    /**
+     * Método principal que inicia la ventana Swing.
+     *
+     * @param args Los argumentos de la línea de comandos (no se utilizan en
+     * este caso).
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

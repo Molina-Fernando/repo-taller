@@ -428,6 +428,12 @@ public class GestionFuncionarios extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Método principal que inicia la ventana Swing.
+     *
+     * @param args Los argumentos de la línea de comandos (no se utilizan en
+     * este caso).
+     */
     public static void main(String args[]) {
 
         /* Set the Nimbus look and feel */

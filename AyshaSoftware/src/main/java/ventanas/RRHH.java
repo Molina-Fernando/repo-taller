@@ -1,4 +1,3 @@
-
 package ventanas;
 
 import Utilidades.SetImageLabel;
@@ -6,11 +5,15 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.WindowConstants;
 
-
-
+/**
+ * La clase `RRHH` representa la ventana que visualizan los administrativos de
+ * recursos humanos en la que pueden registrar funcionarios.
+ */
 public class RRHH extends javax.swing.JFrame {
 
-    
+    /**
+     * Constructor que inicializa los componentes de la ventana
+     */
     public RRHH() {
         initComponents();
         this.setLocationRelativeTo(this);
@@ -23,15 +26,14 @@ public class RRHH extends javax.swing.JFrame {
         SetImageLabel.setImageLabel(labelFuncWomen, "src\\main\\java\\images\\womenAdmin.png");
         SetImageLabel.setImageLabel(labelDocMen, "src\\main\\java\\images\\regMedicos.png");
         SetImageLabel.setImageLabel(labelDocWomen, "src\\main\\java\\images\\femDoc.png");
-        
+
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
         setIconImage(miIcono);
         SetImageLabel.setImageLabel(jLabelIconito, "src\\main\\java\\images\\icon.png");
-        
+
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -143,7 +145,12 @@ public class RRHH extends javax.swing.JFrame {
         // TODO add your handling code here:
         new RegistroMedicos().setVisible(true);
     }//GEN-LAST:event_jButtonRegistrar1ActionPerformed
-
+    /**
+     * Método principal que inicia la ventana Swing.
+     *
+     * @param args Los argumentos de la línea de comandos (no se utilizan en
+     * este caso).
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

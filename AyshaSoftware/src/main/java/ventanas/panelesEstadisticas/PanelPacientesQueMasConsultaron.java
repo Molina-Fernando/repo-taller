@@ -1,24 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package ventanas.panelesEstadisticas;
 
 import Utilidades.FormatosValidos;
+import Utilidades.ManejoFecha;
 import dbController.CtrlEstadistica;
 import static java.lang.String.valueOf;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author joaqu
+ * La clase PanelPacientesQueMasConsultaron es un panel de Swing que extiende de javax.swing.JPanel.
+ * Proporciona una interfaz para visualizar los pacientes que han consultado más.
  */
 public class PanelPacientesQueMasConsultaron extends javax.swing.JPanel {
 
@@ -29,36 +24,14 @@ public class PanelPacientesQueMasConsultaron extends javax.swing.JPanel {
     String hastaT;
 
     /**
-     * Creates new form Panel2
+     * Constructor para la clase PanelPacientesQueMasConsultaron.
+     * Inicializa los componentes y establece la lista de pacientes que más consultaron.
      */
     public PanelPacientesQueMasConsultaron() {
         initComponents();
         modeloLista = new DefaultListModel<>();
         lista = new JList<>(modeloLista);
         jScrollPane1.setViewportView(lista);
-
-    }
-
-    public boolean esFechaValida(String fecha) {
-        try {
-            LocalDate localDate = LocalDate.parse(fecha, FormatosValidos.FORMATO_FECHA);
-            return true;
-        } catch (DateTimeParseException e) {
-            return false;
-        }
-    }
-
-    public boolean esFechaEnRango(String fechaStr) {
-        try {
-            LocalDate fecha = LocalDate.parse(fechaStr, FormatosValidos.FORMATO_FECHA);
-
-            LocalDate hoy = LocalDate.now();
-            LocalDate fechaMinima = LocalDate.of(2000, 1, 1);
-
-            return !fecha.isAfter(hoy) && !fecha.isBefore(fechaMinima);
-        } catch (DateTimeParseException e) {
-            return false;
-        }
     }
 
     /**
@@ -230,7 +203,12 @@ public class PanelPacientesQueMasConsultaron extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_desdeActionPerformed
 
-
+    /**
+     * Este método se ejecuta cuando se hace clic en el botón de carga del médico por fecha.
+     * Verifica si las fechas ingresadas son válidas y están en el rango permitido, y luego actualiza la lista de pacientes que más consultaron.
+     * Si las fechas no son válidas o no están en el rango permitido, muestra un mensaje de error.
+     * @param evt El evento de acción que ocurrió (en este caso, hacer clic en el botón).
+     */
     private void botonCargaMedicoFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCargaMedicoFechaActionPerformed
 
         try {
@@ -239,40 +217,34 @@ public class PanelPacientesQueMasConsultaron extends javax.swing.JPanel {
             hastaT = hasta.getText().trim();
             if (desdeT.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "¡Error! El campo 'desde' está vacío");
-            } else if (!esFechaValida(desdeT)) {
+            } else if (!ManejoFecha.esFechaValida(desdeT)) {
                 JOptionPane.showMessageDialog(null, "¡Error! La fecha en el campo 'desde' no es válida");
-            } else if (!esFechaEnRango(desdeT)) {
+            } else if (!ManejoFecha.esFechaEnRango(desdeT)) {
                 JOptionPane.showMessageDialog(null, "¡Error! La fecha en el campo 'desde' no está en el rango permitido");
             }
-
             if (hastaT.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "¡Error! El campo 'hasta' está vacío");
-            } else if (!esFechaValida(hastaT)) {
+            } else if (!ManejoFecha.esFechaValida(hastaT)) {
                 JOptionPane.showMessageDialog(null, "¡Error! La fecha en el campo 'hasta' no es válida");
-            } else if (!esFechaEnRango(hastaT)) {
+            } else if (!ManejoFecha.esFechaEnRango(hastaT)) {
                 JOptionPane.showMessageDialog(null, "¡Error! La fecha en el campo 'hasta' no está en el rango permitido");
             }
-
-            if (!desdeT.isEmpty() && !hastaT.isEmpty() && esFechaValida(desdeT) && esFechaValida(hastaT) && esFechaEnRango(desdeT) && esFechaEnRango(hastaT)) {
+            if (!desdeT.isEmpty() && !hastaT.isEmpty() && ManejoFecha.esFechaValida(desdeT) && ManejoFecha.esFechaValida(hastaT) && ManejoFecha.esFechaEnRango(desdeT) && ManejoFecha.esFechaEnRango(hastaT)) {
                 LocalDate desdeFecha = LocalDate.parse(desdeT, FormatosValidos.FORMATO_FECHA);
                 LocalDate hastaFecha = LocalDate.parse(hastaT, FormatosValidos.FORMATO_FECHA);
                 if (desdeFecha.isAfter(hastaFecha)) {
                     JOptionPane.showMessageDialog(null, "¡Error! La fecha 'desde' es posterior a la fecha 'hasta'");
                 }
                 pacientesMasConsultados = ctrlEst.pacienteConMasConsultas(desdeT, hastaT);
-
                 for (String paciente : pacientesMasConsultados) {
-
                     modeloLista.addElement(paciente);
                     lista.updateUI();
                 }
                 String consultas = valueOf(ctrlEst.getCantidadDeConsultas());
                 labelCantidadConsultas.setText("Cantidad de consultas: " + consultas);
             }
-
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, "No se seleccionó ninguna opción", "Error", JOptionPane.ERROR_MESSAGE);
-
         }
     }//GEN-LAST:event_botonCargaMedicoFechaActionPerformed
 

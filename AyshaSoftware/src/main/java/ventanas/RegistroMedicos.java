@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
 import clases.Funcionario;
 import javax.swing.WindowConstants;
 
-
 /**
  * La ventana ´RegistroMedicos´ se encarga de registrar a los médicos,
  * relacionandose con el controlador ´CtrlResgistroMedicos´.
@@ -44,8 +43,11 @@ public class RegistroMedicos extends javax.swing.JFrame {
 
     CtrlRegistroMedicos ctrlRegistroMedicos = new CtrlRegistroMedicos();
 
+    /**
+     * Constructor que inicializa los componentes de la ventana
+     */
     public RegistroMedicos() {
-        
+
         initComponents();
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setVisible(true);
@@ -415,7 +417,10 @@ public class RegistroMedicos extends javax.swing.JFrame {
     }//GEN-LAST:event_comboBoxEspecialidadesActionPerformed
 
     /**
-     * @param args the command line arguments
+     * Método principal que inicia la ventana Swing.
+     *
+     * @param args Los argumentos de la línea de comandos (no se utilizan en
+     * este caso).
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

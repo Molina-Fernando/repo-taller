@@ -1,8 +1,5 @@
 package clases;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-
 /**
  * La clase Administrativo representa a un funcionario que trabaja en tareas
  * administrativas.
