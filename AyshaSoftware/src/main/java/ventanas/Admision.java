@@ -1,15 +1,27 @@
 package ventanas;
 
+import Utilidades.SetImageLabel;
 import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.WindowConstants;
 
+/**
+ * La ventana ´Admision´ la pueden acceder los encargados del sector de Admisión
+ * y puede acceder a la ventana donde se registran los pacientes que van
+ * entrando al hospital.
+ *
+ */
 public class Admision extends javax.swing.JFrame {
 
+    /**
+     * Constructor que inicializa los componentes de la ventana
+     */
     public Admision() {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
         setIconImage(miIcono);
         SetImageLabel.setImageLabel(LabelIconito, "src\\main\\java\\images\\icon.png");
@@ -71,10 +83,21 @@ public class Admision extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Botón que abre la ventana ´RegistroPaciente´.
+     *
+     * @param evt
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         new RegistroPaciente().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * Método principal que inicia la ventana Swing.
+     *
+     * @param args Los argumentos de la línea de comandos (no se utilizan en
+     * este caso).
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

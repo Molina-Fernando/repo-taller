@@ -5,13 +5,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-//import clases.AdminSistemas;
-//import clases.Administrativo;
-//import clases.Medico;
+
 import clases.Funcionario;
 import java.util.ArrayList;
 
+/**
+ * La clase `CtrlRegistroFuncionarios` se encarga de gestionar el registro de funcionarios
+ * en la base de datos, así como de proporcionar opciones para cargar datos relacionados con
+ * sectores de la organización.
+ */
+
 public class CtrlRegistroFuncionarios {
+    
 
     private String matricula;
 
@@ -19,28 +24,17 @@ public class CtrlRegistroFuncionarios {
         this.matricula = matricula;
     }
 
+    /**
+     * Registra un nuevo funcionario en la base de datos.
+     *
+     * @param func objeto funcionario
+     * @param sector sector del funcionario
+     */
+    
     public void registrarFuncionario(
-            String nombre,
-            String apellido,
-            String fechaFormateada,
-            String domicilio,
-            String dni,
-            String telFijo,
-            String telCelular,
-            String estadoCivil,
-            String correoElectronico,
-            String sector
+           Funcionario func, String sector
     ) {
-        Funcionario func = new Funcionario();
-        func.setNombre(nombre);
-        func.setApellido(apellido);
-        func.setFecNacimiento(fechaFormateada);
-        func.setDomicilio(domicilio);
-        func.setDni(dni);
-        func.setTelFijo(telFijo);
-        func.setTelCelular(telCelular);
-        func.setEstadoCivil(estadoCivil);
-        func.setCorreoElectronico(correoElectronico);
+ 
 
         Connection conex = null;
         try {
@@ -49,7 +43,7 @@ public class CtrlRegistroFuncionarios {
             String query = "SELECT * FROM Funcionario WHERE DNI = ?";
 
             PreparedStatement psq = conex.prepareStatement(query);
-            psq.setString(1, dni);
+            psq.setString(1, func.getDni());
 
             ResultSet rs = psq.executeQuery();
 
@@ -90,7 +84,13 @@ public class CtrlRegistroFuncionarios {
             }
         }
     }
-
+    
+     /**
+     * Obtiene una lista de opciones de sectores desde la base de datos.
+     *
+     * @return Una lista de nombres de sectores.
+     */
+    
       public ArrayList cargaComboBoxSectores() {
         
         ArrayList<String> arrayOpciones = new ArrayList<>();

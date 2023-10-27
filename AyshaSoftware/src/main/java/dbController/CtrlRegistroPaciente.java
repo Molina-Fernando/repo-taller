@@ -16,8 +16,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import ventanas.RegistroPaciente;
 
-public class CtrlRegistroPaciente {
+/**
+ * La clase `CtrlRegistroPaciente` se encarga de registrar pacientes en la base de datos,
+ * buscar pacientes y gestionar su información.
+ */
 
+public class CtrlRegistroPaciente {
+    /**
+     * Carga en la base de datos a los pacientes y los manda tambien a la lista
+     * para realizar el triage.
+     *
+     * @param pac : Objeto de tipo Paciente.
+     */
     public static void registrarPacientes(Paciente pac) {
 
         Connection conex = null;
@@ -64,6 +74,23 @@ public class CtrlRegistroPaciente {
     }
 
     private static final Paciente paciente = new Paciente();
+    /**
+     * Busca un paciente en la base de datos por su DNI y actualiza los campos de la ventana
+     * con la información del paciente si este existe.
+     *
+     * @param dni             DNI del paciente a buscar.
+     * @param botonRegistro   Botón para registro del paciente si no existe.
+     * @param botonLista      Botón para mostrar la lista de espera si existe.
+     * @param Textnombre      Campo de texto para el nombre del paciente.
+     * @param Textapellido     Campo de texto para el apellido del paciente.
+     * @param Textdomicilio    Campo de texto para el domicilio del paciente.
+     * @param TexttelFijo      Campo de texto para el número de teléfono fijo del paciente.
+     * @param TexttelCel       Campo de texto para el número de teléfono celular del paciente.
+     * @param TextestadoCivil  Campo de texto para el estado civil del paciente.
+     * @param Textmail        Campo de texto para el correo electrónico del paciente.
+     * @param TextpersonaContacto Campo de texto para la persona de contacto del paciente.
+     * @param TextfecNac      Campo de fecha de nacimiento del paciente.
+     */
 
     public static void buscarPaciente(String dni, JButton botonRegistro, JButton botonLista, JTextField Textnombre, JTextField Textapellido, JTextField Textdomicilio, JTextField TexttelFijo, JTextField TexttelCel, JTextField TextestadoCivil, JTextField Textmail, JTextField TextpersonaContacto, JDateChooser TextfecNac) {
 
@@ -113,8 +140,7 @@ public class CtrlRegistroPaciente {
             }
 
         } catch (SQLException e) {
-            System.out.println("EXCEP SQL" + e);
-            JOptionPane.showMessageDialog(null, "¡Error! Contacte al administrador");
+            JOptionPane.showMessageDialog(null, "Paciente ya en espera del Triage");
         } catch (ParseException ex) {
             Logger.getLogger(RegistroPaciente.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

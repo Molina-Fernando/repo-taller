@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package dbController;
 
 import java.sql.Connection;
@@ -11,12 +8,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
+
 /**
- *
- * @author Jeremías Simian
+ * La clase ´CtrlListaTriage´ se encarga de pasar datos de pacientes,
+ * eliminarlos de su respectiva tabla de la base de datos y a su vez cargarlo en
+ * otra tabla.
  */
 public class CtrlListaTriage {
 
+    /**
+     * LLena una lista de pacientes con los datos que hay en la base de datos.
+     *
+     * @return ArrayList con vectores de tipo Object.
+     */
     public ArrayList<Object[]> tablaLista() {
         ArrayList<Object[]> arrayListEspera = new ArrayList<>();
         Connection conex = null;
@@ -54,6 +58,13 @@ public class CtrlListaTriage {
         return arrayListEspera;
     }
 
+    /**
+     * Elimina el paciente de la lista del triage y completa con sus datos la
+     * lista de espera de sala mediante la base de datos.
+     *
+     * @param dni se pasa el DNI del paciente, para poder odentrificarlo en la
+     * tabla de la base de datos.
+     */
     public void eliminarPacienteEsperaTriage(int dni) {
 
         String dniInsert = Integer.toString(dni);
@@ -69,18 +80,9 @@ public class CtrlListaTriage {
             ResultSet rs = psq.executeQuery();
 
             if (rs.next()) {
-                String insertTriages = "INSERT INTO Triage(NombrePac, ApellidoPac, DNI) VALUES(?,?,?);";
-                PreparedStatement psi = conex.prepareStatement(insertTriages);
-
-                psi.setString(1, rs.getString("Nombre"));
-                psi.setString(2, rs.getString("Apellido"));
-                psi.setString(3, dniInsert);
-
-                psi.executeUpdate();
 
                 String insertListaEspera = "INSERT INTO ListaEsperaSala(NombrePac, DNI) VALUES(?,?);";
                 PreparedStatement psi1 = conex.prepareStatement(insertListaEspera);
-
                 psi1.setString(1, rs.getString("Nombre"));
                 psi1.setString(2, dniInsert);
 

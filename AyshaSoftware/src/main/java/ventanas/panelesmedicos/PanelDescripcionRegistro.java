@@ -1,32 +1,40 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package ventanas.panelesmedicos;
 
+
 import clases.Registro;
+import dbController.CtrlMedicoSala;
 import java.time.format.DateTimeFormatter;
 
 /**
- *
- * @author joaqu
+ * La clase PanelDescripcionRegistro es un panel de Swing que extiende de javax.swing.JPanel.
+ * Proporciona una interfaz para la descripción del registro.
  */
 public class PanelDescripcionRegistro extends javax.swing.JPanel {
-
+    CtrlMedicoSala ctrlMedSal;
     /**
-     * Creates new form PanelDescripcionRegistro
-     * @param reg
+     * Constructor para la clase PanelDescripcionRegistro.
+     * Inicializa los componentes y establece las variables de datos.
+     * @param reg El registro que se va a describir.
      */
     public PanelDescripcionRegistro(Registro reg) {
         initComponents();
-        setDatosVariables(reg);
+        ctrlMedSal = new CtrlMedicoSala();
+        setDatosVariables(reg);     
     }
+    
+    /**
+     * Este método establece las variables de datos para el registro.
+     * Formatea y muestra la fecha, hora, diagnóstico, lugar y nombre del médico del registro.
+     * @param reg El registro cuyos datos se van a establecer.
+     */
     private void setDatosVariables(Registro reg){
-
+        
         date.setText(reg.getFecha().format(DateTimeFormatter.ofPattern("dd'/'MM'/'yyyy")));
         hour.setText(reg.getHora().format(DateTimeFormatter.ofPattern("HH':'mm':'ss")));
         diagnosis.setText(reg.getDiagnostico());
         place.setText(String.valueOf(reg.getLugares()));
+        nombreMedico.setText(String.valueOf(ctrlMedSal.nombreCompletoMedico(reg.getMedico())));
     }
 
 
@@ -48,72 +56,41 @@ public class PanelDescripcionRegistro extends javax.swing.JPanel {
         hour = new javax.swing.JLabel();
         place = new javax.swing.JLabel();
         diagnosis = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        nombreMedico = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Fecha:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, -1, -1));
 
         jLabel2.setText("Hora:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 14, -1, -1));
 
         jLabel3.setText("Lugar:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 48, -1, -1));
 
         jLabel4.setText("Diagnostico:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 134, -1, -1));
 
         date.setText("{day}/{month}/{year}");
+        jPanel1.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, -1, -1));
 
         hour.setText("{hour}:{min}:{year}");
+        jPanel1.add(hour, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 14, -1, -1));
 
         place.setText("{lugar}");
+        jPanel1.add(place, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 48, 778, -1));
 
         diagnosis.setText("{diagnostico}");
+        jPanel1.add(diagnosis, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 107, 880, 70));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(place, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hour)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                                .addComponent(jLabel1)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(date)
-                        .addGap(30, 30, 30))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(diagnosis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(hour)
-                    .addComponent(jLabel1)
-                    .addComponent(date))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(place))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(diagnosis, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
-                    .addComponent(jLabel4))
-                .addContainerGap())
-        );
+        jLabel5.setText("Medico/a: ");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 79, -1, -1));
+
+        nombreMedico.setText("{nombreCompletoMedico}");
+        jPanel1.add(nombreMedico, new org.netbeans.lib.awtextra.AbsoluteConstraints(99, 79, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -136,7 +113,9 @@ public class PanelDescripcionRegistro extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel nombreMedico;
     private javax.swing.JLabel place;
     // End of variables declaration//GEN-END:variables
 }

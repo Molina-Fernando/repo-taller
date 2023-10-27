@@ -1,23 +1,35 @@
 package ventanas;
 
+import Utilidades.SetImageLabel;
 import dbController.CtrlRegistroFuncionarios;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import clases.Funcionario;
 
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
+/**
+ * Esta clase representa la ventana de registro de funcionarios en el sistema.
+ * Permite registrar nuevos funcionarios en la base de datos.
+ */
 public class RegistroFuncionarios extends javax.swing.JFrame {
-    
+
     CtrlRegistroFuncionarios ctrlRegistroFuncionarios = new CtrlRegistroFuncionarios();
     private String[] elementosBox = new String[5];
-    
+
+    /**
+     * Constructor de la clase RegistroFuncionarios. Inicializa la ventana y
+     * carga la lista de sectores disponibles en un cuadro de selección.
+     */
     public RegistroFuncionarios() {
         initComponents();
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setVisible(true);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -27,16 +39,20 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
         SetImageLabel.setImageLabel(jLabel12, "src\\main\\java\\images\\regFunc.png");
         setIconImage(miIcono);
-        
+
         cargarBoxSectores(ctrlRegistroFuncionarios.cargaComboBoxSectores());
     }
-    
-   private void cargarBoxSectores(ArrayList<String> arrayList){
-        for(String elemento : arrayList){
+
+    /**
+     * Carga la lista de sectores en un combo box.
+     *
+     * @param arrayList Lista de sectores disponibles.
+     */
+    private void cargarBoxSectores(ArrayList<String> arrayList) {
+        for (String elemento : arrayList) {
             boxSector.addItem(elemento);
         }
     }
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -208,6 +224,13 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botonEditarActionPerformed
 
+    /**
+     * Acción realizada al presionar el botón "REGISTRAR". Registra un nuevo
+     * funcionario en la base de datos con la información proporcionada en los
+     * campos del formulario. Realiza validaciones de datos y muestra mensajes
+     * de error si es necesario.
+     */
+
     private void botonAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregar1ActionPerformed
         String nombre = textNombre.getText().trim();
         String apellido = textApellido.getText().trim();
@@ -239,7 +262,6 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
                 && !estadoCivil.isEmpty()
                 && !correoElectronico.isEmpty()
                 && !sector.isEmpty()) {
-            
 
             if (matcherMail.matches()) {
 
@@ -247,9 +269,8 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
 
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                     String fechaFormateada = formato.format(fechaNacimiento);
-
-                    ctrlRegistroFuncionarios.registrarFuncionario(nombre, apellido, fechaFormateada, domicilio, dni, telFijo, telCelular, estadoCivil, correoElectronico, sector);
-                    
+                    Funcionario funcionario = new Funcionario(nombre, apellido, fechaFormateada, domicilio, dni, telFijo, telCelular, correoElectronico, estadoCivil);
+                    ctrlRegistroFuncionarios.registrarFuncionario(funcionario, sector);
 
                     textNombre.setText("");
                     textApellido.setText("");
@@ -280,20 +301,12 @@ public class RegistroFuncionarios extends javax.swing.JFrame {
     private void textNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textNombreActionPerformed
-    /*   private void buscarFuncionario(String dni) {
-        String query = "SELECT * FROM Funcionarios WHERE DNI = ?";
-        Connection conex = null;
-        try {
-            conex = cn.conectar();
-            PreparedStatement psq = conex.prepareStatement(query);
-            psq.setString(1, dni);
-            ResultSet rs = psq.executeQuery();
-
-        } catch (Exception e) {
-
-        }
-    }*/
-
+    /**
+     * Método principal que inicia la ventana Swing.
+     *
+     * @param args Los argumentos de la línea de comandos (no se utilizan en
+     * este caso).
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

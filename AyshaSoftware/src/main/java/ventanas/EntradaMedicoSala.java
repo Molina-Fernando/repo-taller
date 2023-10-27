@@ -1,115 +1,244 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package ventanas;
 
 import clases.Medico;
 import dbController.CtrlConsulta;
 import dbController.CtrlEntradaMedicoSala;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
-import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author joaqu
+ * La clase `EntradaMedicoSala` representa la ventana que visualizan los
+ * médicos de sala.
  */
 public class EntradaMedicoSala extends javax.swing.JFrame {
 
-    String dniUser = "26123985";//Login.user
+    String dniUser = Login.user;
     ArrayList<Object[]> listaPacientes = new ArrayList<>();
     ArrayList<Object[]> listaBoxes = new ArrayList<>();
+    ArrayList<Object[]> listaRetomados = new ArrayList<>();
+    Object[]datosPacienteMedicoBox= new Object[6];
     DefaultTableModel modelo;
     DefaultTableModel modelo2;
+    DefaultTableModel modelo3;
     CtrlEntradaMedicoSala ctrlDB = new CtrlEntradaMedicoSala();
     CtrlConsulta ctrlConsulta = new CtrlConsulta();
-    String nomDB;
-    String dniDB;
-    String numeroDB;
-    String disponibleDB;
-    public static String dniV = null;
+    public String dniV = null;
     public String disponibleV = null;
-    public static String numeroV = null;
+    public String numeroV = null;
     private Medico med;
 
     /**
-     * Creates new form EntradaMedicoSala
+     * Constructor que inicializa los componentes de la ventana
      */
     public EntradaMedicoSala() {
         initComponents();
         this.setLocationRelativeTo(null);
         setResizable(false);
+        med = ctrlDB.recuperarMedico(dniUser);
+        Toolkit miPantalla = Toolkit.getDefaultToolkit();
+        Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
+        setIconImage(miIcono);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         modelo = new DefaultTableModel();
         modelo.addColumn("Nombre");
         modelo.addColumn("DNI");
         modelo.addColumn("Color");
+        modelo.addColumn("Fecha");
+        modelo.addColumn("Hora");
+        modelo.addColumn("Motivo");
 
         actualizarTablaPacientesEnEspera();
 
         modelo2 = new DefaultTableModel();
         modelo2.addColumn("Numero");
         modelo2.addColumn("Disponibilidad");
-
+        modelo2.addColumn("Médico");
+        modelo2.addColumn("Paciente");
+        modelo2.addColumn("Motivo");
+        
         actualizarTablaBoxes();
+        
+        modelo3 = new DefaultTableModel();
+        modelo3.addColumn("Box");
+        modelo3.addColumn("Nombre");
+        modelo3.addColumn("DNI");
+        modelo3.addColumn("Color");
+        modelo3.addColumn("Motivo");
+        
+        actualizarTablaPacientesEnSala();
 
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                cambiarDisponibilidad(numeroV);
-                dispose();
-            }
-        });
+
+//        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+//        addWindowListener(new WindowAdapter() {
+//            @Override
+//            public void windowClosing(WindowEvent e) {
+//                cambiarDisponibilidad(numeroV);
+//                dispose();
+//            }
+//        });
+    }
+    
+    
+    /**
+     * Este método devuelve el objeto Medico asociado con la instancia actual.
+     *
+     * @return El objeto Medico asociado con la instancia actual.
+     */
+    public Medico getMed(){
+        return this.med;
     }
 
+    /**
+     * Este método se encarga de actualizar la tabla de pacientes en espera luego del triage.
+     * 
+     * El método realiza las siguientes operaciones:
+     * 1. Reinicia el modelo de la tabla.
+     * 2. Crea una nueva tabla y establece su modelo.
+     * 3. Recupera la lista de pacientes en espera de la base de datos.
+     * 4. Añade cada paciente en la lista al modelo de la tabla.
+     */
     private void actualizarTablaPacientesEnEspera() {
         modelo.setRowCount(0);
         tablaPacientes = new javax.swing.JTable();
         tablaPacientes.setModel(modelo);
-        listaPacientes = ctrlDB.getTablaTriages(dniDB, nomDB);
+        listaPacientes = ctrlDB.getTablaTriages();
 
         tablaPacientes = new JTable(modelo);
         jScrollPane1.setViewportView(tablaPacientes);
 
         for (Object[] vector : listaPacientes) {
 
-            dniDB = vector[1].toString();
-            nomDB = vector[0].toString();
-
             modelo.addRow(vector);
             tablaPacientes.setModel(modelo);
         }
     }
 
+    /**
+     * Este método se encarga de actualizar la tabla de boxes médicos.
+     * 
+     * El método realiza las siguientes operaciones:
+     * 1. Reinicia el modelo de la tabla.
+     * 2. Crea una nueva tabla y establece su modelo.
+     * 3. Recupera la lista de boxes de la base de datos.
+     * 4. Modifica los datos recuperados para incluir el nombre completo del médico.
+     * 5. Añade cada box en la lista modificada al modelo de la tabla.
+     */
     public void actualizarTablaBoxes() {
         modelo2.setRowCount(0);
         tablaBoxes = new javax.swing.JTable();
         tablaBoxes.setModel(modelo2);
-        listaBoxes = ctrlDB.getTablaBoxes(numeroDB, disponibleDB);
-
-        tablaBoxes = new JTable(modelo2);
-        jScrollPane2.setViewportView(tablaBoxes);
-
+        listaBoxes = ctrlDB.getTablaBoxes();
+        // Crear un nuevo ArrayList para almacenar los datos modificados
+        ArrayList<Object[]> listaModificada = new ArrayList<>();
         for (Object[] vector : listaBoxes) {
-            numeroDB = vector[1].toString();
-            disponibleDB = vector[0].toString();
+            // Crear una copia del vector para no alterar el original
+            Object[] vectorModificado = vector.clone();
+            if(!vectorModificado[2].equals(" ")){
+                // Obtener el nombre completo del médico y almacenarlo en el vector modificado
+                vectorModificado[2] = ctrlDB.nombreCompletoMedico(Integer.parseInt((String) vectorModificado[2]));
+            }
+            // Añadir el vector modificado a la lista modificada
+            listaModificada.add(vectorModificado);
+        }
+        // Usar la lista modificada para actualizar la tabla
+        for (Object[] vector : listaModificada) {
             modelo2.addRow(vector);
             tablaBoxes.setModel(modelo2);
         }
+        tablaBoxes = new JTable(modelo2);
+        jScrollPane2.setViewportView(tablaBoxes);
+    }
+    
+    
+    /**
+     * Este método se encarga de actualizar la tabla de pacientes en la sala.
+     * 
+     * El método realiza las siguientes operaciones:
+     * 1. Reinicia el modelo de la tabla.
+     * 2. Crea una nueva tabla y establece su modelo.
+     * 3. Recupera la lista de pacientes en la sala del médico actual de la base de datos.
+     * 4. Añade cada paciente en la lista al modelo de la tabla.
+     */
+    public void actualizarTablaPacientesEnSala() {
+        modelo3.setRowCount(0);
+        tablaRetomados = new javax.swing.JTable();
+        tablaRetomados.setModel(modelo3);
+        listaRetomados = ctrlDB.getTablaPacientesEnSala(med.getNumMatricula());
+
+        tablaRetomados = new JTable(modelo3);
+        jScrollPane3.setViewportView(tablaRetomados);
+        if(listaRetomados!=null){
+            for (Object[] vector : listaRetomados) {
+            modelo3.addRow(vector);
+            tablaRetomados.setModel(modelo3);
+            }
+        }
+        
     }
 
-    public void cambiarDisponibilidad(String numeroV) {
-        ctrlDB.alternarDisponibilidad(numeroV);
+    /**
+     * Este método se encarga de ocupar un box médico con un paciente.
+     *
+     * @param numeroV El número del box a ocupar.
+     * @param matricula La matrícula del médico que atenderá al paciente.
+     * @param nombrePac El nombre del paciente que ocupará el box.
+     * @param motivo El motivo de la consulta del paciente.
+     *
+     * El método realiza las siguientes operaciones:
+     * 1. Ocupa el box en la base de datos con los detalles proporcionados.
+     * 2. Actualiza la tabla de boxes para reflejar el cambio.
+     */
+    public void ocuparBox(String numeroV, String matricula, String nombrePac, String motivo) {
+        ctrlDB.ocuparBox(numeroV,matricula,nombrePac,motivo);
         actualizarTablaBoxes();
     }
-
+    
+    /**
+     * Este método se encarga de desocupar un box médico.
+     *
+     * @param numeroV El número del box a desocupar.
+     *
+     * El método realiza las siguientes operaciones:
+     * 1. Desocupa el box en la base de datos.
+     * 2. Actualiza la tabla de boxes para reflejar el cambio.
+     */
+    public void desocuparBox(String numeroV) {
+        ctrlDB.desocuparBox(numeroV);
+        actualizarTablaBoxes();
+    }
+    
+    /**
+     * Este método se encarga de eliminar una fila de la tabla de triage.
+     *
+     * @param dniV El DNI del paciente a eliminar.
+     *
+     * El método realiza las siguientes operaciones:
+     * 1. Elimina el paciente con el DNI proporcionado de la base de datos.
+     * 2. Actualiza la tabla de pacientes en espera para reflejar el cambio.
+     */
     private void eliminarFilaTriage(String dniV) {
         ctrlDB.eliminarPaciente(dniV);
         actualizarTablaPacientesEnEspera();
+    }
+    
+    /**
+     * Este método se encarga de eliminar los datos de un paciente que estuviera en espera en un box.
+     *
+     * @param dniV El DNI del paciente a eliminar.
+     *
+     * El método realiza las siguientes operaciones:
+     * 1. Elimina el paciente con el DNI proporcionado de la base de datos.
+     * 2. Actualiza la tabla de pacientes en la sala para reflejar el cambio.
+     */
+    private void eliminarPacienteEnBox(String dniV) {
+        ctrlDB.eliminarPacienteEnBox(dniV);
+        actualizarTablaPacientesEnSala();
     }
 
     /**
@@ -131,6 +260,10 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaBoxes = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablaRetomados = new javax.swing.JTable();
+        retomarConsulta = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Elección Pacientes");
@@ -142,7 +275,12 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
         jPanel1.setMaximumSize(new java.awt.Dimension(410, 470));
         jPanel1.setMinimumSize(new java.awt.Dimension(410, 470));
         jPanel1.setPreferredSize(new java.awt.Dimension(410, 470));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1000, 6));
 
+        SeleccionPaciente.setBackground(new java.awt.Color(0, 0, 153));
+        SeleccionPaciente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        SeleccionPaciente.setForeground(new java.awt.Color(255, 255, 255));
         SeleccionPaciente.setText("Asignar box");
         SeleccionPaciente.setBorder(null);
         SeleccionPaciente.addActionListener(new java.awt.event.ActionListener() {
@@ -150,19 +288,23 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
                 SeleccionPacienteActionPerformed(evt);
             }
         });
+        jPanel1.add(SeleccionPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 440, 310, 30));
 
+        jLabel1.setBackground(new java.awt.Color(0, 0, 153));
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 153));
         jLabel1.setText("Pacientes");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, -1, -1));
 
         tablaPacientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "DNI", "Color"
+                "Nombre", "DNI", "Color", "Fecha", "Hora", "Motivo"
             }
         ));
         tablaPacientes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -172,18 +314,24 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaPacientes);
 
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 52, 1000, 147));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 228, 1000, -1));
+
+        jLabel2.setBackground(new java.awt.Color(0, 0, 153));
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 153));
         jLabel2.setText("Boxes");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, -1, -1));
 
         tablaBoxes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Numero", "Disponibilidad"
+                "Numero", "Disponibilidad", "Médico", "Paciente", "Motivo"
             }
         ));
         tablaBoxes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -193,88 +341,110 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tablaBoxes);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(170, 170, 170)
-                .addComponent(jLabel1))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(120, 120, 120)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(180, 180, 180)
-                .addComponent(jLabel2))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(SeleccionPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel1)
-                .addGap(13, 13, 13)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jLabel2)
-                .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52)
-                .addComponent(SeleccionPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 243, 1000, 188));
+
+        tablaRetomados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Box", "Nombre", "DNI", "Color", "Motivo"
+            }
+        ));
+        tablaRetomados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaRetomadosMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tablaRetomados);
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 522, 1000, 110));
+
+        retomarConsulta.setBackground(new java.awt.Color(0, 0, 153));
+        retomarConsulta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        retomarConsulta.setForeground(new java.awt.Color(255, 255, 255));
+        retomarConsulta.setText("Retomar consulta");
+        retomarConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                retomarConsultaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(retomarConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 640, 310, -1));
+
+        jLabel3.setBackground(new java.awt.Color(0, 0, 153));
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel3.setText("Pacientes en box");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 490, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Este método se encarga de seleccionar un paciente y un box médico para una consulta.
+     *
+     * @param evt Evento de acción que desencadena este método.
+     *
+     * El método realiza las siguientes operaciones:
+     * 1. Obtiene los números de fila seleccionados en las tablas de pacientes y boxes.
+     * 2. Si no se selecciona ninguna fila en alguna de las tablas, muestra un mensaje de error y termina la ejecución.
+     * 3. Recupera los detalles del paciente y del box de las tablas.
+     * 4. Si el box seleccionado no está disponible, muestra un mensaje de error y termina la ejecución.
+     * 5. Recupera los detalles del médico de la base de datos.
+     * 6. Almacena los detalles del paciente, del médico y del box en un array.
+     * 7. Ocupa el box con los detalles recuperados.
+     * 8. Elimina la fila correspondiente al paciente de la tabla de triage.
+     * 9. Crea e inicia una nueva instancia de MedicoSala.
+     */
     private void SeleccionPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeleccionPacienteActionPerformed
+                        
         int numFila = tablaPacientes.getSelectedRow();
         int numFila2 = tablaBoxes.getSelectedRow();
-        if (numFila != -1 && numFila2 != -1) {
-            EntradaMedicoSala.dniV = (String) tablaPacientes.getValueAt(numFila, 1);
-            
-            this.disponibleV = (String) tablaBoxes.getValueAt(numFila2, 1);
-            
-            EntradaMedicoSala.numeroV = (String) tablaBoxes.getValueAt(numFila2, 0);
-            if (disponibleV.equals("Disponible")) {
-                cambiarDisponibilidad(numeroV);
-                eliminarFilaTriage(EntradaMedicoSala.dniV);
-                MedicoSala m = new MedicoSala(this);
-                m.setVisible(true);
-                med = ctrlDB.recuperarMedico(dniUser);
-                ctrlConsulta.terceraCarga(med.getApellido(), med.getNumMatricula(), dniV);
-                
-                EntradaMedicoSala.dniV = null;
-            }
-        }  
+        if (numFila == -1) {
+            JOptionPane.showMessageDialog(null, "¡Error! No se seleccionó ningún paciente.");
+            return;
+        }
+        if (numFila2 == -1) {
+            JOptionPane.showMessageDialog(null, "¡Error! No se seleccionó ningún box.");
+            return;
+        }
+        String nombrePaciente =(String) tablaPacientes.getValueAt(numFila, 0);
+        String motivoPaciente =(String) tablaPacientes.getValueAt(numFila, 5);
+        this.dniV=(String) tablaPacientes.getValueAt(numFila, 1);      
+        this.disponibleV = (String) tablaBoxes.getValueAt(numFila2, 1);
+        this.numeroV = (String) tablaBoxes.getValueAt(numFila2, 0);
+        if (!disponibleV.equals("Disponible")) {
+            JOptionPane.showMessageDialog(null, "¡Error! El box seleccionado no está disponible.");
+            return;
+        }
+       
+        //Tengo que hacer que esto al menos se guarde en la base de datos de forma optima
+        datosPacienteMedicoBox[0]=tablaBoxes.getValueAt(numFila2, 0); //Número del Box
+        datosPacienteMedicoBox[1]=tablaPacientes.getValueAt(numFila, 0); //Nombre del Paciente
+        datosPacienteMedicoBox[2]=tablaPacientes.getValueAt(numFila, 1); //DNI
+        datosPacienteMedicoBox[3]=tablaPacientes.getValueAt(numFila, 2); //Color del triage
+        datosPacienteMedicoBox[4]=tablaPacientes.getValueAt(numFila, 5); //Motivo de la consulta
+        datosPacienteMedicoBox[5]=med.getNumMatricula(); // Matricula del médico
+        ocuparBox(numeroV,String.valueOf(med.getNumMatricula()),nombrePaciente,motivoPaciente);
+        eliminarFilaTriage(dniV);
+        MedicoSala m = new MedicoSala(this);
+        m.setVisible(true);
+        ctrlConsulta.terceraCarga(med.getApellido(), med.getNumMatricula(), dniV);
+        dniV = null;
     }//GEN-LAST:event_SeleccionPacienteActionPerformed
 
     private void tablaPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPacientesMouseClicked
@@ -285,8 +455,57 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tablaBoxesMouseClicked
 
+    private void tablaRetomadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaRetomadosMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tablaRetomadosMouseClicked
+
+    
     /**
-     * @param args the command line arguments
+     * Este método se encarga de retomar una consulta médica seleccionada por el usuario.
+     * 
+     * @param evt Evento de acción que desencadena este método.
+     * 
+     * El método realiza las siguientes operaciones:
+     * 1. Obtiene el número de fila seleccionado en la tabla de pacientes.
+     * 2. Si no se selecciona ninguna fila, muestra un mensaje de error y termina la ejecución.
+     * 3. Recupera los detalles del paciente y la consulta de la tabla.
+     * 4. Recupera los detalles del médico de la base de datos.
+     * 5. Ocupa un box médico con los detalles recuperados.
+     * 6. Elimina la fila correspondiente al paciente de la tabla de triage.
+     * 7. Crea e inicia una nueva instancia de MedicoSala.
+     */
+    private void retomarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retomarConsultaActionPerformed
+        int numFila = tablaRetomados.getSelectedRow();
+        if (numFila == -1) {
+            JOptionPane.showMessageDialog(null, "¡Error! No se seleccionó ningún paciente.");
+            return;
+        }
+        this.numeroV = (String) tablaRetomados.getValueAt(numFila, 0);
+        String nombrePaciente =(String) tablaRetomados.getValueAt(numFila, 1);
+        this.dniV = (String) tablaRetomados.getValueAt(numFila, 2);
+        String motivoPaciente =(String) tablaRetomados.getValueAt(numFila, 4); 
+        
+        datosPacienteMedicoBox[0]=tablaRetomados.getValueAt(numFila, 0);//Box
+        datosPacienteMedicoBox[1]=tablaRetomados.getValueAt(numFila, 1);//Nombre del paciente
+        datosPacienteMedicoBox[2]=tablaRetomados.getValueAt(numFila, 2);//DNI
+        datosPacienteMedicoBox[3]=tablaRetomados.getValueAt(numFila, 3);//COLOR
+        datosPacienteMedicoBox[4]=tablaRetomados.getValueAt(numFila, 4);//Motivo
+        datosPacienteMedicoBox[5]=med.getNumMatricula(); // Matricula del médico
+        
+        ocuparBox(numeroV,String.valueOf(med.getNumMatricula()),nombrePaciente,motivoPaciente);
+        eliminarPacienteEnBox(dniV);
+        MedicoSala m = new MedicoSala(this);
+        m.setVisible(true);
+//        ctrlConsulta.terceraCarga(med.getApellido(), med.getNumMatricula(), dniV);
+
+        dniV = null;
+    }//GEN-LAST:event_retomarConsultaActionPerformed
+
+    /**
+     * Método principal que inicia la ventana Swing.
+     *
+     * @param args Los argumentos de la línea de comandos (no se utilizan en
+     * este caso).
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -325,13 +544,17 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
     private javax.swing.JButton SeleccionPaciente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JButton retomarConsulta;
     private javax.swing.JTable tablaBoxes;
     private javax.swing.JTable tablaPacientes;
+    private javax.swing.JTable tablaRetomados;
     // End of variables declaration//GEN-END:variables
 
 }

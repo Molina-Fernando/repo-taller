@@ -1,28 +1,41 @@
 package clases;
 
+/**
+ * La clase Sector representa una unidad o área dentro de una organización o
+ * instalación.
+ */
 public class Sector {
 
-    private String sector;
+    /**
+     * El nombre del sector.
+     */
+    private String nombre;
 
-    public Sector(String sector) {
-        this.sector = sector;
+    /**
+     * El identificador del sector.
+     */
+    private int id;
+
+    /**
+     * Constructor de la clase Sector que toma el nombre y el identificador del
+     * sector como argumento.
+     *
+     * @param nombre El nombre del sector.
+     * @param id El identificador del sector
+     */
+    public Sector(String nombre, int id) {
+        this.nombre = nombre;
+        this.id = id;
     }
 
-    public String getSector() {
-        return sector;
-    }
-
-    public void setSector(String sector) {
-        this.sector = sector;
-    }
-
+    /**
+     * Genera una representación de cadena del objeto Sector, incluyendo su
+     * nombre.
+     *
+     * @return Una cadena que representa el objeto Sector.
+     */
     @Override
     public String toString() {
-        return "Sector{" + "sector=" + sector + '}';
+        return "Sector{" + "sector=" + nombre + '}';
     }
-
-    
-    
 }
-
-
