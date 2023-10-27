@@ -4,9 +4,12 @@ package ventanas;
 import clases.Medico;
 import dbController.CtrlConsulta;
 import dbController.CtrlEntradaMedicoSala;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -38,6 +41,10 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         setResizable(false);
         med = ctrlDB.recuperarMedico(dniUser);
+        Toolkit miPantalla = Toolkit.getDefaultToolkit();
+        Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
+        setIconImage(miIcono);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         modelo = new DefaultTableModel();
         modelo.addColumn("Nombre");
         modelo.addColumn("DNI");
@@ -271,6 +278,9 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1000, 6));
 
+        SeleccionPaciente.setBackground(new java.awt.Color(0, 0, 153));
+        SeleccionPaciente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        SeleccionPaciente.setForeground(new java.awt.Color(255, 255, 255));
         SeleccionPaciente.setText("Asignar box");
         SeleccionPaciente.setBorder(null);
         SeleccionPaciente.addActionListener(new java.awt.event.ActionListener() {
@@ -280,7 +290,9 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
         });
         jPanel1.add(SeleccionPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 440, 310, 30));
 
+        jLabel1.setBackground(new java.awt.Color(0, 0, 153));
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 153));
         jLabel1.setText("Pacientes");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, -1, -1));
 
@@ -305,7 +317,9 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 52, 1000, 147));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 228, 1000, -1));
 
+        jLabel2.setBackground(new java.awt.Color(0, 0, 153));
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 153));
         jLabel2.setText("Boxes");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, -1, -1));
 
@@ -349,6 +363,9 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 522, 1000, 110));
 
+        retomarConsulta.setBackground(new java.awt.Color(0, 0, 153));
+        retomarConsulta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        retomarConsulta.setForeground(new java.awt.Color(255, 255, 255));
         retomarConsulta.setText("Retomar consulta");
         retomarConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -357,7 +374,9 @@ public class EntradaMedicoSala extends javax.swing.JFrame {
         });
         jPanel1.add(retomarConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 640, 310, -1));
 
+        jLabel3.setBackground(new java.awt.Color(0, 0, 153));
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 153));
         jLabel3.setText("Pacientes en box");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 490, -1, -1));
 

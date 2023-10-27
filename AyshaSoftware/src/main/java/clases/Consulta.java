@@ -1,4 +1,4 @@
-package clases;
+              package clases;
 
 /**
  * La clase Consulta representa una consulta médica realizada a un paciente

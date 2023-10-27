@@ -56,7 +56,6 @@ public class CtrlMedicoTriage {
     }
 
     /**
-     *
      * Este método obtiene el color definitivo y el motivo de cambio si están
      * disponibles o usa el color parcial en su lugar, registra información del
      * paciente en la tabla 'Triage' con su nombre, apellido, colores de triage
@@ -127,6 +126,7 @@ public class CtrlMedicoTriage {
                 psu.setInt(5, Integer.parseInt(dniPac));
 
                 psu.executeUpdate();
+
 
                 psi.executeUpdate();
 
