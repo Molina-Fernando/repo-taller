@@ -5,6 +5,8 @@ package ventanas;
 import clases.Medico;
 import dbController.CtrlMedicoSala;
 import java.awt.BorderLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
@@ -34,6 +36,9 @@ public class MedicoSala extends javax.swing.JFrame {
      */ 
     public MedicoSala(EntradaMedicoSala frameDeBase) {
         initComponents();
+        Toolkit miPantalla = Toolkit.getDefaultToolkit();
+        Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
+        setIconImage(miIcono);
         MedicoSala.frameDeBase=frameDeBase;
         dni = frameDeBase.dniV;
         med=frameDeBase.getMed();

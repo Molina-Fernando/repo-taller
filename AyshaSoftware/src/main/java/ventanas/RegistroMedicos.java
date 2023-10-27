@@ -323,6 +323,8 @@ public class RegistroMedicos extends javax.swing.JFrame {
                         textNombre.setText("");
                         textApellido.setText("");
                         dcFechaNac.setDate(null);
+                        dcFechaTitulo.setDate(null);
+                        textUniversidad.setText("");
                         textDomicilio.setText("");
                         textDNI.setText("");
                         textFijo.setText("");

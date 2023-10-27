@@ -201,10 +201,25 @@ public class CtrlGestionFuncionarios {
         }
     }
 
+    /**
+     * Registra un nuevo funcionario en la base de datos, generando credenciales
+     * de acceso (un usuario y una contraseña) para su ingreso al sistema.
+     *
+     * @param nomDB El nombre del funcionario.
+     * @param dniDB El número de identificación del funcionario.
+     */
     public void altaFuncionario(String nomDB, int dniDB) {
         generarUsuario(nomDB, dniDB);
     }
 
+    /**
+     * Genera una contraseña basada en el nombre y el número de identificación
+     * (DNI) del funcionario.
+     *
+     * @param nombre El nombre del funcionario.
+     * @param dni El número de identificación del funcionario.
+     * @return La contraseña generada.
+     */
     private String generarContrasenia(String nombre, int dni) {
 
         int tresUltimosDigitosDni = dni % 1000;
@@ -213,6 +228,14 @@ public class CtrlGestionFuncionarios {
         return contrasenia;
     }
 
+    /**
+     * Obtiene las tres primeras letras de un nombre, o el nombre completo si
+     * tiene menos de tres letras.
+     *
+     * @param nombre El nombre del funcionario.
+     * @return Las tres primeras letras del nombre o el nombre completo si es
+     * menor de tres letras.
+     */
     private String obtenerTresPrimerasLetras(String nombre) {
         if (nombre.length() < 3) {
             return nombre;
@@ -221,6 +244,13 @@ public class CtrlGestionFuncionarios {
         }
     }
 
+    /**
+     * Genera un usuario y una contraseña para el funcionario y los inserta en
+     * la base de datos.
+     *
+     * @param nombre El nombre del funcionario.
+     * @param dni El dni del funcionario.
+     */
     private void generarUsuario(String nombre, int dni) {
         String contrasenia = generarContrasenia(nombre, dni);
         String usuario = String.valueOf(dni);

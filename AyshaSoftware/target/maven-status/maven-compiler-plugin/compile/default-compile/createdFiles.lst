@@ -13,6 +13,7 @@ ventanas\Gestor$4.class
 ventanas\MedicoTriage$18.class
 ventanas\Login$2.class
 ventanas\panelesEstadisticas\PanelPacienteEdadFecha$1.class
+ventanas\RRHH$1.class
 ventanas\Estadisticas.class
 ventanas\RegistroPaciente$1.class
 ventanas\VentanaGenerica$6.class
@@ -20,6 +21,7 @@ dbController\CtrlEntradaMedicoSala.class
 dbController\CtrlLogin.class
 ventanas\GestionFuncionarios$6.class
 ventanas\RegistroFuncionarios$2.class
+ventanas\RRHH.class
 ventanas\Estadisticas$4.class
 clases\Registro.class
 ventanas\panelesmedicos\Panel3.class
@@ -33,11 +35,13 @@ ventanas\panelesEstadisticas\PanelTriageCambiado.class
 ventanas\RegistroFuncionarios.class
 ventanas\panelesmedicos\Panel4$1.class
 ventanas\VentanaGenerica$5.class
+dbController\CtrlInfoMedico.class
 ventanas\RegistroFuncionarios$3.class
 ventanas\ListaTriage$3.class
 ventanas\panelesmedicos\Panel4.class
 ventanas\RegistroPaciente$11.class
 dbController\CtrlRegistroFuncionarios.class
+ventanas\MedicoSala$5.class
 ventanas\AdminInformatico$3.class
 ventanas\RegistroMedicos.class
 ventanas\InfoFuncionario$3.class
@@ -47,8 +51,10 @@ ventanas\EntradaMedicoSala$1.class
 ventanas\RegistroPaciente$10.class
 ventanas\Login$1.class
 ventanas\Login.class
+ventanas\InfoMedico$3.class
 ventanas\Estadisticas$3.class
 ventanas\RegistroFuncionarios$1.class
+ventanas\RRHH$2.class
 ventanas\GestionFuncionarios$4.class
 ventanas\RegistroPaciente$12.class
 ventanas\MedicoSala$4.class
@@ -65,6 +71,7 @@ ventanas\panelesEstadisticas\PanelMedicoMasAtendio.class
 ventanas\ListaTriage$2.class
 clases\Datos.class
 ventanas\MedicoTriage$11.class
+ventanas\EntradaMedicoSala$6.class
 ventanas\RegistroPaciente$5.class
 ventanas\EntradaMedicoSala$3.class
 ventanas\Admision.class
@@ -86,6 +93,7 @@ dbController\CtrlEstadistica.class
 ventanas\panelesEstadisticas\PanelPacientesQueMasConsultaron$1.class
 ventanas\MedicoTriage$12.class
 ventanas\EntradaMedicoSala$5.class
+ventanas\VentanaGenerica$1.class
 ventanas\panelesmedicos\PanelDescripcionRegistro.class
 ventanas\RegistroPaciente$13.class
 ventanas\GestionFuncionarios$1.class
@@ -96,6 +104,8 @@ ventanas\EntradaMedicoSala.class
 ventanas\panelesmedicos\Panel3$1.class
 ventanas\panelesmedicos\PanelDescripcionEstudio.class
 ventanas\panelesEstadisticas\PanelPacienteEdadFecha$4.class
+ventanas\InfoMedico$1.class
+ventanas\panelesmedicos\Panel2$3.class
 ventanas\ListaTriage$1.class
 ventanas\MedicoTriage$15.class
 ventanas\MedicoTriage$4.class
@@ -115,6 +125,7 @@ ventanas\GestionFuncionarios$3.class
 dbController\CtrlRegistroPaciente.class
 ventanas\InfoFuncionario.class
 ventanas\MedicoTriage$3.class
+ventanas\VentanaGenerica.class
 dbController\Conexion.class
 clases\Especialidad.class
 main\Principal.class
@@ -124,10 +135,13 @@ clases\Enfermero.class
 clases\Rol.class
 ventanas\panelesEstadisticas\PanelEntrada$2.class
 ventanas\AdminInformatico.class
+ventanas\InfoMedico$2.class
 ventanas\MedicoTriage$10.class
 ventanas\MedicoTriage$9.class
 ventanas\Estadisticas$2.class
+ventanas\RRHH$3.class
 ventanas\RegistroMedicos$1.class
+ventanas\panelesmedicos\Panel2$4.class
 ventanas\RegistroFuncionarios$4.class
 clases\Medico.class
 ventanas\MedicoTriage$16.class
@@ -138,6 +152,7 @@ ventanas\VentanaGenerica$4.class
 ventanas\VentanaGenerica$7.class
 clases\Administrativo.class
 ventanas\panelesEstadisticas\PanelTriageFecha$1.class
+dbController\CtrlConsulta.class
 ventanas\MedicoTriage$5.class
 Utilidades\ManejoFecha.class
 ventanas\GestionFuncionarios$7.class
@@ -174,5 +189,6 @@ clases\Estudio.class
 ventanas\panelesEstadisticas\PanelPacienteEdadFecha$5.class
 ventanas\MedicoTriage$6.class
 ventanas\panelesEstadisticas\PanelTriageFecha$2.class
+ventanas\InfoMedico.class
 ventanas\GestionFuncionarios$8.class
 ventanas\MedicoTriage$19.class
