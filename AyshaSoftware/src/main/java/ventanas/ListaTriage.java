@@ -1,5 +1,6 @@
 package ventanas;
 
+import Utilidades.SetImageLabel;
 import javax.swing.table.DefaultTableModel;
 import dbController.CtrlListaTriage;
 import java.awt.Image;
@@ -20,6 +21,9 @@ public class ListaTriage extends javax.swing.JFrame {
     ArrayList<Object[]> arrayListEspera;
     CtrlListaTriage dbCtrl = new CtrlListaTriage();
 
+    /**
+     * Constructor que inicializa los componentes de la ventana
+     */
     public ListaTriage() {
 
         initComponents();
@@ -147,9 +151,11 @@ public class ListaTriage extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_botonTriageActionPerformed
-
     /**
-     * @param args the command line arguments
+     * Método principal que inicia la ventana Swing.
+     *
+     * @param args Los argumentos de la línea de comandos (no se utilizan en
+     * este caso).
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

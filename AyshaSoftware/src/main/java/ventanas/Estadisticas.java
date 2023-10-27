@@ -18,12 +18,14 @@ import ventanas.panelesEstadisticas.PanelTriageCambiado;
 import ventanas.panelesEstadisticas.PanelTriageFecha;
 
 /**
- *
- * @author joaqu
+ * La clase Estadisticas es una ventana de Swing que extiende de javax.swing.JFrame.
+ * Proporciona una interfaz para visualizar las estadísticas de emergencias.
  */
 public class Estadisticas extends javax.swing.JFrame {
 
-    /** Creates new form Estadisticas */
+    /**
+     * Constructor que inicializa los componentes de la ventana
+     */
     public Estadisticas() {
         
         initComponents();
@@ -37,7 +39,12 @@ public class Estadisticas extends javax.swing.JFrame {
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
         setIconImage(miIcono);
     }
-    
+    /**
+     * Este método se utiliza para mostrar un panel en la interfaz de usuario.
+     * Configura el tamaño y la ubicación del panel, lo agrega al contenedor y actualiza la interfaz de usuario.
+     *
+     * @param p El panel a mostrar.
+     */
     public void showPanel(JPanel p){
         p.setSize(610,500);
         p.setLocation(0,0);
@@ -198,27 +205,57 @@ public class Estadisticas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Este método se ejecuta cuando se presiona el botón 'botonPacientesFecha'.
+     * Muestra el panel de entrada.
+     *
+     * @param evt El evento de acción.
+     */
     private void botonPacientesFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPacientesFechaActionPerformed
         showPanel(new PanelEntrada());
     }//GEN-LAST:event_botonPacientesFechaActionPerformed
-
+    /**
+     * Este método se ejecuta cuando se presiona el botón 'botonPacientesEdadFecha'.
+     * Muestra el panel de paciente por edad y fecha.
+     *
+     * @param evt El evento de acción.
+     */
     private void botonPacientesEdadFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPacientesEdadFechaActionPerformed
         showPanel(new PanelPacienteEdadFecha());
     }//GEN-LAST:event_botonPacientesEdadFechaActionPerformed
-
+    /**
+     * Este método se ejecuta cuando se presiona el botón 'pacientesMasConsultados'.
+     * Muestra el panel de los pacientes que más consultaron.
+     *
+     * @param evt El evento de acción.
+     */
     private void pacientesMasConsultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pacientesMasConsultadosActionPerformed
         showPanel(new PanelPacientesQueMasConsultaron());
     }//GEN-LAST:event_pacientesMasConsultadosActionPerformed
-
+    /**
+     * Este método se ejecuta cuando se presiona el botón 'medicoQueMasAtendio'.
+     * Muestra el panel del médico que más atendió.
+     *
+     * @param evt El evento de acción.
+     */
     private void medicoQueMasAtendioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medicoQueMasAtendioActionPerformed
         showPanel(new PanelMedicoMasAtendio());
     }//GEN-LAST:event_medicoQueMasAtendioActionPerformed
-
+    /**
+     * Este método se ejecuta cuando se presiona el botón 'triagesColorFecha'.
+     * Muestra el panel de triage por color y fecha.
+     *
+     * @param evt El evento de acción.
+     */
     private void triagesColorFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_triagesColorFechaActionPerformed
         showPanel(new PanelTriageFecha());
     }//GEN-LAST:event_triagesColorFechaActionPerformed
-
+    /**
+     * Este método se ejecuta cuando se presiona el botón 'triagesCambiados'.
+     * Muestra el panel de triages cambiados.
+     *
+     * @param evt El evento de acción.
+     */
     private void triagesCambiadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_triagesCambiadosActionPerformed
         showPanel(new PanelTriageCambiado());
     }//GEN-LAST:event_triagesCambiadosActionPerformed

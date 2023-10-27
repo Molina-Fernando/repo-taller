@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import ventanas.Login;
 
+
 /**
  * El controlador ´CtrlMedicoTriage´ se encarga de ser el intermediario entre la
  * clase Médico y la ventana MedicoTriage, completando los datos del triage del
@@ -61,8 +62,6 @@ public class CtrlMedicoTriage {
      * y motivo de cambio, y actualiza la lista de espera para reflejar el color
      * definitivo y otros detalles.
      *
-     * @throws SQLException si ocurre un error al interactuar con la base de
-     * datos.
      */
     public void finalizarTriage() {
 
@@ -78,11 +77,13 @@ public class CtrlMedicoTriage {
 
             String query = "SELECT * FROM Medico WHERE DNI = ?";
             String query1 = "SELECT * FROM Paciente WHERE DNI = ?";
-            String query2 = "SELECT * FROM Consulta WHERE DNIPaciente = ?";
+            String query2 = "SELECT * FROM Consulta WHERE DNIPaciente = ? AND Matricula IS NULL";
+            //String query3 = "SELECT * FROM ListaEsperaSala WHERE DNI = ?";
 
             PreparedStatement psq2 = conex.prepareStatement(query2);
             PreparedStatement psq1 = conex.prepareStatement(query1);
             PreparedStatement psq = conex.prepareStatement(query);
+
             psq2.setString(1, dniPac);
             psq1.setString(1, dniPac);
             psq.setString(1, dniMedico);
@@ -116,15 +117,18 @@ public class CtrlMedicoTriage {
                 psi.setString(6, motivoCambio);
                 psi.setInt(7, rs.getInt("Matricula"));
                 psi.setInt(8, Integer.parseInt(dniPac));
-
+                
                 psu.setString(1, colorDefinitivo);
                 psu.setString(2, rs2.getString("Fecha"));
                 psu.setString(3, rs2.getString("Hora"));
                 psu.setString(4, rs2.getString("Motivo"));
+
                 psu.setInt(5, Integer.parseInt(dniPac));
 
-                psi.executeUpdate();
                 psu.executeUpdate();
+
+
+                psi.executeUpdate();
 
             }
 
@@ -148,8 +152,6 @@ public class CtrlMedicoTriage {
      * ´ListaEsperaSala´, para ser llamado en el método ´finalizarTriage´.
      *
      * @return dniPac
-     * @throws SQLExeption Si ocurre un error en la interacción con la base de
-     * datos.
      */
     public String obtenerUltimoDniPac() {
         String dniPac = null;

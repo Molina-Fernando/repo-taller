@@ -20,8 +20,6 @@ public class CtrlListaTriage {
      * LLena una lista de pacientes con los datos que hay en la base de datos.
      *
      * @return ArrayList con vectores de tipo Object.
-     * @throws SQLExeption Si ocurre un error en la interacción con la base de
-     * datos.
      */
     public ArrayList<Object[]> tablaLista() {
         ArrayList<Object[]> arrayListEspera = new ArrayList<>();
@@ -66,8 +64,6 @@ public class CtrlListaTriage {
      *
      * @param dni se pasa el DNI del paciente, para poder odentrificarlo en la
      * tabla de la base de datos.
-     * @throws SQLExeption Si ocurre un error en la interacción con la base de
-     * datos.
      */
     public void eliminarPacienteEsperaTriage(int dni) {
 
@@ -84,15 +80,6 @@ public class CtrlListaTriage {
             ResultSet rs = psq.executeQuery();
 
             if (rs.next()) {
-
-                String insertTriages = "INSERT INTO Triage(NombrePac, ApellidoPac, DNI) VALUES(?,?,?);";
-                PreparedStatement psi = conex.prepareStatement(insertTriages);
-
-                psi.setString(1, rs.getString("Nombre"));
-                psi.setString(2, rs.getString("Apellido"));
-                psi.setString(3, dniInsert);
-
-                psi.executeUpdate();
 
                 String insertListaEspera = "INSERT INTO ListaEsperaSala(NombrePac, DNI) VALUES(?,?);";
                 PreparedStatement psi1 = conex.prepareStatement(insertListaEspera);

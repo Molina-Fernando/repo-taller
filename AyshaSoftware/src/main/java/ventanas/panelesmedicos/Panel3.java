@@ -1,10 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package ventanas.panelesmedicos;
 
 import clases.Lugares;
+import clases.Medico;
 import clases.Registro;
 import dbController.CtrlMedicoSala;
 import java.util.ArrayList;
@@ -13,51 +10,58 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author joaqu
+ * La clase Panel3 es un panel de Swing que extiende de javax.swing.JPanel.
+ * Proporciona una interfaz para una funcionalidad específica en tu aplicación.
  */
 public class Panel3 extends javax.swing.JPanel {
     
     DefaultTableModel modelo= new DefaultTableModel();
     ArrayList<Object[]>listaRegistros=new ArrayList<>();
-    
-    String fechaDB;
-    String tipoDB;
-    String horaDB;
     CtrlMedicoSala ctrlMedSal;
     String dni;
-    
+    Medico med;
+    Registro reg;
 
     /**
-     * Creates new form Panel2
-     * @param dni
+     * Constructor para la clase Panel3.
+     * Inicializa los componentes, establece el médico y el DNI, y actualiza los registros.
+     *
+     * @param dni El DNI que se va a establecer.
+     * @param med El médico que se va a establecer.
      */
-    public Panel3(String dni) {
+    public Panel3(String dni, Medico med) {
         initComponents();
-        
         ctrlMedSal=new CtrlMedicoSala(dni);
+        this.med=med;
         this.dni=dni;
         modelo.addColumn("Fecha");
         modelo.addColumn("Hora");
         modelo.addColumn("Lugar");
         
         actualizarRegistros();
-        
+        if(ctrlMedSal.isRegistroPendiente(this.dni,this.med.getNumMatricula())){
+            reg= ctrlMedSal.seleccionarRegistroNoFinalizado(this.dni, this.med.getNumMatricula());
+            cargaDiagnostico.setText(reg.getDiagnostico());
+        }else{reg=null;}
+
     }
     
+    
+    
+    /**
+     * Este método actualiza los registros en la tabla de registros.
+     * Limpia la tabla, obtiene los nuevos registros y los añade a la tabla.
+     */
     private void actualizarRegistros(){
         modelo.setRowCount(0);
         tablaRegistros = new javax.swing.JTable();
         tablaRegistros.setModel(modelo);
-        listaRegistros=ctrlMedSal.getTablaRegistros(fechaDB,horaDB,tipoDB);
+        listaRegistros=ctrlMedSal.getTablaRegistros(ctrlMedSal.getDni());
         tablaRegistros = new JTable(modelo);
         jScrollPane1.setViewportView(tablaRegistros);
 
         for (Object[] vector : listaRegistros) {
 
-            fechaDB  = vector[0].toString();
-            horaDB = vector[1].toString();
-            tipoDB = vector[2].toString();
 
             modelo.addRow(vector);
             tablaRegistros.setModel(modelo);
@@ -82,13 +86,12 @@ public class Panel3 extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         cargaDiagnostico = new javax.swing.JTextArea();
         BotonCarga = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
 
-        setPreferredSize(new java.awt.Dimension(460, 510));
+        setPreferredSize(new java.awt.Dimension(550, 650));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tablaRegistros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -103,35 +106,71 @@ public class Panel3 extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tablaRegistros);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, 270, 470, 240));
-
         jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel1.setText("Descripción del diagnostico :");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel2.setText("Registros");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel3.setText("Carga de Registro");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, -1));
 
         cargaDiagnostico.setColumns(20);
         cargaDiagnostico.setRows(5);
         jScrollPane3.setViewportView(cargaDiagnostico);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 79, 310, -1));
-
-        BotonCarga.setText("Agregar");
+        BotonCarga.setText("Guardar");
         BotonCarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonCargaActionPerformed(evt);
             }
         });
-        jPanel1.add(BotonCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, -1, -1));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, -1));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, 150, -1));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(450, 450, 450)
+                .addComponent(jLabel3))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 988, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(420, 420, 420)
+                .addComponent(jLabel1))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(240, 240, 240)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(470, 470, 470)
+                .addComponent(BotonCarga))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(470, 470, 470)
+                .addComponent(jLabel2))
+            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 994, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel3)
+                .addGap(4, 4, 4)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addComponent(jLabel1)
+                .addGap(6, 6, 6)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(BotonCarga)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel2)
+                .addGap(11, 11, 11)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -145,17 +184,45 @@ public class Panel3 extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Este método se activa cuando se realiza una acción en el botón de carga.
+     * Realiza las siguientes operaciones:
+     * 1. Obtiene el texto del campo de diagnóstico.
+     * 2. Verifica si el campo de texto está vacío o solo tiene espacios en blanco. Si es así, muestra un mensaje de error.
+     * 3. Verifica si el texto ingresado excede los 256 caracteres permitidos. Si es así, muestra un mensaje de error.
+     * 4. Si no hay errores, carga el registro con los detalles proporcionados y actualiza los registros.
+     * Luego, limpia el campo de texto de diagnóstico.
+     *
+     * @param evt El evento de acción que ocurrió (no se utiliza en este método).
+     */
     private void BotonCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCargaActionPerformed
         String texto = cargaDiagnostico.getText();
+        if(reg!=null){
+            
+                    // Verifica si el JTextArea está vacío o solo tiene espacios en blanco
+        if (texto.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo de texto está vacío");
+        } else if (texto.length() > 256) {
+            // Verifica si el texto ingresado excede los 256 caracteres
+            JOptionPane.showMessageDialog(null, "El texto ingresado excede los 256 caracteres permitidos");
+        } else {
+            ctrlMedSal.actualizarRegistro(new Registro(this.dni,texto,Lugares.EMERGENCIA, this.med.getNumMatricula()));
+            actualizarRegistros();
+        }
+        }else{
+                    
         // Verifica si el JTextArea está vacío o solo tiene espacios en blanco
         if (texto.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "¡Error! El campo de texto está vacío");
+            JOptionPane.showMessageDialog(null, "El campo de texto está vacío");
+        } else if (texto.length() > 256) {
+            // Verifica si el texto ingresado excede los 256 caracteres
+            JOptionPane.showMessageDialog(null, "El texto ingresado excede los 256 caracteres permitidos");
         } else {
-            
-            ctrlMedSal.cargarRegistro(new Registro(this.dni,texto,Lugares.EMERGENCIA));
+            ctrlMedSal.cargarRegistro(new Registro(this.dni,texto,Lugares.EMERGENCIA, this.med.getNumMatricula()));
             actualizarRegistros();
-            cargaDiagnostico.setText("");
         }
+        }
+
     }//GEN-LAST:event_BotonCargaActionPerformed
 
 
@@ -168,8 +235,8 @@ public class Panel3 extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTable tablaRegistros;
     // End of variables declaration//GEN-END:variables
 }

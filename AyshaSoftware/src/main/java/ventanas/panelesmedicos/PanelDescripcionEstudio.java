@@ -1,63 +1,73 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package ventanas.panelesmedicos;
 
 import clases.Estudio;
+import dbController.CtrlMedicoSala;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
- *
- * @author joaqu
+ * La clase PanelDescripcionEstudio es un panel de Swing que extiende de javax.swing.JPanel.
+ * Proporciona una interfaz para la descripción del estudio.
  */
 public class PanelDescripcionEstudio extends javax.swing.JPanel {
+    
+    CtrlMedicoSala ctrlMedSal;
 
     /**
-     * Creates new form PanelDescripcionEstudio
-     * @param est de tipo Estudio 
+     * Constructor para la clase PanelDescripcionEstudio.
+     * Inicializa los componentes y establece las variables de datos.
+     * @param est El estudio que se va a describir.
      */
     public PanelDescripcionEstudio(Estudio est) {
         initComponents();
+        ctrlMedSal = new CtrlMedicoSala();
         setDatosVariables(est);
     }
     
     /**
-     * 
-     * @param est de tipo Estudio
-     * @
+     * Este método establece las variables de datos para el estudio.
+     * Formatea y muestra la fecha, hora, nombre del médico, resultado y tipo del estudio.
+     * @param est El estudio cuyos datos se van a establecer.
      */
     private void setDatosVariables(Estudio est){
 
         date.setText(est.getFecha().format(DateTimeFormatter.ofPattern("dd'/'MM'/'yyyy")));
         hour.setText(est.getHora().format(DateTimeFormatter.ofPattern("HH':'mm':'ss")));
+        nombreMedico.setText(String.valueOf(ctrlMedSal.nombreCompletoMedico(est.getMedico())));
         String textoAIncluir = splitString(est.getResultado());
         result.setText(textoAIncluir);
         type.setText(est.getTipo());
     }
     
-public static String splitString(String str) {
-    ArrayList<String> list = new ArrayList<>();
-    int i = 0;
-    while (i < str.length()) {
-        int end = Math.min(i + 64, str.length());
-        while (end > i && str.charAt(end - 1) != '.' && str.charAt(end - 1) != ',' && str.charAt(end - 1) != ' ') {
-            end--;
-        }
-        if (end == i) {
-            end = i + 64;
-            if (end < str.length()) {
-                while (end > i && str.charAt(end - 1) != '.' && str.charAt(end - 1) != ',' && str.charAt(end - 1) != ' ') {
-                    end--;
+    
+    /**
+     * Este método divide una cadena en varias subcadenas, cada una de las cuales tiene una longitud máxima de 64.
+     * Las subcadenas se dividen en puntos, comas o espacios cuando sea posible.
+     * @param str La cadena que se va a dividir.
+     * @return Una cadena HTML con las subcadenas separadas por saltos de línea.
+     */
+    public String splitString(String str) {
+        ArrayList<String> list = new ArrayList<>();
+        int i = 0;
+        while (i < str.length()) {
+            int end = Math.min(i + 64, str.length());
+            while (end > i && str.charAt(end - 1) != '.' && str.charAt(end - 1) != ',' && str.charAt(end - 1) != ' ') {
+                end--;
+            }
+            if (end == i) {
+                end = i + 64;
+                if (end < str.length()) {
+                    while (end > i && str.charAt(end - 1) != '.' && str.charAt(end - 1) != ',' && str.charAt(end - 1) != ' ') {
+                        end--;
+                    }
                 }
             }
+            list.add(str.substring(i, Math.min(end, str.length())));
+            i = end;
         }
-        list.add(str.substring(i, Math.min(end, str.length())));
-        i = end;
+        return "<html>" + String.join("<br>", list) + "</html>";
     }
-    return "<html>" + String.join("<br>", list) + "</html>";
-}
 
 
 
@@ -79,74 +89,43 @@ public static String splitString(String str) {
         type = new javax.swing.JLabel();
         result = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        nombreMedico = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Fecha:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
 
         date.setText("{day}/{month}/{year}");
+        jPanel1.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, -1));
 
         jLabel2.setText("Hora:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 14, -1, -1));
 
         hour.setText("{hour}:{min}:{year}");
+        jPanel1.add(hour, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 14, -1, -1));
 
         jLabel3.setText("TIpo:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 58, -1, -1));
 
         type.setText("{tipo}");
+        jPanel1.add(type, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, 58, 785, -1));
 
         result.setText("{result}");
         result.setAlignmentY(0.0F);
         result.setAutoscrolls(true);
+        jPanel1.add(result, new org.netbeans.lib.awtextra.AbsoluteConstraints(103, 122, 891, 45));
 
         jLabel4.setText("Resultado:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 136, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(type, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hour)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                                .addComponent(jLabel1)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(date)
-                        .addGap(30, 30, 30))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(result, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(hour)
-                    .addComponent(jLabel1)
-                    .addComponent(date))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(type))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(result, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
-                    .addComponent(jLabel4))
-                .addContainerGap())
-        );
+        jLabel5.setText("Medico:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 92, -1, -1));
+
+        nombreMedico.setText("jLabel6");
+        jPanel1.add(nombreMedico, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 92, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -156,7 +135,7 @@ public static String splitString(String str) {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -168,7 +147,9 @@ public static String splitString(String str) {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel nombreMedico;
     private javax.swing.JLabel result;
     private javax.swing.JLabel type;
     // End of variables declaration//GEN-END:variables

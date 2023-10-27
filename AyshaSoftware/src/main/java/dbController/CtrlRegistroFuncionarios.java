@@ -27,17 +27,8 @@ public class CtrlRegistroFuncionarios {
     /**
      * Registra un nuevo funcionario en la base de datos.
      *
-     * @param nombre El nombre del funcionario.
-     * @param apellido El apellido del funcionario.
-     * @param fechaFormateada La fecha de nacimiento del funcionario formateada.
-     * @param domicilio El domicilio del funcionario.
-     * @param dni El número de DNI del funcionario.
-     * @param telFijo El número de teléfono fijo del funcionario.
-     * @param telCelular El número de teléfono celular del funcionario.
-     * @param estadoCivil El estado civil del funcionario.
-     * @param correoElectronico El correo electrónico del funcionario.
-     * @param sector El sector al que el funcionario pertenece.
-     * @throws SQLException Si ocurre un error en la interacción con la base de datos.
+     * @param func objeto funcionario
+     * @param sector sector del funcionario
      */
     
     public void registrarFuncionario(

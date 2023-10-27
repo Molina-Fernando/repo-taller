@@ -1,15 +1,19 @@
-
 package ventanas;
 
+import Utilidades.SetImageLabel;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.WindowConstants;
 
-
-
+/**
+ * La clase `RRHH` representa la ventana que visualizan los administrativos de
+ * recursos humanos en la que pueden registrar funcionarios.
+ */
 public class RRHH extends javax.swing.JFrame {
 
-    
+    /**
+     * Constructor que inicializa los componentes de la ventana
+     */
     public RRHH() {
         initComponents();
         this.setLocationRelativeTo(this);
@@ -22,15 +26,14 @@ public class RRHH extends javax.swing.JFrame {
         SetImageLabel.setImageLabel(labelFuncWomen, "src\\main\\java\\images\\womenAdmin.png");
         SetImageLabel.setImageLabel(labelDocMen, "src\\main\\java\\images\\regMedicos.png");
         SetImageLabel.setImageLabel(labelDocWomen, "src\\main\\java\\images\\femDoc.png");
-        
+
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
         Image miIcono = miPantalla.getImage("src\\main\\java\\images\\icon.png");
         setIconImage(miIcono);
         SetImageLabel.setImageLabel(jLabelIconito, "src\\main\\java\\images\\icon.png");
-        
+
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -64,13 +67,13 @@ public class RRHH extends javax.swing.JFrame {
         jButtonRegistrar.setBackground(new java.awt.Color(0, 0, 153));
         jButtonRegistrar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButtonRegistrar.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonRegistrar.setText("Registrar administrativo");
+        jButtonRegistrar.setText("Registrar");
         jButtonRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonRegistrarActionPerformed(evt);
             }
         });
-        bg.add(jButtonRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, 200, 40));
+        bg.add(jButtonRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, 190, 40));
 
         labelFuncMen.setText("jLabel1");
         bg.add(labelFuncMen, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 110, 100));
@@ -99,13 +102,13 @@ public class RRHH extends javax.swing.JFrame {
         jButtonRegistrar1.setBackground(new java.awt.Color(0, 0, 153));
         jButtonRegistrar1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButtonRegistrar1.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonRegistrar1.setText("Registrar médico");
+        jButtonRegistrar1.setText("Registrar");
         jButtonRegistrar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonRegistrar1ActionPerformed(evt);
             }
         });
-        bg.add(jButtonRegistrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 450, 160, 40));
+        bg.add(jButtonRegistrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 450, 190, 40));
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 153));
@@ -142,7 +145,12 @@ public class RRHH extends javax.swing.JFrame {
         // TODO add your handling code here:
         new RegistroMedicos().setVisible(true);
     }//GEN-LAST:event_jButtonRegistrar1ActionPerformed
-
+    /**
+     * Método principal que inicia la ventana Swing.
+     *
+     * @param args Los argumentos de la línea de comandos (no se utilizan en
+     * este caso).
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -1,11 +1,20 @@
 package ventanas;
 
+import Utilidades.SetImageLabel;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.WindowConstants;
 
+/**
+ * La clase `AdminInformatico` representa la ventana principal del administrador
+ * informático.
+ */
 public class AdminInformatico extends javax.swing.JFrame {
 
+    /**
+     * Constructor de la clase `AdminInformatico`. Inicializa la ventana y
+     * configura su apariencia.
+     */
     public AdminInformatico() {
         initComponents();
 
@@ -81,18 +90,20 @@ public class AdminInformatico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        //dispose();
+
         new GestionFuncionarios().setVisible(true);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
-     * @param args the command line arguments
+     * Método principal que inicia la ventana Swing.
+     *
+     * @param args Los argumentos de la línea de comandos (no se utilizan en
+     * este caso).
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -118,7 +129,6 @@ public class AdminInformatico extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AdminInformatico().setVisible(true);

@@ -42,10 +42,10 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="primerRenglon" pref="420" max="32767" attributes="0"/>
+                      <Component id="primerRenglon" max="32767" attributes="0"/>
                       <Component id="segundoRenglon" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="50" max="32767" attributes="0"/>
+                  <EmptySpace pref="28" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -67,7 +67,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Muchotxtojdhjdfshjsdkjkjsdkjfdsjkfdjfsdjksfdjksfdjkl"/>
+            <Property name="text" type="java.lang.String" value="Texto que va a ser reescrito por los metodos que se invocan en el constructor"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="segundoRenglon">
@@ -75,7 +75,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Muchotewengfdfifdjdfidfiocjkidsfkodsodsodsfoddofdosf"/>
+            <Property name="text" type="java.lang.String" value="Texto que va a ser reescrito por los metodos que se invocan en el constructor"/>
           </Properties>
         </Component>
       </SubComponents>

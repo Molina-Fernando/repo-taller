@@ -22,8 +22,6 @@ public class CtrlInfoMedico {
      *
      * @return una lista de vectores con los médicos que esten presentes en la
      * base de datos.
-     * @throws SQLExeption Si ocurre un error en la interacción con la base de
-     * datos.
      */
     public ArrayList<Object[]> getTablaMedicos() {
         ArrayList<Object[]> arrayListDeVectores = new ArrayList<>();
@@ -69,8 +67,6 @@ public class CtrlInfoMedico {
      * @param dniDB : dni del paciente recuperado de la selección.
      * @return una lista de vectores con los datos de cada especialidad del
      * médico.
-     * @throws SQLExeption Si ocurre un error en la interacción con la base de
-     * datos.
      */
     public ArrayList<Object[]> getTablaEspecialidades(int dniDB) {
         ArrayList<Object[]> arrayListDeEspecialidades = new ArrayList<>();

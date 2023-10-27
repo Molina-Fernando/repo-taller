@@ -1,5 +1,6 @@
 package ventanas;
 
+import Utilidades.SetImageLabel;
 import dbController.CtrlInfoMedico;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -9,8 +10,8 @@ import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * La ventana ´InfoMedico´, es la encargada que el gestor pueda visualizar todos
- * los datos de los médicos registrados en el sistema.
+ * La ventana ´InfoMedico´, es la encargada de que el gestor pueda visualizar
+ * todos los datos de los médicos registrados en el sistema.
  */
 public class InfoMedico extends javax.swing.JFrame {
 
@@ -20,9 +21,12 @@ public class InfoMedico extends javax.swing.JFrame {
     CtrlInfoMedico ctrlDb = new CtrlInfoMedico();
     ArrayList<Object[]> arrayListEspecialidades;
 
+    /**
+     * Constructor que inicializa los componentes de la ventana
+     */
     public InfoMedico() {
         initComponents();
-        
+
         setTitle("Información de Médicos");
         setLocationRelativeTo(null);
         setResizable(false);
@@ -119,7 +123,7 @@ public class InfoMedico extends javax.swing.JFrame {
         tablaMedicos.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tablaMedicos);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 700, 150));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 790, 150));
 
         botonMostrarEspecialidades.setBackground(new java.awt.Color(0, 0, 153));
         botonMostrarEspecialidades.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -145,13 +149,13 @@ public class InfoMedico extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaEspecialidades);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 380, 90));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 520, 90));
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 153));
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 153));
         jLabel1.setText("Lista de médicos");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 130, 30));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 130, 30));
 
         LabelIconito.setText("jLabel8");
         jPanel1.add(LabelIconito, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 40));
@@ -160,7 +164,7 @@ public class InfoMedico extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,9 +197,11 @@ public class InfoMedico extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_botonMostrarEspecialidadesActionPerformed
-
     /**
-     * @param args the command line arguments
+     * Método principal que inicia la ventana Swing.
+     *
+     * @param args Los argumentos de la línea de comandos (no se utilizan en
+     * este caso).
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

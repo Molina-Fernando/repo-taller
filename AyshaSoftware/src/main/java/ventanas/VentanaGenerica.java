@@ -1,21 +1,28 @@
-
 package ventanas;
 
+import Utilidades.SetImageLabel;
 import dbController.CtrlVentanaGenerica;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.WindowConstants;
 
-
+/**
+ * Esta clase representa la ventana principal del sistema que proporciona acceso
+ * a diferentes funciones según el rol del usuario. Los botones de esta ventana
+ * se muestran o se ocultan dependiendo de los roles de usuario asociados.
+ */
 public final class VentanaGenerica extends javax.swing.JFrame {
 
     CtrlVentanaGenerica ctrlVG = new CtrlVentanaGenerica();
     ArrayList<Integer> arrayIds = new ArrayList<>();
 
+    /**
+     * Constructor de la clase VentanaGenerica. Inicializa la ventana y ajusta
+     * la visibilidad de los botones según los roles del usuario actual.
+     */
     public VentanaGenerica() {
         initComponents();
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         botonTriage.setVisible(false);
         botonSala.setVisible(false);
         botonRRHH.setVisible(false);
@@ -33,17 +40,24 @@ public final class VentanaGenerica extends javax.swing.JFrame {
         SetImageLabel.setImageLabel(jLabel9, "src\\main\\java\\images\\15.png");
         SetImageLabel.setImageLabel(jLabel10, "src\\main\\java\\images\\16.png");
         SetImageLabel.setImageLabel(jLabel11, "src\\main\\java\\images\\17.png");
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
         setTitle("Menú");
         arrayIds = ctrlVG.rolesParametrizados(Login.user);
 
         visibilidadBotones(arrayIds);
 
     }
-    
+
+    /**
+     * Ajusta la visibilidad de los botones en función de los roles del usuario.
+     *
+     * @param arrayIds Lista de identificadores de roles del usuario.
+     */
     private void visibilidadBotones(ArrayList<Integer> arrayIds) {
 
         for (int id : arrayIds) {
-            if (id == 1) {
+            if (id == 1 || id == 7) {
                 botonTriage.setVisible(true);
             }
             if (id == 2) {
@@ -58,7 +72,6 @@ public final class VentanaGenerica extends javax.swing.JFrame {
             if (id == 5) {
                 botonInformatica.setVisible(true);
                 botonTriage.setVisible(true);
-                botonSala.setVisible(true);
                 botonRRHH.setVisible(true);
                 botonGestion.setVisible(true);
                 botonAdmision.setVisible(true);
@@ -195,39 +208,60 @@ public final class VentanaGenerica extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Acción realizada al presionar el botón "Ingresar" correspondiente al rol
+     * de "MedicoSala". Abre la ventana de la sala médica.
+     */
     private void botonSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalaActionPerformed
         // TODO add your handling code here:
         new EntradaMedicoSala().setVisible(true);
     }//GEN-LAST:event_botonSalaActionPerformed
-
+    /**
+     * Acción realizada al presionar el botón "Ingresar" correspondiente al rol
+     * de "MedicoTriage". Abre la lista de triage.
+     */
     private void botonTriageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonTriageActionPerformed
         // TODO add your handling code here:
         new ListaTriage().setVisible(true);
     }//GEN-LAST:event_botonTriageActionPerformed
-
+    /**
+     * Acción realizada al presionar el botón "Ingresar" correspondiente al rol
+     * de "AdministrativoAdmision". Abre la ventana de admisión.
+     */
     private void botonAdmisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAdmisionActionPerformed
         // TODO add your handling code here:
         new Admision().setVisible(true);
     }//GEN-LAST:event_botonAdmisionActionPerformed
-
+    /**
+     * Acción realizada al presionar el botón "Ingresar" correspondiente al rol
+     * de "AdministrativoRRHH". Abre la ventana de RRHH.
+     */
     private void botonRRHHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRRHHActionPerformed
         // TODO add your handling code here:
         new RRHH().setVisible(true);
     }//GEN-LAST:event_botonRRHHActionPerformed
-
+    /**
+     * Acción realizada al presionar el botón "Ingresar" correspondiente al rol
+     * de "AdministrativoGestion". Abre la ventana de Gestor.
+     */
     private void botonGestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGestionActionPerformed
         // TODO add your handling code here:
-        new GenericaGestor().setVisible(true);
+        new Gestor().setVisible(true);
     }//GEN-LAST:event_botonGestionActionPerformed
-
+    /**
+     * Acción realizada al presionar el botón "Ingresar" correspondiente al rol
+     * de "AdminInformatico". Abre la ventana de AdminInformatico.
+     */
     private void botonInformaticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonInformaticaActionPerformed
         // TODO add your handling code here:
         new AdminInformatico().setVisible(true);
     }//GEN-LAST:event_botonInformaticaActionPerformed
 
     /**
-     * @param args the command line arguments
+     * Método principal que inicia la ventana Swing.
+     *
+     * @param args Los argumentos de la línea de comandos (no se utilizan en
+     * este caso).
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

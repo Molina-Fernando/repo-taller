@@ -95,7 +95,7 @@ public abstract class Persona {
     /**
      * Establece el apellido de la persona.
      *
-     * @param nombre El apellido de la persona.
+     * @param apellido El apellido de la persona.
      */
     public final void setApellido(String apellido) {
         this.apellido = apellido;
@@ -104,7 +104,7 @@ public abstract class Persona {
     /**
      * Establece la fecha de nacimiento de la persona.
      *
-     * @param nombre El la fecha de nacimiento de la persona.
+     * @param fecNacimiento El la fecha de nacimiento de la persona.
      */
     public final void setFecNacimiento(String fecNacimiento) {
         this.fecNacimiento = fecNacimiento;
@@ -113,7 +113,7 @@ public abstract class Persona {
     /**
      * Establece el domicilio de la persona.
      *
-     * @param nombre El domicilio de la persona.
+     * @param domicilio El domicilio de la persona.
      */
     public final void setDomicilio(String domicilio) {
         this.domicilio = domicilio;
@@ -122,7 +122,7 @@ public abstract class Persona {
     /**
      * Establece el dni de la persona.
      *
-     * @param nombre El dni de la persona.
+     * @param dni El dni de la persona.
      */
     public final void setDni(String dni) {
         this.dni = dni;
@@ -131,7 +131,7 @@ public abstract class Persona {
     /**
      * Establece el teléfono fijo de la persona.
      *
-     * @param nombre El teléfono fijo de la persona.
+     * @param telFijo El teléfono fijo de la persona.
      */
     public final void setTelFijo(String telFijo) {
         this.telFijo = telFijo;
@@ -140,7 +140,7 @@ public abstract class Persona {
     /**
      * Establece el teléfono celular de la persona.
      *
-     * @param nombre El teléfono celular de la persona.
+     * @param telCelular El teléfono celular de la persona.
      */
     public final void setTelCelular(String telCelular) {
         this.telCelular = telCelular;
@@ -149,7 +149,7 @@ public abstract class Persona {
     /**
      * Establece el correo electrónico de la persona.
      *
-     * @param nombre El correo electrónico de la persona.
+     * @param correoElectronico El correo electrónico de la persona.
      */
     public final void setCorreoElectronico(String correoElectronico) {
         this.correoElectronico = correoElectronico;
@@ -185,7 +185,6 @@ public abstract class Persona {
     /**
      * Obtiene el estado civil de la persona.
      *
-     * @return El estado civil de la persona.
      */
     public final void setEstadoCivil(String estadoCivil) {
         this.estadoCivil = estadoCivil;
