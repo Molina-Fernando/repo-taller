@@ -9,34 +9,23 @@ public class Sector {
     /**
      * El nombre del sector.
      */
-    private String sector;
+    private String nombre;
 
     /**
-     * Constructor de la clase Sector que toma el nombre del sector como
-     * argumento.
-     *
-     * @param sector El nombre del sector.
+     * El identificador del sector.
      */
-    public Sector(String sector) {
-        this.sector = sector;
-    }
+    private int id;
 
     /**
-     * Obtiene el nombre del sector.
+     * Constructor de la clase Sector que toma el nombre y el identificador del
+     * sector como argumento.
      *
-     * @return El nombre del sector.
+     * @param nombre El nombre del sector.
+     * @param id El identificador del sector
      */
-    public String getSector() {
-        return sector;
-    }
-
-    /**
-     * Establece el nombre del sector.
-     *
-     * @param sector El nombre del sector a establecer.
-     */
-    public void setSector(String sector) {
-        this.sector = sector;
+    public Sector(String nombre, int id) {
+        this.nombre = nombre;
+        this.id = id;
     }
 
     /**
@@ -47,6 +36,6 @@ public class Sector {
      */
     @Override
     public String toString() {
-        return "Sector{" + "sector=" + sector + '}';
+        return "Sector{" + "sector=" + nombre + '}';
     }
 }

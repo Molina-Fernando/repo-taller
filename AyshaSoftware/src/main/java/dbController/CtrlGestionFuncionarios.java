@@ -8,22 +8,21 @@ import javax.swing.JOptionPane;
 import java.util.ArrayList;
 
 /**
- * La clase `CtrlGestionFuncionarios` se encarga de gestionar la información de funcionarios,
- * interactuando con la base de datos, dar de alta funcionarios generando usuario y contraseña para el acceso al sistema,
- * asignación de roles en la base de datos y ver roles asociados.
+ * La clase `CtrlGestionFuncionarios` se encarga de gestionar la información de
+ * funcionarios, interactuando con la base de datos, dar de alta funcionarios
+ * generando usuario y contraseña para el acceso al sistema, asignación de roles
+ * en la base de datos y ver roles asociados.
  */
-
-
 public class CtrlGestionFuncionarios {
-    
+
     /**
      * Obtiene una tabla de funcionarios desde la base de datos.
+     *
      * @param dniDB DNI de la base de datos.
      * @param nomDB Nombre de la base de datos.
      * @return Una lista de arrays de objetos con información de funcionarios.
      * Cada array contiene [DNI, Nombre, Apellido, Sector].
      */
-
     public ArrayList<Object[]> getTablaFuncionarios(int dniDB, String nomDB) {
         ArrayList<Object[]> arrayListDeVectores = new ArrayList<>();
         Connection conex = null;
@@ -58,15 +57,15 @@ public class CtrlGestionFuncionarios {
 
         return arrayListDeVectores;
     }
-    
-     /**
-     * Obtiene una tabla de roles asociados a un funcionario desde la base de datos.
+
+    /**
+     * Obtiene una tabla de roles asociados a un funcionario desde la base de
+     * datos.
      *
      * @param dniDB DNI de la base de datos.
-     * @return Una lista de arrays de objetos con información de roles asociados.
-     * Cada array contiene [DNI, Nombre].
+     * @return Una lista de arrays de objetos con información de roles
+     * asociados. Cada array contiene [DNI, Nombre].
      */
-
     public ArrayList<Object[]> getTablaRolesAsociados(int dniDB) {
         ArrayList<Object[]> arrayListDeRoles = new ArrayList<>();
         Connection conex = null;
@@ -129,7 +128,6 @@ public class CtrlGestionFuncionarios {
      * @param arrayList Una lista de nombres de roles a asignar.
      * @param dni El DNI del funcionario al que se asignan los roles.
      */
-    
     public void asignarRoles(ArrayList<String> arrayList, int dni) {
         Connection conex = null;
 
@@ -201,10 +199,25 @@ public class CtrlGestionFuncionarios {
         }
     }
 
+    /**
+     * Registra un nuevo funcionario en la base de datos, generando credenciales
+     * de acceso (un usuario y una contraseña) para su ingreso al sistema.
+     *
+     * @param nomDB El nombre del funcionario.
+     * @param dniDB El número de identificación del funcionario.
+     */
     public void altaFuncionario(String nomDB, int dniDB) {
         generarUsuario(nomDB, dniDB);
     }
 
+    /**
+     * Genera una contraseña basada en el nombre y el número de identificación
+     * (DNI) del funcionario.
+     *
+     * @param nombre El nombre del funcionario.
+     * @param dni El número de identificación del funcionario.
+     * @return La contraseña generada.
+     */
     private String generarContrasenia(String nombre, int dni) {
 
         int tresUltimosDigitosDni = dni % 1000;
@@ -213,6 +226,14 @@ public class CtrlGestionFuncionarios {
         return contrasenia;
     }
 
+    /**
+     * Obtiene las tres primeras letras de un nombre, o el nombre completo si
+     * tiene menos de tres letras.
+     *
+     * @param nombre El nombre del funcionario.
+     * @return Las tres primeras letras del nombre o el nombre completo si es
+     * menor de tres letras.
+     */
     private String obtenerTresPrimerasLetras(String nombre) {
         if (nombre.length() < 3) {
             return nombre;
@@ -221,6 +242,13 @@ public class CtrlGestionFuncionarios {
         }
     }
 
+    /**
+     * Genera un usuario y una contraseña para el funcionario y los inserta en
+     * la base de datos.
+     *
+     * @param nombre El nombre del funcionario.
+     * @param dni El dni del funcionario.
+     */
     private void generarUsuario(String nombre, int dni) {
         String contrasenia = generarContrasenia(nombre, dni);
         String usuario = String.valueOf(dni);
